@@ -181,9 +181,10 @@ Before any presentation deliverable is considered complete:
 
 ## TODO — Next Steps
 
+- [x] **Brainstorming** — approach decided (A+ Hybrid), design approved → see `docs/plans/2026-03-04-presentation-design.md`
+- [ ] **Create implementation plan** — use `writing-plans` skill to break design into concrete build steps
 - [ ] **Verify institutional requirements** — time limit, language, required elements (logo, declaration), Q&A format
 - [ ] **Distill core contribution** into one sentence: *"This thesis demonstrates that ___ by ___, resulting in ___"*
-- [ ] **Prototype framework choice** — build a quick reveal.js vs Slidev comparison to pick the winner
 - [ ] **Build slide-by-slide blueprint** using `presentation-architect` skill
 - [ ] **Design and implement** the full presentation with 3D elements where they explain something
 
