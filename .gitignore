@@ -1,0 +1,25 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Node
+node_modules/
+dist/
+.cache/
+.parcel-cache/
+
+# Build artifacts
+*.log
+*.tmp
+
+# Large assets (add back selectively)
+*.mp4
+*.mov
+*.zip
+
+# Claude internal
+.claude/
