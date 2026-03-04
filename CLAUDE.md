@@ -153,6 +153,18 @@ Based on pre-research, use **Structure A — Classic committee-friendly with str
 - Proactively invoke relevant skills — especially `presentation-architect` and `presentation-design` before creating slides
 - Use `giving-presentations` skill when preparing speaker notes or rehearsal material
 
+## Sync Protocol
+When the user says **"sync"**, automatically:
+
+1. `git status` → review changes
+2. `git add -A` → stage all (`.gitignore` handles exclusions)
+3. Analyze diff → generate descriptive commit message (`feat:`, `fix:`, `style:`, `docs:`, `refactor:`, `chore:`)
+4. `git commit` with co-author tag
+5. `git push origin main`
+6. Report summary of what was pushed
+
+**Remote:** `https://github.com/AmirrezaRoodsaz/Masterarbeit_presentation.git` | **Branch:** `main`
+
 ## Quality Gates
 Before any presentation deliverable is considered complete:
 - [ ] One-sentence thesis claim is sharp and testable
