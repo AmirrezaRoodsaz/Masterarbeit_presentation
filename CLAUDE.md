@@ -179,6 +179,25 @@ Before any presentation deliverable is considered complete:
 - [ ] Tested offline (no network dependencies)
 - [ ] Tested on target display resolution
 
+## TODO — Next Steps
+
+- [ ] **Verify institutional requirements** — time limit, language, required elements (logo, declaration), Q&A format
+- [ ] **Distill core contribution** into one sentence: *"This thesis demonstrates that ___ by ___, resulting in ___"*
+- [ ] **Prototype framework choice** — build a quick reveal.js vs Slidev comparison to pick the winner
+- [ ] **Build slide-by-slide blueprint** using `presentation-architect` skill
+- [ ] **Design and implement** the full presentation with 3D elements where they explain something
+
+## How to Use Skills
+
+Skills are invoked **automatically** — just describe what you want in plain language and Claude picks the right ones.
+
+**To force a specific skill**, name it in your prompt:
+
+- *"Use the presentation-architect skill to plan my slides"*
+- *"Use manimgl to animate the SOH equation"*
+
+**Tip:** Skills are most powerful with **concrete tasks** rather than abstract ones. Instead of *"make it look good"*, say *"build a dark-themed slide showing SOH comparison across 3 vehicles with an interactive bar chart"* — that lets Claude chain multiple skills together for maximum impact.
+
 ## Additional Skills to Consider Installing
 Found via web search — could enhance the workflow:
 - **[revealjs-skill](https://github.com/ryanbbrown/revealjs-skill)** — Claude Code skill specifically for creating reveal.js presentations from natural language
