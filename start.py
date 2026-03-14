@@ -631,13 +631,31 @@ def step_launch(d, idx, lang):
     except Exception:
         pass
 
-    d.animate_to(idx, 70, 0.2, f"Port {port}")
+    # Detect LAN IP for QR codes
+    local_ip = "localhost"
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        local_ip = s.getsockname()[0]
+        s.close()
+    except Exception:
+        pass
+
+    d.animate_to(idx, 70, 0.2, f"Port {port} · {local_ip}")
     d.animate_to(idx, 100, 0.3, m["starting"])
-    d.set_done(idx, f"Port {port}")
+    d.set_done(idx, f"Port {port} · IP {local_ip}")
+
+    # Write IP to public/local-ip.json so the browser can fetch it
+    public_dir = os.path.join(os.getcwd(), "public")
+    os.makedirs(public_dir, exist_ok=True)
+    ip_file = os.path.join(public_dir, "local-ip.json")
+    with open(ip_file, "w") as f:
+        json.dump({"ip": local_ip}, f)
 
     sys.stdout.write(SHOW)
 
     url = f"http://localhost:{port}"
+    lan_url = f"http://{local_ip}:{port}"
 
     def open_browser():
         time.sleep(2.5)
@@ -650,7 +668,8 @@ def step_launch(d, idx, lang):
     print()
     print(f"  {'═' * w}")
     print(f"  {GREEN}{BOLD}\u2713 {m['ready']}{RESET} — {m['browser_auto']}")
-    print(f"  {BOLD}{url}{RESET}")
+    print(f"  {BOLD}Local:   {url}{RESET}")
+    print(f"  {BOLD}Netzwerk:{RESET} {CYAN}{lan_url}{RESET}")
     print()
     print(f"  {m['to_exit']} {YELLOW}Ctrl+C{RESET}")
     print(f"  {'═' * w}")
@@ -658,7 +677,7 @@ def step_launch(d, idx, lang):
 
     try:
         subprocess.run(
-            [npx, "vite", "--port", str(port), "--open", "false"],
+            [npx, "vite", "--host", "0.0.0.0", "--port", str(port)],
             stderr=subprocess.DEVNULL,
         )
     except KeyboardInterrupt:

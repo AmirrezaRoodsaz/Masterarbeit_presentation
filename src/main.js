@@ -4,6 +4,7 @@ import RevealMath from 'reveal.js/plugin/math/math.esm.js';
 import { initShell } from './components/shell.js';
 import { initInputManager } from './components/input-manager.js';
 import { initSettingsModal } from './components/settings-modal.js';
+import { initQrHub } from './components/qr-hub.js';
 import { getSettings } from './components/settings-store.js';
 
 // Reveal.js core styles
@@ -35,6 +36,7 @@ deck.initialize().then(() => {
   initShell(deck);
   initInputManager(deck);
   initSettingsModal();
+  initQrHub();
   updateProgressBar();
 
   // Apply default display settings
