@@ -18,6 +18,7 @@ const SECTIONS = [
 export function initShell(deck) {
   buildSidebar(deck);
   initTimer();
+  initLanguage();
 
   // Update active section on slide change
   deck.on('slidechanged', () => updateActiveSection(deck));
@@ -89,6 +90,9 @@ function buildSidebar(deck) {
   // Timer toggle
   document.getElementById('btn-timer')?.addEventListener('click', toggleTimer);
 
+  // Language toggle
+  document.getElementById('btn-lang')?.addEventListener('click', toggleLanguage);
+
   // Settings
   document.getElementById('btn-settings')?.addEventListener('click', () => {
     document.dispatchEvent(new CustomEvent('toggle-settings'));
@@ -139,10 +143,8 @@ let timerSeconds = 0;
 let timerRunning = false;
 
 function initTimer() {
-  // Restore defense mode from session
-  if (sessionStorage.getItem('defense-mode') === 'true') {
-    document.body.classList.add('defense-mode');
-  }
+  // Defense mode is controlled via the D key or settings default.
+  // Don't auto-restore from sessionStorage — it can get stale and hide the sidebar.
 }
 
 export function toggleTimer() {
@@ -174,3 +176,28 @@ export function toggleTimer() {
   }
 }
 
+// === Language Toggle ===
+export function toggleLanguage() {
+  const isEnglish = document.body.classList.toggle('lang-en');
+  sessionStorage.setItem('lang', isEnglish ? 'en' : 'de');
+
+  // Update sidebar indicator
+  const indicator = document.querySelector('.lang-indicator');
+  if (indicator) indicator.textContent = isEnglish ? 'EN' : 'DE';
+}
+
+function initLanguage() {
+  // Restore from session, or use settings default
+  const stored = sessionStorage.getItem('lang');
+  const s = getSettings();
+  const lang = stored || s.display.defaultLanguage || 'de';
+
+  if (lang === 'en') {
+    document.body.classList.add('lang-en');
+    const indicator = document.querySelector('.lang-indicator');
+    if (indicator) indicator.textContent = 'EN';
+  }
+
+  // Listen for toggle event from input-manager
+  document.addEventListener('toggle-language', toggleLanguage);
+}

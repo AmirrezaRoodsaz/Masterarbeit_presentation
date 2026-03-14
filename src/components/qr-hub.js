@@ -6,7 +6,7 @@
  * Auto-detects local IP for dynamic app URLs.
  */
 import QrCreator from 'qr-creator';
-import { createIcons, X, Activity, Zap, Monitor, Github, FileText, Wifi, WifiOff, Edit3 } from 'lucide';
+import { createIcons, X, Activity, Zap, Monitor, Github, FileText, Wifi, WifiOff, Edit3, ExternalLink } from 'lucide';
 
 // ── QR Config ───────────────────────────────────────────────
 
@@ -42,7 +42,7 @@ function getQrEntries() {
     { id: 'soh-pro',   name: 'SOH Tool (Pro)',            url: `http://${ip}:8501`,    icon: 'activity',  type: 'dynamic' },
     { id: 'soh-easy',  name: 'SOH Tool (Easy)',           url: `http://${ip}:8000`,    icon: 'zap',       type: 'dynamic' },
     { id: 'thesis',    name: 'Masterarbeit Bericht PDF',  url: '/thesis.pdf',          icon: 'file-text', type: 'static' },
-    { id: 'github',    name: 'GitHub',                    url: 'https://github.com/AmirrezaRoodsaz', icon: 'github', type: 'static' },
+    { id: 'github',    name: 'GitHub',                    url: 'https://github.com/simeonkt/MA-Amirreza-VehicleSohTesting', icon: 'github', type: 'static' },
   ];
 }
 
@@ -177,7 +177,7 @@ function renderContent() {
   }
 
   // Re-create Lucide icons in the new DOM
-  createIcons({ icons: { X, Activity, Zap, Monitor, Github, FileText, Wifi, WifiOff, Edit3 } });
+  createIcons({ icons: { X, Activity, Zap, Monitor, Github, FileText, Wifi, WifiOff, Edit3, ExternalLink } });
 }
 
 function renderGrid(body, entries) {
@@ -199,9 +199,10 @@ function renderGrid(body, entries) {
     if (canvas) renderQR(canvas, resolveURL(entry), 200);
   });
 
-  // Bind click → zoom
+  // Bind click → zoom (but not when clicking the URL link)
   body.querySelectorAll('.qr-card').forEach(card => {
-    card.addEventListener('click', () => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.qr-card-url')) return; // let link clicks through
       const id = card.dataset.entryId;
       const entry = entries.find(e => e.id === id);
       if (entry) {
@@ -222,8 +223,11 @@ function renderZoomed(body, entry) {
           <canvas id="qr-canvas-zoomed"></canvas>
         </div>
         <h3 class="qr-zoomed-name">${entry.name}</h3>
-        <p class="qr-zoomed-url">${url}</p>
-        <p class="qr-zoomed-hint">Klicken oder ESC zum Zurückkehren</p>
+        <a class="qr-zoomed-url" href="${url}" target="_blank" rel="noopener">
+          <span>${url}</span>
+          <i data-lucide="external-link"></i>
+        </a>
+        <p class="qr-zoomed-hint">Klicken zum Zurückkehren · ESC für Übersicht</p>
       </div>
     </div>
   `;
@@ -232,14 +236,16 @@ function renderZoomed(body, entry) {
   const canvas = body.querySelector('#qr-canvas-zoomed');
   if (canvas) renderQR(canvas, url, 400);
 
-  // Click anywhere in zoomed view → back to grid
-  body.querySelector('.qr-zoomed').addEventListener('click', () => {
+  // Click on the card background → back to grid (but not on the link)
+  body.querySelector('.qr-zoomed-card').addEventListener('click', (e) => {
+    if (e.target.closest('.qr-zoomed-url')) return; // let link clicks through
     zoomedEntry = null;
     renderContent();
   });
 }
 
 function cardHTML(entry) {
+  const url = resolveURL(entry);
   return `
     <div class="qr-card" data-entry-id="${entry.id}" tabindex="0">
       <div class="qr-card-canvas-wrap">
@@ -249,7 +255,10 @@ function cardHTML(entry) {
         <i data-lucide="${entry.icon}"></i>
         <span class="qr-card-name">${entry.name}</span>
       </div>
-      <span class="qr-card-url">${resolveURL(entry)}</span>
+      <a class="qr-card-url" href="${url}" target="_blank" rel="noopener" title="Link öffnen">
+        <span>${url}</span>
+        <i data-lucide="external-link"></i>
+      </a>
     </div>
   `;
 }

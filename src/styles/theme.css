@@ -32,10 +32,12 @@ html, body {
 }
 
 /* Reveal.js overrides */
-.reveal {
+.reveal,
+.reveal-viewport {
   font-family: var(--font-primary);
   font-size: var(--fs-body);
   color: var(--text-primary);
+  background: var(--bg-primary) !important;
 }
 
 .reveal .slides {

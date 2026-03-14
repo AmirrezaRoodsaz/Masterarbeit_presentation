@@ -1,3 +1,12 @@
+/* === Language Toggle === */
+/* Default: German visible, English hidden. When body.lang-en → swap. */
+/* Only target lang spans inside slides/sidebar, never the body itself */
+span.lang-en, .lang-en:not(body) { display: none !important; }
+body.lang-en span.lang-de, body.lang-en .lang-de:not(body) { display: none !important; }
+body.lang-en span.lang-en, body.lang-en .lang-en:not(body) { display: inline !important; }
+/* Block-level lang spans (headings, paragraphs) */
+body.lang-en .lang-en.block:not(body) { display: block !important; }
+
 /* === Reusable Components === */
 
 /* Takeaway Box — "What should the committee remember?" */
@@ -164,6 +173,52 @@
 
 .equation-block .katex {
   font-size: 1.6rem;
+}
+
+/* Stacked equation rows — vertical layout with label + equation + description */
+.equation-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.equation-row {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: var(--bg-surface);
+  border-radius: var(--border-radius);
+  padding: 1.2rem 2.5rem;
+  border-left: 4px solid var(--accent);
+}
+
+.equation-row .equation-label {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  color: var(--accent);
+  white-space: nowrap;
+  min-width: 100px;
+}
+
+.equation-row .katex-eq {
+  flex: 1;
+  text-align: center;
+}
+
+.equation-row .katex {
+  font-size: 2rem;
+  color: var(--text-primary);
+}
+
+.equation-row .equation-desc {
+  font-size: var(--fs-body);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  min-width: 180px;
+  text-align: right;
 }
 
 /* Comparison layout for good vs bad */

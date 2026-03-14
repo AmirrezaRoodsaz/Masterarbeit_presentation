@@ -27,16 +27,33 @@
           <!-- Slide 1: Title -->
           <section id="slide-title" data-section="opening">
             <div class="title-slide">
-              <div class="title-logos">
+              <div class="title-logos title-logos-large">
                 <img src="/assets/images/logos/Institut_Logo.png" alt="Institut für Elektromobilität">
               </div>
-              <h1>Entwicklung reproduzierbarer Methoden zur Bestimmung des State of Health (SOH) von Traktionsbatterien</h1>
-              <p class="subtitle">innerhalb des Elektrofahrzeugs mittels On-Board- und Off-Board-Diagnosesystemen</p>
+              <p class="title-type">
+                <span class="lang-de">Masterarbeit Kolloquium</span>
+                <span class="lang-en" hidden>Master's Thesis Colloquium</span>
+              </p>
+              <h1>
+                <span class="lang-de">Entwicklung reproduzierbarer Methoden zur Bestimmung des State of Health (SOH) von Traktionsbatterien</span>
+                <span class="lang-en" hidden>Development of Reproducible Methods for Determining the State of Health (SOH) of Traction Batteries</span>
+              </h1>
+              <p class="subtitle">
+                <span class="lang-de">innerhalb des Elektrofahrzeugs mittels On-Board- und Off-Board-Diagnosesystemen</span>
+                <span class="lang-en" hidden>within the Electric Vehicle Using On-Board and Off-Board Diagnostic Systems</span>
+              </p>
               <div class="title-meta">
                 <p class="author">Amirreza Roodsaz</p>
+                <p class="matrikel">Matrikelnummer: 018328079</p>
                 <p class="institution">Hochschule Bochum — Institut für Elektromobilität</p>
-                <p class="advisor">Erste Prüferin: Prof. Dr.-Ing. Kerstin Siebert</p>
-                <p class="advisor">Zweiter Prüfer: Prof. Dr.-Ing. Michael Schugt</p>
+                <p class="advisor">
+                  <span class="lang-de">Erste Prüferin: Prof. Dr.-Ing. Kerstin Siebert</span>
+                  <span class="lang-en" hidden>First Examiner: Prof. Dr.-Ing. Kerstin Siebert</span>
+                </p>
+                <p class="advisor">
+                  <span class="lang-de">Zweiter Prüfer: Prof. Dr.-Ing. Michael Schugt</span>
+                  <span class="lang-en" hidden>Second Examiner: Prof. Dr.-Ing. Michael Schugt</span>
+                </p>
                 <p class="date">April 2026</p>
               </div>
             </div>
@@ -303,24 +320,30 @@
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
-                <div class="three-col">
-                  <div class="equation-block">
-                    <h3>SOH<sub>C</sub> — <span class="lang-de">Kapazitätsbasiert</span><span class="lang-en" hidden>Capacity-based</span></h3>
+                <div class="equation-stack">
+                  <div class="equation-row">
+                    <span class="equation-label">SOH<sub>C</sub></span>
                     <div class="katex-eq">$$\text{SOH}_C = \frac{C_\text{aktuell}}{C_\text{nenn}} \times 100\%$$</div>
-                    <p class="lang-de">Verhältnis aktuelle zu nomineller Kapazität</p>
-                    <p class="lang-en" hidden>Ratio of current to nominal capacity</p>
+                    <span class="equation-desc">
+                      <span class="lang-de">Kapazitätsbasiert</span>
+                      <span class="lang-en" hidden>Capacity-based</span>
+                    </span>
                   </div>
-                  <div class="equation-block">
-                    <h3>SOH<sub>E</sub> — <span class="lang-de">Energiebasiert</span><span class="lang-en" hidden>Energy-based</span></h3>
+                  <div class="equation-row">
+                    <span class="equation-label">SOH<sub>E</sub></span>
                     <div class="katex-eq">$$\text{SOH}_E = \frac{E_\text{aktuell}}{E_\text{nenn}} \times 100\%$$</div>
-                    <p class="lang-de">Berücksichtigt Spannungsabfall durch Alterung</p>
-                    <p class="lang-en" hidden>Accounts for voltage drop due to aging</p>
+                    <span class="equation-desc">
+                      <span class="lang-de">Energiebasiert</span>
+                      <span class="lang-en" hidden>Energy-based</span>
+                    </span>
                   </div>
-                  <div class="equation-block">
-                    <h3>SOH<sub>R</sub> — <span class="lang-de">Widerstandsbasiert</span><span class="lang-en" hidden>Resistance-based</span></h3>
+                  <div class="equation-row">
+                    <span class="equation-label">SOH<sub>R</sub></span>
                     <div class="katex-eq">$$\text{SOH}_R = \frac{R_{i,\text{Baseline}}}{R_{i,\text{aktuell}}} \times 100\%$$</div>
-                    <p class="lang-de">Innenwiderstand steigt mit Alterung</p>
-                    <p class="lang-en" hidden>Internal resistance increases with aging</p>
+                    <span class="equation-desc">
+                      <span class="lang-de">Widerstandsbasiert</span>
+                      <span class="lang-en" hidden>Resistance-based</span>
+                    </span>
                   </div>
                 </div>
               </div>
