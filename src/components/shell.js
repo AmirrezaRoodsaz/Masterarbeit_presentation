@@ -1,7 +1,7 @@
 /**
  * Navigation Shell — sidebar, section navigation, progress bar
  */
-import { createIcons, BookOpen, Zap, Beaker, Wrench, BarChart3, MessageSquare, Target, QrCode, Languages, Timer, Monitor, Presentation, Settings } from 'lucide';
+import { createIcons, BookOpen, Zap, Beaker, Wrench, BarChart3, MessageSquare, Target, QrCode, Languages, Timer, Monitor, Presentation, Settings, Workflow } from 'lucide';
 import { getSettings } from './settings-store.js';
 
 // Section definitions matching the slide structure
@@ -38,9 +38,12 @@ const SECTIONS = [
     { label: 'Stärken & Grenzen', label_en: 'Strengths & Limits', slideIndex: 18 },
     { label: 'Unsicherheitsbudget', label_en: 'Uncertainty Budget', slideIndex: 19 },
   ]},
-  { id: 'conclusion', label: 'Fazit', label_en: 'Conclusion', icon: 'target', slideIndex: 20, subs: [
-    { label: 'Kernaussage', label_en: 'Core Finding', slideIndex: 20 },
-    { label: 'Ausblick', label_en: 'Outlook', slideIndex: 21 },
+  { id: 'flowcharts', label: 'Diagramme', label_en: 'Diagrams', icon: 'workflow', slideIndex: 20, subs: [
+    { label: 'Galerie', label_en: 'Gallery', slideIndex: 20 },
+  ]},
+  { id: 'conclusion', label: 'Fazit', label_en: 'Conclusion', icon: 'target', slideIndex: 21, subs: [
+    { label: 'Kernaussage', label_en: 'Core Finding', slideIndex: 21 },
+    { label: 'Ausblick', label_en: 'Outlook', slideIndex: 22 },
   ]},
 ];
 
@@ -139,7 +142,7 @@ function buildSidebar(deck) {
 
   // Initialize Lucide icons
   createIcons({
-    icons: { BookOpen, Zap, Beaker, Wrench, BarChart3, MessageSquare, Target, QrCode, Languages, Timer, Monitor, Presentation, Settings },
+    icons: { BookOpen, Zap, Beaker, Wrench, BarChart3, MessageSquare, Target, QrCode, Languages, Timer, Monitor, Presentation, Settings, Workflow },
   });
 
   // Update slide counter

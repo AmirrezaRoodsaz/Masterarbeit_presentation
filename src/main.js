@@ -8,6 +8,7 @@ import { getSettings } from './components/settings-store.js';
 import { initCharts } from './components/charts.js';
 import { initAnimations } from './components/animations.js';
 import { initDemoEmbed } from './components/demo-embed.js';
+import { initFlowchartGallery } from './components/flowchart-gallery.js';
 
 // KaTeX — local import (offline-first, no CDN)
 import renderMathInElement from 'katex/contrib/auto-render';
@@ -70,6 +71,9 @@ deck.initialize().then(() => {
 
   // Streamlit demo embed (slide 17 — iframe or video fallback)
   initDemoEmbed().catch(err => console.warn('Demo embed init failed:', err));
+
+  // Flowchart gallery (slide 20 — diagram selector)
+  initFlowchartGallery().catch(err => console.warn('Flowchart gallery init failed:', err));
 
   // Apply default display settings
   if (s.display.defaultMode === 'defense') {
