@@ -203,12 +203,13 @@ Each phase: push main → create feature branch → implement → merge with app
 - [x] **Phase 5:** QR hub (dynamic IP, clickable links, Lucide icons)
 - [x] **Phase 6:** KaTeX equations (slide 7 SOH definitions, stacked equation layout)
 - [x] **Phase 7:** D3.js interactive charts (slides 12–15: method comparison, reproducibility, temperature, DC pulse). **Rework needed later:** remove all non-VW-ID.4 vehicle data from stat cards and charts (BMW i3s, Skoda Elroq etc. should be deleted). Charts need visual rework but structure is good.
-- [ ] **Phase 8:** GSAP animations (slide 11 SOH pipeline, fragment reveals, subtle transitions)
+- [x] **Phase 8:** GSAP animations (slide 11 SOH pipeline, fragment reveals, subtle transitions). **Rework needed later** — see Phase 13.
 - [ ] **Phase 9:** Streamlit iframe + video fallback (slide 17 live demo)
 - [ ] **Phase 10: Cross-reference report** — read all thesis chapters (`../Masterarbeit_v2/kapitel/`), ensure every key point from the report is represented in the presentation. Fill in motivation, gap, contributions, related work, discussion, limitations, and conclusion slides with actual bullet points and data from the report. Every section must have real content, not placeholders.
 - [ ] **Phase 11: Mermaid diagrams** — rework slide 6 aging mechanisms + slide 9 measurement protocol, matching PlantUML originals from report. Needs rework after report content is finalized.
 - [ ] **Phase 12: Flowchart Gallery** — new section before Fazit with a dropdown selector showing all 39 PlantUML diagrams (30 Flowcharts + 9 Software Architecture) converted to Mermaid. Select-and-show UI: pick a diagram from the list, it renders full size with scrolling. Sources: `../python_soh/.../Flowcharts/` (30 files) and `../python_soh/.../Software_Architecture_Modeling/` (9 files).
-- [ ] **Phase 13:** Polish — visual consistency, responsive scaling, defense mode testing, projector resolution check
+- [ ] **Phase 13: Animation rework** — user goes through all slides and provides a list of animation opportunities. Rework pipeline animation + add new animations based on that list. This is the last step before polish.
+- [ ] **Phase 14:** Polish — visual consistency, responsive scaling, defense mode testing, projector resolution check
 - [ ] **Phase 14:** Speaker notes — German narration for each slide, timing cues, transition phrases
 - [ ] **Phase 15:** Fallbacks — PDF export, PPTX backup, demo video recording
 

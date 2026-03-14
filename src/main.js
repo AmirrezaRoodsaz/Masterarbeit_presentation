@@ -6,6 +6,7 @@ import { initSettingsModal } from './components/settings-modal.js';
 import { initQrHub } from './components/qr-hub.js';
 import { getSettings } from './components/settings-store.js';
 import { initCharts } from './components/charts.js';
+import { initAnimations } from './components/animations.js';
 
 // KaTeX — local import (offline-first, no CDN)
 import renderMathInElement from 'katex/contrib/auto-render';
@@ -62,6 +63,9 @@ deck.initialize().then(() => {
 
   // Render D3.js charts (results slides 12–15)
   initCharts().catch(err => console.warn('D3 charts init failed:', err));
+
+  // GSAP animations (pipeline slide 11 + fragment enhancements)
+  initAnimations(deck);
 
   // Apply default display settings
   if (s.display.defaultMode === 'defense') {
