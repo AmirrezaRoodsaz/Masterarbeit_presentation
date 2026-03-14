@@ -111,25 +111,35 @@ MSG = {
 
 # ── ASCII Art Logo ───────────────────────────────────────────
 
-_BO_LOGO = [
-    "██████╗    ██████╗ ",
-    "██╔══██╗  ██╔═══██╗",
-    "██████╔╝  ██║   ██║",
-    "██╔══██╗  ██║   ██║",
-    "██████╔╝  ╚██████╔╝",
-    "╚═════╝    ╚═════╝ ",
+_KOLLO_TOP = [
+    "██╗  ██╗   ██████╗   ██╗       ██╗        ██████╗ ",
+    "██║ ██╔╝  ██╔═══██╗  ██║       ██║       ██╔═══██╗",
+    "█████╔╝   ██║   ██║  ██║       ██║       ██║   ██║",
+    "██╔═██╗   ██║   ██║  ██║       ██║       ██║   ██║",
+    "██║  ██╗  ╚██████╔╝  ███████╗  ███████╗  ╚██████╔╝",
+    "╚═╝  ╚═╝   ╚═════╝   ╚══════╝  ╚══════╝   ╚═════╝ ",
+]
+
+_KOLLO_BOT = [
+    "  ██████╗   ██╗   ██╗  ██╗  ██╗   ██╗  ███╗   ███╗",
+    " ██╔═══██╗  ██║   ██║  ██║  ██║   ██║  ████╗ ████║",
+    " ██║   ██║  ██║   ██║  ██║  ██║   ██║  ██╔████╔██║",
+    " ██║▄▄ ██║  ██║   ██║  ██║  ██║   ██║  ██║╚██╔╝██║",
+    " ╚██████╔╝  ╚██████╔╝  ██║  ╚██████╔╝  ██║ ╚═╝ ██║",
+    "  ╚══▀▀═╝    ╚═════╝   ╚═╝   ╚═════╝   ╚═╝     ╚═╝",
 ]
 
 
 def print_logo():
-    """Print the BO Bochum University logo in RED."""
+    """Print Kolloquium ASCII art in RED."""
     print()
-    for line in _BO_LOGO:
-        print(f"    {RED}{BOLD}{line}{RESET}")
-    print(f"    {RED}Bochum University{RESET}")
-    print(f"    {RED}of Applied Sciences{RESET}")
-    print(f"    {RED}TECHNOLOGY \u00b7 BUSINESS \u00b7 HEALTH{RESET}")
-    print(f"    {DIM}Institut f\u00fcr Elektromobilit\u00e4t{RESET}")
+    for line in _KOLLO_TOP:
+        print(f"  {RED}{BOLD}{line}{RESET}")
+    print()
+    for line in _KOLLO_BOT:
+        print(f"  {RED}{BOLD}{line}{RESET}")
+    print()
+    print(f"    {DIM}Masterarbeit Pr\u00e4sentation \u00b7 Institut f\u00fcr Elektromobilit\u00e4t{RESET}")
 
 
 # ── Cross-platform key input ────────────────────────────────
@@ -421,17 +431,24 @@ class StepDisplay:
 
 # ── Helpers ──────────────────────────────────────────────────
 
+def _box_line(text, w, color=CYAN, text_fmt=""):
+    """Build a single box line with correct padding."""
+    visible_len = len(text)
+    padding = w - visible_len
+    return (f"  {color}\u2551{RESET}"
+            f"  {text_fmt}{text}{RESET}"
+            f"{' ' * padding}{color}\u2551{RESET}")
+
+
 def header():
     """Print application header."""
     w = 50
     print()
     print(f"  {CYAN}\u2554{'═' * w}\u2557{RESET}")
-    print(f"  {CYAN}\u2551{RESET}  {BOLD}Masterarbeit Pr\u00e4sentation{RESET}"
-          f"{' ' * (w - 27)}{CYAN}\u2551{RESET}")
-    print(f"  {CYAN}\u2551{RESET}  SOH Elektrofahrzeuge"
-          f"{' ' * (w - 22)}{CYAN}\u2551{RESET}")
-    print(f"  {CYAN}\u2551{RESET}  {DIM}Auto-Setup & Start{RESET}"
-          f"{' ' * (w - 19)}{CYAN}\u2551{RESET}")
+    # Each line: 2 leading spaces + text + padding = w chars between ║...║
+    print(_box_line("Masterarbeit Praesentation", w - 2, text_fmt=BOLD))
+    print(_box_line("SOH Elektrofahrzeuge", w - 2, text_fmt=""))
+    print(_box_line("Auto-Setup & Start", w - 2, text_fmt=DIM))
     print(f"  {CYAN}\u255a{'═' * w}\u255d{RESET}")
     os_name = platform.system()
     os_map = {"Darwin": "macOS", "Linux": "Linux", "Windows": "Windows"}
@@ -661,17 +678,14 @@ def main():
     print_logo()
     header()
 
-    lang = select_language()
+    lang = "de"
     sys.stdout.write(HIDE)
 
-    step_names = STEPS_DE if lang == "de" else STEPS_EN
+    step_names = STEPS_DE
 
     def _header_reprint():
         print_logo()
         header()
-        chosen = "Deutsch" if lang == "de" else "English"
-        print(f"  {GREEN}\u2713 {chosen}{RESET}")
-        print()
 
     d = StepDisplay(step_names, header_fn=_header_reprint)
     d.render()
