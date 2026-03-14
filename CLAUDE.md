@@ -187,16 +187,34 @@ Before any presentation deliverable is considered complete:
 - [ ] Tested offline (no network dependencies)
 - [ ] Tested on target display resolution
 
-## TODO — Next Steps
+## TODO — Build Phases
 
+### Pre-Build (Complete)
 - [x] **Brainstorming** — approach decided (A+ Hybrid), design approved → see `docs/plans/2026-03-04-presentation-design.md`
-- [x] **Tool exploration** — evaluated anime.js (skipped, GSAP covers it), kimi.ai (skipped, not relevant), Lucide Icons (added), qr-creator (added), Lottie (fallback). Design doc updated with all decisions.
-- [ ] Now the brainstorming phase is complete. The next step per the workflow is to create an **implementation plan** — the concrete step-by-step build order. Next session we pick up with creating the concrete build plan
-- [ ] **Create implementation plan** — use `writing-plans` skill to break design into concrete build steps
+- [x] **Tool exploration** — evaluated anime.js, Lucide Icons, qr-creator, Lottie. Design doc updated.
+
+### Implementation Phases
+
+Each phase: push main → create feature branch → implement → merge with approval.
+
+- [x] **Phase 0–2:** Project setup, Reveal.js, navigation shell, sidebar, layout grid
+- [x] **Phase 3:** Slide HTML structure (all 21 slides + backup slides)
+- [x] **Phase 4:** Settings store, settings modal, input manager (keyboard/presenter/gamepad)
+- [x] **Phase 5:** QR hub (dynamic IP, clickable links, Lucide icons)
+- [x] **Phase 6:** KaTeX equations (slide 7 SOH definitions, stacked equation layout)
+- [ ] **Phase 7:** D3.js interactive charts (slides 12–16: method comparison, reproducibility, temperature, DC pulse, failure case)
+- [ ] **Phase 8:** GSAP animations (slide 11 SOH pipeline, fragment reveals, subtle transitions)
+- [ ] **Phase 9:** Streamlit iframe + video fallback (slide 17 live demo)
+- [ ] **Phase 10: Cross-reference report** — read all thesis chapters (`../Masterarbeit_v2/kapitel/`), ensure every key point from the report is represented in the presentation. Fill in motivation, gap, contributions, related work, discussion, limitations, and conclusion slides with actual bullet points and data from the report. Every section must have real content, not placeholders.
+- [ ] **Phase 11: Mermaid diagrams** — rework slide 6 aging mechanisms + slide 9 measurement protocol, matching PlantUML originals from report. Needs rework after report content is finalized.
+- [ ] **Phase 12: Flowchart Gallery** — new section before Fazit with a dropdown selector showing all 39 PlantUML diagrams (30 Flowcharts + 9 Software Architecture) converted to Mermaid. Select-and-show UI: pick a diagram from the list, it renders full size with scrolling. Sources: `../python_soh/.../Flowcharts/` (30 files) and `../python_soh/.../Software_Architecture_Modeling/` (9 files).
+- [ ] **Phase 13:** Polish — visual consistency, responsive scaling, defense mode testing, projector resolution check
+- [ ] **Phase 14:** Speaker notes — German narration for each slide, timing cues, transition phrases
+- [ ] **Phase 15:** Fallbacks — PDF export, PPTX backup, demo video recording
+
+### Pending (non-phase)
 - [ ] **Verify institutional requirements** — time limit, language, required elements (logo, declaration), Q&A format
 - [ ] **Distill core contribution** into one sentence: *"This thesis demonstrates that ___ by ___, resulting in ___"*
-- [ ] **Build slide-by-slide blueprint** using `presentation-architect` skill
-- [ ] **Design and implement** the full presentation with 3D elements where they explain something
 
 ## How to Use Skills
 
