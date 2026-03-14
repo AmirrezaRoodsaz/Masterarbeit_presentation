@@ -1,0 +1,162 @@
+/* === D3.js Chart Styles === */
+
+/* SVG text defaults */
+.chart-container svg text {
+  font-family: var(--font-primary);
+  fill: var(--text-secondary);
+}
+
+/* Axis styles */
+.chart-container .axis path,
+.chart-container .axis line {
+  stroke: rgba(255, 255, 255, 0.1);
+}
+
+.chart-container .axis text {
+  font-size: 14px;
+  fill: var(--text-secondary);
+}
+
+.chart-container .axis-label {
+  font-size: 13px;
+  fill: var(--text-secondary);
+}
+
+/* Grid lines */
+.chart-container .grid line {
+  stroke: rgba(255, 255, 255, 0.06);
+  stroke-dasharray: 2, 4;
+}
+
+.chart-container .grid .domain {
+  stroke: none;
+}
+
+/* Bar styles */
+.chart-container .bar {
+  transition: opacity 150ms ease;
+  cursor: pointer;
+}
+
+.chart-container .bar:hover {
+  opacity: 0.85;
+}
+
+/* Reference line */
+.chart-container .reference-line {
+  stroke: var(--text-secondary);
+  stroke-width: 2;
+  stroke-dasharray: 8, 6;
+  opacity: 0.7;
+}
+
+.chart-container .reference-label {
+  font-size: 13px;
+  fill: var(--text-secondary);
+  font-weight: var(--fw-semibold);
+}
+
+/* Delta annotations */
+.chart-container .delta-label {
+  font-size: 13px;
+  font-weight: var(--fw-semibold);
+}
+
+.chart-container .delta-label.positive {
+  fill: var(--success);
+}
+
+.chart-container .delta-label.negative {
+  fill: var(--warning);
+}
+
+.chart-container .delta-label.best {
+  fill: var(--accent);
+}
+
+/* Value labels on bars */
+.chart-container .bar-value {
+  font-size: 14px;
+  font-weight: var(--fw-bold);
+  fill: var(--text-primary);
+}
+
+/* Legend */
+.chart-legend {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  padding: 0.5rem 0;
+}
+
+.chart-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.chart-legend-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+/* Tooltip */
+.chart-tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: var(--bg-surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-sm);
+  padding: 0.6rem 0.9rem;
+  box-shadow: var(--shadow-tooltip);
+  font-size: 13px;
+  color: var(--text-primary);
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 150ms ease;
+  max-width: 260px;
+  line-height: 1.4;
+}
+
+.chart-tooltip.visible {
+  opacity: 1;
+}
+
+.chart-tooltip .tooltip-method {
+  font-weight: var(--fw-semibold);
+  margin-bottom: 0.2rem;
+}
+
+.chart-tooltip .tooltip-value {
+  color: var(--text-primary);
+}
+
+.chart-tooltip .tooltip-delta {
+  font-size: 12px;
+  margin-top: 0.15rem;
+}
+
+.chart-tooltip .tooltip-note {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 0.3rem;
+  font-style: italic;
+}
+
+/* Annotation badges */
+.chart-container .annotation-badge {
+  font-size: 13px;
+  font-weight: var(--fw-bold);
+}
+
+/* Delta arrows between groups */
+.chart-container .delta-arrow {
+  stroke: var(--text-secondary);
+  stroke-width: 1.5;
+  fill: none;
+  opacity: 0.6;
+}

@@ -202,7 +202,7 @@ Each phase: push main → create feature branch → implement → merge with app
 - [x] **Phase 4:** Settings store, settings modal, input manager (keyboard/presenter/gamepad)
 - [x] **Phase 5:** QR hub (dynamic IP, clickable links, Lucide icons)
 - [x] **Phase 6:** KaTeX equations (slide 7 SOH definitions, stacked equation layout)
-- [ ] **Phase 7:** D3.js interactive charts (slides 12–16: method comparison, reproducibility, temperature, DC pulse, failure case)
+- [x] **Phase 7:** D3.js interactive charts (slides 12–15: method comparison, reproducibility, temperature, DC pulse). **Rework needed later:** remove all non-VW-ID.4 vehicle data from stat cards and charts (BMW i3s, Skoda Elroq etc. should be deleted). Charts need visual rework but structure is good.
 - [ ] **Phase 8:** GSAP animations (slide 11 SOH pipeline, fragment reveals, subtle transitions)
 - [ ] **Phase 9:** Streamlit iframe + video fallback (slide 17 live demo)
 - [ ] **Phase 10: Cross-reference report** — read all thesis chapters (`../Masterarbeit_v2/kapitel/`), ensure every key point from the report is represented in the presentation. Fill in motivation, gap, contributions, related work, discussion, limitations, and conclusion slides with actual bullet points and data from the report. Every section must have real content, not placeholders.
