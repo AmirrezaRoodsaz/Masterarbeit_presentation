@@ -7,6 +7,7 @@ import { initQrHub } from './components/qr-hub.js';
 import { getSettings } from './components/settings-store.js';
 import { initCharts } from './components/charts.js';
 import { initAnimations } from './components/animations.js';
+import { initDemoEmbed } from './components/demo-embed.js';
 
 // KaTeX — local import (offline-first, no CDN)
 import renderMathInElement from 'katex/contrib/auto-render';
@@ -66,6 +67,9 @@ deck.initialize().then(() => {
 
   // GSAP animations (pipeline slide 11 + fragment enhancements)
   initAnimations(deck);
+
+  // Streamlit demo embed (slide 17 — iframe or video fallback)
+  initDemoEmbed().catch(err => console.warn('Demo embed init failed:', err));
 
   // Apply default display settings
   if (s.display.defaultMode === 'defense') {
