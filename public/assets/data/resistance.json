@@ -1,0 +1,22 @@
+{
+  "vehicles": [
+    {
+      "vehicle": "VW ID.4 (IfE)",
+      "r_charge_mohm": 40.0,
+      "r_discharge_mohm": 32.8,
+      "soc_percent": 51.2,
+      "temp_celsius": 34,
+      "note": "DC-Puls bei 51,2 % SOC",
+      "note_en": "DC pulse at 51.2% SOC"
+    },
+    {
+      "vehicle": "BMW i3s",
+      "r_charge_mohm": 228,
+      "r_discharge_mohm": null,
+      "soc_percent": null,
+      "temp_celsius": null,
+      "note": "Höherer Widerstand — ältere Batterie",
+      "note_en": "Higher resistance — older battery"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+/* === Reveal.js Theme Overrides === */
+
+/* Font face — Inter Variable */
+@font-face {
+  font-family: 'Inter';
+  src: url('/assets/fonts/InterVariable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/assets/fonts/InterVariable-Italic.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+}
+
+/* Reveal.js overrides */
+.reveal {
+  font-family: var(--font-primary);
+  font-size: var(--fs-body);
+  color: var(--text-primary);
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides section {
+  background: var(--bg-primary);
+  padding: var(--content-padding);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Title + Conclusion slides use surface color for bookend effect */
+.reveal .slides section[data-section="opening"],
+.reveal .slides section[data-section="conclusion"] {
+  background: var(--bg-surface);
+}
+
+/* Typography */
+.reveal h1 {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+}
+
+.reveal h2 {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+  line-height: 1.3;
+  margin-bottom: 0.8em;
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 0.3em;
+}
+
+.reveal h3 {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+  color: var(--text-secondary);
+  margin-bottom: 0.6em;
+}
+
+.reveal p {
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 0.6em;
+}
+
+.reveal strong {
+  color: var(--text-primary);
+  font-weight: var(--fw-semibold);
+}
+
+.reveal a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.reveal a:hover {
+  text-decoration: underline;
+}
+
+/* Reveal.js fragment animation override */
+.reveal .slides section .fragment {
+  opacity: 0;
+  transition: opacity var(--transition-default), transform var(--transition-default);
+  transform: translateY(10px);
+}
+
+.reveal .slides section .fragment.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hide Reveal.js default controls we don't need */
+.reveal .controls,
+.reveal .progress,
+.reveal .slide-number {
+  display: none !important;
+}

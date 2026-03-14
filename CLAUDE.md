@@ -30,9 +30,17 @@ These 4 files are pre-research — horizons of what will come, not final decisio
 - `master_thesis_final_refinement_checklist.md` — Contribution distillation, validity threats, slide economy
 
 ## Technical Stack (Decided)
-- **Primary format:** Web-based slides (reveal.js or Slidev — final choice TBD based on prototyping)
-- **3D integration:** `<model-viewer>` for GLB models (primary), Three.js only if custom behavior needed
-- **Fallbacks:** PDF export, PPTX backup, video recording of 3D demos
+- **Slide engine:** Reveal.js 5.x + custom navigation shell (Vanilla JS + CSS)
+- **Data visualization:** D3.js (interactive charts for results)
+- **Animations:** GSAP (timeline-based, method pipeline, transitions)
+- **Icons:** Lucide Icons (structural SVG icons, vanilla JS, tree-shaken)
+- **QR codes:** qr-creator by Nimiq (dynamic QR hub — auto-detect local IP, hardcoded ports)
+- **Animation fallback:** Lottie (only if GSAP doesn't look polished enough)
+- **Diagrams:** Mermaid.js (flowcharts from markdown)
+- **Equations:** KaTeX (lightweight LaTeX rendering)
+- **Typography:** Inter (fallback: Source Sans Pro)
+- **Live demo:** Streamlit iframe + pre-recorded MP4 fallback
+- **Fallbacks:** PDF export, PPTX backup, video recording of demos
 - **Offline-first:** All assets bundled locally, no external dependencies at runtime
 
 ## Thesis Content Summary (For Slide Content)
@@ -182,6 +190,8 @@ Before any presentation deliverable is considered complete:
 ## TODO — Next Steps
 
 - [x] **Brainstorming** — approach decided (A+ Hybrid), design approved → see `docs/plans/2026-03-04-presentation-design.md`
+- [x] **Tool exploration** — evaluated anime.js (skipped, GSAP covers it), kimi.ai (skipped, not relevant), Lucide Icons (added), qr-creator (added), Lottie (fallback). Design doc updated with all decisions.
+- [ ] Now the brainstorming phase is complete. The next step per the workflow is to create an **implementation plan** — the concrete step-by-step build order. Next session we pick up with creating the concrete build plan
 - [ ] **Create implementation plan** — use `writing-plans` skill to break design into concrete build steps
 - [ ] **Verify institutional requirements** — time limit, language, required elements (logo, declaration), Q&A format
 - [ ] **Distill core contribution** into one sentence: *"This thesis demonstrates that ___ by ___, resulting in ___"*

@@ -1,0 +1,20 @@
+{
+  "reference": {
+    "method": "AVL HV-Check",
+    "method_en": "AVL HV-Check",
+    "soh": 97.3,
+    "source": "Off-Board (Referenz)"
+  },
+  "methods": [
+    { "method": "SOH_e (Energie-direkt)", "method_en": "SOH_e (Energy-direct)", "soh": 99.6, "delta": 2.3, "note": "Genaueste Einzelmethode", "note_en": "Most accurate single method" },
+    { "method": "SOH_c (Coulomb-Zählung)", "method_en": "SOH_c (Coulomb-counting)", "soh": 91.8, "delta": -5.5, "note": "Systematische Unterschätzung", "note_en": "Systematic underestimation" },
+    { "method": "SOH kapazitätsbasiert", "method_en": "SOH capacity-based", "soh": 89.7, "delta": -7.6, "note": "Größter Einzelfehler", "note_en": "Largest single error" },
+    { "method": "SOH kombiniert (e+c)/2", "method_en": "SOH combined (e+c)/2", "soh": 95.7, "delta": -1.6, "note": "Bester Gesamtwert", "note_en": "Best overall value" },
+    { "method": "SOH_R (Widerstand)", "method_en": "SOH_R (Resistance)", "soh": 100.0, "delta": 2.7, "note": "Baseline-gebunden", "note_en": "Baseline-locked" }
+  ],
+  "conditions": {
+    "vehicle": "VW ID.4 (IfE)",
+    "temperature": 19.0,
+    "session": "A"
+  }
+}

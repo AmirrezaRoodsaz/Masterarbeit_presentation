@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOH Elektrofahrzeuge — Masterarbeit Amirreza Roodsaz</title>
+  <link rel="stylesheet" href="src/styles/main.css">
+</head>
+<body>
+  <div id="app-shell">
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="sidebar" aria-label="Abschnittsnavigation">
+      <div class="sidebar-header"></div>
+      <nav class="sidebar-nav"></nav>
+      <div class="sidebar-footer"></div>
+    </aside>
+
+    <!-- Main Presentation Area -->
+    <main id="main-area">
+      <div class="reveal">
+        <div class="slides">
+
+          <!-- ============================================================ -->
+          <!-- SECTION 1: OPENING (Slides 1-2, ~1.5 min)                    -->
+          <!-- ============================================================ -->
+
+          <!-- Slide 1: Title -->
+          <section id="slide-title" data-section="opening">
+            <div class="title-slide">
+              <div class="title-logos">
+                <img src="/assets/images/logos/Institut_Logo.png" alt="Institut für Elektromobilität">
+              </div>
+              <h1>Entwicklung reproduzierbarer Methoden zur Bestimmung des State of Health (SOH) von Traktionsbatterien</h1>
+              <p class="subtitle">innerhalb des Elektrofahrzeugs mittels On-Board- und Off-Board-Diagnosesystemen</p>
+              <div class="title-meta">
+                <p class="author">Amirreza Roodsaz</p>
+                <p class="institution">Hochschule Bochum — Institut für Elektromobilität</p>
+                <p class="advisor">Erste Prüferin: Prof. Dr.-Ing. Kerstin Siebert</p>
+                <p class="advisor">Zweiter Prüfer: Prof. Dr.-Ing. Michael Schugt</p>
+                <p class="date">April 2026</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 2: Roadmap / Agenda -->
+          <section id="slide-roadmap" data-section="opening">
+            <h2>
+              <span class="lang-de">Agenda</span>
+              <span class="lang-en" hidden>Agenda</span>
+            </h2>
+            <div class="roadmap-grid">
+              <div class="roadmap-card" data-target="2">
+                <div class="roadmap-number">01</div>
+                <div class="roadmap-label">
+                  <span class="lang-de">Motivation & Problemstellung</span>
+                  <span class="lang-en" hidden>Motivation & Problem</span>
+                </div>
+                <div class="roadmap-time">~2,5 min</div>
+              </div>
+              <div class="roadmap-card" data-target="5">
+                <div class="roadmap-number">02</div>
+                <div class="roadmap-label">
+                  <span class="lang-de">Theoretische Grundlagen</span>
+                  <span class="lang-en" hidden>Theoretical Foundations</span>
+                </div>
+                <div class="roadmap-time">~2 min</div>
+              </div>
+              <div class="roadmap-card" data-target="7">
+                <div class="roadmap-number">03</div>
+                <div class="roadmap-label">
+                  <span class="lang-de">Methodik</span>
+                  <span class="lang-en" hidden>Methodology</span>
+                </div>
+                <div class="roadmap-time">~4 min</div>
+              </div>
+              <div class="roadmap-card" data-target="11">
+                <div class="roadmap-number">04</div>
+                <div class="roadmap-label">
+                  <span class="lang-de">Ergebnisse & Demo</span>
+                  <span class="lang-en" hidden>Results & Demo</span>
+                </div>
+                <div class="roadmap-time">~7 min</div>
+              </div>
+              <div class="roadmap-card" data-target="17">
+                <div class="roadmap-number">05</div>
+                <div class="roadmap-label">
+                  <span class="lang-de">Diskussion</span>
+                  <span class="lang-en" hidden>Discussion</span>
+                </div>
+                <div class="roadmap-time">~2 min</div>
+              </div>
+              <div class="roadmap-card" data-target="19">
+                <div class="roadmap-number">06</div>
+                <div class="roadmap-label">
+                  <span class="lang-de">Fazit & Ausblick</span>
+                  <span class="lang-en" hidden>Conclusion & Outlook</span>
+                </div>
+                <div class="roadmap-time">~1,5 min</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============================================================ -->
+          <!-- SECTION 2: PROBLEM & MOTIVATION (Slides 3-5, ~2.5 min)       -->
+          <!-- ============================================================ -->
+
+          <!-- Slide 3: Real-world problem -->
+          <section id="slide-problem" data-section="motivation">
+            <h2>
+              <span class="lang-de">Die Traktionsbatterie ist das teuerste Einzelbauteil im Elektrofahrzeug — und ihr Zustand ist intransparent</span>
+              <span class="lang-en" hidden>The traction battery is the most expensive single component in an EV — and its condition is opaque</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="three-col">
+                  <div class="stat-card">
+                    <div class="stat-value accent">40–50 %</div>
+                    <div class="stat-label">
+                      <span class="lang-de">Anteil am Fahrzeugwert</span>
+                      <span class="lang-en" hidden>Share of vehicle value</span>
+                    </div>
+                  </div>
+                  <div class="stat-card">
+                    <div class="stat-value warning">?? %</div>
+                    <div class="stat-label">
+                      <span class="lang-de">SOH laut BMS — herstellerspezifisch, nicht vergleichbar</span>
+                      <span class="lang-en" hidden>SOH per BMS — manufacturer-specific, not comparable</span>
+                    </div>
+                  </div>
+                  <div class="stat-card">
+                    <div class="stat-value">70–80 %</div>
+                    <div class="stat-label">
+                      <span class="lang-de">End-of-Life Schwelle — danach Second Life</span>
+                      <span class="lang-en" hidden>End-of-Life threshold — then second life</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="takeaway-box fragment">
+                <div class="takeaway-label">Kernproblem</div>
+                <p>
+                  <span class="lang-de">Beim Gebrauchtfahrzeugkauf kann der Batteriezustand nicht zuverlässig und standardisiert bewertet werden.</span>
+                  <span class="lang-en" hidden>When buying a used EV, battery condition cannot be reliably and standardly assessed.</span>
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 4: The Gap -->
+          <section id="slide-gap" data-section="motivation">
+            <h2>
+              <span class="lang-de">Unterschiedliche Diagnosesysteme liefern signifikant abweichende SOH-Werte für dasselbe Fahrzeug</span>
+              <span class="lang-en" hidden>Different diagnostic systems yield significantly different SOH values for the same vehicle</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="three-col">
+                  <div class="card">
+                    <h3>
+                      <span class="lang-de">BMS-Algorithmen</span>
+                      <span class="lang-en" hidden>BMS Algorithms</span>
+                    </h3>
+                    <p>
+                      <span class="lang-de">Proprietär, herstellerspezifisch, nicht öffentlich zugänglich</span>
+                      <span class="lang-en" hidden>Proprietary, manufacturer-specific, not publicly accessible</span>
+                    </p>
+                  </div>
+                  <div class="card">
+                    <h3>
+                      <span class="lang-de">Externe Diagnostik</span>
+                      <span class="lang-en" hidden>External Diagnostics</span>
+                    </h3>
+                    <p>
+                      <span class="lang-de">OBD-Adapter, Werkstattgeräte und Prüfstände widersprechen sich häufig</span>
+                      <span class="lang-en" hidden>OBD adapters, workshop devices and test stands often contradict each other</span>
+                    </p>
+                  </div>
+                  <div class="card">
+                    <h3>
+                      <span class="lang-de">Fehlende Studien</span>
+                      <span class="lang-en" hidden>Missing Studies</span>
+                    </h3>
+                    <p>
+                      <span class="lang-de">Kein systematischer Vergleich unter kontrollierten, reproduzierbaren Bedingungen</span>
+                      <span class="lang-en" hidden>No systematic comparison under controlled, reproducible conditions</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="takeaway-box fragment">
+                <div class="takeaway-label">Forschungslücke</div>
+                <p>
+                  <span class="lang-de">Es fehlt eine standardisierte, reproduzierbare Methodik zum Vergleich von SOH-Diagnosesystemen.</span>
+                  <span class="lang-en" hidden>A standardized, reproducible methodology for comparing SOH diagnostic systems is missing.</span>
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 5: Research question + contributions -->
+          <section id="slide-contributions" data-section="motivation">
+            <h2>
+              <span class="lang-de">Forschungsfrage & Beiträge</span>
+              <span class="lang-en" hidden>Research Question & Contributions</span>
+            </h2>
+            <div class="slide-content">
+              <div class="research-question card">
+                <p style="font-size: var(--fs-h3); color: var(--text-primary); font-weight: var(--fw-medium);">
+                  <span class="lang-de">Wie kann der State of Health von Traktionsbatterien reproduzierbar und praxistauglich mittels On-Board- und Off-Board-Diagnostik bestimmt werden?</span>
+                  <span class="lang-en" hidden>How can the State of Health of traction batteries be determined reproducibly and practically using on-board and off-board diagnostics?</span>
+                </p>
+              </div>
+              <div class="contributions-grid" style="margin-top: 1.5rem;">
+                <div class="contribution fragment">
+                  <span class="contribution-number">1</span>
+                  <span class="lang-de"><strong>Systematische Evaluation</strong> dreier Diagnosesysteme (AVL, OBD, AUTEL) unter kontrollierten Bedingungen</span>
+                  <span class="lang-en" hidden><strong>Systematic evaluation</strong> of three diagnostic systems (AVL, OBD, AUTEL) under controlled conditions</span>
+                </div>
+                <div class="contribution fragment">
+                  <span class="contribution-number">2</span>
+                  <span class="lang-de"><strong>Entwicklung</strong> eines standardisierten Messprotokolls für reproduzierbare SOH-Bestimmung</span>
+                  <span class="lang-en" hidden><strong>Development</strong> of a standardized measurement protocol for reproducible SOH determination</span>
+                </div>
+                <div class="contribution fragment">
+                  <span class="contribution-number">3</span>
+                  <span class="lang-de"><strong>Implementierung & Vergleich</strong> von 6 SOH-Berechnungsmethoden in einer Python-Anwendung</span>
+                  <span class="lang-en" hidden><strong>Implementation & comparison</strong> of 6 SOH calculation methods in a Python application</span>
+                </div>
+                <div class="contribution fragment">
+                  <span class="contribution-number">4</span>
+                  <span class="lang-de"><strong>Quantifizierung</strong> der Einflussfaktoren: Temperatur, SOC-Fenster, Ladeleistung</span>
+                  <span class="lang-en" hidden><strong>Quantification</strong> of influencing factors: temperature, SOC window, charging power</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============================================================ -->
+          <!-- SECTION 3: THEORY (Slides 6-7, ~2 min)                       -->
+          <!-- ============================================================ -->
+
+          <!-- Slide 6: Battery basics + aging -->
+          <section id="slide-battery-basics" data-section="theory">
+            <h2>
+              <span class="lang-de">Li-Ionen-Batterien altern durch kalendarische und zyklische Degradation</span>
+              <span class="lang-en" hidden>Li-ion batteries age through calendar and cyclic degradation</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="two-col">
+                  <div>
+                    <h3>
+                      <span class="lang-de">Kalendarische Alterung</span>
+                      <span class="lang-en" hidden>Calendar Aging</span>
+                    </h3>
+                    <ul class="styled-list">
+                      <li class="fragment">
+                        <span class="lang-de">SEI-Wachstum → Verlust von Lithium-Inventar (LLI)</span>
+                        <span class="lang-en" hidden>SEI growth → Loss of Lithium Inventory (LLI)</span>
+                      </li>
+                      <li class="fragment">
+                        <span class="lang-de">Elektrolyt-Zersetzung → Kapazitätsverlust</span>
+                        <span class="lang-en" hidden>Electrolyte decomposition → capacity loss</span>
+                      </li>
+                      <li class="fragment">
+                        <span class="lang-de">Arrhenius-Verhalten: Höhere Temperatur = exponentiell schnellere Alterung</span>
+                        <span class="lang-en" hidden>Arrhenius behavior: Higher temperature = exponentially faster aging</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3>
+                      <span class="lang-de">Zyklische Alterung</span>
+                      <span class="lang-en" hidden>Cyclic Aging</span>
+                    </h3>
+                    <ul class="styled-list">
+                      <li class="fragment">
+                        <span class="lang-de">Mechanische Beanspruchung → Partikelriss → LAM</span>
+                        <span class="lang-en" hidden>Mechanical stress → particle cracking → LAM</span>
+                      </li>
+                      <li class="fragment">
+                        <span class="lang-de">Lithium-Plating: Li⁺ lagert sich als Metall ab (Risiko: Dendriten)</span>
+                        <span class="lang-en" hidden>Lithium plating: Li⁺ deposits as metal (risk: dendrites)</span>
+                      </li>
+                      <li class="fragment">
+                        <span class="lang-de">Hoher Strom + niedrige Temperatur + hoher SOC beschleunigen Alterung</span>
+                        <span class="lang-en" hidden>High current + low temperature + high SOC accelerate aging</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!-- Mermaid diagram placeholder — Phase 7 -->
+              <div id="mermaid-aging" class="mermaid-container"></div>
+            </div>
+          </section>
+
+          <!-- Slide 7: SOH definitions + equations -->
+          <section id="slide-soh-definitions" data-section="theory">
+            <h2>
+              <span class="lang-de">Drei komplementäre SOH-Definitionen erfassen unterschiedliche Aspekte der Batteriealterung</span>
+              <span class="lang-en" hidden>Three complementary SOH definitions capture different aspects of battery aging</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="three-col">
+                  <div class="equation-block">
+                    <h3>SOH<sub>C</sub> — <span class="lang-de">Kapazitätsbasiert</span><span class="lang-en" hidden>Capacity-based</span></h3>
+                    <div class="katex-eq">$$\text{SOH}_C = \frac{C_\text{aktuell}}{C_\text{nenn}} \times 100\%$$</div>
+                    <p class="lang-de">Verhältnis aktuelle zu nomineller Kapazität</p>
+                    <p class="lang-en" hidden>Ratio of current to nominal capacity</p>
+                  </div>
+                  <div class="equation-block">
+                    <h3>SOH<sub>E</sub> — <span class="lang-de">Energiebasiert</span><span class="lang-en" hidden>Energy-based</span></h3>
+                    <div class="katex-eq">$$\text{SOH}_E = \frac{E_\text{aktuell}}{E_\text{nenn}} \times 100\%$$</div>
+                    <p class="lang-de">Berücksichtigt Spannungsabfall durch Alterung</p>
+                    <p class="lang-en" hidden>Accounts for voltage drop due to aging</p>
+                  </div>
+                  <div class="equation-block">
+                    <h3>SOH<sub>R</sub> — <span class="lang-de">Widerstandsbasiert</span><span class="lang-en" hidden>Resistance-based</span></h3>
+                    <div class="katex-eq">$$\text{SOH}_R = \frac{R_{i,\text{Baseline}}}{R_{i,\text{aktuell}}} \times 100\%$$</div>
+                    <p class="lang-de">Innenwiderstand steigt mit Alterung</p>
+                    <p class="lang-en" hidden>Internal resistance increases with aging</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============================================================ -->
+          <!-- SECTION 4: METHODOLOGY (Slides 8-11, ~4 min)                 -->
+          <!-- ============================================================ -->
+
+          <!-- Slide 8: Three diagnostic tools -->
+          <section id="slide-tools" data-section="method">
+            <h2>
+              <span class="lang-de">Drei Diagnosesysteme decken das Spektrum von professioneller Referenz bis kostengünstigem On-Board ab</span>
+              <span class="lang-en" hidden>Three diagnostic systems cover the spectrum from professional reference to low-cost on-board</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th><span class="lang-de">System</span><span class="lang-en" hidden>System</span></th>
+                      <th><span class="lang-de">Typ</span><span class="lang-en" hidden>Type</span></th>
+                      <th><span class="lang-de">Datenerfassung</span><span class="lang-en" hidden>Data Acquisition</span></th>
+                      <th><span class="lang-de">Kosten</span><span class="lang-en" hidden>Cost</span></th>
+                      <th><span class="lang-de">Einsatz</span><span class="lang-en" hidden>Application</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="highlight">AVL HV-Check</td>
+                      <td><span class="lang-de">Off-Board (professionell)</span><span class="lang-en" hidden>Off-Board (professional)</span></td>
+                      <td><span class="lang-de">Snapshot (Minuten)</span><span class="lang-en" hidden>Snapshot (minutes)</span></td>
+                      <td>~€15.000</td>
+                      <td><span class="lang-de">Referenzmessung</span><span class="lang-en" hidden>Reference measurement</span></td>
+                    </tr>
+                    <tr>
+                      <td class="highlight">OBDLink MX+</td>
+                      <td><span class="lang-de">On-Board (Bluetooth)</span><span class="lang-en" hidden>On-Board (Bluetooth)</span></td>
+                      <td><span class="lang-de">Kontinuierlich (CSV)</span><span class="lang-en" hidden>Continuous (CSV)</span></td>
+                      <td>~€50</td>
+                      <td><span class="lang-de">Datenquelle für 6 SOH-Methoden</span><span class="lang-en" hidden>Data source for 6 SOH methods</span></td>
+                    </tr>
+                    <tr>
+                      <td class="highlight">AUTEL MaxiSYS Ultra</td>
+                      <td><span class="lang-de">Off-Board (universell)</span><span class="lang-en" hidden>Off-Board (universal)</span></td>
+                      <td><span class="lang-de">Snapshot</span><span class="lang-en" hidden>Snapshot</span></td>
+                      <td>~€4.000</td>
+                      <td><span class="lang-de">Kreuzvalidierung</span><span class="lang-en" hidden>Cross-validation</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 9: Test protocol -->
+          <section id="slide-protocol" data-section="method">
+            <h2>
+              <span class="lang-de">Das standardisierte Messprotokoll definiert 5 Phasen für reproduzierbare SOH-Bestimmung</span>
+              <span class="lang-en" hidden>The standardized measurement protocol defines 5 phases for reproducible SOH determination</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <!-- Mermaid flowchart — Phase 7 -->
+                <div id="mermaid-protocol" class="mermaid-container">
+                  <div class="protocol-steps">
+                    <div class="protocol-step fragment">
+                      <div class="step-number">1</div>
+                      <div class="step-content">
+                        <strong><span class="lang-de">Vorbereitung</span><span class="lang-en" hidden>Preparation</span></strong>
+                        <p><span class="lang-de">Fahrzeug klimatisieren (15–30 °C), SOC &lt; 10 %</span><span class="lang-en" hidden>Condition vehicle (15–30 °C), SOC &lt; 10%</span></p>
+                      </div>
+                    </div>
+                    <div class="protocol-step fragment">
+                      <div class="step-number">2</div>
+                      <div class="step-content">
+                        <strong><span class="lang-de">Snapshot-Messung</span><span class="lang-en" hidden>Snapshot Measurement</span></strong>
+                        <p><span class="lang-de">AVL HV-Check + AUTEL — Referenz-SOH erfassen</span><span class="lang-en" hidden>AVL HV-Check + AUTEL — capture reference SOH</span></p>
+                      </div>
+                    </div>
+                    <div class="protocol-step fragment">
+                      <div class="step-number">3</div>
+                      <div class="step-content">
+                        <strong><span class="lang-de">CC-CV Ladung</span><span class="lang-en" hidden>CC-CV Charging</span></strong>
+                        <p><span class="lang-de">AC-Wallbox, 0,1–0,15C, OBD-Logging (194 Sensoren)</span><span class="lang-en" hidden>AC wallbox, 0.1–0.15C, OBD logging (194 sensors)</span></p>
+                      </div>
+                    </div>
+                    <div class="protocol-step fragment">
+                      <div class="step-number">4</div>
+                      <div class="step-content">
+                        <strong><span class="lang-de">DC-Puls-Test</span><span class="lang-en" hidden>DC Pulse Test</span></strong>
+                        <p><span class="lang-de">Innenwiderstand R<sub>i</sub> bestimmen (Lade- & Entladepuls)</span><span class="lang-en" hidden>Determine internal resistance R<sub>i</sub> (charge & discharge pulse)</span></p>
+                      </div>
+                    </div>
+                    <div class="protocol-step fragment">
+                      <div class="step-number">5</div>
+                      <div class="step-content">
+                        <strong><span class="lang-de">Analyse & Berechnung</span><span class="lang-en" hidden>Analysis & Calculation</span></strong>
+                        <p><span class="lang-de">Python-App: 6 SOH-Methoden parallel berechnen</span><span class="lang-en" hidden>Python app: calculate 6 SOH methods in parallel</span></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 10: Test vehicles -->
+          <section id="slide-vehicles" data-section="method">
+            <h2>
+              <span class="lang-de">33 Messungen an 6 Fahrzeugen über 12 Monate — Primärfahrzeug VW ID.4</span>
+              <span class="lang-en" hidden>33 measurements on 6 vehicles over 12 months — primary vehicle VW ID.4</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="two-col">
+                  <div>
+                    <table class="data-table">
+                      <thead>
+                        <tr>
+                          <th><span class="lang-de">Eigenschaft</span><span class="lang-en" hidden>Property</span></th>
+                          <th>VW ID.4 (IfE)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td><span class="lang-de">Batterie</span><span class="lang-en" hidden>Battery</span></td><td class="highlight">77 kWh (netto: 72 kWh)</td></tr>
+                        <tr><td><span class="lang-de">Zellchemie</span><span class="lang-en" hidden>Cell Chemistry</span></td><td>NMC 712</td></tr>
+                        <tr><td><span class="lang-de">Konfiguration</span><span class="lang-en" hidden>Configuration</span></td><td>12 Module × 24 Zellen = 288</td></tr>
+                        <tr><td><span class="lang-de">Nennspannung</span><span class="lang-en" hidden>Nominal Voltage</span></td><td>~350 V (300–408 V)</td></tr>
+                        <tr><td><span class="lang-de">Kilometerstand</span><span class="lang-en" hidden>Mileage</span></td><td>10.801 km</td></tr>
+                        <tr><td><span class="lang-de">Zustand</span><span class="lang-en" hidden>Condition</span></td><td class="highlight"><span class="lang-de">Exzellent</span><span class="lang-en" hidden>Excellent</span></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div>
+                    <h3><span class="lang-de">Weitere Fahrzeuge</span><span class="lang-en" hidden>Additional Vehicles</span></h3>
+                    <div class="vehicle-list">
+                      <div class="vehicle-item fragment">
+                        <strong>BMW i3s</strong> — 42 kWh, NMC, 35.600 km
+                      </div>
+                      <div class="vehicle-item fragment">
+                        <strong>Skoda Elroq</strong> — 77 kWh, NMC, 12.572 km (neu)
+                      </div>
+                      <div class="vehicle-item fragment">
+                        <strong>VW ID.4 (FP)</strong> — 77 kWh, 65.467 km
+                      </div>
+                      <div class="vehicle-item fragment">
+                        <strong>Renault Zoe</strong> — <span class="lang-de">Vergleichsfahrzeug</span><span class="lang-en" hidden>Comparison vehicle</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 11: SOH calculation pipeline (GSAP animated — Phase 9) -->
+          <section id="slide-pipeline" data-section="method">
+            <h2>
+              <span class="lang-de">Sechs Berechnungsmethoden konvergieren zu einem robusten kombinierten SOH-Wert</span>
+              <span class="lang-en" hidden>Six calculation methods converge into a robust combined SOH value</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div id="gsap-pipeline" class="pipeline-container">
+                  <!-- Pipeline visualization — GSAP Phase 9 -->
+                  <div class="pipeline-flow">
+                    <div class="pipeline-node pipeline-input" id="pipeline-raw">
+                      <span class="lang-de">OBD-Rohdaten</span>
+                      <span class="lang-en" hidden>OBD Raw Data</span>
+                      <div class="pipeline-detail">194 Sensoren, CSV</div>
+                    </div>
+                    <div class="pipeline-arrow" id="pipeline-arrow-1">→</div>
+                    <div class="pipeline-methods">
+                      <div class="pipeline-node pipeline-method" id="method-sohe">SOH<sub>e</sub><div class="pipeline-detail">99,6 %</div></div>
+                      <div class="pipeline-node pipeline-method" id="method-sohc">SOH<sub>c</sub><div class="pipeline-detail">91,8 %</div></div>
+                      <div class="pipeline-node pipeline-method" id="method-cap">SOH<sub>kap</sub><div class="pipeline-detail">89,7 %</div></div>
+                      <div class="pipeline-node pipeline-method" id="method-sohr">SOH<sub>R</sub><div class="pipeline-detail">100,0 %</div></div>
+                      <div class="pipeline-node pipeline-method" id="method-ica">ICA<div class="pipeline-detail"><span class="lang-de">Diagnostisch</span><span class="lang-en" hidden>Diagnostic</span></div></div>
+                      <div class="pipeline-node pipeline-method" id="method-dva">DVA<div class="pipeline-detail"><span class="lang-de">Diagnostisch</span><span class="lang-en" hidden>Diagnostic</span></div></div>
+                    </div>
+                    <div class="pipeline-arrow" id="pipeline-arrow-2">→</div>
+                    <div class="pipeline-node pipeline-output" id="pipeline-combined">
+                      <span class="lang-de">Kombiniert</span>
+                      <span class="lang-en" hidden>Combined</span>
+                      <div class="pipeline-result">95,7 %</div>
+                      <div class="pipeline-detail">vs. AVL: 97,3 % (−1,6 Pp)</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============================================================ -->
+          <!-- SECTION 5: RESULTS & DEMO (Slides 12-17, ~7 min)             -->
+          <!-- ============================================================ -->
+
+          <!-- Slide 12: Method comparison -->
+          <section id="slide-method-comparison" data-section="results">
+            <h2>
+              <span class="lang-de">Der kombinierte SOH-Wert (e+c)/2 erreicht nur −1,6 Pp Abweichung von der professionellen Referenz</span>
+              <span class="lang-en" hidden>The combined SOH value (e+c)/2 achieves only −1.6 pp deviation from the professional reference</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="chart-container" id="chart-method-comparison">
+                  <!-- D3 chart — Phase 8 -->
+                </div>
+              </div>
+              <div class="takeaway-box fragment">
+                <div class="takeaway-label">Takeaway</div>
+                <p>
+                  <span class="lang-de">Die Mittelung von SOH_e (+2,3 Pp) und SOH_c (−5,5 Pp) kompensiert systematische Fehler beider Methoden.</span>
+                  <span class="lang-en" hidden>Averaging SOH_e (+2.3 pp) and SOH_c (−5.5 pp) compensates for systematic errors of both methods.</span>
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 13: Reproducibility -->
+          <section id="slide-reproducibility" data-section="results">
+            <h2>
+              <span class="lang-de">Algorithmische Reproduzierbarkeit ist exzellent — nur 0,2 Pp Streuung über 3 Durchläufe</span>
+              <span class="lang-en" hidden>Algorithmic reproducibility is excellent — only 0.2 pp spread across 3 runs</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="two-col">
+                  <div class="chart-container" id="chart-reproducibility">
+                    <!-- D3 chart — Phase 8 -->
+                  </div>
+                  <div>
+                    <h3><span class="lang-de">AVL-Messwiederholung</span><span class="lang-en" hidden>AVL Measurement Repeatability</span></h3>
+                    <table class="data-table">
+                      <thead>
+                        <tr>
+                          <th><span class="lang-de">Fahrzeug</span><span class="lang-en" hidden>Vehicle</span></th>
+                          <th>n</th>
+                          <th>σ</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>Skoda Elroq</td><td>7</td><td class="highlight" style="color: var(--success)">0,0 %</td></tr>
+                        <tr><td>BMW i3s</td><td>3</td><td>0,46 %</td></tr>
+                        <tr><td>VW ID.4 (IfE)</td><td>5</td><td>1,20 %</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="takeaway-box fragment">
+                <div class="takeaway-label">Takeaway</div>
+                <p>
+                  <span class="lang-de">Skoda Elroq: 7× hintereinander exakt 100,0 % — perfekte Konsistenz im Neuzustand.</span>
+                  <span class="lang-en" hidden>Skoda Elroq: 7× consecutively exactly 100.0% — perfect consistency when new.</span>
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 14: Temperature effect -->
+          <section id="slide-temperature" data-section="results">
+            <h2>
+              <span class="lang-de">Gegenläufige Temperatureffekte heben sich im kombinierten SOH fast perfekt auf</span>
+              <span class="lang-en" hidden>Opposing temperature effects nearly perfectly cancel in the combined SOH</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="chart-container" id="chart-temperature">
+                  <!-- D3 chart — Phase 8 -->
+                </div>
+              </div>
+              <div class="takeaway-box fragment">
+                <div class="takeaway-label">Takeaway</div>
+                <p>
+                  <span class="lang-de">SOH_e steigt bei Kälte (+1,2 Pp), SOH_c sinkt (−1,3 Pp) — kombiniert: nur 0,1 Pp Differenz zwischen 9,8 °C und 19 °C.</span>
+                  <span class="lang-en" hidden>SOH_e rises in cold (+1.2 pp), SOH_c drops (−1.3 pp) — combined: only 0.1 pp difference between 9.8°C and 19°C.</span>
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 15: DC pulse resistance -->
+          <section id="slide-resistance" data-section="results">
+            <h2>
+              <span class="lang-de">Der DC-Puls-Innenwiderstand des VW ID.4 liegt mit 40 mΩ deutlich unter dem BMW i3s (228 mΩ)</span>
+              <span class="lang-en" hidden>The DC pulse internal resistance of the VW ID.4 at 40 mΩ is well below the BMW i3s (228 mΩ)</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="two-col">
+                  <div class="chart-container" id="chart-resistance">
+                    <!-- D3 chart — Phase 8 -->
+                  </div>
+                  <div>
+                    <div class="stat-card" style="margin-bottom: 1.5rem;">
+                      <div class="stat-value success">40,0 mΩ</div>
+                      <div class="stat-label">VW ID.4 R<sub>i</sub> (Laden)</div>
+                      <div class="stat-sublabel">32,8 mΩ (Entladen)</div>
+                    </div>
+                    <div class="stat-card">
+                      <div class="stat-value warning">228 mΩ</div>
+                      <div class="stat-label">BMW i3s R<sub>i</sub> (Median)</div>
+                      <div class="stat-sublabel"><span class="lang-de">Ältere Batterie, höherer Widerstand</span><span class="lang-en" hidden>Older battery, higher resistance</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 16: Failure case — SOC window -->
+          <section id="slide-failure" data-section="results">
+            <h2>
+              <span class="lang-de">Ein SOC-Fenster unter 50 % führt zu einer Abweichung von 21 Prozentpunkten — SOH-Bestimmung wird unbrauchbar</span>
+              <span class="lang-en" hidden>An SOC window below 50% leads to a 21 percentage point deviation — SOH determination becomes unusable</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="comparison">
+                  <div class="good">
+                    <div class="badge success">
+                      <span class="lang-de">SOC-Fenster &gt; 80 %</span>
+                      <span class="lang-en" hidden>SOC window &gt; 80%</span>
+                    </div>
+                    <div class="stat-card" style="margin-top: 1rem;">
+                      <div class="stat-value success">95,7 %</div>
+                      <div class="stat-label">SOH kombiniert</div>
+                      <div class="stat-sublabel">vs. AVL 97,3 % → −1,6 Pp</div>
+                    </div>
+                  </div>
+                  <div class="bad">
+                    <div class="badge danger">
+                      <span class="lang-de">SOC-Fenster &lt; 50 %</span>
+                      <span class="lang-en" hidden>SOC window &lt; 50%</span>
+                    </div>
+                    <div class="stat-card" style="margin-top: 1rem;">
+                      <div class="stat-value accent">76,3 %</div>
+                      <div class="stat-label">SOH kombiniert</div>
+                      <div class="stat-sublabel">vs. AVL 97,3 % → −21,0 Pp !</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="takeaway-box fragment">
+                <div class="takeaway-label">Takeaway</div>
+                <p>
+                  <span class="lang-de">Die Coulomb-Zählung (SOH_c) fällt bei kleinem SOC-Fenster auf 54,6 % — immer mit maximalem SOC-Fenster messen!</span>
+                  <span class="lang-en" hidden>Coulomb counting (SOH_c) drops to 54.6% with small SOC window — always measure with maximum SOC window!</span>
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 17: Live tool demo -->
+          <section id="slide-demo" data-section="results">
+            <h2>
+              <span class="lang-de">Live-Demo: SOH-Analyse-Tool</span>
+              <span class="lang-en" hidden>Live Demo: SOH Analysis Tool</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area demo-area">
+                <div id="demo-container" class="demo-container">
+                  <!-- Streamlit iframe or video fallback — Phase 10 -->
+                  <div class="demo-placeholder">
+                    <p>
+                      <span class="lang-de">Python Streamlit App — OBD-Daten hochladen → 6 SOH-Methoden → Bericht generieren</span>
+                      <span class="lang-en" hidden>Python Streamlit App — upload OBD data → 6 SOH methods → generate report</span>
+                    </p>
+                    <p class="demo-info">
+                      <span class="lang-de">Port 8501 (Pro) | Port 8502 (Easy)</span>
+                      <span class="lang-en" hidden>Port 8501 (Pro) | Port 8502 (Easy)</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============================================================ -->
+          <!-- SECTION 6: DISCUSSION (Slides 18-19, ~2 min)                 -->
+          <!-- ============================================================ -->
+
+          <!-- Slide 18: Strengths & limitations -->
+          <section id="slide-discussion" data-section="discussion">
+            <h2>
+              <span class="lang-de">Stärken & Limitationen</span>
+              <span class="lang-en" hidden>Strengths & Limitations</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="two-col">
+                  <div>
+                    <h3 style="color: var(--success)"><span class="lang-de">Stärken</span><span class="lang-en" hidden>Strengths</span></h3>
+                    <ul class="styled-list">
+                      <li class="fragment"><span class="lang-de">Reproduzierbarer SOH mit ~€50 OBD-Hardware (±1,6 Pp vs. Referenz)</span><span class="lang-en" hidden>Reproducible SOH with ~€50 OBD hardware (±1.6 pp vs. reference)</span></li>
+                      <li class="fragment"><span class="lang-de">Kombinierte Methode robust gegen Temperatur (0,1 Pp über 9–19 °C)</span><span class="lang-en" hidden>Combined method robust against temperature (0.1 pp across 9–19°C)</span></li>
+                      <li class="fragment"><span class="lang-de">Inter-System-Übereinstimmung: 0,4 Pp bei BMW i3s (3 Systeme)</span><span class="lang-en" hidden>Inter-system agreement: 0.4 pp for BMW i3s (3 systems)</span></li>
+                      <li class="fragment"><span class="lang-de">Automatisierte Python-App für Werkstattpraxis</span><span class="lang-en" hidden>Automated Python app for workshop practice</span></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 style="color: var(--warning)"><span class="lang-de">Limitationen</span><span class="lang-en" hidden>Limitations</span></h3>
+                    <ul class="styled-list">
+                      <li class="fragment"><span class="lang-de">Einzelnes Primärfahrzeug (VW ID.4) — Übertragbarkeit unklar</span><span class="lang-en" hidden>Single primary vehicle (VW ID.4) — transferability unclear</span></li>
+                      <li class="fragment"><span class="lang-de">Nur AC-Ladung — keine DC-Schnellladedaten</span><span class="lang-en" hidden>AC charging only — no DC fast charging data</span></li>
+                      <li class="fragment"><span class="lang-de">Keine signifikante Alterung beobachtet (SOH &gt; 97 %)</span><span class="lang-en" hidden>No significant aging observed (SOH &gt; 97%)</span></li>
+                      <li class="fragment"><span class="lang-de">Keine unabhängige Laborvalidierung (ISO 12405)</span><span class="lang-en" hidden>No independent lab validation (ISO 12405)</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 19: Uncertainty budget -->
+          <section id="slide-uncertainty" data-section="discussion">
+            <h2>
+              <span class="lang-de">Die Gesamtunsicherheit von ±4,5 Pp reicht aus, um Batteriezustandskategorien zu unterscheiden</span>
+              <span class="lang-en" hidden>The total uncertainty of ±4.5 pp is sufficient to distinguish battery condition categories</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="equation-block" style="max-width: 900px; margin: 0 auto;">
+                  <div class="katex-eq">$$u_\text{gesamt} = \sqrt{u_\text{Mess}^2 + u_\text{Temp}^2 + u_\text{SOC}^2 + u_\text{Methode}^2} \approx \pm 4{,}5 \text{ Pp}$$</div>
+                </div>
+                <div class="uncertainty-components" style="margin-top: 2rem;">
+                  <div class="three-col" style="grid-template-columns: repeat(4, 1fr);">
+                    <div class="stat-card fragment">
+                      <div class="stat-value" style="font-size: 2rem;">~1 Pp</div>
+                      <div class="stat-label">u<sub>Mess</sub></div>
+                      <div class="stat-sublabel"><span class="lang-de">OBD-AVL Kreuzvalidierung</span><span class="lang-en" hidden>OBD-AVL cross-validation</span></div>
+                    </div>
+                    <div class="stat-card fragment">
+                      <div class="stat-value success" style="font-size: 2rem;">~0,1 Pp</div>
+                      <div class="stat-label">u<sub>Temp</sub></div>
+                      <div class="stat-sublabel">9,8 °C vs. 19 °C</div>
+                    </div>
+                    <div class="stat-card fragment">
+                      <div class="stat-value warning" style="font-size: 2rem;">~2 Pp</div>
+                      <div class="stat-label">u<sub>SOC</sub></div>
+                      <div class="stat-sublabel"><span class="lang-de">SOC-Fenster Qualität</span><span class="lang-en" hidden>SOC window quality</span></div>
+                    </div>
+                    <div class="stat-card fragment">
+                      <div class="stat-value accent" style="font-size: 2rem;">~4 Pp</div>
+                      <div class="stat-label">u<sub>Methode</sub></div>
+                      <div class="stat-sublabel"><span class="lang-de">SOH_e vs. SOH_c Streuung</span><span class="lang-en" hidden>SOH_e vs. SOH_c spread</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============================================================ -->
+          <!-- SECTION 7: CONCLUSION & OUTLOOK (Slides 20-21, ~1.5 min)     -->
+          <!-- ============================================================ -->
+
+          <!-- Slide 20: Core finding -->
+          <section id="slide-conclusion" data-section="conclusion">
+            <h2>
+              <span class="lang-de">Kernaussage</span>
+              <span class="lang-en" hidden>Core Finding</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area" style="text-align: center;">
+                <div class="core-claim" style="max-width: 1200px; margin: 0 auto;">
+                  <p style="font-size: var(--fs-h2); color: var(--text-primary); font-weight: var(--fw-semibold); line-height: 1.5;">
+                    <span class="lang-de">Die Kombination von energiebasierter und integrativer SOH-Methode ermöglicht eine <span style="color: var(--accent);">reproduzierbare Bestimmung des Batteriezustands</span> mit einem kostengünstigen OBD-Adapter (~€50) bei einer Abweichung von nur <span style="color: var(--success);">±1,6 Prozentpunkten</span> zur professionellen Off-Board-Referenz.</span>
+                    <span class="lang-en" hidden>The combination of energy-based and integrative SOH methods enables <span style="color: var(--accent);">reproducible battery health determination</span> with a low-cost OBD adapter (~€50) at a deviation of only <span style="color: var(--success);">±1.6 percentage points</span> from the professional off-board reference.</span>
+                  </p>
+                </div>
+                <div class="three-col" style="margin-top: 3rem; max-width: 1000px; margin-left: auto; margin-right: auto;">
+                  <div class="stat-card fragment">
+                    <div class="stat-value success">95,7 %</div>
+                    <div class="stat-label">SOH kombiniert</div>
+                    <div class="stat-sublabel">vs. AVL 97,3 %</div>
+                  </div>
+                  <div class="stat-card fragment">
+                    <div class="stat-value" style="color: var(--chart-blue);">0,1 Pp</div>
+                    <div class="stat-label"><span class="lang-de">Temperaturrobustheit</span><span class="lang-en" hidden>Temperature robustness</span></div>
+                    <div class="stat-sublabel">9,8 °C – 19 °C</div>
+                  </div>
+                  <div class="stat-card fragment">
+                    <div class="stat-value success">0,4 Pp</div>
+                    <div class="stat-label"><span class="lang-de">Inter-System</span><span class="lang-en" hidden>Inter-system</span></div>
+                    <div class="stat-sublabel">BMW i3s (3 Systeme)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 21: Applications + future work -->
+          <section id="slide-outlook" data-section="conclusion">
+            <h2>
+              <span class="lang-de">Anwendungen & Ausblick</span>
+              <span class="lang-en" hidden>Applications & Outlook</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="two-col">
+                  <div>
+                    <h3><span class="lang-de">Praxisanwendungen</span><span class="lang-en" hidden>Practical Applications</span></h3>
+                    <div class="application-grid">
+                      <div class="application-item fragment">
+                        <strong><span class="lang-de">Werkstätten</span><span class="lang-en" hidden>Workshops</span></strong>
+                        <p><span class="lang-de">Standardisierte SOH-Prüfung mit OBD-Adapter + Python-App</span><span class="lang-en" hidden>Standardized SOH testing with OBD adapter + Python app</span></p>
+                      </div>
+                      <div class="application-item fragment">
+                        <strong><span class="lang-de">Flottenbetreiber</span><span class="lang-en" hidden>Fleet Operators</span></strong>
+                        <p><span class="lang-de">Langzeit-Monitoring und Degradationsvorhersage</span><span class="lang-en" hidden>Long-term monitoring and degradation prediction</span></p>
+                      </div>
+                      <div class="application-item fragment">
+                        <strong><span class="lang-de">Versicherungen</span><span class="lang-en" hidden>Insurance</span></strong>
+                        <p><span class="lang-de">Objektive Batteriebewertung für Restwertbestimmung</span><span class="lang-en" hidden>Objective battery assessment for residual value determination</span></p>
+                      </div>
+                      <div class="application-item fragment">
+                        <strong>Second Life</strong>
+                        <p><span class="lang-de">Klassifizierung: A (&gt;90 %), B (80–89 %), C (70–79 %)</span><span class="lang-en" hidden>Classification: A (&gt;90%), B (80–89%), C (70–79%)</span></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <h3><span class="lang-de">Zukünftige Forschung</span><span class="lang-en" hidden>Future Research</span></h3>
+                    <ul class="styled-list">
+                      <li class="fragment"><span class="lang-de">Erweiterung auf LFP-Chemie (BYD, Tesla) und weitere MEB-Plattformen</span><span class="lang-en" hidden>Extension to LFP chemistry (BYD, Tesla) and more MEB platforms</span></li>
+                      <li class="fragment"><span class="lang-de">DC-Schnelllade-Messungen (hohe C-Rate-Effekte)</span><span class="lang-en" hidden>DC fast charging measurements (high C-rate effects)</span></li>
+                      <li class="fragment"><span class="lang-de">Gealterte Fahrzeuge (50k–150k km) für ICA/DVA-Validierung</span><span class="lang-en" hidden>Aged vehicles (50k–150k km) for ICA/DVA validation</span></li>
+                      <li class="fragment"><span class="lang-de">ML-basierte Korrektur: Ridge/Random-Forest auf AVL-Referenz</span><span class="lang-en" hidden>ML-based correction: Ridge/Random Forest on AVL reference</span></li>
+                      <li class="fragment"><span class="lang-de">EU-Batteriepass (Verordnung 2023/1542 — ab 2027 verpflichtend)</span><span class="lang-en" hidden>EU Battery Passport (Regulation 2023/1542 — mandatory from 2027)</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============================================================ -->
+          <!-- BACKUP SLIDES (hidden in Defense Mode)                        -->
+          <!-- ============================================================ -->
+
+          <section id="slide-backup-intersystem" data-section="backup" data-visibility="uncounted">
+            <h2>
+              <span class="lang-de">Backup: Inter-System-Vergleich</span>
+              <span class="lang-en" hidden>Backup: Inter-System Comparison</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th><span class="lang-de">Fahrzeug</span><span class="lang-en" hidden>Vehicle</span></th>
+                      <th>AVL</th>
+                      <th>AUTEL</th>
+                      <th>OBD</th>
+                      <th><span class="lang-de">Streuung</span><span class="lang-en" hidden>Spread</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>BMW i3s</td><td>95,6 %</td><td>96,0 %</td><td>96,0 %</td><td class="highlight" style="color: var(--success)">0,4 Pp</td></tr>
+                    <tr><td>Skoda Elroq</td><td>100,0 %</td><td>100,0 %</td><td>—</td><td class="highlight" style="color: var(--success)">0,0 Pp</td></tr>
+                    <tr><td>Renault Zoe</td><td>—</td><td>93,0 %</td><td>93,9 %</td><td>0,9 Pp</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section id="slide-backup-degradation" data-section="backup" data-visibility="uncounted">
+            <h2>
+              <span class="lang-de">Backup: Degradationsrate im Vergleich</span>
+              <span class="lang-en" hidden>Backup: Degradation Rate Comparison</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="two-col">
+                  <div class="stat-card">
+                    <div class="stat-value warning">~1,7 Pp / 11k km</div>
+                    <div class="stat-label">VW ID.4 (FP, 65.467 km)</div>
+                    <div class="stat-sublabel">98,1 % → 96,4 % über 6 Monate</div>
+                  </div>
+                  <div class="stat-card">
+                    <div class="stat-value">~1 Pp / 10k km</div>
+                    <div class="stat-label">MEB-Plattform (Community)</div>
+                    <div class="stat-sublabel">95 % → 92 % über 40.000 km</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="slide-backup-app" data-section="backup" data-visibility="uncounted">
+            <h2>
+              <span class="lang-de">Backup: Python SOH-App Architektur</span>
+              <span class="lang-en" hidden>Backup: Python SOH App Architecture</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="two-col">
+                  <div>
+                    <h3><span class="lang-de">Funktionen</span><span class="lang-en" hidden>Features</span></h3>
+                    <ul class="styled-list">
+                      <li>Auto-Import: OBD CSV + AVL PDF</li>
+                      <li><span class="lang-de">6 SOH-Methoden parallel</span><span class="lang-en" hidden>6 SOH methods in parallel</span></li>
+                      <li>SQLite: <span class="lang-de">Fahrzeughistorie</span><span class="lang-en" hidden>Vehicle history</span></li>
+                      <li>PDF-Report + PNG Export</li>
+                      <li>Pro Mode + Easy Mode</li>
+                      <li><span class="lang-de">Zweisprachig (DE/EN)</span><span class="lang-en" hidden>Bilingual (DE/EN)</span></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3>Tech Stack</h3>
+                    <ul class="styled-list">
+                      <li>Streamlit (Frontend)</li>
+                      <li>FastAPI (Backend REST API)</li>
+                      <li>Plotly (Charts)</li>
+                      <li>scikit-learn, scipy, numpy</li>
+                      <li>Version 2.9.3</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+
+      <!-- Custom progress bar -->
+      <div id="progress-container">
+        <div id="progress-bar"></div>
+        <span id="section-title"></span>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

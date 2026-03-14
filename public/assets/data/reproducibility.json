@@ -1,0 +1,23 @@
+{
+  "algorithmic": {
+    "runs": [
+      { "run": 1, "soh_e": 99.6, "soh_c": 91.8, "combined": 95.7 },
+      { "run": 2, "soh_e": 99.6, "soh_c": 91.5, "combined": 95.5 },
+      { "run": 3, "soh_e": 99.6, "soh_c": 91.5, "combined": 95.5 }
+    ],
+    "spread_pp": 0.2,
+    "rating": "SEHR GUT",
+    "rating_en": "EXCELLENT"
+  },
+  "measurement": [
+    { "vehicle": "Skoda Elroq", "n": 7, "timespan": "9 Monate", "soh_min": 100.0, "soh_max": 100.0, "sigma": 0.0 },
+    { "vehicle": "BMW i3s", "n": 3, "timespan": "4 Monate", "soh_min": 94.8, "soh_max": 95.6, "sigma": 0.46 },
+    { "vehicle": "VW ID.4 (IfE)", "n": 5, "timespan": "12 Monate", "soh_min": 97.3, "soh_max": 100.0, "sigma": 1.20 },
+    { "vehicle": "VW ID.4 (FP)", "n": 3, "timespan": "6 Monate", "soh_min": 96.2, "soh_max": 98.1, "sigma": 1.00 }
+  ],
+  "intersystem": [
+    { "vehicle": "BMW i3s", "avl": 95.6, "autel": 96.0, "obd": 96.0, "spread_pp": 0.4 },
+    { "vehicle": "Skoda Elroq", "avl": 100.0, "autel": 100.0, "obd": null, "spread_pp": 0.0 },
+    { "vehicle": "Renault Zoe", "avl": null, "autel": 93.0, "obd": 93.9, "spread_pp": 0.9 }
+  ]
+}

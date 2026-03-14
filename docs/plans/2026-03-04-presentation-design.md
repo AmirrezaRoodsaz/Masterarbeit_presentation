@@ -39,6 +39,9 @@
 - Reveal.js 5.x (core slide engine)
 - D3.js (interactive charts for results)
 - GSAP (method comparison animation, transitions)
+- Lucide Icons (structural SVG icons — navigation, labels, tool tables)
+- qr-creator by Nimiq (dynamic QR code generation, 4.75 KB gzipped)
+- Lottie (fallback — only if GSAP animations don't look polished enough)
 - Vanilla JS + CSS (navigation shell — no React/Vue overhead)
 - Streamlit embed via iframe (tool demo section)
 - Mermaid.js (flowcharts rendered in-slide)
@@ -156,7 +159,45 @@
 - Browse mode: full-width interactive iframe
 - Defense mode: presenter narrates while interacting live
 
-### 4.4 Subtle Animations (throughout)
+### 4.4 QR Code Hub (accessible from any slide)
+
+Dynamic QR code popup for sharing all running apps with the committee.
+
+**Trigger:** Keyboard shortcut (`Q`) or icon button in navigation shell.
+
+**Behavior:**
+1. Press `Q` → dark modal overlay with grid of QR cards
+2. Click a card → zooms in to full-size single QR code (projector-scannable)
+3. Click again or `ESC` → back to grid → `ESC` again → close
+
+**Dynamic IP detection:**
+- On presentation startup, auto-detect the machine's local IP (e.g. `192.168.1.42`)
+- If detection fails → small input field: "Enter your IP"
+- Ports are hardcoded in config (set once, never change)
+
+**Config:**
+```js
+const qrConfig = {
+  localIP: 'auto',  // auto-detect, manual override via input field
+  apps: [
+    { name: 'SOH Tool (Pro)',   port: 8501, icon: 'activity' },
+    { name: 'SOH Tool (Easy)',  port: 8502, icon: 'zap' },
+    { name: 'Presentation',     port: 8000, icon: 'monitor' },
+  ],
+  static: [
+    { name: 'GitHub', url: 'https://github.com/AmirrezaRoodsaz/...', icon: 'github' },
+    { name: 'Thesis PDF', path: '/thesis.pdf', icon: 'file-text' },
+  ]
+};
+```
+
+**Design:**
+- QR codes rendered in HSBoRed (`#E2001A`) on dark background — on-brand
+- Rounded corners via qr-creator's built-in option
+- Each card shows Lucide icon + label + URL
+- Grid layout: 3 dynamic apps on top row, 2 static links on bottom row
+
+### 4.5 Subtle Animations (throughout)
 
 - Slide transitions: simple fade (no spinning/flying)
 - Fragment reveals: content appears top-down on advance
@@ -165,7 +206,49 @@
 
 ---
 
-## 5. Fallback & Reliability
+## 5. Lucide Icons — Usage Guidelines
+
+### Integration
+
+Vanilla JS, tree-shaken — import only icons used:
+```js
+import { createIcons, BatteryCharging, Thermometer, ... } from 'lucide';
+createIcons({ icons: { BatteryCharging, Thermometer, ... } });
+```
+
+### Sizing
+
+Two sizes only, used consistently:
+- **24px** — inline with text (labels, navigation, table cells)
+- **32px** — standalone (slide section markers, QR popup cards)
+
+### Color Rules
+
+- **White/light gray** (`#f0f0f0` / `#a0a0b8`) — default, most icons
+- **HSBoRed** (`#E2001A`) — emphasis only (key findings, active navigation)
+- **Success/Warning** (`#00C9A7` / `#FFB800`) — status indicators on results slides
+
+### Where to Use (structural, not decorative)
+
+| Location | Icons | Purpose |
+|----------|-------|---------|
+| Navigation shell | `chevron-left`, `chevron-right`, `menu`, `qr-code` | UI controls |
+| QR Code Hub cards | `activity`, `zap`, `monitor`, `github`, `file-text` | App/link labels |
+| Diagnostic tools table (Slide 8) | `bluetooth`, `plug-zap`, `wifi` | Tool type indicators |
+| Test protocol (Slide 9) | `car`, `thermometer`, `zap` | Vehicle, temp, charging |
+| Results indicators (Slides 12–16) | `check-circle`, `alert-triangle`, `x-circle` | Pass/warn/fail |
+| Motivation slides (Slides 3–4) | `battery-warning`, `trending-down` | Problem visualization |
+
+### Anti-Patterns (avoid)
+
+- Icon next to every slide title — clutters, adds no meaning
+- Icon bullet lists — use real text
+- Icons at inconsistent sizes — pick 24px or 32px, nothing else
+- HSBoRed on every icon — most should be white/gray
+
+---
+
+## 6. Fallback & Reliability
 
 - **PDF export:** Reveal.js `?print-pdf` mode -> static PDF, charts as snapshots
 - **Streamlit fallback:** Pre-recorded MP4 of demo flow, auto-plays if iframe fails
@@ -174,7 +257,7 @@
 
 ---
 
-## 6. Bilingual Support
+## 7. Bilingual Support
 
 - German primary (all slide text)
 - EN/DE toggle button in navigation shell
@@ -184,7 +267,7 @@
 
 ---
 
-## 7. Key Decisions Log
+## 8. Key Decisions Log
 
 | Decision | Choice | Rationale |
 |----------|--------|-----------|
@@ -197,4 +280,7 @@
 | Equations | KaTeX | Fast, lightweight LaTeX rendering |
 | Fonts | Inter | Modern sans-serif, excellent readability |
 | Demo | Streamlit iframe + video fallback | Live demo with safety net |
+| Icons | Lucide (vanilla JS, tree-shaken) | Structural SVG icons, 24/32px, fully stylable to match theme |
+| QR Codes | qr-creator by Nimiq (4.75 KB) | Dynamic IP-based QR hub for sharing apps with committee |
+| Animation fallback | Lottie (only if GSAP insufficient) | Pre-made vector animations as safety net |
 | Language | German primary + toggle | Matches thesis language + flexibility |

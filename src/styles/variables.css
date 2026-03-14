@@ -1,0 +1,50 @@
+/* === Design System Variables === */
+:root {
+  /* Colors — from design doc */
+  --bg-primary: #0f0f1a;
+  --bg-surface: #1a1a2e;
+  --text-primary: #f0f0f0;
+  --text-secondary: #a0a0b8;
+  --accent: #E2001A;
+  --accent-soft: rgba(226, 0, 26, 0.2);
+  --success: #00C9A7;
+  --warning: #FFB800;
+  --danger: #E2001A;
+  --chart-blue: #4C9AFF;
+  --chart-red: #E2001A;
+  --chart-green: #00C9A7;
+  --chart-yellow: #FFB800;
+
+  /* Typography */
+  --font-primary: 'Inter', 'Source Sans Pro', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --fs-title: 3rem;
+  --fs-h1: 2.4rem;
+  --fs-h2: 1.8rem;
+  --fs-h3: 1.4rem;
+  --fs-body: 1.2rem;
+  --fs-caption: 0.95rem;
+  --fs-small: 0.85rem;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Layout */
+  --slide-width: 1920px;
+  --slide-height: 1080px;
+  --sidebar-width: 280px;
+  --progress-height: 4px;
+  --content-padding: 60px;
+  --border-radius: 8px;
+  --border-radius-sm: 4px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-default: 300ms ease;
+  --transition-slow: 500ms ease;
+
+  /* Shadows */
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
+  --shadow-tooltip: 0 8px 32px rgba(0, 0, 0, 0.5);
+}

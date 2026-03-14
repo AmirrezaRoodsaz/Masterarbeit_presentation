@@ -1,0 +1,179 @@
+/* === Layout System === */
+
+/* App shell: sidebar + main area */
+#app-shell {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+
+/* Sidebar — Phase 2 will populate */
+.sidebar {
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-surface);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition: transform var(--transition-default);
+  z-index: 100;
+}
+
+/* Defense mode: sidebar hidden */
+body.defense-mode .sidebar {
+  transform: translateX(-100%);
+  position: absolute;
+}
+
+body.defense-mode #main-area {
+  margin-left: 0;
+}
+
+/* Main area */
+#main-area {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Custom progress bar */
+#progress-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--progress-height);
+  background: rgba(255, 255, 255, 0.05);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+}
+
+#progress-bar {
+  height: 100%;
+  background: var(--accent);
+  width: 0%;
+  transition: width var(--transition-default);
+}
+
+#section-title {
+  position: fixed;
+  bottom: 8px;
+  right: 16px;
+  font-size: var(--fs-small);
+  color: var(--text-secondary);
+  text-transform: capitalize;
+  z-index: 201;
+}
+
+/* === Assertion-Evidence Slide Layout === */
+/* Headline = takeaway at top, evidence fills remaining space */
+.slide-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 1.5rem;
+}
+
+.evidence-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Two-column layout */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  width: 100%;
+}
+
+/* Three-column layout */
+.three-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  width: 100%;
+}
+
+/* Title slide layout */
+.title-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  gap: 1.5rem;
+}
+
+.title-slide h1 {
+  font-size: var(--fs-title);
+  max-width: 1400px;
+  border-bottom: none;
+}
+
+.title-slide .subtitle {
+  font-size: var(--fs-h3);
+  color: var(--text-secondary);
+  max-width: 1200px;
+}
+
+.title-meta {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.title-meta .author {
+  font-size: var(--fs-h3);
+  color: var(--text-primary);
+  font-weight: var(--fw-semibold);
+}
+
+.title-meta .institution,
+.title-meta .advisor,
+.title-meta .date {
+  font-size: var(--fs-body);
+  color: var(--text-secondary);
+}
+
+.title-logos {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.title-logos img {
+  height: 60px;
+  object-fit: contain;
+}
+
+/* Chart container */
+.chart-container {
+  width: 100%;
+  flex: 1;
+  min-height: 400px;
+  position: relative;
+}
+
+/* Placeholder styling (removed after Phase 3) */
+.placeholder {
+  background: var(--bg-surface);
+  border: 2px dashed rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-style: italic;
+  min-height: 200px;
+}

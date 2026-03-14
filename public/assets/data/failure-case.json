@@ -1,0 +1,28 @@
+{
+  "good": {
+    "label": "SOC-Fenster > 80 %",
+    "label_en": "SOC window > 80%",
+    "soc_window_percent": 90.8,
+    "combined_soh": 95.7,
+    "soh_e": 99.6,
+    "soh_c": 91.8,
+    "avl_ref": 97.3,
+    "quality": "Ausgezeichnet",
+    "quality_en": "Excellent"
+  },
+  "bad": {
+    "label": "SOC-Fenster < 50 %",
+    "label_en": "SOC window < 50%",
+    "soc_window_percent": 48,
+    "combined_soh": 76.3,
+    "soh_e": 98.0,
+    "soh_c": 54.6,
+    "avl_ref": 97.3,
+    "quality": "Unzureichend",
+    "quality_en": "Insufficient"
+  },
+  "takeaway": {
+    "de": "Ein SOC-Fenster unter 50 % macht die Coulomb-Zählung unzuverlässig und verfälscht den SOH um bis zu 21 Prozentpunkte.",
+    "en": "An SOC window below 50% makes Coulomb counting unreliable, distorting SOH by up to 21 percentage points."
+  }
+}

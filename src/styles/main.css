@@ -1,0 +1,7 @@
+/* Main CSS entry — imports all style modules */
+@import './variables.css';
+@import './theme.css';
+@import './layout.css';
+@import './components.css';
+@import './shell.css';
+@import './settings.css';
