@@ -32,10 +32,10 @@ const deck = Reveal({
   margin: 0,
   minScale: 0.2,
   maxScale: 1.5,
+  keyboard: false,         // Custom input-manager handles all keys
   plugins: [RevealNotes],
 });
 
-// Disable Reveal.js built-in keyboard for keys we manage ourselves
 const s = getSettings();
 
 deck.initialize().then(() => {
