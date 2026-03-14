@@ -96,9 +96,9 @@
                   <span class="lang-de">Ergebnisse & Demo</span>
                   <span class="lang-en" hidden>Results & Demo</span>
                 </div>
-                <div class="roadmap-time">~7 min</div>
+                <div class="roadmap-time">~8 min</div>
               </div>
-              <div class="roadmap-card" data-target="17">
+              <div class="roadmap-card" data-target="21">
                 <div class="roadmap-number">05</div>
                 <div class="roadmap-label">
                   <span class="lang-de">Diskussion</span>
@@ -106,7 +106,7 @@
                 </div>
                 <div class="roadmap-time">~2 min</div>
               </div>
-              <div class="roadmap-card" data-target="19">
+              <div class="roadmap-card" data-target="24">
                 <div class="roadmap-number">06</div>
                 <div class="roadmap-label">
                   <span class="lang-de">Fazit & Ausblick</span>
@@ -248,6 +248,16 @@
                   <span class="lang-de"><strong>Quantifizierung</strong> der Einflussfaktoren: Temperatur, SOC-Fenster, Ladeleistung</span>
                   <span class="lang-en" hidden><strong>Quantification</strong> of influencing factors: temperature, SOC window, charging power</span>
                 </div>
+                <div class="contribution fragment">
+                  <span class="contribution-number">5</span>
+                  <span class="lang-de"><strong>Entwicklung</strong> einer Python-Streamlit-Anwendung mit automatischer PDF-Berichterstellung und SQLite-Datenpersistenz</span>
+                  <span class="lang-en" hidden><strong>Development</strong> of a Python Streamlit application with automatic PDF reporting and SQLite data persistence</span>
+                </div>
+                <div class="contribution fragment">
+                  <span class="contribution-number">6</span>
+                  <span class="lang-de"><strong>Formulierung</strong> praxisorientierter Empfehlungen für die reproduzierbare SOH-Bestimmung im Werkstattalltag</span>
+                  <span class="lang-en" hidden><strong>Formulation</strong> of practice-oriented recommendations for reproducible SOH determination in workshop practice</span>
+                </div>
               </div>
             </div>
           </section>
@@ -377,7 +387,7 @@
                       <td class="highlight">AVL HV-Check</td>
                       <td><span class="lang-de">Off-Board (professionell)</span><span class="lang-en" hidden>Off-Board (professional)</span></td>
                       <td><span class="lang-de">Snapshot (Minuten)</span><span class="lang-en" hidden>Snapshot (minutes)</span></td>
-                      <td>~€15.000</td>
+                      <td>&gt;€10.000</td>
                       <td><span class="lang-de">Referenzmessung</span><span class="lang-en" hidden>Reference measurement</span></td>
                     </tr>
                     <tr>
@@ -391,7 +401,7 @@
                       <td class="highlight">AUTEL MaxiSYS Ultra</td>
                       <td><span class="lang-de">Off-Board (universell)</span><span class="lang-en" hidden>Off-Board (universal)</span></td>
                       <td><span class="lang-de">Snapshot</span><span class="lang-en" hidden>Snapshot</span></td>
-                      <td>~€4.000</td>
+                      <td>&gt;€5.000</td>
                       <td><span class="lang-de">Kreuzvalidierung</span><span class="lang-en" hidden>Cross-validation</span></td>
                     </tr>
                   </tbody>
@@ -455,8 +465,8 @@
           <!-- Slide 10: Test vehicles -->
           <section id="slide-vehicles" data-section="method">
             <h2>
-              <span class="lang-de">33 Messungen an 6 Fahrzeugen über 12 Monate — Primärfahrzeug VW ID.4</span>
-              <span class="lang-en" hidden>33 measurements on 6 vehicles over 12 months — primary vehicle VW ID.4</span>
+              <span class="lang-de">Testfahrzeug VW ID.4 — 16 Messungen über 12 Monate mit drei Diagnosesystemen</span>
+              <span class="lang-en" hidden>Test Vehicle VW ID.4 — 16 measurements over 12 months with three diagnostic systems</span>
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
@@ -470,31 +480,35 @@
                         </tr>
                       </thead>
                       <tbody>
+                        <tr><td><span class="lang-de">Plattform</span><span class="lang-en" hidden>Platform</span></td><td>MEB</td></tr>
                         <tr><td><span class="lang-de">Batterie</span><span class="lang-en" hidden>Battery</span></td><td class="highlight">77 kWh (netto: 72 kWh)</td></tr>
                         <tr><td><span class="lang-de">Zellchemie</span><span class="lang-en" hidden>Cell Chemistry</span></td><td>NMC 712</td></tr>
                         <tr><td><span class="lang-de">Konfiguration</span><span class="lang-en" hidden>Configuration</span></td><td>12 Module × 24 Zellen = 288</td></tr>
                         <tr><td><span class="lang-de">Nennspannung</span><span class="lang-en" hidden>Nominal Voltage</span></td><td>~350 V (300–408 V)</td></tr>
                         <tr><td><span class="lang-de">Kilometerstand</span><span class="lang-en" hidden>Mileage</span></td><td>10.801 km</td></tr>
-                        <tr><td><span class="lang-de">Zustand</span><span class="lang-en" hidden>Condition</span></td><td class="highlight"><span class="lang-de">Exzellent</span><span class="lang-en" hidden>Excellent</span></td></tr>
+                        <tr><td><span class="lang-de">Zustand</span><span class="lang-en" hidden>Condition</span></td><td class="highlight"><span class="lang-de">Exzellent (SOH 97,3 %)</span><span class="lang-en" hidden>Excellent (SOH 97.3%)</span></td></tr>
                       </tbody>
                     </table>
                   </div>
                   <div>
-                    <h3><span class="lang-de">Weitere Fahrzeuge</span><span class="lang-en" hidden>Additional Vehicles</span></h3>
-                    <div class="vehicle-list">
-                      <div class="vehicle-item fragment">
-                        <strong>BMW i3s</strong> — 42 kWh, NMC, 35.600 km
-                      </div>
-                      <div class="vehicle-item fragment">
-                        <strong>Skoda Elroq</strong> — 77 kWh, NMC, 12.572 km (neu)
-                      </div>
-                      <div class="vehicle-item fragment">
-                        <strong>VW ID.4 (FP)</strong> — 77 kWh, 65.467 km
-                      </div>
-                      <div class="vehicle-item fragment">
-                        <strong>Renault Zoe</strong> — <span class="lang-de">Vergleichsfahrzeug</span><span class="lang-en" hidden>Comparison vehicle</span>
-                      </div>
-                    </div>
+                    <h3><span class="lang-de">Messumfang</span><span class="lang-en" hidden>Measurement Scope</span></h3>
+                    <table class="data-table">
+                      <thead>
+                        <tr>
+                          <th><span class="lang-de">Diagnosesystem</span><span class="lang-en" hidden>Diagnostic System</span></th>
+                          <th>n</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>AVL HV-Check</td><td class="highlight">6</td></tr>
+                        <tr><td>OBDLink MX+ (kontinuierlich)</td><td class="highlight">7</td></tr>
+                        <tr><td>AUTEL MaxiSYS Ultra</td><td>3</td></tr>
+                      </tbody>
+                    </table>
+                    <p style="font-size: var(--fs-caption); color: var(--text-secondary); margin-top: 0.75rem;">
+                      <span class="lang-de">Messzeitraum: Dez. 2024 – Dez. 2025<br>Diagnosesysteme zusätzlich an BMW i3s, Skoda Elroq, Cupra Born und Renault Zoe zur Werkzeugvalidierung getestet.</span>
+                      <span class="lang-en" hidden>Measurement period: Dec. 2024 – Dec. 2025<br>Diagnostic systems additionally tested on BMW i3s, Skoda Elroq, Cupra Born and Renault Zoe for tool validation.</span>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -578,20 +592,24 @@
                     <!-- D3 chart — Phase 8 -->
                   </div>
                   <div>
-                    <h3><span class="lang-de">AVL-Messwiederholung</span><span class="lang-en" hidden>AVL Measurement Repeatability</span></h3>
+                    <h3><span class="lang-de">AVL-Messwiederholung VW ID.4</span><span class="lang-en" hidden>AVL Measurement Repeatability VW ID.4</span></h3>
                     <table class="data-table">
                       <thead>
                         <tr>
-                          <th><span class="lang-de">Fahrzeug</span><span class="lang-en" hidden>Vehicle</span></th>
-                          <th>n</th>
-                          <th>σ</th>
+                          <th><span class="lang-de">Messung</span><span class="lang-en" hidden>Measurement</span></th>
+                          <th>SOH [%]</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr><td>Skoda Elroq</td><td>7</td><td class="highlight" style="color: var(--success)">0,0 %</td></tr>
-                        <tr><td>BMW i3s</td><td>3</td><td>0,46 %</td></tr>
-                        <tr><td>VW ID.4 (IfE)</td><td>5</td><td>1,20 %</td></tr>
+                        <tr><td>1 (Apr 2025)</td><td>100,0</td></tr>
+                        <tr><td>2 (Jun 2025)</td><td>97,3</td></tr>
+                        <tr><td>3 (Jul 2025)</td><td>97,3</td></tr>
+                        <tr><td>4 (Okt 2025)</td><td>97,3</td></tr>
+                        <tr><td>5 (Dez 2025)</td><td>94,8</td></tr>
                       </tbody>
+                      <tfoot>
+                        <tr><td><strong>σ</strong></td><td><strong>1,20 %</strong></td></tr>
+                      </tfoot>
                     </table>
                   </div>
                 </div>
@@ -599,8 +617,8 @@
               <div class="takeaway-box fragment">
                 <div class="takeaway-label">Takeaway</div>
                 <p>
-                  <span class="lang-de">Skoda Elroq: 7× hintereinander exakt 100,0 % — perfekte Konsistenz im Neuzustand.</span>
-                  <span class="lang-en" hidden>Skoda Elroq: 7× consecutively exactly 100.0% — perfect consistency when new.</span>
+                  <span class="lang-de">VW ID.4: σ = 1,20 % über 5 AVL-Messungen (12 Monate). Algorithmisch: nur 0,2 Pp Streuung über 3 identische Durchläufe.</span>
+                  <span class="lang-en" hidden>VW ID.4: σ = 1.20% across 5 AVL measurements (12 months). Algorithmically: only 0.2 pp spread across 3 identical runs.</span>
                 </p>
               </div>
             </div>
@@ -631,8 +649,8 @@
           <!-- Slide 15: DC pulse resistance -->
           <section id="slide-resistance" data-section="results">
             <h2>
-              <span class="lang-de">Der DC-Puls-Innenwiderstand des VW ID.4 liegt mit 40 mΩ deutlich unter dem BMW i3s (228 mΩ)</span>
-              <span class="lang-en" hidden>The DC pulse internal resistance of the VW ID.4 at 40 mΩ is well below the BMW i3s (228 mΩ)</span>
+              <span class="lang-de">Der DC-Puls-Innenwiderstand des VW ID.4 beträgt 40 mΩ (Laden) und 33 mΩ (Entladen) bei 51 % SOC</span>
+              <span class="lang-en" hidden>The DC pulse internal resistance of the VW ID.4 is 40 mΩ (charging) and 33 mΩ (discharging) at 51% SOC</span>
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
@@ -643,13 +661,17 @@
                   <div>
                     <div class="stat-card" style="margin-bottom: 1.5rem;">
                       <div class="stat-value success">40,0 mΩ</div>
-                      <div class="stat-label">VW ID.4 R<sub>i</sub> (Laden)</div>
-                      <div class="stat-sublabel">32,8 mΩ (Entladen)</div>
+                      <div class="stat-label">R<sub>i</sub> <span class="lang-de">Laden</span><span class="lang-en" hidden>Charging</span></div>
+                      <div class="stat-sublabel">DC-Puls, 51,2 % SOC</div>
+                    </div>
+                    <div class="stat-card" style="margin-bottom: 1.5rem;">
+                      <div class="stat-value success">32,8 mΩ</div>
+                      <div class="stat-label">R<sub>i</sub> <span class="lang-de">Entladen</span><span class="lang-en" hidden>Discharging</span></div>
+                      <div class="stat-sublabel">DC-Puls, 51,2 % SOC</div>
                     </div>
                     <div class="stat-card">
-                      <div class="stat-value warning">228 mΩ</div>
-                      <div class="stat-label">BMW i3s R<sub>i</sub> (Median)</div>
-                      <div class="stat-sublabel"><span class="lang-de">Ältere Batterie, höherer Widerstand</span><span class="lang-en" hidden>Older battery, higher resistance</span></div>
+                      <div class="stat-value" style="font-size: 1.5rem; color: var(--text-secondary);">34 °C</div>
+                      <div class="stat-label"><span class="lang-de">Batterietemperatur</span><span class="lang-en" hidden>Battery Temperature</span></div>
                     </div>
                   </div>
                 </div>
@@ -700,7 +722,179 @@
             </div>
           </section>
 
-          <!-- Slide 17: Live demo — Pro app -->
+          <!-- Slide 16: Inter-System Agreement -->
+          <section id="slide-intersystem" data-section="results">
+            <h2>
+              <span class="lang-de">AVL-Referenz und On-Board-Methode stimmen beim VW ID.4 auf 1,6 Prozentpunkte überein</span>
+              <span class="lang-en" hidden>AVL reference and on-board method agree within 1.6 percentage points for the VW ID.4</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="two-col">
+                  <div>
+                    <table class="data-table">
+                      <thead>
+                        <tr>
+                          <th><span class="lang-de">System</span><span class="lang-en" hidden>System</span></th>
+                          <th>SOH [%]</th>
+                          <th><span class="lang-de">Methode</span><span class="lang-en" hidden>Method</span></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="highlight">AVL HV-Check</td>
+                          <td>97,3</td>
+                          <td><span class="lang-de">Off-Board Referenz</span><span class="lang-en" hidden>Off-board reference</span></td>
+                        </tr>
+                        <tr>
+                          <td class="highlight">OBD (kombiniert)</td>
+                          <td>95,7</td>
+                          <td>(SOH<sub>e</sub> + SOH<sub>c</sub>) / 2</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p style="font-size: var(--fs-small); color: var(--text-secondary); margin-top: 1rem;">
+                      <span class="lang-de">AUTEL-Messung am VW ID.4 nicht verfügbar (nur PIDs des Herstellers unterstützt)</span>
+                      <span class="lang-en" hidden>AUTEL measurement for VW ID.4 not available (only manufacturer PIDs supported)</span>
+                    </p>
+                  </div>
+                  <div>
+                    <div class="stat-card" style="margin-bottom: 1.5rem;">
+                      <div class="stat-value success" style="font-size: 3rem;">1,6 Pp</div>
+                      <div class="stat-label"><span class="lang-de">Abweichung AVL ↔ OBD</span><span class="lang-en" hidden>Deviation AVL ↔ OBD</span></div>
+                      <div class="stat-sublabel">CV ~1 %</div>
+                    </div>
+                    <div class="stat-card">
+                      <div class="stat-value" style="font-size: 2rem; color: var(--text-secondary);">~€50</div>
+                      <div class="stat-label"><span class="lang-de">OBD-Hardware vs. &gt;€10.000 AVL</span><span class="lang-en" hidden>OBD hardware vs. &gt;€10,000 AVL</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="takeaway-box fragment">
+                <div class="takeaway-label">Takeaway</div>
+                <p>
+                  <span class="lang-de">Die On-Board-Methode erreicht mit nur 1,6 Pp Abweichung eine praxistaugliche Genauigkeit — bei einem Bruchteil der Kosten des professionellen AVL-Systems.</span>
+                  <span class="lang-en" hidden>The on-board method achieves practical accuracy with only 1.6 pp deviation — at a fraction of the cost of the professional AVL system.</span>
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 17: ICA/DVA Analysis -->
+          <section id="slide-ica-dva" data-section="results">
+            <h2>
+              <span class="lang-de">ICA-Analyse identifiziert charakteristische NMC-712-Peaks — Grundlage für Langzeit-Degradationsmonitoring</span>
+              <span class="lang-en" hidden>ICA analysis identifies characteristic NMC 712 peaks — foundation for long-term degradation monitoring</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="two-col">
+                  <div>
+                    <h3>OCV-Kennlinie</h3>
+                    <div class="card" style="padding: 1rem;">
+                      <ul class="styled-list">
+                        <li><span class="lang-de">Leerlaufspannung: ~325 V → ~397 V</span><span class="lang-en" hidden>Open circuit voltage: ~325 V → ~397 V</span></li>
+                        <li><span class="lang-de">Charakteristischer S-förmiger Verlauf (NMC)</span><span class="lang-en" hidden>Characteristic S-shaped curve (NMC)</span></li>
+                        <li><span class="lang-de">SOC-Bereich: 5,2 % – 96,0 %</span><span class="lang-en" hidden>SOC range: 5.2% – 96.0%</span></li>
+                      </ul>
+                    </div>
+                    <h3 style="margin-top: 1rem;">ICA (dQ/dV vs. V)</h3>
+                    <div class="card" style="padding: 1rem;">
+                      <ul class="styled-list">
+                        <li><span class="lang-de">Automatische Peakerkennung implementiert</span><span class="lang-en" hidden>Automatic peak detection implemented</span></li>
+                        <li><span class="lang-de">Peaks zuordenbar zu Phasenübergängen der Graphit-Anode und NMC-Kathode</span><span class="lang-en" hidden>Peaks assignable to phase transitions of graphite anode and NMC cathode</span></li>
+                        <li><span class="lang-de">Peakpositionen in Datenbank gespeichert</span><span class="lang-en" hidden>Peak positions stored in database</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div>
+                    <h3>DVA (dV/dQ vs. Q)</h3>
+                    <div class="card" style="padding: 1rem;">
+                      <ul class="styled-list">
+                        <li><span class="lang-de">Komplementäre Information über Spannungsplateaus</span><span class="lang-en" hidden>Complementary information about voltage plateaus</span></li>
+                        <li><span class="lang-de">Plateauspannungen stimmen mit NMC-712-Referenzwerten überein</span><span class="lang-en" hidden>Plateau voltages match NMC 712 reference values</span></li>
+                      </ul>
+                    </div>
+                    <div class="card" style="padding: 1rem; margin-top: 1rem; border-color: var(--warning);">
+                      <h3 style="color: var(--warning);"><span class="lang-de">Limitation</span><span class="lang-en" hidden>Limitation</span></h3>
+                      <p style="font-size: var(--fs-caption);">
+                        <span class="lang-de">Keine alterungsbedingte Peakverschiebung nachweisbar — Fahrzeug zeigt keine signifikante Degradation im Messzeitraum. Langzeitmessungen über mehrere Jahre oder Vergleich mit Fahrzeugen bekannten Degradationsgrads erforderlich.</span>
+                        <span class="lang-en" hidden>No aging-related peak shift detectable — vehicle shows no significant degradation in measurement period. Long-term measurements over several years or comparison with vehicles of known degradation required.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 18: Community Dataset Comparison -->
+          <section id="slide-community" data-section="results">
+            <h2>
+              <span class="lang-de">Eigene Messwerte fügen sich konsistent in öffentliche Community-Datensätze ein</span>
+              <span class="lang-en" hidden>Own measurements consistently fit into public community datasets</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="two-col">
+                  <div>
+                    <h3>VW ID.4 Community (n = 273)</h3>
+                    <table class="data-table">
+                      <thead>
+                        <tr>
+                          <th><span class="lang-de">Metrik</span><span class="lang-en" hidden>Metric</span></th>
+                          <th><span class="lang-de">Wert</span><span class="lang-en" hidden>Value</span></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td><span class="lang-de">Mittelwert SOH</span><span class="lang-en" hidden>Mean SOH</span></td><td>94,0 %</td></tr>
+                        <tr><td>Minimum</td><td>71,7 %</td></tr>
+                        <tr><td>Maximum</td><td>101,3 %</td></tr>
+                        <tr><td><span class="lang-de">Laufleistung</span><span class="lang-en" hidden>Mileage</span></td><td>0 – 156.663 km</td></tr>
+                      </tbody>
+                    </table>
+                    <div class="stat-card fragment" style="margin-top: 1rem;">
+                      <div class="stat-value success">99,6 %</div>
+                      <div class="stat-label">VW ID.4 (IfE, 10.801 km)</div>
+                      <div class="stat-sublabel"><span class="lang-de">Oberer Bereich — plausibel bei geringer Laufleistung</span><span class="lang-en" hidden>Upper range — plausible for low mileage</span></div>
+                    </div>
+                  </div>
+                  <div>
+                    <h3>MEB-Plattform (n = 192)</h3>
+                    <table class="data-table">
+                      <thead>
+                        <tr>
+                          <th><span class="lang-de">Metrik</span><span class="lang-en" hidden>Metric</span></th>
+                          <th><span class="lang-de">Wert</span><span class="lang-en" hidden>Value</span></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td><span class="lang-de">Mittelwert SOH</span><span class="lang-en" hidden>Mean SOH</span></td><td>96,0 %</td></tr>
+                        <tr><td>Minimum</td><td>88,8 %</td></tr>
+                        <tr><td>Maximum</td><td>103,6 %</td></tr>
+                        <tr><td><span class="lang-de">Laufleistung</span><span class="lang-en" hidden>Mileage</span></td><td>480 – 131.124 km</td></tr>
+                      </tbody>
+                    </table>
+                    <div class="stat-card fragment" style="margin-top: 1rem;">
+                      <div class="stat-value">~1 Pp / 10k km</div>
+                      <div class="stat-label"><span class="lang-de">Degradationsrate (Langzeitbeobachtung)</span><span class="lang-en" hidden>Degradation rate (long-term observation)</span></div>
+                      <div class="stat-sublabel">Enyaq 80X: 95 % → 92 % (91k–131k km)</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="takeaway-box fragment">
+                <div class="takeaway-label">Takeaway</div>
+                <p>
+                  <span class="lang-de">Der eigene Messwert (VW ID.4: 99,6 % SOH_e) liegt im erwarteten Bereich der Community-Daten — externe Plausibilitätsprüfung bestanden.</span>
+                  <span class="lang-en" hidden>Own measurement (VW ID.4: 99.6% SOH_e) falls within the expected range of community data — external plausibility check passed.</span>
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 19: Live demo — Pro app -->
           <section id="slide-demo-pro" data-section="results">
             <h2>
               <span class="lang-de">Live-Demo: SOH Tool (Pro)</span>
@@ -713,7 +907,7 @@
             </div>
           </section>
 
-          <!-- Slide 18: Live demo — Easy app -->
+          <!-- Slide 20: Live demo — Easy app -->
           <section id="slide-demo-easy" data-section="results">
             <h2>
               <span class="lang-de">Live-Demo: SOH Tool (Easy)</span>
@@ -727,10 +921,10 @@
           </section>
 
           <!-- ============================================================ -->
-          <!-- SECTION 6: DISCUSSION (Slides 18-19, ~2 min)                 -->
+          <!-- SECTION 6: DISCUSSION (Slides 21-22, ~2 min)                 -->
           <!-- ============================================================ -->
 
-          <!-- Slide 18: Strengths & limitations -->
+          <!-- Slide 21: Strengths & limitations -->
           <section id="slide-discussion" data-section="discussion">
             <h2>
               <span class="lang-de">Stärken & Limitationen</span>
@@ -744,7 +938,7 @@
                     <ul class="styled-list">
                       <li class="fragment"><span class="lang-de">Reproduzierbarer SOH mit ~€50 OBD-Hardware (±1,6 Pp vs. Referenz)</span><span class="lang-en" hidden>Reproducible SOH with ~€50 OBD hardware (±1.6 pp vs. reference)</span></li>
                       <li class="fragment"><span class="lang-de">Kombinierte Methode robust gegen Temperatur (0,1 Pp über 9–19 °C)</span><span class="lang-en" hidden>Combined method robust against temperature (0.1 pp across 9–19°C)</span></li>
-                      <li class="fragment"><span class="lang-de">Inter-System-Übereinstimmung: 0,4 Pp bei BMW i3s (3 Systeme)</span><span class="lang-en" hidden>Inter-system agreement: 0.4 pp for BMW i3s (3 systems)</span></li>
+                      <li class="fragment"><span class="lang-de">Inter-System-Übereinstimmung: 1,6 Pp zwischen AVL und OBD</span><span class="lang-en" hidden>Inter-system agreement: 1.6 pp between AVL and OBD</span></li>
                       <li class="fragment"><span class="lang-de">Automatisierte Python-App für Werkstattpraxis</span><span class="lang-en" hidden>Automated Python app for workshop practice</span></li>
                     </ul>
                   </div>
@@ -762,7 +956,7 @@
             </div>
           </section>
 
-          <!-- Slide 19: Uncertainty budget -->
+          <!-- Slide 22: Uncertainty budget -->
           <section id="slide-uncertainty" data-section="discussion">
             <h2>
               <span class="lang-de">Die Gesamtunsicherheit von ±4,5 Pp reicht aus, um Batteriezustandskategorien zu unterscheiden</span>
@@ -802,10 +996,10 @@
           </section>
 
           <!-- ============================================================ -->
-          <!-- SECTION 7: FLOWCHART GALLERY (Slide 20)                      -->
+          <!-- SECTION 7: FLOWCHART GALLERY (Slide 23)                      -->
           <!-- ============================================================ -->
 
-          <!-- Slide 20: Diagram gallery -->
+          <!-- Slide 23: Diagram gallery -->
           <section id="slide-flowchart-gallery" data-section="flowcharts">
             <h2>
               <span class="lang-de">Flussdiagramme & Systemarchitektur</span>
@@ -819,10 +1013,10 @@
           </section>
 
           <!-- ============================================================ -->
-          <!-- SECTION 8: CONCLUSION & OUTLOOK (Slides 21-22, ~1.5 min)     -->
+          <!-- SECTION 8: CONCLUSION & OUTLOOK (Slides 24-25, ~1.5 min)     -->
           <!-- ============================================================ -->
 
-          <!-- Slide 20: Core finding -->
+          <!-- Slide 24: Core finding -->
           <section id="slide-conclusion" data-section="conclusion">
             <h2>
               <span class="lang-de">Kernaussage</span>
@@ -848,16 +1042,16 @@
                     <div class="stat-sublabel">9,8 °C – 19 °C</div>
                   </div>
                   <div class="stat-card fragment">
-                    <div class="stat-value success">0,4 Pp</div>
-                    <div class="stat-label"><span class="lang-de">Inter-System</span><span class="lang-en" hidden>Inter-system</span></div>
-                    <div class="stat-sublabel">BMW i3s (3 Systeme)</div>
+                    <div class="stat-value success">1,6 Pp</div>
+                    <div class="stat-label"><span class="lang-de">AVL ↔ OBD</span><span class="lang-en" hidden>AVL ↔ OBD</span></div>
+                    <div class="stat-sublabel">VW ID.4 (IfE)</div>
                   </div>
                 </div>
               </div>
             </div>
           </section>
 
-          <!-- Slide 21: Applications + future work -->
+          <!-- Slide 25: Applications + future work -->
           <section id="slide-outlook" data-section="conclusion">
             <h2>
               <span class="lang-de">Anwendungen & Ausblick</span>
@@ -908,25 +1102,28 @@
 
           <section id="slide-backup-intersystem" data-section="backup" data-visibility="uncounted">
             <h2>
-              <span class="lang-de">Backup: Inter-System-Vergleich</span>
-              <span class="lang-en" hidden>Backup: Inter-System Comparison</span>
+              <span class="lang-de">Backup: Werkzeugvalidierung an weiteren Fahrzeugen</span>
+              <span class="lang-en" hidden>Backup: Tool Validation on Additional Vehicles</span>
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                  <span class="lang-de">Die Diagnosewerkzeuge wurden zusätzlich an weiteren Fahrzeugen auf grundsätzliche Funktionsfähigkeit getestet. Diese Messungen dienten der Werkzeugvalidierung — die Daten sind nicht Gegenstand der quantitativen Analyse.</span>
+                  <span class="lang-en" hidden>The diagnostic tools were additionally tested on further vehicles for basic functionality. These measurements served tool validation — the data are not part of the quantitative analysis.</span>
+                </p>
                 <table class="data-table">
                   <thead>
                     <tr>
                       <th><span class="lang-de">Fahrzeug</span><span class="lang-en" hidden>Vehicle</span></th>
-                      <th>AVL</th>
-                      <th>AUTEL</th>
-                      <th>OBD</th>
-                      <th><span class="lang-de">Streuung</span><span class="lang-en" hidden>Spread</span></th>
+                      <th><span class="lang-de">Getestete Systeme</span><span class="lang-en" hidden>Tested Systems</span></th>
+                      <th><span class="lang-de">Zweck</span><span class="lang-en" hidden>Purpose</span></th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td>BMW i3s</td><td>95,6 %</td><td>96,0 %</td><td>96,0 %</td><td class="highlight" style="color: var(--success)">0,4 Pp</td></tr>
-                    <tr><td>Skoda Elroq</td><td>100,0 %</td><td>100,0 %</td><td>—</td><td class="highlight" style="color: var(--success)">0,0 Pp</td></tr>
-                    <tr><td>Renault Zoe</td><td>—</td><td>93,0 %</td><td>93,9 %</td><td>0,9 Pp</td></tr>
+                    <tr><td>BMW i3s</td><td>AVL, AUTEL, OBD</td><td><span class="lang-de">Werkzeugvalidierung, Inter-System-Test</span><span class="lang-en" hidden>Tool validation, inter-system test</span></td></tr>
+                    <tr><td>Skoda Elroq</td><td>AVL, AUTEL</td><td><span class="lang-de">Werkzeugvalidierung, Neufahrzeug-Referenz</span><span class="lang-en" hidden>Tool validation, new vehicle reference</span></td></tr>
+                    <tr><td>Cupra Born</td><td>AVL</td><td><span class="lang-de">MEB-Plattform-Kompatibilität</span><span class="lang-en" hidden>MEB platform compatibility</span></td></tr>
+                    <tr><td>Renault Zoe</td><td>AUTEL, OBD</td><td><span class="lang-de">Nicht-MEB-Kompatibilität</span><span class="lang-en" hidden>Non-MEB compatibility</span></td></tr>
                   </tbody>
                 </table>
               </div>
@@ -950,6 +1147,224 @@
                     <div class="stat-value">~1 Pp / 10k km</div>
                     <div class="stat-label">MEB-Plattform (Community)</div>
                     <div class="stat-sublabel">95 % → 92 % über 40.000 km</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="slide-backup-avl-timeseries" data-section="backup" data-visibility="uncounted">
+            <h2>
+              <span class="lang-de">Backup: AVL-Messzeitreihe VW ID.4 (IfE)</span>
+              <span class="lang-en" hidden>Backup: AVL Measurement Time Series VW ID.4 (IfE)</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th><span class="lang-de">Datum</span><span class="lang-en" hidden>Date</span></th>
+                      <th>km</th>
+                      <th>T [°C]</th>
+                      <th>SOC [%]</th>
+                      <th>SOH [%]</th>
+                      <th>ΔV<sub>max</sub> [V]</th>
+                      <th>R<sub>iso</sub> [kΩ]</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>19.12.2024</td><td>9.285</td><td>11,5</td><td>78,0</td><td>99,2</td><td>0,012</td><td>4.630</td></tr>
+                    <tr><td>14.03.2025</td><td>9.558</td><td class="highlight" style="color: var(--chart-blue);">4,0</td><td>92,8</td><td class="highlight">100,0</td><td>0,007</td><td>4.640</td></tr>
+                    <tr><td>25.04.2025</td><td>9.872</td><td>10,5</td><td>77,6</td><td class="highlight">100,0</td><td>0,010</td><td>3.990</td></tr>
+                    <tr><td>25.04.2025</td><td>9.872</td><td>10,5</td><td>77,6</td><td class="highlight">100,0</td><td>0,010</td><td>4.070</td></tr>
+                    <tr><td>03.12.2025</td><td>10.801</td><td class="highlight" style="color: var(--success);">24,0</td><td>94,8</td><td>97,3</td><td>0,006</td><td>4.680</td></tr>
+                  </tbody>
+                </table>
+                <div class="takeaway-box" style="margin-top: 1rem;">
+                  <div class="takeaway-label">Takeaway</div>
+                  <p>
+                    <span class="lang-de">Messungen bei niedrigen Temperaturen (4–10,5 °C) liefern systematisch höhere SOH-Werte (100 %). Der Wert bei 24 °C (97,3 %) ist am repräsentativsten. Doppelmessung am 25.04.2025 bestätigt hohe Kurzzeit-Reproduzierbarkeit.</span>
+                    <span class="lang-en" hidden>Measurements at low temperatures (4–10.5°C) systematically yield higher SOH values (100%). The value at 24°C (97.3%) is most representative. Double measurement on 25.04.2025 confirms high short-term reproducibility.</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="slide-backup-methods-detail" data-section="backup" data-visibility="uncounted">
+            <h2>
+              <span class="lang-de">Backup: Detaillierter Methodenvergleich</span>
+              <span class="lang-en" hidden>Backup: Detailed Method Comparison</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th><span class="lang-de">Methode</span><span class="lang-en" hidden>Method</span></th>
+                      <th><span class="lang-de">Datenquelle</span><span class="lang-en" hidden>Data Source</span></th>
+                      <th>SOH [%]</th>
+                      <th>Δ AVL</th>
+                      <th><span class="lang-de">Bewertung</span><span class="lang-en" hidden>Assessment</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="highlight">AVL HV-Check</td><td>Off-Board</td><td>97,3</td><td>—</td><td><span class="lang-de">Referenz</span><span class="lang-en" hidden>Reference</span></td></tr>
+                    <tr><td class="highlight">SOH<sub>e</sub> (direkt)</td><td>BMS-PID E<sub>aktuell</sub></td><td class="highlight" style="color: var(--success);">99,6</td><td>+2,3 Pp</td><td><span class="lang-de">Beste Einzelmethode</span><span class="lang-en" hidden>Best single method</span></td></tr>
+                    <tr><td class="highlight">SOH<sub>c</sub> (Integration)</td><td>∫|I| dt</td><td>91,8</td><td>−5,5 Pp</td><td><span class="lang-de">Systematische Unterschätzung</span><span class="lang-en" hidden>Systematic underestimation</span></td></tr>
+                    <tr><td class="highlight">SOH<sub>kap</sub></td><td>BMS-PID C<sub>Wh</sub></td><td>89,7</td><td>−7,6 Pp</td><td><span class="lang-de">Größte Abweichung</span><span class="lang-en" hidden>Largest deviation</span></td></tr>
+                    <tr><td class="highlight" style="color: var(--accent);">SOH kombiniert</td><td>(SOH<sub>e</sub>+SOH<sub>c</sub>)/2</td><td class="highlight" style="color: var(--accent);">95,7</td><td style="color: var(--success);">−1,6 Pp</td><td><span class="lang-de">Robusteste Methode</span><span class="lang-en" hidden>Most robust method</span></td></tr>
+                    <tr><td class="highlight">SOH<sub>R</sub></td><td>R<sub>i,Baseline</sub>/R<sub>i,aktuell</sub></td><td>100,0</td><td>+2,7 Pp</td><td><span class="lang-de">Nur für Langzeittrend</span><span class="lang-en" hidden>Only for long-term trend</span></td></tr>
+                  </tbody>
+                </table>
+                <p style="font-size: var(--fs-small); color: var(--text-secondary); margin-top: 0.75rem;">
+                  <span class="lang-de">Methodenabweichung: (max − min) / Mittelwert = 8,7 % → Bewertung: gering</span>
+                  <span class="lang-en" hidden>Method deviation: (max − min) / mean = 8.7% → Rating: low</span>
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section id="slide-backup-charging" data-section="backup" data-visibility="uncounted">
+            <h2>
+              <span class="lang-de">Backup: Ladeprofil & Innenwiderstand</span>
+              <span class="lang-en" hidden>Backup: Charging Profile & Internal Resistance</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="two-col">
+                  <div>
+                    <h3><span class="lang-de">CC-CV Ladeprofil (Session A)</span><span class="lang-en" hidden>CC-CV Charging Profile (Session A)</span></h3>
+                    <table class="data-table">
+                      <thead>
+                        <tr>
+                          <th><span class="lang-de">Parameter</span><span class="lang-en" hidden>Parameter</span></th>
+                          <th><span class="lang-de">Wert</span><span class="lang-en" hidden>Value</span></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td><span class="lang-de">Ladeart</span><span class="lang-en" hidden>Charging type</span></td><td>AC Wallbox</td></tr>
+                        <tr><td><span class="lang-de">Packspannung</span><span class="lang-en" hidden>Pack voltage</span></td><td>~330 V → ~397 V</td></tr>
+                        <tr><td><span class="lang-de">Ladestrom</span><span class="lang-en" hidden>Charging current</span></td><td>~30 A (CC-Phase)</td></tr>
+                        <tr><td><span class="lang-de">Ladeleistung</span><span class="lang-en" hidden>Charging power</span></td><td>~10 kW (konstant)</td></tr>
+                        <tr><td>C-Rate</td><td>0,1–0,15 C</td></tr>
+                        <tr><td><span class="lang-de">Ladeenergie</span><span class="lang-en" hidden>Charging energy</span></td><td>73,9 kWh</td></tr>
+                        <tr><td><span class="lang-de">Ladedauer</span><span class="lang-en" hidden>Charging duration</span></td><td>465 min</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div>
+                    <h3><span class="lang-de">DC-Puls-Test (Aug. 2024)</span><span class="lang-en" hidden>DC Pulse Test (Aug. 2024)</span></h3>
+                    <table class="data-table">
+                      <thead>
+                        <tr>
+                          <th><span class="lang-de">Parameter</span><span class="lang-en" hidden>Parameter</span></th>
+                          <th><span class="lang-de">Wert</span><span class="lang-en" hidden>Value</span></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>SOC</td><td>51,2 %</td></tr>
+                        <tr><td><span class="lang-de">Temperatur</span><span class="lang-en" hidden>Temperature</span></td><td>34 °C</td></tr>
+                        <tr><td>R<sub>i,Laden</sub></td><td class="highlight" style="color: var(--success);">40,0 mΩ</td></tr>
+                        <tr><td>R<sub>i,Entladen</sub></td><td>32,8 mΩ</td></tr>
+                      </tbody>
+                    </table>
+                    <p style="font-size: var(--fs-small); color: var(--text-secondary); margin-top: 0.5rem;">
+                      <span class="lang-de">Unterschiedliche Lade-/Entladewiderstände resultieren aus asymmetrischer Impedanz an der Elektroden-Elektrolyt-Grenzfläche.</span>
+                      <span class="lang-en" hidden>Different charge/discharge resistances result from asymmetric impedance at the electrode-electrolyte interface.</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="slide-backup-recommendations" data-section="backup" data-visibility="uncounted">
+            <h2>
+              <span class="lang-de">Backup: Praxisempfehlungen</span>
+              <span class="lang-en" hidden>Backup: Practical Recommendations</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="protocol-steps">
+                  <div class="protocol-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                      <strong>SOH<sub>e</sub> <span class="lang-de">bevorzugen</span><span class="lang-en" hidden>preferred</span></strong>
+                      <p><span class="lang-de">Wenn BMS-PID für maximale Energiekapazität verfügbar → genauester Einzelwert (≤ 3 Pp Abweichung)</span><span class="lang-en" hidden>When BMS PID for max energy capacity available → most accurate single value (≤ 3 pp deviation)</span></p>
+                    </div>
+                  </div>
+                  <div class="protocol-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                      <strong><span class="lang-de">Kombinierten SOH als Gesamtbewertung</span><span class="lang-en" hidden>Combined SOH as overall assessment</span></strong>
+                      <p><span class="lang-de">Mittelwert von SOH_e und SOH_c kompensiert systematische Fehler → ≤ 2 Pp Abweichung</span><span class="lang-en" hidden>Mean of SOH_e and SOH_c compensates systematic errors → ≤ 2 pp deviation</span></p>
+                    </div>
+                  </div>
+                  <div class="protocol-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                      <strong><span class="lang-de">SOC-Fenster maximieren</span><span class="lang-en" hidden>Maximize SOC window</span></strong>
+                      <p><span class="lang-de">Ladung bei &lt; 10 % SOC starten, bis &gt; 90 % SOC laden. Minimum: 50 %, ideal: &gt; 80 %</span><span class="lang-en" hidden>Start charging at &lt; 10% SOC, charge to &gt; 90% SOC. Minimum: 50%, ideal: &gt; 80%</span></p>
+                    </div>
+                  </div>
+                  <div class="protocol-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                      <strong><span class="lang-de">Temperaturbereich einhalten</span><span class="lang-en" hidden>Maintain temperature range</span></strong>
+                      <p><span class="lang-de">15–30 °C für konsistente Ergebnisse. Temperaturkorrektur in diesem Bereich unnötig.</span><span class="lang-en" hidden>15–30°C for consistent results. Temperature correction unnecessary in this range.</span></p>
+                    </div>
+                  </div>
+                  <div class="protocol-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                      <strong><span class="lang-de">Off-Board-Validierung empfohlen</span><span class="lang-en" hidden>Off-board validation recommended</span></strong>
+                      <p><span class="lang-de">Für sicherheitskritische Anwendungen (Second Life, Garantieprüfung) On-Board-Analyse mit Off-Board-Messung ergänzen.</span><span class="lang-en" hidden>For safety-critical applications (second life, warranty checks) supplement on-board analysis with off-board measurement.</span></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="slide-backup-battery-passport" data-section="backup" data-visibility="uncounted">
+            <h2>
+              <span class="lang-de">Backup: EU-Batteriepass & Second-Life-Grading</span>
+              <span class="lang-en" hidden>Backup: EU Battery Passport & Second-Life Grading</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="two-col">
+                  <div>
+                    <h3><span class="lang-de">EU-Batterieverordnung 2023/1542</span><span class="lang-en" hidden>EU Battery Regulation 2023/1542</span></h3>
+                    <ul class="styled-list">
+                      <li><span class="lang-de">Ab 2027 verpflichtend für Traktionsbatterien</span><span class="lang-en" hidden>Mandatory from 2027 for traction batteries</span></li>
+                      <li><span class="lang-de">Digitaler Batteriepass mit standardisierten Daten</span><span class="lang-en" hidden>Digital battery passport with standardized data</span></li>
+                      <li><span class="lang-de">Anwendung erfasst bereits Großteil der geforderten Daten</span><span class="lang-en" hidden>Application already captures most required data</span></li>
+                      <li><span class="lang-de">Strukturierter Export als Basis für Batteriepass-Schema möglich</span><span class="lang-en" hidden>Structured export as basis for battery passport schema possible</span></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3>Second-Life Grading</h3>
+                    <table class="data-table">
+                      <thead>
+                        <tr>
+                          <th>Grade</th>
+                          <th>SOH</th>
+                          <th><span class="lang-de">Verwendung</span><span class="lang-en" hidden>Usage</span></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td class="highlight" style="color: var(--success);">A</td><td>≥ 90 %</td><td><span class="lang-de">Weiterverwendung im Fahrzeug</span><span class="lang-en" hidden>Continued vehicle use</span></td></tr>
+                        <tr><td class="highlight" style="color: var(--chart-blue);">B</td><td>80–89 %</td><td><span class="lang-de">Stationäre Speicher</span><span class="lang-en" hidden>Stationary storage</span></td></tr>
+                        <tr><td class="highlight" style="color: var(--warning);">C</td><td>70–79 %</td><td><span class="lang-de">Eingeschränkte Nutzung</span><span class="lang-en" hidden>Restricted use</span></td></tr>
+                        <tr><td class="highlight" style="color: var(--accent);">D</td><td>&lt; 70 %</td><td><span class="lang-de">Recycling</span><span class="lang-en" hidden>Recycling</span></td></tr>
+                      </tbody>
+                    </table>
+                    <p style="font-size: var(--fs-small); color: var(--text-secondary); margin-top: 0.5rem;">
+                      <span class="lang-de">Basierend auf kombiniertem Score aus SOH, R<sub>i</sub> und Zellbalance</span>
+                      <span class="lang-en" hidden>Based on combined score of SOH, R<sub>i</sub> and cell balance</span>
+                    </p>
                   </div>
                 </div>
               </div>

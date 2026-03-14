@@ -180,12 +180,19 @@
 }
 
 .qr-card-canvas-wrap {
-  background: #1a1a2e;
+  background: var(--bg-surface);
   border-radius: 8px;
   padding: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform var(--transition-fast);
+}
+
+.qr-card-canvas-wrap:hover {
+  transform: scale(1.03);
 }
 
 .qr-card-canvas-wrap canvas {
@@ -254,7 +261,7 @@ a.qr-card-url svg {
 }
 
 .qr-zoomed-canvas-wrap {
-  background: #1a1a2e;
+  background: var(--bg-surface);
   border-radius: 16px;
   padding: 20px;
   box-shadow: 0 16px 48px rgba(226, 0, 26, 0.2);

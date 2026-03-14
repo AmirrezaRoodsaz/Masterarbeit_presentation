@@ -31,19 +31,22 @@ const SECTIONS = [
     { label: 'Temperatureffekt', label_en: 'Temperature Effect', slideIndex: 13 },
     { label: 'Innenwiderstand', label_en: 'Resistance', slideIndex: 14 },
     { label: 'Fehlerfall', label_en: 'Failure Case', slideIndex: 15 },
-    { label: 'Demo (Pro)', label_en: 'Demo (Pro)', slideIndex: 16 },
-    { label: 'Demo (Easy)', label_en: 'Demo (Easy)', slideIndex: 17 },
+    { label: 'Inter-System', label_en: 'Inter-System', slideIndex: 16 },
+    { label: 'ICA/DVA', label_en: 'ICA/DVA', slideIndex: 17 },
+    { label: 'Community-Daten', label_en: 'Community Data', slideIndex: 18 },
+    { label: 'Demo (Pro)', label_en: 'Demo (Pro)', slideIndex: 19 },
+    { label: 'Demo (Easy)', label_en: 'Demo (Easy)', slideIndex: 20 },
   ]},
-  { id: 'discussion', label: 'Diskussion', label_en: 'Discussion', icon: 'message-square', slideIndex: 18, subs: [
-    { label: 'Stärken & Grenzen', label_en: 'Strengths & Limits', slideIndex: 18 },
-    { label: 'Unsicherheitsbudget', label_en: 'Uncertainty Budget', slideIndex: 19 },
+  { id: 'discussion', label: 'Diskussion', label_en: 'Discussion', icon: 'message-square', slideIndex: 21, subs: [
+    { label: 'Stärken & Grenzen', label_en: 'Strengths & Limits', slideIndex: 21 },
+    { label: 'Unsicherheitsbudget', label_en: 'Uncertainty Budget', slideIndex: 22 },
   ]},
-  { id: 'flowcharts', label: 'Diagramme', label_en: 'Diagrams', icon: 'workflow', slideIndex: 20, subs: [
-    { label: 'Galerie', label_en: 'Gallery', slideIndex: 20 },
+  { id: 'flowcharts', label: 'Diagramme', label_en: 'Diagrams', icon: 'workflow', slideIndex: 23, subs: [
+    { label: 'Galerie', label_en: 'Gallery', slideIndex: 23 },
   ]},
-  { id: 'conclusion', label: 'Fazit', label_en: 'Conclusion', icon: 'target', slideIndex: 21, subs: [
-    { label: 'Kernaussage', label_en: 'Core Finding', slideIndex: 21 },
-    { label: 'Ausblick', label_en: 'Outlook', slideIndex: 22 },
+  { id: 'conclusion', label: 'Fazit', label_en: 'Conclusion', icon: 'target', slideIndex: 24, subs: [
+    { label: 'Kernaussage', label_en: 'Core Finding', slideIndex: 24 },
+    { label: 'Ausblick', label_en: 'Outlook', slideIndex: 25 },
   ]},
 ];
 

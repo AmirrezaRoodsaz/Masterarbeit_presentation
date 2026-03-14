@@ -48,3 +48,30 @@
   --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
   --shadow-tooltip: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
+
+/* === Theme: Dark (AMOLED / pure black) === */
+body.theme-dark {
+  --bg-primary: #000000;
+  --bg-surface: #111111;
+  --text-primary: #f0f0f0;
+  --text-secondary: #888888;
+  --accent-soft: rgba(226, 0, 26, 0.15);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.6);
+  --shadow-tooltip: 0 8px 32px rgba(0, 0, 0, 0.8);
+}
+
+/* === Theme: Light === */
+body.theme-light {
+  --bg-primary: #f5f5f5;
+  --bg-surface: #ffffff;
+  --text-primary: #1a1a2e;
+  --text-secondary: #555566;
+  --accent-soft: rgba(226, 0, 26, 0.1);
+  --success: #00997d;
+  --warning: #cc9400;
+  --chart-blue: #2b6cb0;
+  --chart-green: #00997d;
+  --chart-yellow: #cc9400;
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-tooltip: 0 8px 32px rgba(0, 0, 0, 0.12);
+}

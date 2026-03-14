@@ -13,6 +13,10 @@ export function initSettingsModal() {
   createModalDOM();
   document.addEventListener('toggle-settings', toggleSettings);
 
+  // Apply saved theme on startup
+  const s = getSettings();
+  applyTheme(s.display.theme || 'midnight');
+
   // Gamepad live state for the UI
   document.addEventListener('gamepad-state', (e) => {
     if (isOpen && activeTab === 'gamepad') {
@@ -276,6 +280,26 @@ function renderDisplayTab() {
     <div class="settings-form">
       <div class="setting-row">
         <label class="setting-label">
+          <span class="lang-de">Farbschema</span>
+          <span class="lang-en" hidden>Color Palette</span>
+        </label>
+        <div class="theme-switcher">
+          <button class="theme-option ${s.display.theme === 'midnight' ? 'active' : ''}" data-theme="midnight">
+            <span class="theme-swatch" style="background: #0f0f1a; border: 2px solid #1a1a2e;"></span>
+            <span>Midnight</span>
+          </button>
+          <button class="theme-option ${s.display.theme === 'dark' ? 'active' : ''}" data-theme="dark">
+            <span class="theme-swatch" style="background: #000000; border: 2px solid #333;"></span>
+            <span>Dark</span>
+          </button>
+          <button class="theme-option ${s.display.theme === 'light' ? 'active' : ''}" data-theme="light">
+            <span class="theme-swatch" style="background: #f5f5f5; border: 2px solid #ddd;"></span>
+            <span>Light</span>
+          </button>
+        </div>
+      </div>
+      <div class="setting-row">
+        <label class="setting-label">
           <span class="lang-de">Standardmodus</span>
           <span class="lang-en" hidden>Default Mode</span>
         </label>
@@ -356,6 +380,16 @@ function bindTabEvents() {
     const val = parseFloat(e.target.value);
     document.getElementById('gamepad-deadzone-value').textContent = val;
     updateSettings('gamepad', 'deadzone', val);
+  });
+
+  // Theme switcher
+  document.querySelectorAll('.theme-option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const theme = btn.dataset.theme;
+      updateSettings('display', 'theme', theme);
+      applyTheme(theme);
+      renderTabContent();
+    });
   });
 
   // Display settings
@@ -457,6 +491,14 @@ function updateGamepadLiveState(state) {
   }
 
   display.innerHTML = html;
+}
+
+// === Theme application ===
+export function applyTheme(theme) {
+  document.body.classList.remove('theme-dark', 'theme-light');
+  if (theme === 'dark') document.body.classList.add('theme-dark');
+  else if (theme === 'light') document.body.classList.add('theme-light');
+  // 'midnight' = default (no class needed)
 }
 
 function updateGamepadConnectionStatus(detail) {

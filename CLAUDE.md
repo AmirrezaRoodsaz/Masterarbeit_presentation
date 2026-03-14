@@ -212,6 +212,9 @@ Each phase: push main → create feature branch → implement → merge with app
 - [ ] **Phase 14:** Polish — visual consistency, responsive scaling, defense mode testing, projector resolution check
 - [ ] **Phase 14:** Speaker notes — German narration for each slide, timing cues, transition phrases
 - [ ] **Phase 15:** Fallbacks — PDF export, PPTX backup, demo video recording
+- [ ] adding entladung and einladung protocol
+- [ ] from start page to finish page each page should get controllean and redesighnd seperatly
+- [ ] 
 
 ### Pending (non-phase)
 - [ ] **Verify institutional requirements** — time limit, language, required elements (logo, declaration), Q&A format

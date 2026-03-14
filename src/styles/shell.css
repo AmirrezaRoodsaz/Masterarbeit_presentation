@@ -27,6 +27,11 @@
   opacity: 0.8;
 }
 
+body.theme-light .sidebar-logo {
+  filter: none;
+  opacity: 1;
+}
+
 /* Navigation items */
 .sidebar-nav {
   flex: 1;

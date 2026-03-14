@@ -72,6 +72,11 @@ export async function initQrHub() {
 
   // Sidebar button click
   document.getElementById('btn-qr')?.addEventListener('click', toggleQrHub);
+
+  // Re-render QR codes when theme changes
+  document.addEventListener('settings-changed', (e) => {
+    if (e.detail?.key === 'theme' && isOpen) renderContent();
+  });
 }
 
 export function toggleQrHub() {
@@ -219,9 +224,9 @@ function renderZoomed(body, entry) {
   body.innerHTML = `
     <div class="qr-zoomed">
       <div class="qr-zoomed-card">
-        <div class="qr-zoomed-canvas-wrap">
+        <a class="qr-zoomed-canvas-wrap" href="${url}" target="_blank" rel="noopener" title="Link öffnen">
           <canvas id="qr-canvas-zoomed"></canvas>
-        </div>
+        </a>
         <h3 class="qr-zoomed-name">${entry.name}</h3>
         <a class="qr-zoomed-url" href="${url}" target="_blank" rel="noopener">
           <span>${url}</span>
@@ -236,9 +241,9 @@ function renderZoomed(body, entry) {
   const canvas = body.querySelector('#qr-canvas-zoomed');
   if (canvas) renderQR(canvas, url, 400);
 
-  // Click on the card background → back to grid (but not on the link)
-  body.querySelector('.qr-zoomed-card').addEventListener('click', (e) => {
-    if (e.target.closest('.qr-zoomed-url')) return; // let link clicks through
+  // Click anywhere except links → back to grid
+  body.querySelector('.qr-zoomed').addEventListener('click', (e) => {
+    if (e.target.closest('a')) return; // let link + canvas clicks through
     zoomedEntry = null;
     renderContent();
   });
@@ -266,12 +271,15 @@ function cardHTML(entry) {
 // ── QR Rendering ────────────────────────────────────────────
 
 function renderQR(canvas, text, size) {
+  const isLight = document.body.classList.contains('theme-light');
+  const bgSurface = getComputedStyle(document.documentElement).getPropertyValue('--bg-surface').trim() || '#1a1a2e';
+
   QrCreator.render({
     text,
     radius: 0.4,
     ecLevel: 'H',
-    fill: '#E2001A',      // HSBoRed
-    background: '#1a1a2e', // bg-surface
+    fill: isLight ? '#000000' : '#E2001A',
+    background: isLight ? '#ffffff' : bgSurface,
     size,
   }, canvas);
 }

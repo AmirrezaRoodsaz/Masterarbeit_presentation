@@ -42,6 +42,7 @@ const DEFAULT_SETTINGS = {
   display: {
     defaultMode: 'browse',
     defaultLanguage: 'de',
+    theme: 'midnight',
     timerTarget: 1200,
     timerWarning: 1080,
   },

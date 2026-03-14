@@ -440,7 +440,6 @@ function renderResistance(container, data) {
   const barData = [
     { label: 'VW ID.4', sublabel: en ? 'Charging' : 'Laden', value: vehicles[0].r_charge_mohm, color: success },
     { label: 'VW ID.4', sublabel: en ? 'Discharging' : 'Entladen', value: vehicles[0].r_discharge_mohm, color: d3.color(success).darker(0.5).formatHex() },
-    { label: 'BMW i3s', sublabel: 'Median', value: vehicles[1].r_charge_mohm, color: warning },
   ];
 
   // Scales
@@ -449,7 +448,7 @@ function renderResistance(container, data) {
     .range([0, innerW])
     .padding(0.35);
 
-  const y = d3.scaleLinear().domain([0, 260]).range([innerH, 0]);
+  const y = d3.scaleLinear().domain([0, 60]).range([innerH, 0]);
 
   // Grid
   g.append('g')
@@ -493,9 +492,7 @@ function renderResistance(container, data) {
       .attr('rx', 4)
       .attr('fill', d.color)
       .on('mousemove', (event) => {
-        const note = d.label === 'BMW i3s'
-          ? (en ? vehicles[1].note_en : vehicles[1].note)
-          : (en ? vehicles[0].note_en : vehicles[0].note);
+        const note = en ? vehicles[0].note_en : vehicles[0].note;
         showTooltip(tip, `
           <div class="tooltip-method">${d.label} — ${d.sublabel}</div>
           <div class="tooltip-value">R<sub>i</sub>: ${d.value} mΩ</div>
