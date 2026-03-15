@@ -1,0 +1,47 @@
+{
+  "datasets": [
+    {
+      "name": "VW ID.4 Community",
+      "name_en": "VW ID.4 Community",
+      "n": 273,
+      "period": "Okt 2021 – Mrz 2025",
+      "period_en": "Oct 2021 – Mar 2025",
+      "min": 71.7,
+      "max": 101.3,
+      "mean": 94.0,
+      "mileage_range": "0 – 156.663 km",
+      "mileage_range_en": "0 – 156,663 km"
+    },
+    {
+      "name": "MEB-Plattform",
+      "name_en": "MEB Platform",
+      "n": 192,
+      "period": "Mai 2021 – Mrz 2025",
+      "period_en": "May 2021 – Mar 2025",
+      "min": 88.8,
+      "max": 103.6,
+      "mean": 96.0,
+      "mileage_range": "480 – 131.124 km",
+      "mileage_range_en": "480 – 131,124 km"
+    }
+  ],
+  "own_measurements": [
+    {
+      "label": "VW ID.4 (IfE)",
+      "soh": 99.6,
+      "km": 10801,
+      "method": "SOH_e"
+    },
+    {
+      "label": "VW ID.4 (FP)",
+      "soh": 96.4,
+      "km": 65467,
+      "method": "AVL"
+    }
+  ],
+  "degradation_rate": {
+    "value": "~1 Pp / 10k km",
+    "source": "Škoda Enyaq 80X Langzeitbeobachtung",
+    "source_en": "Škoda Enyaq 80X long-term observation"
+  }
+}

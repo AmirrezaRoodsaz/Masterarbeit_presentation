@@ -1,0 +1,19 @@
+{
+  "vehicle": "VW ID.4 (IfE)",
+  "measurements": [
+    { "date": "2024-12-19", "soh": 99.2, "km": 9285, "temp": 11.5, "delta_v": 0.012, "r_iso": 4630 },
+    { "date": "2025-03-14", "soh": 100.0, "km": 9558, "temp": 4.0, "delta_v": 0.007, "r_iso": 4640 },
+    { "date": "2025-04-25", "soh": 100.0, "km": 9872, "temp": 10.5, "delta_v": 0.010, "r_iso": 3990 },
+    { "date": "2025-04-25", "soh": 100.0, "km": 9872, "temp": 10.5, "delta_v": 0.010, "r_iso": 4070 },
+    { "date": "2025-12-03", "soh": 97.3, "km": 10801, "temp": 24.0, "delta_v": 0.006, "r_iso": 4680 }
+  ],
+  "stats": {
+    "n": 5,
+    "mean": 99.3,
+    "sigma": 1.20,
+    "min": 97.3,
+    "max": 100.0,
+    "timespan": "12 Monate",
+    "timespan_en": "12 months"
+  }
+}

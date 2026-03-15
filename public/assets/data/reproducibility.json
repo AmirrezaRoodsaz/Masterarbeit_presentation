@@ -10,7 +10,7 @@
     "rating_en": "EXCELLENT"
   },
   "measurement": [
-    { "vehicle": "VW ID.4 (IfE)", "n": 5, "timespan": "12 Monate", "soh_min": 94.8, "soh_max": 100.0, "sigma": 1.20 },
+    { "vehicle": "VW ID.4 (IfE)", "n": 5, "timespan": "12 Monate", "soh_min": 97.3, "soh_max": 100.0, "sigma": 1.20 },
     { "vehicle": "VW ID.4 (FP)", "n": 3, "timespan": "6 Monate", "soh_min": 96.2, "soh_max": 98.1, "sigma": 1.00 }
   ]
 }

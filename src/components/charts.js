@@ -512,15 +512,336 @@ function renderResistance(container, data) {
   });
 }
 
+// ── Chart 5: AVL SOH Timeline (Slide 13, right panel) ────────────────
+
+function renderAVLTimeline(container, data) {
+  container.innerHTML = '';
+  const tip = ensureTooltip(container);
+
+  const width = 600;
+  const height = 400;
+  const margin = { top: 30, right: 30, bottom: 60, left: 60 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const en = isEnglish();
+  const accent = getCSSVar('--accent');
+  const success = getCSSVar('--success');
+
+  const svg = d3.select(container)
+    .append('svg')
+    .attr('viewBox', `0 0 ${width} ${height}`)
+    .attr('preserveAspectRatio', 'xMidYMid meet')
+    .style('width', '100%')
+    .style('height', '100%');
+
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const measurements = data.measurements;
+  const parseDate = d3.timeParse('%Y-%m-%d');
+  const points = measurements.map(m => ({
+    ...m,
+    dateObj: parseDate(m.date),
+  }));
+
+  // Scales
+  const xExtent = d3.extent(points, d => d.dateObj);
+  // Add 15-day padding on each side
+  const xPad = 15 * 24 * 60 * 60 * 1000;
+  const x = d3.scaleTime()
+    .domain([new Date(xExtent[0].getTime() - xPad), new Date(xExtent[1].getTime() + xPad)])
+    .range([0, innerW]);
+
+  const y = d3.scaleLinear().domain([95, 102]).range([innerH, 0]);
+
+  // Grid
+  g.append('g')
+    .attr('class', 'grid')
+    .call(d3.axisLeft(y).tickSize(-innerW).tickFormat('').ticks(7));
+
+  // Mean line
+  const meanY = y(data.stats.mean);
+  g.append('line')
+    .attr('x1', 0).attr('x2', innerW)
+    .attr('y1', meanY).attr('y2', meanY)
+    .attr('stroke', accent)
+    .attr('stroke-width', 1.5)
+    .attr('stroke-dasharray', '6,4')
+    .attr('opacity', 0.7);
+
+  g.append('text')
+    .attr('x', innerW - 4)
+    .attr('y', meanY - 8)
+    .attr('text-anchor', 'end')
+    .attr('fill', accent)
+    .attr('font-size', '11px')
+    .attr('font-weight', '600')
+    .text(`μ = ${data.stats.mean} %`);
+
+  // σ band
+  const bandTop = y(data.stats.mean + data.stats.sigma);
+  const bandBottom = y(data.stats.mean - data.stats.sigma);
+  g.append('rect')
+    .attr('x', 0).attr('y', bandTop)
+    .attr('width', innerW)
+    .attr('height', bandBottom - bandTop)
+    .attr('fill', accent)
+    .attr('opacity', 0.08);
+
+  // Axes
+  const formatMonth = en ? d3.timeFormat('%b %Y') : d3.timeFormat('%b %Y');
+  g.append('g')
+    .attr('class', 'axis')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(x).ticks(5).tickFormat(formatMonth))
+    .selectAll('text')
+    .style('font-size', '11px')
+    .style('fill', getCSSVar('--text-primary'))
+    .attr('transform', 'rotate(-25)')
+    .attr('text-anchor', 'end');
+
+  g.append('g')
+    .attr('class', 'axis')
+    .call(d3.axisLeft(y).ticks(7).tickFormat(d => `${d} %`));
+
+  // Line connecting points
+  const line = d3.line()
+    .x(d => x(d.dateObj))
+    .y(d => y(d.soh));
+
+  g.append('path')
+    .datum(points)
+    .attr('fill', 'none')
+    .attr('stroke', success)
+    .attr('stroke-width', 2)
+    .attr('stroke-opacity', 0.5)
+    .attr('d', line);
+
+  // Data points
+  g.selectAll('.point')
+    .data(points)
+    .join('circle')
+    .attr('class', 'point')
+    .attr('cx', d => x(d.dateObj))
+    .attr('cy', d => y(d.soh))
+    .attr('r', 7)
+    .attr('fill', success)
+    .attr('stroke', getCSSVar('--bg-surface'))
+    .attr('stroke-width', 2)
+    .style('cursor', 'pointer')
+    .on('mousemove', (event, d) => {
+      const dateStr = d3.timeFormat('%d.%m.%Y')(d.dateObj);
+      showTooltip(tip, `
+        <div class="tooltip-method">${dateStr}</div>
+        <div class="tooltip-value">SOH: ${d.soh} %</div>
+        <div class="tooltip-note">${d.km.toLocaleString('de-DE')} km · ${d.temp} °C</div>
+      `, event, container);
+    })
+    .on('mouseleave', () => hideTooltip(tip));
+
+  // Value labels on points
+  points.forEach((d, i) => {
+    // Offset duplicate Apr 2025 points vertically
+    const yOff = (i === 2 && points[3] && points[3].soh === d.soh) ? -16 : (i === 3 ? 20 : -14);
+    g.append('text')
+      .attr('x', x(d.dateObj))
+      .attr('y', y(d.soh) + yOff)
+      .attr('text-anchor', 'middle')
+      .attr('fill', getCSSVar('--text-primary'))
+      .attr('font-size', '11px')
+      .attr('font-weight', '600')
+      .text(`${d.soh} %`);
+  });
+
+  // Stats annotation
+  g.append('text')
+    .attr('x', innerW / 2)
+    .attr('y', -10)
+    .attr('text-anchor', 'middle')
+    .attr('fill', success)
+    .attr('font-size', '13px')
+    .attr('font-weight', '700')
+    .text(`σ = ${data.stats.sigma} % · n = ${data.stats.n} · ${en ? data.stats.timespan_en : data.stats.timespan}`);
+}
+
+// ── Chart 6: Community Data Positioning (Slide 18) ───────────────────
+
+function renderCommunityComparison(container, data) {
+  container.innerHTML = '';
+  const tip = ensureTooltip(container);
+
+  const width = 900;
+  const height = 400;
+  const margin = { top: 40, right: 40, bottom: 40, left: 200 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const en = isEnglish();
+  const accent = getCSSVar('--accent');
+  const chartBlue = getCSSVar('--chart-blue');
+  const success = getCSSVar('--success');
+
+  const svg = d3.select(container)
+    .append('svg')
+    .attr('viewBox', `0 0 ${width} ${height}`)
+    .attr('preserveAspectRatio', 'xMidYMid meet')
+    .style('width', '100%')
+    .style('height', '100%');
+
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const datasets = data.datasets;
+
+  // X scale: SOH range
+  const x = d3.scaleLinear().domain([65, 108]).range([0, innerW]);
+
+  // Y scale: dataset rows
+  const y = d3.scaleBand()
+    .domain(datasets.map(d => en ? d.name_en : d.name))
+    .range([0, innerH])
+    .padding(0.5);
+
+  // Grid
+  g.append('g')
+    .attr('class', 'grid')
+    .call(d3.axisBottom(x).tickSize(innerH).tickFormat('').ticks(8))
+    .attr('transform', 'translate(0,0)');
+
+  // X axis
+  g.append('g')
+    .attr('class', 'axis')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(x).ticks(8).tickFormat(d => `${d} %`));
+
+  // Y axis labels
+  g.append('g')
+    .attr('class', 'axis')
+    .call(d3.axisLeft(y).tickSize(0))
+    .selectAll('text')
+    .style('font-size', '14px')
+    .style('fill', getCSSVar('--text-primary'));
+
+  g.select('.axis .domain').remove();
+
+  // Range bars (min to max)
+  datasets.forEach(d => {
+    const label = en ? d.name_en : d.name;
+    const barY = y(label);
+    const barH = y.bandwidth();
+
+    // Full range bar (light)
+    g.append('rect')
+      .attr('x', x(d.min))
+      .attr('y', barY)
+      .attr('width', x(d.max) - x(d.min))
+      .attr('height', barH)
+      .attr('rx', barH / 2)
+      .attr('fill', chartBlue)
+      .attr('opacity', 0.2);
+
+    // Mean marker
+    g.append('line')
+      .attr('x1', x(d.mean)).attr('x2', x(d.mean))
+      .attr('y1', barY - 4).attr('y2', barY + barH + 4)
+      .attr('stroke', chartBlue)
+      .attr('stroke-width', 2.5);
+
+    // Mean label
+    g.append('text')
+      .attr('x', x(d.mean))
+      .attr('y', barY - 8)
+      .attr('text-anchor', 'middle')
+      .attr('fill', chartBlue)
+      .attr('font-size', '11px')
+      .attr('font-weight', '600')
+      .text(`μ = ${d.mean} %`);
+
+    // Min/max labels
+    g.append('text')
+      .attr('x', x(d.min) - 4)
+      .attr('y', barY + barH / 2)
+      .attr('text-anchor', 'end')
+      .attr('dominant-baseline', 'middle')
+      .attr('fill', getCSSVar('--text-secondary'))
+      .attr('font-size', '10px')
+      .text(`${d.min}`);
+
+    g.append('text')
+      .attr('x', x(d.max) + 4)
+      .attr('y', barY + barH / 2)
+      .attr('text-anchor', 'start')
+      .attr('dominant-baseline', 'middle')
+      .attr('fill', getCSSVar('--text-secondary'))
+      .attr('font-size', '10px')
+      .text(`${d.max}`);
+
+    // n label
+    g.append('text')
+      .attr('x', x(d.mean))
+      .attr('y', barY + barH + 16)
+      .attr('text-anchor', 'middle')
+      .attr('fill', getCSSVar('--text-secondary'))
+      .attr('font-size', '10px')
+      .text(`n = ${d.n}`);
+  });
+
+  // Own measurement markers (diamonds)
+  data.own_measurements.forEach(own => {
+    // Place on each dataset row
+    datasets.forEach(d => {
+      const label = en ? d.name_en : d.name;
+      const barY = y(label);
+      const barH = y.bandwidth();
+      const cx = x(own.soh);
+      const cy = barY + barH / 2;
+
+      // Diamond marker
+      const size = 8;
+      g.append('path')
+        .attr('d', `M${cx},${cy - size} L${cx + size},${cy} L${cx},${cy + size} L${cx - size},${cy} Z`)
+        .attr('fill', own.label.includes('FP') ? getCSSVar('--warning') : accent)
+        .attr('stroke', getCSSVar('--bg-surface'))
+        .attr('stroke-width', 1.5)
+        .style('cursor', 'pointer')
+        .on('mousemove', (event) => {
+          showTooltip(tip, `
+            <div class="tooltip-method">${own.label}</div>
+            <div class="tooltip-value">SOH: ${own.soh} % (${own.method})</div>
+            <div class="tooltip-note">${own.km.toLocaleString('de-DE')} km</div>
+          `, event, container);
+        })
+        .on('mouseleave', () => hideTooltip(tip));
+    });
+  });
+
+  // Legend
+  const legendDiv = document.createElement('div');
+  legendDiv.className = 'chart-legend';
+  const items = [
+    { color: chartBlue, label: en ? 'Community range' : 'Community-Bereich', opacity: '0.2' },
+    { color: accent, label: 'VW ID.4 (IfE, 10.801 km)' },
+    { color: getCSSVar('--warning'), label: 'VW ID.4 (FP, 65.467 km)' },
+  ];
+  items.forEach(item => {
+    const el = document.createElement('span');
+    el.className = 'chart-legend-item';
+    el.innerHTML = `<span class="chart-legend-swatch" style="background:${item.color};${item.opacity ? `opacity:${item.opacity}` : ''}"></span>${item.label}`;
+    legendDiv.appendChild(el);
+  });
+  container.appendChild(legendDiv);
+}
+
 // ── Init ─────────────────────────────────────────────────────────────
 
 export async function initCharts() {
   // Fetch all data in parallel
-  const [methodsData, reproData, tempData, resistData] = await Promise.all([
+  const [methodsData, reproData, tempData, resistData, avlTimelineData, communityData] = await Promise.all([
     fetch('/assets/data/soh-methods.json').then(r => r.json()),
     fetch('/assets/data/reproducibility.json').then(r => r.json()),
     fetch('/assets/data/temperature-comparison.json').then(r => r.json()),
     fetch('/assets/data/resistance.json').then(r => r.json()),
+    fetch('/assets/data/avl-timeline.json').then(r => r.json()),
+    fetch('/assets/data/community-comparison.json').then(r => r.json()),
   ]);
 
   const charts = [
@@ -528,6 +849,8 @@ export async function initCharts() {
     { id: 'chart-reproducibility', render: renderReproducibility, data: reproData },
     { id: 'chart-temperature', render: renderTemperature, data: tempData },
     { id: 'chart-resistance', render: renderResistance, data: resistData },
+    { id: 'chart-avl-timeline', render: renderAVLTimeline, data: avlTimelineData },
+    { id: 'chart-community', render: renderCommunityComparison, data: communityData },
   ];
 
   // Initial render

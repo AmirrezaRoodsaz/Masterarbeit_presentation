@@ -609,26 +609,8 @@
                   <div class="chart-container" id="chart-reproducibility">
                     <!-- D3 chart — Phase 8 -->
                   </div>
-                  <div>
-                    <h3><span class="lang-de">AVL-Messwiederholung VW ID.4</span><span class="lang-en" hidden>AVL Measurement Repeatability VW ID.4</span></h3>
-                    <table class="data-table">
-                      <thead>
-                        <tr>
-                          <th><span class="lang-de">Messung</span><span class="lang-en" hidden>Measurement</span></th>
-                          <th>SOH [%]</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr><td>1 (Apr 2025)</td><td>100,0</td></tr>
-                        <tr><td>2 (Jun 2025)</td><td>97,3</td></tr>
-                        <tr><td>3 (Jul 2025)</td><td>97,3</td></tr>
-                        <tr><td>4 (Okt 2025)</td><td>97,3</td></tr>
-                        <tr><td>5 (Dez 2025)</td><td>94,8</td></tr>
-                      </tbody>
-                      <tfoot>
-                        <tr><td><strong>σ</strong></td><td><strong>1,20 %</strong></td></tr>
-                      </tfoot>
-                    </table>
+                  <div class="chart-container" id="chart-avl-timeline">
+                    <!-- D3 chart — AVL SOH timeline -->
                   </div>
                 </div>
               </div>
@@ -855,51 +837,8 @@
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
-                <div class="two-col">
-                  <div>
-                    <h3>VW ID.4 Community (n = 273)</h3>
-                    <table class="data-table">
-                      <thead>
-                        <tr>
-                          <th><span class="lang-de">Metrik</span><span class="lang-en" hidden>Metric</span></th>
-                          <th><span class="lang-de">Wert</span><span class="lang-en" hidden>Value</span></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr><td><span class="lang-de">Mittelwert SOH</span><span class="lang-en" hidden>Mean SOH</span></td><td>94,0 %</td></tr>
-                        <tr><td>Minimum</td><td>71,7 %</td></tr>
-                        <tr><td>Maximum</td><td>101,3 %</td></tr>
-                        <tr><td><span class="lang-de">Laufleistung</span><span class="lang-en" hidden>Mileage</span></td><td>0 – 156.663 km</td></tr>
-                      </tbody>
-                    </table>
-                    <div class="stat-card fragment" style="margin-top: 1rem;">
-                      <div class="stat-value success">99,6 %</div>
-                      <div class="stat-label">VW ID.4 (IfE, 10.801 km)</div>
-                      <div class="stat-sublabel"><span class="lang-de">Oberer Bereich — plausibel bei geringer Laufleistung</span><span class="lang-en" hidden>Upper range — plausible for low mileage</span></div>
-                    </div>
-                  </div>
-                  <div>
-                    <h3>MEB-Plattform (n = 192)</h3>
-                    <table class="data-table">
-                      <thead>
-                        <tr>
-                          <th><span class="lang-de">Metrik</span><span class="lang-en" hidden>Metric</span></th>
-                          <th><span class="lang-de">Wert</span><span class="lang-en" hidden>Value</span></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr><td><span class="lang-de">Mittelwert SOH</span><span class="lang-en" hidden>Mean SOH</span></td><td>96,0 %</td></tr>
-                        <tr><td>Minimum</td><td>88,8 %</td></tr>
-                        <tr><td>Maximum</td><td>103,6 %</td></tr>
-                        <tr><td><span class="lang-de">Laufleistung</span><span class="lang-en" hidden>Mileage</span></td><td>480 – 131.124 km</td></tr>
-                      </tbody>
-                    </table>
-                    <div class="stat-card fragment" style="margin-top: 1rem;">
-                      <div class="stat-value">~1 Pp / 10k km</div>
-                      <div class="stat-label"><span class="lang-de">Degradationsrate (Langzeitbeobachtung)</span><span class="lang-en" hidden>Degradation rate (long-term observation)</span></div>
-                      <div class="stat-sublabel">Enyaq 80X: 95 % → 92 % (91k–131k km)</div>
-                    </div>
-                  </div>
+                <div class="chart-container" id="chart-community" style="min-height: 400px;">
+                  <!-- D3 chart — Community data positioning -->
                 </div>
               </div>
               <div class="takeaway-box fragment">
