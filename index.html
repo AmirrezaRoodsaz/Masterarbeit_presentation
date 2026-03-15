@@ -138,10 +138,10 @@
                     </div>
                   </div>
                   <div class="stat-card">
-                    <div class="stat-value warning">?? %</div>
+                    <div class="stat-value warning">±5–10 %</div>
                     <div class="stat-label">
-                      <span class="lang-de">SOH laut BMS — herstellerspezifisch, nicht vergleichbar</span>
-                      <span class="lang-en" hidden>SOH per BMS — manufacturer-specific, not comparable</span>
+                      <span class="lang-de">Typische BMS-Abweichung — herstellerspezifisch, nicht vergleichbar</span>
+                      <span class="lang-en" hidden>Typical BMS deviation — manufacturer-specific, not comparable</span>
                     </div>
                   </div>
                   <div class="stat-card">
@@ -194,12 +194,12 @@
                   </div>
                   <div class="card">
                     <h3>
-                      <span class="lang-de">Fehlende Studien</span>
-                      <span class="lang-en" hidden>Missing Studies</span>
+                      <span class="lang-de">Labor vs. Realfahrzeug</span>
+                      <span class="lang-en" hidden>Lab vs. Real Vehicles</span>
                     </h3>
                     <p>
-                      <span class="lang-de">Kein systematischer Vergleich unter kontrollierten, reproduzierbaren Bedingungen</span>
-                      <span class="lang-en" hidden>No systematic comparison under controlled, reproducible conditions</span>
+                      <span class="lang-de">Die meisten Studien nutzen Laborzellen — kein systematischer Vergleich an realen Fahrzeugen mit kommerziellen Diagnosegeräten</span>
+                      <span class="lang-en" hidden>Most studies use lab cells — no systematic comparison on real vehicles with commercial diagnostic tools</span>
                     </p>
                   </div>
                 </div>
@@ -317,6 +317,10 @@
                   </div>
                 </div>
               </div>
+              <div class="context-note fragment" style="margin-top: 1rem; padding: 0.8rem 1.2rem; border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: var(--border-radius-sm);">
+                <span class="lang-de"><strong>Testfahrzeug VW ID.4:</strong> NMC 712 Pouch-Zellen · 288 Zellen (12 Module × 24) · 77 kWh brutto / 72 kWh netto · 300–408 V</span>
+                <span class="lang-en" hidden><strong>Test vehicle VW ID.4:</strong> NMC 712 pouch cells · 288 cells (12 modules × 24) · 77 kWh gross / 72 kWh net · 300–408 V</span>
+              </div>
               <!-- Mermaid diagram placeholder — Phase 7 -->
               <div id="mermaid-aging" class="mermaid-container"></div>
             </div>
@@ -325,8 +329,8 @@
           <!-- Slide 7: SOH definitions + equations -->
           <section id="slide-soh-definitions" data-section="theory">
             <h2>
-              <span class="lang-de">Drei komplementäre SOH-Definitionen erfassen unterschiedliche Aspekte der Batteriealterung</span>
-              <span class="lang-en" hidden>Three complementary SOH definitions capture different aspects of battery aging</span>
+              <span class="lang-de">Vier komplementäre SOH-Methoden erfassen unterschiedliche Aspekte der Batteriealterung</span>
+              <span class="lang-en" hidden>Four complementary SOH methods capture different aspects of battery aging</span>
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
@@ -345,6 +349,14 @@
                     <span class="equation-desc">
                       <span class="lang-de">Energiebasiert</span>
                       <span class="lang-en" hidden>Energy-based</span>
+                    </span>
+                  </div>
+                  <div class="equation-row">
+                    <span class="equation-label">SOH<sub>c</sub></span>
+                    <div class="katex-eq">$$\text{SOH}_c = \frac{\int_0^t I \, dt}{C_\text{nenn}} \times 100\%$$</div>
+                    <span class="equation-desc">
+                      <span class="lang-de">Coulomb-Counting (Ladungsbilanz)</span>
+                      <span class="lang-en" hidden>Coulomb Counting (charge balance)</span>
                     </span>
                   </div>
                   <div class="equation-row">
@@ -425,7 +437,7 @@
                       <div class="step-number">1</div>
                       <div class="step-content">
                         <strong><span class="lang-de">Vorbereitung</span><span class="lang-en" hidden>Preparation</span></strong>
-                        <p><span class="lang-de">Fahrzeug klimatisieren (15–30 °C), SOC &lt; 10 %</span><span class="lang-en" hidden>Condition vehicle (15–30 °C), SOC &lt; 10%</span></p>
+                        <p><span class="lang-de">Entladung auf ~0 % SOC, Umgebungstemperatur dokumentieren (15–30 °C), Kilometerstand notieren</span><span class="lang-en" hidden>Discharge to ~0% SOC, document ambient temperature (15–30 °C), record odometer</span></p>
                       </div>
                     </div>
                     <div class="protocol-step fragment">
@@ -439,7 +451,7 @@
                       <div class="step-number">3</div>
                       <div class="step-content">
                         <strong><span class="lang-de">CC-CV Ladung</span><span class="lang-en" hidden>CC-CV Charging</span></strong>
-                        <p><span class="lang-de">AC-Wallbox, 0,1–0,15C, OBD-Logging (194 Sensoren)</span><span class="lang-en" hidden>AC wallbox, 0.1–0.15C, OBD logging (194 sensors)</span></p>
+                        <p><span class="lang-de">OBD-Verbindungsaufbau → AC-Wallbox 0→100 %, 0,1–0,15C, kontinuierliches Logging (194 Sensoren)</span><span class="lang-en" hidden>OBD connection setup → AC wallbox 0→100%, 0.1–0.15C, continuous logging (194 sensors)</span></p>
                       </div>
                     </div>
                     <div class="protocol-step fragment">
@@ -505,9 +517,15 @@
                         <tr><td>AUTEL MaxiSYS Ultra</td><td>3</td></tr>
                       </tbody>
                     </table>
-                    <p style="font-size: var(--fs-caption); color: var(--text-secondary); margin-top: 0.75rem;">
-                      <span class="lang-de">Messzeitraum: Dez. 2024 – Dez. 2025<br>Diagnosesysteme zusätzlich an BMW i3s, Skoda Elroq, Cupra Born und Renault Zoe zur Werkzeugvalidierung getestet.</span>
-                      <span class="lang-en" hidden>Measurement period: Dec. 2024 – Dec. 2025<br>Diagnostic systems additionally tested on BMW i3s, Skoda Elroq, Cupra Born and Renault Zoe for tool validation.</span>
+                    <h3 style="margin-top: 1rem;"><span class="lang-de">Warum VW ID.4?</span><span class="lang-en" hidden>Why VW ID.4?</span></h3>
+                    <ul class="styled-list" style="font-size: var(--fs-caption);">
+                      <li><span class="lang-de">MEB-Plattform: meistverkaufte EV-Architektur in Europa</span><span class="lang-en" hidden>MEB platform: best-selling EV architecture in Europe</span></li>
+                      <li><span class="lang-de">NMC 712: branchenübliche Zellchemie</span><span class="lang-en" hidden>NMC 712: industry-standard cell chemistry</span></li>
+                      <li><span class="lang-de">Vollständiger OBD-Zugang (96 Zellspannungen, Temperaturen)</span><span class="lang-en" hidden>Full OBD access (96 cell voltages, temperatures)</span></li>
+                    </ul>
+                    <p style="font-size: var(--fs-small); color: var(--text-secondary); margin-top: 0.5rem;">
+                      <span class="lang-de">Messzeitraum: Dez. 2024 – Dez. 2025 · Diagnosesysteme zusätzlich an BMW i3s, Skoda Elroq, Cupra Born und Renault Zoe zur Werkzeugvalidierung getestet.</span>
+                      <span class="lang-en" hidden>Measurement period: Dec. 2024 – Dec. 2025 · Diagnostic systems additionally tested on BMW i3s, Skoda Elroq, Cupra Born and Renault Zoe for tool validation.</span>
                     </p>
                   </div>
                 </div>
@@ -948,6 +966,7 @@
                       <li class="fragment"><span class="lang-de">Einzelnes Primärfahrzeug (VW ID.4) — Übertragbarkeit unklar</span><span class="lang-en" hidden>Single primary vehicle (VW ID.4) — transferability unclear</span></li>
                       <li class="fragment"><span class="lang-de">Nur AC-Ladung — keine DC-Schnellladedaten</span><span class="lang-en" hidden>AC charging only — no DC fast charging data</span></li>
                       <li class="fragment"><span class="lang-de">Keine signifikante Alterung beobachtet (SOH &gt; 97 %)</span><span class="lang-en" hidden>No significant aging observed (SOH &gt; 97%)</span></li>
+                      <li class="fragment"><span class="lang-de">Keine Temperaturkorrektur implementiert — Messungen bei &lt;15 °C eingeschränkt vergleichbar</span><span class="lang-en" hidden>No temperature correction implemented — measurements at &lt;15°C have limited comparability</span></li>
                       <li class="fragment"><span class="lang-de">Keine unabhängige Laborvalidierung (ISO 12405)</span><span class="lang-en" hidden>No independent lab validation (ISO 12405)</span></li>
                     </ul>
                   </div>
