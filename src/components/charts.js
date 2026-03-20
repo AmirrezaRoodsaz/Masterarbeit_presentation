@@ -831,17 +831,525 @@ function renderCommunityComparison(container, data) {
   container.appendChild(legendDiv);
 }
 
+// ── Chart 7: Discharge Protocol Flowchart (Slide 10) ─────────────────
+
+function renderDischargeProtocol(container, data) {
+  container.innerHTML = '';
+
+  const width = 900;
+  const height = 520;
+  const en = isEnglish();
+
+  const svg = d3.select(container)
+    .append('svg')
+    .attr('viewBox', `0 0 ${width} ${height}`)
+    .attr('preserveAspectRatio', 'xMidYMid meet')
+    .style('width', '100%')
+    .style('height', '100%');
+
+  // ── Layout constants ──
+  const flowX = 260;         // center of flowchart boxes
+  const boxW = 380;
+  const boxH = 60;
+  const gap = 18;            // vertical gap between boxes
+  const startY = 20;
+  const arrowLen = gap;
+
+  const steps = data.steps;
+
+  // ── Draw flowchart boxes + arrows ──
+  steps.forEach((step, i) => {
+    const yPos = startY + i * (boxH + arrowLen);
+
+    // Box
+    const boxG = svg.append('g')
+      .attr('transform', `translate(${flowX - boxW / 2}, ${yPos})`);
+
+    // Rounded rect with left accent border
+    boxG.append('rect')
+      .attr('width', boxW)
+      .attr('height', boxH)
+      .attr('rx', 8)
+      .attr('fill', getCSSVar('--bg-surface'))
+      .attr('stroke', step.color)
+      .attr('stroke-width', 2.5);
+
+    // Left color accent strip
+    boxG.append('rect')
+      .attr('width', 6)
+      .attr('height', boxH)
+      .attr('rx', 3)
+      .attr('fill', step.color);
+
+    // Step number circle
+    boxG.append('circle')
+      .attr('cx', 30)
+      .attr('cy', boxH / 2)
+      .attr('r', 14)
+      .attr('fill', step.color);
+
+    boxG.append('text')
+      .attr('x', 30)
+      .attr('y', boxH / 2)
+      .attr('text-anchor', 'middle')
+      .attr('dominant-baseline', 'central')
+      .attr('fill', '#ffffff')
+      .attr('font-size', '13px')
+      .attr('font-weight', '700')
+      .text(step.id);
+
+    // Label (bold)
+    boxG.append('text')
+      .attr('x', 56)
+      .attr('y', boxH / 2 - 10)
+      .attr('fill', getCSSVar('--text-primary'))
+      .attr('font-size', '15px')
+      .attr('font-weight', '700')
+      .text(en ? step.label_en : step.label);
+
+    // Detail
+    boxG.append('text')
+      .attr('x', 56)
+      .attr('y', boxH / 2 + 12)
+      .attr('fill', getCSSVar('--text-secondary'))
+      .attr('font-size', '12px')
+      .text(en ? step.detail_en : step.detail);
+
+    // Arrow to next box
+    if (i < steps.length - 1) {
+      const arrowY1 = yPos + boxH;
+      const arrowY2 = yPos + boxH + arrowLen;
+      svg.append('line')
+        .attr('x1', flowX).attr('x2', flowX)
+        .attr('y1', arrowY1).attr('y2', arrowY2 - 4)
+        .attr('stroke', getCSSVar('--text-secondary'))
+        .attr('stroke-width', 2)
+        .attr('opacity', 0.5);
+
+      // Arrow head
+      svg.append('path')
+        .attr('d', `M${flowX - 5},${arrowY2 - 8} L${flowX},${arrowY2 - 2} L${flowX + 5},${arrowY2 - 8}`)
+        .attr('fill', getCSSVar('--text-secondary'))
+        .attr('opacity', 0.5);
+    }
+  });
+
+  // ── SOC gauge on the right side ──
+  const gaugeX = 660;
+  const gaugeY = 50;
+  const gaugeW = 60;
+  const gaugeH = 300;
+
+  // Gauge background
+  svg.append('rect')
+    .attr('x', gaugeX)
+    .attr('y', gaugeY)
+    .attr('width', gaugeW)
+    .attr('height', gaugeH)
+    .attr('rx', 8)
+    .attr('fill', getCSSVar('--bg-surface'))
+    .attr('stroke', getCSSVar('--text-secondary'))
+    .attr('stroke-width', 1.5)
+    .attr('opacity', 0.6);
+
+  // Starting SOC fill (top portion)
+  const startPct = data.soc_gauge.start / 100;
+  const startFillH = gaugeH * startPct;
+  svg.append('rect')
+    .attr('x', gaugeX + 3)
+    .attr('y', gaugeY + gaugeH - startFillH + 3)
+    .attr('width', gaugeW - 6)
+    .attr('height', startFillH - 6)
+    .attr('rx', 5)
+    .attr('fill', '#3b82f6')
+    .attr('opacity', 0.2);
+
+  // Ending SOC fill (BMS ~5.75%)
+  const endPct = data.soc_gauge.bms_at_zero / 100;
+  const endFillH = gaugeH * endPct;
+  svg.append('rect')
+    .attr('x', gaugeX + 3)
+    .attr('y', gaugeY + gaugeH - endFillH + 3)
+    .attr('width', gaugeW - 6)
+    .attr('height', endFillH - 6)
+    .attr('rx', 5)
+    .attr('fill', '#f59e0b')
+    .attr('opacity', 0.5);
+
+  // Gauge labels
+  svg.append('text')
+    .attr('x', gaugeX + gaugeW / 2)
+    .attr('y', gaugeY - 10)
+    .attr('text-anchor', 'middle')
+    .attr('fill', getCSSVar('--text-primary'))
+    .attr('font-size', '13px')
+    .attr('font-weight', '700')
+    .text('SOC');
+
+  // Start label
+  svg.append('text')
+    .attr('x', gaugeX + gaugeW + 10)
+    .attr('y', gaugeY + gaugeH - startFillH + 14)
+    .attr('fill', '#3b82f6')
+    .attr('font-size', '12px')
+    .attr('font-weight', '600')
+    .text(`${en ? 'Start' : 'Start'}: ~${data.soc_gauge.start} %`);
+
+  // End label — Display SOC
+  svg.append('text')
+    .attr('x', gaugeX + gaugeW + 10)
+    .attr('y', gaugeY + gaugeH - 20)
+    .attr('fill', '#f59e0b')
+    .attr('font-size', '12px')
+    .attr('font-weight', '600')
+    .text(`Display: 0 %`);
+
+  // BMS annotation
+  svg.append('text')
+    .attr('x', gaugeX + gaugeW + 10)
+    .attr('y', gaugeY + gaugeH - 4)
+    .attr('fill', getCSSVar('--text-secondary'))
+    .attr('font-size', '11px')
+    .text(`BMS: ≈ ${data.soc_gauge.bms_at_zero} %`);
+
+  // Arrow from start to end
+  const arrowStartY = gaugeY + gaugeH - startFillH + 30;
+  const arrowEndY = gaugeY + gaugeH - 35;
+  svg.append('line')
+    .attr('x1', gaugeX - 15).attr('x2', gaugeX - 15)
+    .attr('y1', arrowStartY).attr('y2', arrowEndY)
+    .attr('stroke', getCSSVar('--accent'))
+    .attr('stroke-width', 2)
+    .attr('marker-end', 'url(#arrowDown)');
+
+  // Arrow marker def
+  svg.append('defs').append('marker')
+    .attr('id', 'arrowDown')
+    .attr('viewBox', '0 0 10 10')
+    .attr('refX', 5).attr('refY', 10)
+    .attr('markerWidth', 6).attr('markerHeight', 6)
+    .attr('orient', 'auto')
+    .append('path')
+    .attr('d', 'M0,0 L5,10 L10,0')
+    .attr('fill', getCSSVar('--accent'));
+
+  svg.append('text')
+    .attr('x', gaugeX - 20)
+    .attr('y', (arrowStartY + arrowEndY) / 2)
+    .attr('text-anchor', 'end')
+    .attr('fill', getCSSVar('--accent'))
+    .attr('font-size', '11px')
+    .attr('font-weight', '600')
+    .text(en ? 'Driving' : 'Fahrt');
+
+  // ── Insight bar at bottom ──
+  const insightY = height - 50;
+  const insightText = en ? data.insight.en : data.insight.de;
+
+  svg.append('rect')
+    .attr('x', 30)
+    .attr('y', insightY)
+    .attr('width', width - 60)
+    .attr('height', 36)
+    .attr('rx', 6)
+    .attr('fill', getCSSVar('--accent'))
+    .attr('opacity', 0.08);
+
+  svg.append('rect')
+    .attr('x', 30)
+    .attr('y', insightY)
+    .attr('width', 4)
+    .attr('height', 36)
+    .attr('rx', 2)
+    .attr('fill', getCSSVar('--accent'));
+
+  svg.append('text')
+    .attr('x', 46)
+    .attr('y', insightY + 22)
+    .attr('fill', getCSSVar('--text-primary'))
+    .attr('font-size', '12px')
+    .text(insightText);
+}
+
+// ── Chart 8: CC-CV Charging Profile (Slide 11) ──────────────────────
+
+function renderChargingProfile(container, data) {
+  container.innerHTML = '';
+  const tip = ensureTooltip(container);
+
+  const width = 900;
+  const height = 480;
+  const margin = { top: 40, right: 80, bottom: 70, left: 70 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const en = isEnglish();
+  const accent = getCSSVar('--accent');
+  const chartBlue = '#3b82f6';
+  const chartOrange = '#f97316';
+
+  const svg = d3.select(container)
+    .append('svg')
+    .attr('viewBox', `0 0 ${width} ${height}`)
+    .attr('preserveAspectRatio', 'xMidYMid meet')
+    .style('width', '100%')
+    .style('height', '100%');
+
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const profile = data.profile;
+  const transitionSOC = data.transition_soc;
+
+  // ── Scales ──
+  const x = d3.scaleLinear().domain([0, 100]).range([0, innerW]);
+  const yVoltage = d3.scaleLinear().domain([290, 430]).range([innerH, 0]);
+  const yCurrent = d3.scaleLinear().domain([0, 20]).range([innerH, 0]);
+
+  // ── Shaded regions ──
+  // CC region (0–80%)
+  g.append('rect')
+    .attr('x', x(0))
+    .attr('y', 0)
+    .attr('width', x(transitionSOC) - x(0))
+    .attr('height', innerH)
+    .attr('fill', chartBlue)
+    .attr('opacity', 0.05);
+
+  // CV region (80–100%)
+  g.append('rect')
+    .attr('x', x(transitionSOC))
+    .attr('y', 0)
+    .attr('width', x(100) - x(transitionSOC))
+    .attr('height', innerH)
+    .attr('fill', chartOrange)
+    .attr('opacity', 0.05);
+
+  // Phase labels at top
+  g.append('text')
+    .attr('x', x(transitionSOC / 2))
+    .attr('y', -8)
+    .attr('text-anchor', 'middle')
+    .attr('fill', chartBlue)
+    .attr('font-size', '15px')
+    .attr('font-weight', '700')
+    .text(en ? data.cc_phase.label_en : data.cc_phase.label);
+
+  g.append('text')
+    .attr('x', x(transitionSOC + (100 - transitionSOC) / 2))
+    .attr('y', -8)
+    .attr('text-anchor', 'middle')
+    .attr('fill', chartOrange)
+    .attr('font-size', '15px')
+    .attr('font-weight', '700')
+    .text(en ? data.cv_phase.label_en : data.cv_phase.label);
+
+  // ── Transition line ──
+  g.append('line')
+    .attr('x1', x(transitionSOC)).attr('x2', x(transitionSOC))
+    .attr('y1', -2).attr('y2', innerH)
+    .attr('stroke', getCSSVar('--text-secondary'))
+    .attr('stroke-width', 1.5)
+    .attr('stroke-dasharray', '6,4')
+    .attr('opacity', 0.6);
+
+  g.append('text')
+    .attr('x', x(transitionSOC))
+    .attr('y', -18)
+    .attr('text-anchor', 'middle')
+    .attr('fill', getCSSVar('--text-secondary'))
+    .attr('font-size', '11px')
+    .text(`${transitionSOC} % SOC`);
+
+  // ── Grid ──
+  g.append('g')
+    .attr('class', 'grid')
+    .call(d3.axisLeft(yVoltage).tickSize(-innerW).tickFormat('').ticks(7));
+
+  // ── X axis ──
+  g.append('g')
+    .attr('class', 'axis')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(x).ticks(10).tickFormat(d => `${d} %`));
+
+  g.append('text')
+    .attr('x', innerW / 2)
+    .attr('y', innerH + 40)
+    .attr('text-anchor', 'middle')
+    .attr('fill', getCSSVar('--text-secondary'))
+    .attr('font-size', '13px')
+    .text('SOC (%)');
+
+  // ── Left Y axis (Voltage) ──
+  g.append('g')
+    .attr('class', 'axis')
+    .call(d3.axisLeft(yVoltage).ticks(7).tickFormat(d => `${d} V`))
+    .selectAll('text')
+    .style('fill', chartBlue);
+
+  g.append('text')
+    .attr('transform', 'rotate(-90)')
+    .attr('x', -innerH / 2)
+    .attr('y', -50)
+    .attr('text-anchor', 'middle')
+    .attr('fill', chartBlue)
+    .attr('font-size', '13px')
+    .attr('font-weight', '600')
+    .text(en ? 'Voltage (V)' : 'Spannung (V)');
+
+  // ── Right Y axis (Current) ──
+  g.append('g')
+    .attr('class', 'axis')
+    .attr('transform', `translate(${innerW},0)`)
+    .call(d3.axisRight(yCurrent).ticks(5).tickFormat(d => `${d} A`))
+    .selectAll('text')
+    .style('fill', chartOrange);
+
+  g.append('text')
+    .attr('transform', 'rotate(90)')
+    .attr('x', innerH / 2)
+    .attr('y', -innerW - 55)
+    .attr('text-anchor', 'middle')
+    .attr('fill', chartOrange)
+    .attr('font-size', '13px')
+    .attr('font-weight', '600')
+    .text(en ? 'Current (A)' : 'Strom (A)');
+
+  // ── Voltage line ──
+  const voltageLine = d3.line()
+    .x(d => x(d.soc))
+    .y(d => yVoltage(d.voltage))
+    .curve(d3.curveMonotoneX);
+
+  g.append('path')
+    .datum(profile)
+    .attr('fill', 'none')
+    .attr('stroke', chartBlue)
+    .attr('stroke-width', 3)
+    .attr('d', voltageLine);
+
+  // ── Current line ──
+  const currentLine = d3.line()
+    .x(d => x(d.soc))
+    .y(d => yCurrent(d.current))
+    .curve(d3.curveMonotoneX);
+
+  g.append('path')
+    .datum(profile)
+    .attr('fill', 'none')
+    .attr('stroke', chartOrange)
+    .attr('stroke-width', 3)
+    .attr('d', currentLine);
+
+  // ── Key value annotations ──
+  // CC constant current label
+  g.append('text')
+    .attr('x', x(40))
+    .attr('y', yCurrent(16) - 12)
+    .attr('text-anchor', 'middle')
+    .attr('fill', chartOrange)
+    .attr('font-size', '12px')
+    .attr('font-weight', '600')
+    .text(`I = ${profile[0].current} A`);
+
+  // CV constant voltage label
+  g.append('text')
+    .attr('x', x(92))
+    .attr('y', yVoltage(408) - 12)
+    .attr('text-anchor', 'middle')
+    .attr('fill', chartBlue)
+    .attr('font-size', '12px')
+    .attr('font-weight', '600')
+    .text(`U = ${profile[profile.length - 1].voltage} V`);
+
+  // End current annotation
+  g.append('text')
+    .attr('x', x(100) + 4)
+    .attr('y', yCurrent(0.5) + 4)
+    .attr('text-anchor', 'start')
+    .attr('fill', accent)
+    .attr('font-size', '11px')
+    .attr('font-weight', '600')
+    .text(`I < ${data.end_current_a} A`);
+
+  // ── Interactive overlay ──
+  const bisect = d3.bisector(d => d.soc).left;
+  const focusV = g.append('circle').attr('r', 5).attr('fill', chartBlue).style('display', 'none');
+  const focusI = g.append('circle').attr('r', 5).attr('fill', chartOrange).style('display', 'none');
+  const focusLine = g.append('line')
+    .attr('stroke', getCSSVar('--text-secondary'))
+    .attr('stroke-width', 1)
+    .attr('stroke-dasharray', '3,3')
+    .style('display', 'none');
+
+  g.append('rect')
+    .attr('width', innerW)
+    .attr('height', innerH)
+    .attr('fill', 'transparent')
+    .on('mousemove', (event) => {
+      const [mx] = d3.pointer(event);
+      const soc = x.invert(mx);
+      const idx = bisect(profile, soc, 1);
+      const d0 = profile[idx - 1];
+      const d1 = profile[idx] || d0;
+      const d = soc - d0.soc > d1.soc - soc ? d1 : d0;
+
+      focusV.attr('cx', x(d.soc)).attr('cy', yVoltage(d.voltage)).style('display', null);
+      focusI.attr('cx', x(d.soc)).attr('cy', yCurrent(d.current)).style('display', null);
+      focusLine.attr('x1', x(d.soc)).attr('x2', x(d.soc)).attr('y1', 0).attr('y2', innerH).style('display', null);
+
+      const phase = d.soc <= transitionSOC ? (en ? 'CC Phase' : 'CC-Phase') : (en ? 'CV Phase' : 'CV-Phase');
+      showTooltip(tip, `
+        <div class="tooltip-method">${phase} · SOC ${d.soc} %</div>
+        <div class="tooltip-value" style="color:${chartBlue}">${en ? 'Voltage' : 'Spannung'}: ${d.voltage} V</div>
+        <div class="tooltip-value" style="color:${chartOrange}">${en ? 'Current' : 'Strom'}: ${d.current} A</div>
+      `, event, container);
+    })
+    .on('mouseleave', () => {
+      focusV.style('display', 'none');
+      focusI.style('display', 'none');
+      focusLine.style('display', 'none');
+      hideTooltip(tip);
+    });
+
+  // ── Legend ──
+  const legendDiv = document.createElement('div');
+  legendDiv.className = 'chart-legend';
+  const items = [
+    { color: chartBlue, label: en ? 'Voltage (V)' : 'Spannung (V)' },
+    { color: chartOrange, label: en ? 'Current (A)' : 'Strom (A)' },
+  ];
+  items.forEach(item => {
+    const el = document.createElement('span');
+    el.className = 'chart-legend-item';
+    el.innerHTML = `<span class="chart-legend-swatch" style="background:${item.color}"></span>${item.label}`;
+    legendDiv.appendChild(el);
+  });
+
+  // SOH method usage annotation
+  const sohNote = document.createElement('div');
+  sohNote.className = 'chart-legend';
+  sohNote.style.marginTop = '4px';
+  sohNote.style.fontSize = '12px';
+  sohNote.style.opacity = '0.8';
+  sohNote.innerHTML = `<span style="color:${chartBlue}">CC → ${en ? data.cc_phase.soh_use_en : data.cc_phase.soh_use}</span> · <span style="color:${chartOrange}">CV → ${en ? data.cv_phase.soh_use_en : data.cv_phase.soh_use}</span>`;
+
+  container.appendChild(legendDiv);
+  container.appendChild(sohNote);
+}
+
 // ── Init ─────────────────────────────────────────────────────────────
 
 export async function initCharts() {
   // Fetch all data in parallel
-  const [methodsData, reproData, tempData, resistData, avlTimelineData, communityData] = await Promise.all([
+  const [methodsData, reproData, tempData, resistData, avlTimelineData, communityData, dischargeData, chargingData] = await Promise.all([
     fetch('/assets/data/soh-methods.json').then(r => r.json()),
     fetch('/assets/data/reproducibility.json').then(r => r.json()),
     fetch('/assets/data/temperature-comparison.json').then(r => r.json()),
     fetch('/assets/data/resistance.json').then(r => r.json()),
     fetch('/assets/data/avl-timeline.json').then(r => r.json()),
     fetch('/assets/data/community-comparison.json').then(r => r.json()),
+    fetch('/assets/data/discharge-protocol.json').then(r => r.json()),
+    fetch('/assets/data/charging-profile.json').then(r => r.json()),
   ]);
 
   const charts = [
@@ -851,6 +1359,8 @@ export async function initCharts() {
     { id: 'chart-resistance', render: renderResistance, data: resistData },
     { id: 'chart-avl-timeline', render: renderAVLTimeline, data: avlTimelineData },
     { id: 'chart-community', render: renderCommunityComparison, data: communityData },
+    { id: 'chart-discharge-protocol', render: renderDischargeProtocol, data: dischargeData },
+    { id: 'chart-charging-profile', render: renderChargingProfile, data: chargingData },
   ];
 
   // Initial render

@@ -207,18 +207,15 @@ Each phase: push main → create feature branch → implement → merge with app
 - [x] **Phase 9:** Streamlit iframe (slide 17 live demo). Iframe-only, no video fallback — live demo of the app.
 - [x] **Phase 10: Cross-reference report** — thesis chapters cross-referenced. Added: BMS ±5–10% accuracy (slide 2), lab-vs-real-vehicles gap (slide 3), SOH_c Coulomb-counting equation (slide 6), NMC 712 specs (slide 5), vehicle selection rationale (slide 9), protocol reconciliation with thesis (slide 8), temperature correction limitation (slide 21). Vehicle cleanup (BMW i3s, Skoda Elroq removal) completed in prior session.
 - [ ] **Phase 11: Mermaid diagrams** — rework slide 6 aging mechanisms + slide 9 measurement protocol, matching PlantUML originals from report. Needs rework after report content is finalized.
-- [ ] **Phase 12: Flowchart Gallery** — new section before Fazit with a dropdown selector showing all 39 PlantUML diagrams (30 Flowcharts + 9 Software Architecture) converted to Mermaid. Select-and-show UI: pick a diagram from the list, it renders full size with scrolling. Sources: `../python_soh/.../Flowcharts/` (30 files) and `../python_soh/.../Software_Architecture_Modeling/` (9 files).
-- [ ] **Phase 13: Animation rework** — user goes through all slides and provides a list of animation opportunities. Rework pipeline animation + add new animations based on that list. This is the last step before polish.
-- [ ] **Phase 14:** Polish — visual consistency, responsive scaling, defense mode testing, projector resolution check
-- [ ] **Phase 14:** Speaker notes — German narration for each slide, timing cues, transition phrases
-- [ ] **Phase 15:** Fallbacks — PDF export, PPTX backup, demo video recording
-- [ ] adding entladung and einladung protocol
-- [ ] from start page to finish page each page should get controllean and redesighnd seperatly
-- [ ] 
-
-### Pending (non-phase)
-- [ ] **Verify institutional requirements** — time limit, language, required elements (logo, declaration), Q&A format
-- [ ] **Distill core contribution** into one sentence: *"This thesis demonstrates that ___ by ___, resulting in ___"*
+- [x] **Phase 12: Flowchart Gallery** — new section before Fazit with a dropdown selector showing all 39 PlantUML diagrams (30 Flowcharts + 9 Software Architecture) pre-rendered as SVGs. Select-and-show UI with grouped dropdown, full-size viewer with white background container.
+- [x] **Phase 16:** Entladung & Einladung protocol — discharge flowchart + CC-CV charging profile chart added as new methodology slides
+- [ ] **Phase 13:** Slide-by-slide review & redesign — go through every slide from start to finish, control and redesign separately
+- [ ] **Phase 14:** Animation rework — user goes through all slides and provides a list of animation opportunities. Rework pipeline animation + add new animations based on that list.
+- [ ] **Phase 15:** Polish — visual consistency, responsive scaling, defense mode testing, projector resolution check
+- [ ] **Phase 16:** Speaker notes — German narration for each slide, timing cues, transition phrases
+- [ ] **Phase 17:** Fallbacks — PDF export, PPTX backup, demo video recording
+- [ ] **Phase 18:** Verify institutional requirements — time limit, language, required elements (logo, declaration), Q&A format
+- [ ] **Phase 19:** Distill core contribution — one sentence: *"This thesis demonstrates that ___ by ___, resulting in ___"*
 
 ## How to Use Skills
 

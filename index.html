@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SOH Elektrofahrzeuge — Masterarbeit Amirreza Roodsaz</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="stylesheet" href="src/styles/main.css">
 </head>
 <body>
@@ -59,60 +63,129 @@
             </div>
           </section>
 
-          <!-- Slide 2: Roadmap / Agenda -->
+          <!-- Slide 2: Roadmap / Agenda — Numbered Icon Set Grid -->
           <section id="slide-roadmap" data-section="opening">
             <h2>
               <span class="lang-de">Agenda</span>
               <span class="lang-en" hidden>Agenda</span>
             </h2>
-            <div class="roadmap-grid">
-              <div class="roadmap-card" data-target="2">
-                <div class="roadmap-number">01</div>
-                <div class="roadmap-label">
-                  <span class="lang-de">Motivation & Problemstellung</span>
-                  <span class="lang-en" hidden>Motivation & Problem</span>
+            <div class="slide-content">
+              <div class="agenda-grid">
+
+                <!-- 1: Motivation -->
+                <div class="agenda-item">
+                  <svg class="agenda-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="50" fill="#fff"/>
+                    <path fill="#E2001A" fill-rule="evenodd" d="M50.0,0.0 C22.4,0.0 0.0,22.4 0.0,50.0 C0.0,71.7 14.0,90.3 33.5,97.2 C34.8,97.6 36.2,98.0 37.6,98.5 C41.6,99.5 45.8,100.0 50.0,100.0 C77.6,100.0 100.0,77.6 100.0,50.0 C100.0,22.4 77.6,0.0 50.0,0.0 Z M50.0,95.5 C46.1,95.5 42.3,95.0 38.7,94.1 L38.7,35.5 L34.7,35.5 L19.2,42.7 L20.4,47.2 L33.5,41.5 L33.5,92.5 C16.4,85.9 4.3,69.3 4.3,50.0 C4.3,24.8 24.8,4.3 50.0,4.3 C75.2,4.3 95.7,24.8 95.7,50.0 C95.7,75.2 75.2,95.5 50.0,95.5 Z"/>
+                  </svg>
+                  <div class="agenda-text">
+                    <div class="agenda-title">
+                      <svg class="agenda-title-icon" viewBox="0 0 24 24" fill="none" stroke="#E2001A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+                      <span class="lang-de">Motivation</span>
+                      <span class="lang-en" hidden>Motivation</span>
+                    </div>
+                    <div class="agenda-desc">
+                      <span class="lang-de">Kosten, Sicherheit & Transparenz</span>
+                      <span class="lang-en" hidden>Cost, safety & transparency</span>
+                    </div>
+                  </div>
                 </div>
-                <div class="roadmap-time">~2,5 min</div>
-              </div>
-              <div class="roadmap-card" data-target="5">
-                <div class="roadmap-number">02</div>
-                <div class="roadmap-label">
-                  <span class="lang-de">Theoretische Grundlagen</span>
-                  <span class="lang-en" hidden>Theoretical Foundations</span>
+
+                <!-- 2: Theorie -->
+                <div class="agenda-item">
+                  <svg class="agenda-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="50" fill="#fff"/>
+                    <path fill="#4C9AFF" fill-rule="evenodd" d="M50.0,0.0 C43.4,0.0 37.1,1.3 31.2,3.7 C27.0,5.4 23.2,7.6 19.6,10.3 C7.6,19.5 0.0,33.8 0.0,50.0 C0.0,77.6 22.4,100.0 50.0,100.0 C77.6,100.0 100.0,77.6 100.0,50.0 C100.0,22.4 77.5,0.0 50.0,0.0 Z M46.4,95.4 C24.3,93.8 6.5,76.2 4.5,54.2 C2.6,34.5 13.5,17.0 29.9,8.9 C31.7,8.0 33.8,7.5 35.9,7.5 C35.9,7.5 35.9,7.5 35.9,7.5 C40.1,7.5 43.4,8.7 45.5,11.2 C47.7,13.7 48.8,17.1 48.8,21.3 C48.8,23.7 48.4,26.0 47.5,28.4 C46.6,30.8 45.3,33.3 43.5,36.0 C41.7,38.7 39.3,41.5 36.5,44.6 C33.7,47.6 30.3,51.1 26.5,54.9 L18.0,63.2 L18.9,66.7 L56.8,66.7 L56.8,62.4 L25.5,62.4 L34.3,53.9 C37.8,50.5 40.9,47.4 43.4,44.5 C45.9,41.5 47.9,38.7 49.6,36.1 C51.2,33.5 52.4,30.9 53.2,28.5 C53.9,26.1 54.3,23.6 54.3,21.2 C54.3,18.6 53.9,16.2 53.2,14.0 C52.4,11.8 51.2,9.9 49.7,8.4 C48.2,6.8 46.3,5.7 44.1,4.8 C46.0,4.6 47.9,4.5 49.8,4.5 C75.0,4.5 95.4,24.9 95.4,50.1 C95.7,76.3 73.2,97.5 46.4,95.4 Z"/>
+                  </svg>
+                  <div class="agenda-text">
+                    <div class="agenda-title">
+                      <svg class="agenda-title-icon" viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 3h15"/><path d="M6 3v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V3"/><path d="M6 14h12"/></svg>
+                      <span class="lang-de">Theorie</span>
+                      <span class="lang-en" hidden>Theory</span>
+                    </div>
+                    <div class="agenda-desc">
+                      <span class="lang-de">Batteriealterung & SOH-Definition</span>
+                      <span class="lang-en" hidden>Battery aging & SOH definition</span>
+                    </div>
+                  </div>
                 </div>
-                <div class="roadmap-time">~2 min</div>
-              </div>
-              <div class="roadmap-card" data-target="7">
-                <div class="roadmap-number">03</div>
-                <div class="roadmap-label">
-                  <span class="lang-de">Methodik</span>
-                  <span class="lang-en" hidden>Methodology</span>
+
+                <!-- 3: Methodik -->
+                <div class="agenda-item">
+                  <svg class="agenda-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="50" fill="#fff"/>
+                    <path fill="#00C9A7" fill-rule="evenodd" d="M50.0,0.0 C22.4,0.0 0.0,22.4 0.0,50.0 C0.0,77.6 22.4,100.0 50.0,100.0 C53.6,100.0 57.2,99.6 60.5,98.9 C68.0,97.3 74.9,94.0 80.8,89.3 C92.4,80.2 100.0,66.0 100.0,50.0 C100.0,22.4 77.6,0.0 50.0,0.0 Z M82.6,81.8 C82.6,81.6 82.6,81.4 82.6,81.2 C82.6,77.4 81.4,74.1 79.0,71.5 C76.6,68.8 73.7,67.0 70.0,66.0 C72.9,64.9 75.3,63.2 77.4,60.5 C79.3,58.0 80.3,54.8 80.3,50.9 C80.3,48.5 79.9,46.3 79.0,44.3 C78.2,42.4 76.8,40.7 75.2,39.2 C73.6,37.8 71.6,36.6 69.5,35.8 C67.2,34.9 64.7,34.6 62.0,34.6 C59.2,34.6 56.5,34.9 53.9,35.5 C51.3,36.2 48.7,37.4 46.2,39.0 L47.9,42.9 C50.5,41.4 52.9,40.3 55.0,39.7 C57.1,39.1 59.2,38.8 61.6,38.8 C65.9,38.8 69.1,40.0 71.5,42.3 C73.9,44.6 75.1,47.5 75.1,51.2 C75.1,53.4 74.7,55.2 73.8,56.8 C72.9,58.5 71.7,59.8 70.2,61.0 C68.7,62.2 67.0,62.9 65.0,63.6 C63.0,64.1 61.0,64.5 58.7,64.5 L52.8,64.5 L52.8,68.7 L60.7,68.7 C65.4,68.7 69.3,69.8 72.4,72.1 C75.4,74.2 77.0,77.4 77.0,81.3 C77.0,83.6 76.5,86.0 75.0,87.7 C73.4,89.5 70.9,90.5 68.8,91.5 C66.5,92.5 64.2,93.4 61.8,94.0 C61.3,94.1 60.7,94.3 60.1,94.5 C56.7,95.2 53.4,95.7 49.8,95.7 C48.2,95.7 46.5,95.5 45.0,95.4 C22.1,93.0 4.1,73.6 4.1,50.0 C4.1,24.8 24.6,4.3 49.8,4.3 C75.0,4.3 95.4,24.8 95.4,50.0 C95.7,62.4 90.7,73.6 82.6,81.8 Z"/>
+                  </svg>
+                  <div class="agenda-text">
+                    <div class="agenda-title">
+                      <svg class="agenda-title-icon" viewBox="0 0 24 24" fill="none" stroke="#00C9A7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                      <span class="lang-de">Methodik</span>
+                      <span class="lang-en" hidden>Methodology</span>
+                    </div>
+                    <div class="agenda-desc">
+                      <span class="lang-de">Fahrzeuge, Protokoll & Werkzeuge</span>
+                      <span class="lang-en" hidden>Vehicles, protocol & tools</span>
+                    </div>
+                  </div>
                 </div>
-                <div class="roadmap-time">~4 min</div>
-              </div>
-              <div class="roadmap-card" data-target="11">
-                <div class="roadmap-number">04</div>
-                <div class="roadmap-label">
-                  <span class="lang-de">Ergebnisse & Demo</span>
-                  <span class="lang-en" hidden>Results & Demo</span>
+
+                <!-- 4: Ergebnisse -->
+                <div class="agenda-item">
+                  <svg class="agenda-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="50" fill="#fff"/>
+                    <path fill="#FFB800" fill-rule="evenodd" d="M77.9,8.6 C76.3,7.5 74.6,6.4 72.7,5.5 C72.4,5.3 72.1,5.2 71.6,5.0 C70.4,4.5 69.1,3.9 67.9,3.4 C62.4,1.2 56.3,0.0 50.0,0.0 C22.4,0.0 0.0,22.4 0.0,50.0 C0.0,77.6 22.4,100.0 50.0,100.0 C77.6,100.0 100.0,77.6 100.0,50.0 C100.0,32.8 91.3,17.6 77.9,8.6 Z M72.6,10.4 L72.5,17.0 L72.5,39.6 L47.5,39.6 L64.3,16.4 L69.3,8.7 C70.4,9.2 71.6,9.8 72.6,10.4 Z M50.0,95.7 C24.8,95.7 4.3,75.2 4.3,50.0 C4.3,24.8 24.8,4.3 50.0,4.3 C55.3,4.3 60.5,5.3 65.3,7.0 L40.8,40.9 L40.8,44.0 L72.5,44.0 L72.5,61.0 L77.9,61.0 L77.9,44.0 L88.8,44.0 L88.8,39.7 L77.9,39.7 L77.9,14.1 C88.7,22.5 95.7,35.5 95.7,50.2 C95.7,75.2 75.2,95.7 50.0,95.7 Z"/>
+                  </svg>
+                  <div class="agenda-text">
+                    <div class="agenda-title">
+                      <svg class="agenda-title-icon" viewBox="0 0 24 24" fill="none" stroke="#FFB800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 17V9"/><path d="M18 17V5"/><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M8 17v-3"/></svg>
+                      <span class="lang-de">Ergebnisse & Demo</span>
+                      <span class="lang-en" hidden>Results & Demo</span>
+                    </div>
+                    <div class="agenda-desc">
+                      <span class="lang-de">SOH-Vergleich & Live-App</span>
+                      <span class="lang-en" hidden>SOH comparison & live app</span>
+                    </div>
+                  </div>
                 </div>
-                <div class="roadmap-time">~8 min</div>
-              </div>
-              <div class="roadmap-card" data-target="21">
-                <div class="roadmap-number">05</div>
-                <div class="roadmap-label">
-                  <span class="lang-de">Diskussion</span>
-                  <span class="lang-en" hidden>Discussion</span>
+
+                <!-- 5: Diskussion -->
+                <div class="agenda-item">
+                  <svg class="agenda-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="50" fill="#fff"/>
+                    <path fill="#9F7AEA" fill-rule="evenodd" d="M50.0,0.0 C22.4,0.0 0.0,22.4 0.0,50.1 C0.0,69.4 11.1,86.3 27.3,94.6 C30.7,96.3 34.2,97.6 38.0,98.6 C41.8,99.6 45.9,100.0 50.0,100.0 C77.6,100.0 100.0,77.6 100.0,49.9 C100.0,22.3 77.6,0.0 50.0,0.0 Z M54.0,95.5 C55.3,94.9 56.4,94.1 57.5,93.1 C59.5,91.4 61.1,89.3 62.1,86.9 C63.0,84.5 63.7,81.8 63.7,78.8 C63.7,75.7 63.0,73.1 61.8,70.8 C60.7,68.6 59.0,66.6 57.1,65.0 C55.1,63.4 52.8,62.2 50.2,61.4 C47.6,60.6 44.9,60.2 42.2,60.2 C40.8,60.2 39.3,60.3 38.2,60.4 C36.8,60.5 35.9,60.7 35.0,60.8 L37.3,39.3 L62.4,39.3 L62.4,34.9 L33.2,34.9 L30.0,65.8 C31.7,65.3 33.5,65.0 35.1,64.9 C36.7,64.6 38.5,64.6 40.4,64.6 C46.0,64.6 50.3,65.9 53.5,68.7 C56.7,71.3 58.3,74.9 58.3,79.3 C58.3,81.9 57.8,84.2 56.8,86.2 C55.9,88.0 54.7,89.7 53.0,90.9 C51.4,92.2 49.6,93.0 47.4,93.6 C31.7,97.7 15.9,83.7 9.3,70.6 C5.8,63.3 4.1,55.2 4.7,47.1 C6.2,24.6 24.2,6.3 46.7,4.7 C73.5,2.7 95.9,23.9 95.9,50.3 C95.7,73.9 77.3,93.5 54.0,95.5 Z"/>
+                  </svg>
+                  <div class="agenda-text">
+                    <div class="agenda-title">
+                      <svg class="agenda-title-icon" viewBox="0 0 24 24" fill="none" stroke="#9F7AEA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                      <span class="lang-de">Diskussion</span>
+                      <span class="lang-en" hidden>Discussion</span>
+                    </div>
+                    <div class="agenda-desc">
+                      <span class="lang-de">Einordnung & Limitationen</span>
+                      <span class="lang-en" hidden>Context & limitations</span>
+                    </div>
+                  </div>
                 </div>
-                <div class="roadmap-time">~2 min</div>
-              </div>
-              <div class="roadmap-card" data-target="24">
-                <div class="roadmap-number">06</div>
-                <div class="roadmap-label">
-                  <span class="lang-de">Fazit & Ausblick</span>
-                  <span class="lang-en" hidden>Conclusion & Outlook</span>
+
+                <!-- 6: Fazit & Ausblick -->
+                <div class="agenda-item">
+                  <svg class="agenda-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="50" fill="#fff"/>
+                    <path fill="#F97316" fill-rule="evenodd" d="M74.2,6.3 C71.8,5.0 69.2,3.8 66.6,2.8 C61.4,1.0 55.8,0.0 50.0,0.0 C22.4,0.0 0.0,22.4 0.0,50.0 C0.0,77.6 22.4,100.0 50.0,100.0 C77.6,100.0 100.0,77.6 100.0,50.0 C100.0,31.2 89.6,14.8 74.2,6.3 Z M46.5,95.4 C24.2,93.8 6.2,75.8 4.6,53.4 C2.6,26.6 23.8,4.2 50.1,4.2 C51.6,4.2 53.0,4.3 54.5,4.5 C54.2,4.6 54.1,4.6 53.9,4.7 C50.7,6.0 47.8,8.0 45.3,10.9 C42.8,13.7 40.8,17.3 39.1,21.6 C37.6,26.0 36.7,31.2 36.7,37.4 C36.7,42.9 37.4,47.6 38.6,51.4 C39.8,55.2 41.4,58.3 43.5,60.5 C45.5,62.8 47.8,64.6 50.4,65.4 C53.0,66.4 55.8,66.8 58.5,66.8 C61.5,66.8 64.2,66.3 66.7,65.3 C69.2,64.2 71.4,62.8 73.3,60.9 C75.1,58.9 76.5,56.6 77.5,53.9 C78.6,51.2 79.0,48.3 79.0,45.1 C79.0,41.8 78.5,38.9 77.5,36.4 C76.4,33.9 75.0,31.7 73.3,30.0 C71.4,28.3 69.3,27.0 66.8,26.1 C64.5,25.2 61.8,24.8 59.1,24.8 C57.1,24.8 55.1,25.0 53.4,25.5 C51.6,26.1 49.9,26.7 48.5,27.5 C47.0,28.4 45.7,29.2 44.5,30.3 C43.3,31.4 42.4,32.5 41.6,33.6 C41.8,29.3 42.6,25.5 43.8,22.2 C45.0,18.9 46.6,16.1 48.6,13.8 C50.5,11.5 52.8,9.8 55.5,8.6 C63.9,4.9 71.6,8.6 78.4,14.0 C84.5,18.9 89.3,25.3 92.3,32.5 C94.6,37.9 95.7,43.8 95.7,49.8 C95.7,76.3 73.3,97.5 46.5,95.4 Z M42.1,43.2 C42.1,42.4 42.2,41.7 42.3,41.1 C42.5,40.4 42.6,39.8 42.8,39.2 C43.4,37.9 44.0,36.7 45.0,35.4 C46.0,34.2 47.1,33.2 48.5,32.3 C49.8,31.4 51.3,30.7 52.8,30.1 C54.5,29.6 56.2,29.2 58.0,29.2 C60.2,29.2 62.3,29.6 64.2,30.2 C66.1,30.9 67.8,32.0 69.1,33.3 C70.5,34.6 71.6,36.3 72.4,38.4 C73.2,40.4 73.6,42.8 73.6,45.5 C73.6,48.2 73.2,50.5 72.4,52.7 C71.6,54.8 70.5,56.6 69.1,58.0 C67.7,59.5 66.2,60.7 64.3,61.4 C62.5,62.2 60.5,62.6 58.5,62.6 C56.2,62.6 54.0,62.2 52.1,61.3 C50.1,60.4 48.3,59.1 46.8,57.5 C45.3,55.9 44.1,53.8 43.3,51.4 C42.5,48.9 42.1,46.2 42.1,43.2 Z"/>
+                  </svg>
+                  <div class="agenda-text">
+                    <div class="agenda-title">
+                      <svg class="agenda-title-icon" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                      <span class="lang-de">Fazit & Ausblick</span>
+                      <span class="lang-en" hidden>Conclusion & Outlook</span>
+                    </div>
+                    <div class="agenda-desc">
+                      <span class="lang-de">Kernaussage & nächste Schritte</span>
+                      <span class="lang-en" hidden>Core finding & next steps</span>
+                    </div>
+                  </div>
                 </div>
-                <div class="roadmap-time">~1,5 min</div>
+
               </div>
             </div>
           </section>
@@ -124,40 +197,165 @@
           <!-- Slide 3: Real-world problem -->
           <section id="slide-problem" data-section="motivation">
             <h2>
-              <span class="lang-de">Die Traktionsbatterie ist das teuerste Einzelbauteil im Elektrofahrzeug — und ihr Zustand ist intransparent</span>
-              <span class="lang-en" hidden>The traction battery is the most expensive single component in an EV — and its condition is opaque</span>
+              <span class="lang-de">Die Traktionsbatterie ist das teuerste Einzelbauteil — und ihr Zustand ist intransparent</span>
+              <span class="lang-en" hidden>The traction battery is the most expensive component — and its condition is opaque</span>
             </h2>
             <div class="slide-content">
-              <div class="evidence-area">
-                <div class="three-col">
-                  <div class="stat-card">
-                    <div class="stat-value accent">40–50 %</div>
-                    <div class="stat-label">
-                      <span class="lang-de">Anteil am Fahrzeugwert</span>
-                      <span class="lang-en" hidden>Share of vehicle value</span>
+              <div class="cycle-layout">
+                <!-- Left text blocks: items 5 (top), 4 (bottom) -->
+                <div class="cycle-texts cycle-texts-left">
+                  <div class="cycle-text-block">
+                    <div class="cycle-text-num" style="background: #F97316;">5</div>
+                    <div>
+                      <div class="cycle-text-title">
+                        <span class="lang-de">Second Life</span>
+                        <span class="lang-en" hidden>Second Life</span>
+                      </div>
+                      <div class="cycle-text-desc">
+                        <span class="lang-de">Unterhalb 70–80 % EOL-Schwelle wird die Batterie für stationäre Speicher umgewidmet</span>
+                        <span class="lang-en" hidden>Below 70–80% EOL threshold, batteries are repurposed for stationary storage</span>
+                      </div>
                     </div>
                   </div>
-                  <div class="stat-card">
-                    <div class="stat-value warning">±5–10 %</div>
-                    <div class="stat-label">
-                      <span class="lang-de">Typische BMS-Abweichung — herstellerspezifisch, nicht vergleichbar</span>
-                      <span class="lang-en" hidden>Typical BMS deviation — manufacturer-specific, not comparable</span>
+                  <div class="cycle-text-block">
+                    <div class="cycle-text-num" style="background: #FFB800;">4</div>
+                    <div>
+                      <div class="cycle-text-title">
+                        <span class="lang-de">Diagnose-Divergenz</span>
+                        <span class="lang-en" hidden>Diagnostic Divergence</span>
+                      </div>
+                      <div class="cycle-text-desc">
+                        <span class="lang-de">Verschiedene Tools liefern signifikant abweichende SOH-Werte für dasselbe Fahrzeug</span>
+                        <span class="lang-en" hidden>Different tools deliver significantly different SOH values for the same vehicle</span>
+                      </div>
                     </div>
                   </div>
-                  <div class="stat-card">
-                    <div class="stat-value">70–80 %</div>
-                    <div class="stat-label">
-                      <span class="lang-de">End-of-Life Schwelle — danach Second Life</span>
-                      <span class="lang-en" hidden>End-of-Life threshold — then second life</span>
+                </div>
+
+                <!-- Center: 5-step rounded pentagon SVG -->
+                <svg class="cycle-svg" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Segment 1: Kostenfaktor (top) #E2001A -->
+                  <path class="cycle-segment" d="M349.6,228.4 L451.7,87.8 C405.4,55.5 354.4,29.8 300.0,12.2 C245.6,29.8 194.6,55.5 148.3,87.8 L250.4,228.4 C255.9,236.0 265.7,239.5 274.5,236.5 C282.5,233.8 291.1,232.3 300.0,232.3 C308.9,232.3 317.5,233.8 325.5,236.5 C334.3,239.5 344.1,236.0 349.6,228.4 Z" fill="#E2001A"/>
+                  <!-- Segment 2: BMS Black Box (upper-right) #4C9AFF -->
+                  <path class="cycle-segment" d="M466.4,98.5 L364.0,239.5 C358.4,247.2 358.8,257.5 364.4,265.1 C374.1,278.3 379.8,294.5 379.8,312.1 L379.8,312.3 C379.8,321.8 385.5,330.3 394.5,333.2 L563.1,388.0 C579.3,334.3 587.8,278.1 587.8,221.3 L587.8,221.3 C553.6,174.1 512.6,132.8 466.5,98.4 Z" fill="#4C9AFF"/>
+                  <!-- Segment 3: Kein Standard (lower-right) #00C9A7 -->
+                  <path class="cycle-segment" d="M364.9,358.5 C355.0,372.2 340.9,382.7 324.5,388.0 C315.5,390.9 309.1,399.0 309.1,408.5 L309.1,587.7 C366.1,586.8 423.0,577.5 477.9,559.7 L477.9,559.7 C512.3,512.3 539.0,460.2 557.5,405.3 L388.2,350.3 C379.5,347.5 370.2,351.0 364.9,358.5 Z" fill="#00C9A7"/>
+                  <!-- Segment 4: Diagnose-Divergenz (lower-left) #FFB800 -->
+                  <path class="cycle-segment" d="M275.5,388.0 C259.1,382.7 245.0,372.2 235.1,358.4 C229.8,350.9 220.5,347.5 211.8,350.3 L42.5,405.3 C61.0,460.1 87.7,512.2 122.1,559.7 L122.1,559.7 C177.0,577.5 233.9,586.7 290.9,587.7 L290.9,408.4 C290.9,399.0 284.5,390.9 275.5,388.0 Z" fill="#FFB800"/>
+                  <!-- Segment 5: Second Life (upper-left) #F97316 -->
+                  <path class="cycle-segment" d="M220.2,312.3 L220.2,312.1 C220.2,294.5 225.9,278.3 235.6,265.1 C241.2,257.4 241.6,247.2 236.0,239.5 L133.5,98.5 C87.4,132.9 46.4,174.2 12.2,221.3 L12.2,221.3 C12.2,278.1 20.7,334.3 36.9,388.0 L205.5,333.3 C214.5,330.3 220.2,321.8 220.2,312.3 Z" fill="#F97316"/>
+
+                  <!-- Icons (scaled 1.5x, centered on each segment) -->
+                  <!-- 1: circle-dollar-sign (top, center 300,123) -->
+                  <g transform="translate(300,123) scale(1.5)" class="cycle-icon-g">
+                    <g transform="translate(-12,-12)">
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/>
+                      <path d="M12 18V6"/>
+                    </g>
+                  </g>
+                  <!-- 2: eye-off (upper-right, center 485,256) -->
+                  <g transform="translate(485,256) scale(1.5)" class="cycle-icon-g">
+                    <g transform="translate(-12,-12)">
+                      <path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/>
+                      <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/>
+                      <path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/>
+                      <path d="m2 2 20 20"/>
+                    </g>
+                  </g>
+                  <!-- 3: scale (lower-right, center 411,474) -->
+                  <g transform="translate(411,474) scale(1.5)" class="cycle-icon-g">
+                    <g transform="translate(-12,-12)">
+                      <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
+                      <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
+                      <path d="M7 21h10"/>
+                      <path d="M12 3v18"/>
+                      <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>
+                    </g>
+                  </g>
+                  <!-- 4: git-fork (lower-left, center 189,474) -->
+                  <g transform="translate(189,474) scale(1.5)" class="cycle-icon-g">
+                    <g transform="translate(-12,-12)">
+                      <circle cx="12" cy="18" r="3"/>
+                      <circle cx="6" cy="6" r="3"/>
+                      <circle cx="18" cy="6" r="3"/>
+                      <path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"/>
+                      <path d="M12 12v3"/>
+                    </g>
+                  </g>
+                  <!-- 5: recycle (upper-left, center 115,256) -->
+                  <g transform="translate(115,256) scale(1.5)" class="cycle-icon-g">
+                    <g transform="translate(-12,-12)">
+                      <path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"/>
+                      <path d="M11 19h8.203a1.83 1.83 0 0 0 1.556-.89 1.784 1.784 0 0 0 0-1.775l-1.226-2.12"/>
+                      <path d="m14 16-3 3 3 3"/>
+                      <path d="M8.293 13.596 7.196 9.5 3.1 10.598"/>
+                      <path d="m9.344 5.811 1.093-1.892A1.83 1.83 0 0 1 11.985 3a1.784 1.784 0 0 1 1.546.888l3.943 6.843"/>
+                      <path d="m13.378 9.633 4.096 1.098 1.097-4.096"/>
+                    </g>
+                  </g>
+
+                  <!-- Center: battery-warning icon -->
+                  <g transform="translate(300,312) scale(2)" class="cycle-icon-g" style="stroke: var(--text-secondary);">
+                    <g transform="translate(-12,-12)">
+                      <path d="M10 17h.01"/>
+                      <path d="M10 7v6"/>
+                      <path d="M14 7h2a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-2"/>
+                      <path d="M22 11v2"/>
+                      <path d="M6 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/>
+                    </g>
+                  </g>
+                </svg>
+
+                <!-- Right text blocks: items 1 (top), 2 (middle), 3 (bottom) -->
+                <div class="cycle-texts cycle-texts-right">
+                  <div class="cycle-text-block">
+                    <div class="cycle-text-num" style="background: #E2001A;">1</div>
+                    <div>
+                      <div class="cycle-text-title">
+                        <span class="lang-de">Kostenfaktor</span>
+                        <span class="lang-en" hidden>Cost Factor</span>
+                      </div>
+                      <div class="cycle-text-desc">
+                        <span class="lang-de">Batterie = 40–50 % des Fahrzeugwerts — teuerste Einzelkomponente im Elektrofahrzeug</span>
+                        <span class="lang-en" hidden>Battery = 40–50% of vehicle value — most expensive single component in an EV</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cycle-text-block">
+                    <div class="cycle-text-num" style="background: #4C9AFF;">2</div>
+                    <div>
+                      <div class="cycle-text-title">
+                        <span class="lang-de">BMS Black Box</span>
+                        <span class="lang-en" hidden>BMS Black Box</span>
+                      </div>
+                      <div class="cycle-text-desc">
+                        <span class="lang-de">SOH-Algorithmen sind proprietär mit ±5–10 % Abweichung — nicht nachvollziehbar</span>
+                        <span class="lang-en" hidden>SOH algorithms are proprietary with ±5–10% deviation — not traceable</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cycle-text-block">
+                    <div class="cycle-text-num" style="background: #00C9A7;">3</div>
+                    <div>
+                      <div class="cycle-text-title">
+                        <span class="lang-de">Kein Standard</span>
+                        <span class="lang-en" hidden>No Standard</span>
+                      </div>
+                      <div class="cycle-text-desc">
+                        <span class="lang-de">Keine einheitliche, herstellerübergreifende SOH-Definition — Vergleichbarkeit fehlt</span>
+                        <span class="lang-en" hidden>No unified, cross-manufacturer SOH definition — comparability is missing</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+
               <div class="takeaway-box fragment">
                 <div class="takeaway-label">Kernproblem</div>
                 <p>
-                  <span class="lang-de">Beim Gebrauchtfahrzeugkauf kann der Batteriezustand nicht zuverlässig und standardisiert bewertet werden.</span>
-                  <span class="lang-en" hidden>When buying a used EV, battery condition cannot be reliably and standardly assessed.</span>
+                  <span class="lang-de">Beim Gebrauchtfahrzeugkauf kann der Batteriezustand nicht zuverlässig bewertet werden — ein reproduzierbares, herstellerunabhängiges Verfahren fehlt.</span>
+                  <span class="lang-en" hidden>When buying a used EV, battery condition cannot be reliably assessed — a reproducible, manufacturer-independent method is missing.</span>
                 </p>
               </div>
             </div>
@@ -170,45 +368,108 @@
               <span class="lang-en" hidden>Different diagnostic systems yield significantly different SOH values for the same vehicle</span>
             </h2>
             <div class="slide-content">
-              <div class="evidence-area">
-                <div class="three-col">
-                  <div class="card">
-                    <h3>
-                      <span class="lang-de">BMS-Algorithmen</span>
-                      <span class="lang-en" hidden>BMS Algorithms</span>
-                    </h3>
-                    <p>
-                      <span class="lang-de">Proprietär, herstellerspezifisch, nicht öffentlich zugänglich</span>
-                      <span class="lang-en" hidden>Proprietary, manufacturer-specific, not publicly accessible</span>
-                    </p>
+              <div class="cycle-layout">
+                <!-- Left text block: item 2 -->
+                <div class="cycle-texts cycle-texts-left">
+                  <div class="cycle-text-block">
+                    <div class="cycle-text-num" style="background: #4C9AFF;">2</div>
+                    <div>
+                      <div class="cycle-text-title">
+                        <span class="lang-de">Externe Diagnostik</span>
+                        <span class="lang-en" hidden>External Diagnostics</span>
+                      </div>
+                      <div class="cycle-text-desc">
+                        <span class="lang-de">OBD-Adapter, Werkstattgeräte und Prüfstände liefern widersprüchliche SOH-Werte für dasselbe Fahrzeug</span>
+                        <span class="lang-en" hidden>OBD adapters, workshop devices and test stands deliver contradicting SOH values for the same vehicle</span>
+                      </div>
+                    </div>
                   </div>
-                  <div class="card">
-                    <h3>
-                      <span class="lang-de">Externe Diagnostik</span>
-                      <span class="lang-en" hidden>External Diagnostics</span>
-                    </h3>
-                    <p>
-                      <span class="lang-de">OBD-Adapter, Werkstattgeräte und Prüfstände widersprechen sich häufig</span>
-                      <span class="lang-en" hidden>OBD adapters, workshop devices and test stands often contradict each other</span>
-                    </p>
+                </div>
+
+                <!-- Center: 3-step rounded triangle SVG -->
+                <svg class="cycle-svg" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Segment 1: BMS-Algorithmen (top) -->
+                  <path class="cycle-segment" d="M383.8,282.7 L503.9,213.3 C454.7,131.9 385.2,62.6 300.0,13.3 C214.7,62.6 145.3,131.9 96.0,213.3 L216.2,282.7 C223.7,287.1 233.2,285.8 239.5,279.8 C255.1,264.6 276.5,255.2 300.0,255.2 C323.5,255.2 344.8,264.6 360.5,279.8 C366.8,285.8 376.2,287.0 383.8,282.7 Z" fill="#E2001A"/>
+                  <!-- Segment 2: Externe Diagnostik (bottom-left) -->
+                  <path class="cycle-segment" d="M275.7,426.4 C239.4,415.9 212.7,382.3 212.7,342.5 C212.7,335.2 213.6,328.2 215.3,321.4 C217.4,313.0 213.7,304.2 206.2,299.9 L86.1,230.5 C39.2,314.5 13.3,410.4 13.3,510.0 L13.3,510.0 C99.0,559.5 194.4,585.0 290.1,586.6 L290.1,445.1 C290.1,436.3 284.2,428.8 275.7,426.4 Z" fill="#4C9AFF"/>
+                  <!-- Segment 3: Labor vs. Realfahrzeug (bottom-right) -->
+                  <path class="cycle-segment" d="M513.9,230.5 L393.8,299.9 C386.3,304.2 382.6,313.0 384.7,321.4 C386.4,328.2 387.3,335.2 387.3,342.5 C387.3,382.3 360.6,415.9 324.3,426.4 C315.8,428.8 309.9,436.3 309.9,445.1 L309.9,586.6 C405.6,585.0 501.0,559.5 586.7,510.0 L586.7,510.0 C586.7,410.4 560.8,314.5 513.9,230.5 Z" fill="#00C9A7"/>
+
+                  <!-- Icons -->
+                  <!-- 1: lock-keyhole (top, BMS proprietary) -->
+                  <g transform="translate(300,144) scale(1.5)" class="cycle-icon-g">
+                    <g transform="translate(-12,-12)">
+                      <circle cx="12" cy="16" r="1"/>
+                      <rect x="3" y="10" width="18" height="12" rx="2"/>
+                      <path d="M7 10V7a5 5 0 0 1 10 0v3"/>
+                    </g>
+                  </g>
+                  <!-- 2: shuffle (bottom-left, contradicting diagnostics) -->
+                  <g transform="translate(132,436) scale(1.5)" class="cycle-icon-g">
+                    <g transform="translate(-12,-12)">
+                      <path d="m18 14 4 4-4 4"/>
+                      <path d="m18 2 4 4-4 4"/>
+                      <path d="M2 18h1.973a4 4 0 0 0 3.3-1.7l5.454-8.6a4 4 0 0 1 3.3-1.7H22"/>
+                      <path d="M2 6h1.972a4 4 0 0 1 3.6 2.2"/>
+                      <path d="M22 18h-6.041a4 4 0 0 1-3.3-1.8l-.359-.45"/>
+                    </g>
+                  </g>
+                  <!-- 3: flask-conical (bottom-right, lab vs real) -->
+                  <g transform="translate(468,436) scale(1.5)" class="cycle-icon-g">
+                    <g transform="translate(-12,-12)">
+                      <path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2"/>
+                      <path d="M6.453 15h11.094"/>
+                      <path d="M8.5 2h7"/>
+                    </g>
+                  </g>
+
+                  <!-- Center: search-x (missing methodology) -->
+                  <g transform="translate(300,340) scale(2)" class="cycle-icon-g" style="stroke: var(--text-secondary);">
+                    <g transform="translate(-12,-12)">
+                      <path d="m13.5 8.5-5 5"/>
+                      <path d="m8.5 8.5 5 5"/>
+                      <circle cx="11" cy="11" r="8"/>
+                      <path d="m21 21-4.3-4.3"/>
+                    </g>
+                  </g>
+                </svg>
+
+                <!-- Right text blocks: items 1 (top), 3 (bottom) -->
+                <div class="cycle-texts cycle-texts-right">
+                  <div class="cycle-text-block">
+                    <div class="cycle-text-num" style="background: #E2001A;">1</div>
+                    <div>
+                      <div class="cycle-text-title">
+                        <span class="lang-de">BMS-Algorithmen</span>
+                        <span class="lang-en" hidden>BMS Algorithms</span>
+                      </div>
+                      <div class="cycle-text-desc">
+                        <span class="lang-de">Proprietär, herstellerspezifisch und nicht öffentlich zugänglich — keine unabhängige Verifikation möglich</span>
+                        <span class="lang-en" hidden>Proprietary, manufacturer-specific and not publicly accessible — no independent verification possible</span>
+                      </div>
+                    </div>
                   </div>
-                  <div class="card">
-                    <h3>
-                      <span class="lang-de">Labor vs. Realfahrzeug</span>
-                      <span class="lang-en" hidden>Lab vs. Real Vehicles</span>
-                    </h3>
-                    <p>
-                      <span class="lang-de">Die meisten Studien nutzen Laborzellen — kein systematischer Vergleich an realen Fahrzeugen mit kommerziellen Diagnosegeräten</span>
-                      <span class="lang-en" hidden>Most studies use lab cells — no systematic comparison on real vehicles with commercial diagnostic tools</span>
-                    </p>
+                  <div class="cycle-text-block">
+                    <div class="cycle-text-num" style="background: #00C9A7;">3</div>
+                    <div>
+                      <div class="cycle-text-title">
+                        <span class="lang-de">Labor vs. Realfahrzeug</span>
+                        <span class="lang-en" hidden>Lab vs. Real Vehicles</span>
+                      </div>
+                      <div class="cycle-text-desc">
+                        <span class="lang-de">Die meisten Studien nutzen Laborzellen — kein systematischer Vergleich an realen Fahrzeugen mit kommerziellen Diagnosegeräten</span>
+                        <span class="lang-en" hidden>Most studies use lab cells — no systematic comparison on real vehicles with commercial diagnostic tools</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
+
               <div class="takeaway-box fragment">
                 <div class="takeaway-label">Forschungslücke</div>
                 <p>
-                  <span class="lang-de">Es fehlt eine standardisierte, reproduzierbare Methodik zum Vergleich von SOH-Diagnosesystemen.</span>
-                  <span class="lang-en" hidden>A standardized, reproducible methodology for comparing SOH diagnostic systems is missing.</span>
+                  <span class="lang-de">Es fehlt eine standardisierte, reproduzierbare Methodik zum Vergleich von SOH-Diagnosesystemen an realen Fahrzeugen.</span>
+                  <span class="lang-en" hidden>A standardized, reproducible methodology for comparing SOH diagnostic systems on real vehicles is missing.</span>
                 </p>
               </div>
             </div>
@@ -221,42 +482,137 @@
               <span class="lang-en" hidden>Research Question & Contributions</span>
             </h2>
             <div class="slide-content">
-              <div class="research-question card">
-                <p style="font-size: var(--fs-h3); color: var(--text-primary); font-weight: var(--fw-medium);">
+              <!-- Research question — prominent -->
+              <div class="research-question card" style="border-left: 4px solid var(--accent); padding: 1.2rem 1.8rem;">
+                <p style="font-size: var(--fs-h3); color: var(--text-primary); font-weight: var(--fw-medium); margin: 0;">
                   <span class="lang-de">Wie kann der State of Health von Traktionsbatterien reproduzierbar und praxistauglich mittels On-Board- und Off-Board-Diagnostik bestimmt werden?</span>
                   <span class="lang-en" hidden>How can the State of Health of traction batteries be determined reproducibly and practically using on-board and off-board diagnostics?</span>
                 </p>
               </div>
-              <div class="contributions-grid" style="margin-top: 1.5rem;">
-                <div class="contribution fragment">
-                  <span class="contribution-number">1</span>
-                  <span class="lang-de"><strong>Systematische Evaluation</strong> dreier Diagnosesysteme (AVL, OBD, AUTEL) unter kontrollierten Bedingungen</span>
-                  <span class="lang-en" hidden><strong>Systematic evaluation</strong> of three diagnostic systems (AVL, OBD, AUTEL) under controlled conditions</span>
+
+              <!-- 4-step cycle: contributions grouped into 4 themes, CLOCKWISE -->
+              <div class="cycle-layout" style="flex: 1;">
+                <!-- Left text blocks: 4 (top-left), 3 (bottom-left) -->
+                <div class="cycle-texts cycle-texts-left">
+                  <div class="cycle-text-block">
+                    <div class="cycle-text-num" style="background: #FFB800;">4</div>
+                    <div>
+                      <div class="cycle-text-title">
+                        <span class="lang-de">Einflussfaktoren</span>
+                        <span class="lang-en" hidden>Influencing Factors</span>
+                      </div>
+                      <div class="cycle-text-desc">
+                        <span class="lang-de"><strong>B4:</strong> Quantifizierung der Auswirkungen von Temperatur, SOC-Fenster und Ladeleistung auf die SOH-Bestimmung</span>
+                        <span class="lang-en" hidden><strong>C4:</strong> Quantification of temperature, SOC window and charging power effects on SOH determination</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cycle-text-block">
+                    <div class="cycle-text-num" style="background: #00C9A7;">3</div>
+                    <div>
+                      <div class="cycle-text-title">
+                        <span class="lang-de">Software & Methoden</span>
+                        <span class="lang-en" hidden>Software & Methods</span>
+                      </div>
+                      <div class="cycle-text-desc">
+                        <span class="lang-de"><strong>B3:</strong> Implementierung & Vergleich von 6 SOH-Berechnungsmethoden</span>
+                        <span class="lang-en" hidden><strong>C3:</strong> Implementation & comparison of 6 SOH calculation methods</span>
+                      </div>
+                      <div class="cycle-text-desc">
+                        <span class="lang-de"><strong>B5:</strong> Python-Streamlit-App mit PDF-Berichterstellung und SQLite-Persistenz</span>
+                        <span class="lang-en" hidden><strong>C5:</strong> Python Streamlit app with PDF reporting and SQLite persistence</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="contribution fragment">
-                  <span class="contribution-number">2</span>
-                  <span class="lang-de"><strong>Entwicklung</strong> eines standardisierten Messprotokolls für reproduzierbare SOH-Bestimmung</span>
-                  <span class="lang-en" hidden><strong>Development</strong> of a standardized measurement protocol for reproducible SOH determination</span>
-                </div>
-                <div class="contribution fragment">
-                  <span class="contribution-number">3</span>
-                  <span class="lang-de"><strong>Implementierung & Vergleich</strong> von 6 SOH-Berechnungsmethoden in einer Python-Anwendung</span>
-                  <span class="lang-en" hidden><strong>Implementation & comparison</strong> of 6 SOH calculation methods in a Python application</span>
-                </div>
-                <div class="contribution fragment">
-                  <span class="contribution-number">4</span>
-                  <span class="lang-de"><strong>Quantifizierung</strong> der Einflussfaktoren: Temperatur, SOC-Fenster, Ladeleistung</span>
-                  <span class="lang-en" hidden><strong>Quantification</strong> of influencing factors: temperature, SOC window, charging power</span>
-                </div>
-                <div class="contribution fragment">
-                  <span class="contribution-number">5</span>
-                  <span class="lang-de"><strong>Entwicklung</strong> einer Python-Streamlit-Anwendung mit automatischer PDF-Berichterstellung und SQLite-Datenpersistenz</span>
-                  <span class="lang-en" hidden><strong>Development</strong> of a Python Streamlit application with automatic PDF reporting and SQLite data persistence</span>
-                </div>
-                <div class="contribution fragment">
-                  <span class="contribution-number">6</span>
-                  <span class="lang-de"><strong>Formulierung</strong> praxisorientierter Empfehlungen für die reproduzierbare SOH-Bestimmung im Werkstattalltag</span>
-                  <span class="lang-en" hidden><strong>Formulation</strong> of practice-oriented recommendations for reproducible SOH determination in workshop practice</span>
+
+                <!-- Center: 4-step rounded square SVG (clockwise: 1=TR, 2=BR, 3=BL, 4=TL) -->
+                <svg class="cycle-svg" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Segment 1: Evaluation (top-right) -->
+                  <path class="cycle-segment" d="M324.4,214.4 C354.0,222.8 377.3,246.1 385.7,275.7 C388.1,284.1 395.9,289.9 404.6,289.9 L586.4,289.9 C585.8,213.5 571.4,137.2 542.7,64.8 L542.7,64.8 C468.5,32.7 389.5,15.7 310.2,13.8 L310.2,195.5 C310.2,204.2 316.0,212.0 324.4,214.4 Z" fill="#E2001A"/>
+                  <!-- Segment 2: Messprotokoll (bottom-right) -->
+                  <path class="cycle-segment" d="M385.7,324.4 C377.3,354.0 353.9,377.3 324.4,385.7 C315.9,388.1 310.1,395.9 310.1,404.7 L310.1,586.5 C386.5,585.9 462.9,571.5 535.2,542.8 L535.2,542.8 C567.3,468.5 584.3,389.5 586.2,310.2 L404.6,310.2 C395.8,310.2 388.0,316.0 385.6,324.5 Z" fill="#4C9AFF"/>
+                  <!-- Segment 3: Software (bottom-left) -->
+                  <path class="cycle-segment" d="M275.6,385.7 C246.0,377.4 222.7,354.0 214.3,324.4 C211.9,316.0 204.1,310.2 195.4,310.2 L13.6,310.2 C14.2,386.6 28.6,462.9 57.3,535.3 C131.5,567.4 210.5,584.4 289.8,586.3 L289.8,404.6 C289.8,395.9 284.0,388.1 275.6,385.7 Z" fill="#00C9A7"/>
+                  <!-- Segment 4: Einflussfaktoren (top-left) -->
+                  <path class="cycle-segment" d="M64.7,57.3 C32.6,131.6 15.7,210.6 13.7,289.9 L195.4,289.9 C204.2,289.9 211.9,284.1 214.3,275.6 C222.7,246.0 246.1,222.8 275.6,214.3 C284.1,211.9 289.9,204.2 289.9,195.4 L289.9,13.6 C213.5,14.2 137.1,28.6 64.8,57.3 L64.8,57.3 Z" fill="#FFB800"/>
+
+                  <!-- Icons -->
+                  <!-- 1: clipboard-check (top-right, evaluation) -->
+                  <g transform="translate(443,154) scale(1.5)" class="cycle-icon-g">
+                    <g transform="translate(-12,-12)">
+                      <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/>
+                      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                      <path d="m9 14 2 2 4-4"/>
+                    </g>
+                  </g>
+                  <!-- 2: file-text (bottom-right, protocol) -->
+                  <g transform="translate(443,444) scale(1.5)" class="cycle-icon-g">
+                    <g transform="translate(-12,-12)">
+                      <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+                      <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+                      <path d="M10 9H8"/>
+                      <path d="M16 13H8"/>
+                      <path d="M16 17H8"/>
+                    </g>
+                  </g>
+                  <!-- 3: code-xml (bottom-left, software) -->
+                  <g transform="translate(157,444) scale(1.5)" class="cycle-icon-g">
+                    <g transform="translate(-12,-12)">
+                      <path d="m18 16 4-4-4-4"/>
+                      <path d="m6 8-4 4 4 4"/>
+                      <path d="m14.5 4-5 16"/>
+                    </g>
+                  </g>
+                  <!-- 4: thermometer (top-left, influencing factors) -->
+                  <g transform="translate(157,154) scale(1.5)" class="cycle-icon-g">
+                    <g transform="translate(-12,-12)">
+                      <path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/>
+                    </g>
+                  </g>
+
+                  <!-- Center: target (research goal) -->
+                  <g transform="translate(300,300) scale(2)" class="cycle-icon-g" style="stroke: var(--text-secondary);">
+                    <g transform="translate(-12,-12)">
+                      <circle cx="12" cy="12" r="10"/>
+                      <circle cx="12" cy="12" r="6"/>
+                      <circle cx="12" cy="12" r="2"/>
+                    </g>
+                  </g>
+                </svg>
+
+                <!-- Right text blocks: 1 (top-right), 2 (bottom-right) -->
+                <div class="cycle-texts cycle-texts-right">
+                  <div class="cycle-text-block">
+                    <div class="cycle-text-num" style="background: #E2001A;">1</div>
+                    <div>
+                      <div class="cycle-text-title">
+                        <span class="lang-de">Systematische Evaluation</span>
+                        <span class="lang-en" hidden>Systematic Evaluation</span>
+                      </div>
+                      <div class="cycle-text-desc">
+                        <span class="lang-de"><strong>B1:</strong> Vergleich dreier Diagnosesysteme (AVL HV-Check, OBD, AUTEL) unter kontrollierten, reproduzierbaren Bedingungen am realen Fahrzeug</span>
+                        <span class="lang-en" hidden><strong>C1:</strong> Comparison of three diagnostic systems (AVL HV-Check, OBD, AUTEL) under controlled, reproducible conditions on real vehicles</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cycle-text-block">
+                    <div class="cycle-text-num" style="background: #4C9AFF;">2</div>
+                    <div>
+                      <div class="cycle-text-title">
+                        <span class="lang-de">Messprotokoll</span>
+                        <span class="lang-en" hidden>Measurement Protocol</span>
+                      </div>
+                      <div class="cycle-text-desc">
+                        <span class="lang-de"><strong>B2:</strong> Standardisiertes Entlade-/Ladeprotokoll für reproduzierbare SOH-Bestimmung</span>
+                        <span class="lang-en" hidden><strong>C2:</strong> Standardized discharge/charge protocol for reproducible SOH determination</span>
+                      </div>
+                      <div class="cycle-text-desc">
+                        <span class="lang-de"><strong>B6:</strong> Praxisorientierte Empfehlungen für den Werkstattalltag</span>
+                        <span class="lang-en" hidden><strong>C6:</strong> Practice-oriented recommendations for workshop use</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -474,7 +830,33 @@
             </div>
           </section>
 
-          <!-- Slide 10: Test vehicles -->
+          <!-- Slide 10: Discharge Protocol (Entladung) -->
+          <section id="slide-discharge" data-section="method">
+            <h2>
+              <span class="lang-de">Entladung durch normale Fahrt bis Display-SOC = 0 % (BMS-SOC ≈ 5,75 %)</span>
+              <span class="lang-en" hidden>Discharge via normal driving until display SOC = 0% (BMS SOC ≈ 5.75%)</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="chart-container" id="chart-discharge-protocol"></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 11: CC-CV Charging Profile (Einladung) -->
+          <section id="slide-charging" data-section="method">
+            <h2>
+              <span class="lang-de">CC-CV-Ladeprofil: Konstantstrom → Konstantspannung liefert Daten für alle SOH-Methoden</span>
+              <span class="lang-en" hidden>CC-CV charging profile: constant current → constant voltage provides data for all SOH methods</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="chart-container" id="chart-charging-profile"></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 12: Test vehicles -->
           <section id="slide-vehicles" data-section="method">
             <h2>
               <span class="lang-de">Testfahrzeug VW ID.4 — 16 Messungen über 12 Monate mit drei Diagnosesystemen</span>

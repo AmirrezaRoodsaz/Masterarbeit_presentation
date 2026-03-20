@@ -266,47 +266,53 @@ body.lang-en .lang-en.block:not(body) { display: block !important; }
   background: var(--accent);
 }
 
-/* Roadmap grid */
-.roadmap-grid {
+/* Agenda numbered icon grid (slide 2) */
+.agenda-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-top: 1rem;
+  grid-template-rows: 1fr 1fr;
+  gap: 1rem 4rem;
+  flex: 1 1 auto;
+  align-content: center;
+  width: 100%;
+  padding: 0 1rem;
 }
-
-.roadmap-card {
-  background: var(--bg-surface);
-  border-radius: var(--border-radius);
-  padding: 1.5rem;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+.agenda-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.75rem;
 }
-
-.roadmap-card:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
+.agenda-icon {
+  width: 180px;
+  height: 180px;
+  flex-shrink: 0;
 }
-
-.roadmap-number {
-  font-size: var(--fs-title);
+.agenda-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.agenda-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: var(--fs-h2);
   font-weight: var(--fw-bold);
-  color: var(--accent);
-  opacity: 0.4;
-  line-height: 1;
-  margin-bottom: 0.5rem;
-}
-
-.roadmap-label {
-  font-size: var(--fs-h3);
-  font-weight: var(--fw-medium);
   color: var(--text-primary);
-  margin-bottom: 0.3rem;
 }
-
-.roadmap-time {
-  font-size: var(--fs-small);
+.agenda-title-icon {
+  width: 1.2em;
+  height: 1.2em;
+  flex-shrink: 0;
+}
+.agenda-desc {
+  font-size: var(--fs-body);
   color: var(--text-secondary);
+  line-height: 1.4;
 }
 
 /* Contributions */
@@ -516,6 +522,111 @@ body.lang-en .lang-en.block:not(body) { display: block !important; }
 }
 
 /* Core claim styling */
+/* Segmented Cycle Layout (reusable for motivation section) */
+.cycle-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3%;
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+}
+
+.cycle-svg {
+  flex: 0 0 40%;
+  height: auto;
+  max-height: 100%;
+}
+
+.cycle-segment {
+  stroke: var(--bg-primary, #0f0f1a);
+  stroke-width: 3;
+  opacity: 0.9;
+  transition: opacity var(--transition-fast);
+}
+
+.cycle-segment:hover {
+  opacity: 1;
+}
+
+.cycle-icon-g {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cycle-center-icon {
+  fill: none;
+  stroke: var(--text-secondary);
+  stroke-width: 1.5;
+}
+
+.cycle-texts {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-self: stretch;
+  min-width: 0;
+  gap: 1.5rem;
+}
+
+.cycle-texts-left { text-align: right; }
+.cycle-texts-right { text-align: left; }
+
+.cycle-texts-left .cycle-text-block {
+  flex-direction: row-reverse;
+}
+
+.cycle-text-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.cycle-text-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-body);
+  flex-shrink: 0;
+}
+
+.cycle-text-title {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: 0.3rem;
+}
+
+.cycle-text-desc {
+  font-size: var(--fs-body);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Theme overrides */
+body.theme-light .cycle-segment {
+  stroke: #f5f5f5;
+}
+
+body.theme-light .cycle-icon-g {
+  stroke: #fff;
+}
+
+body.theme-dark .cycle-segment {
+  stroke: #000000;
+}
+
 .core-claim {
   background: var(--bg-surface);
   border-radius: var(--border-radius);

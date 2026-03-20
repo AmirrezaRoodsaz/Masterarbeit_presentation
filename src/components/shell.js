@@ -22,31 +22,33 @@ const SECTIONS = [
   { id: 'method', label: 'Methodik', label_en: 'Methodology', icon: 'wrench', slideIndex: 7, subs: [
     { label: 'Diagnosesysteme', label_en: 'Diagnostic Tools', slideIndex: 7 },
     { label: 'Messprotokoll', label_en: 'Test Protocol', slideIndex: 8 },
-    { label: 'Fahrzeuge', label_en: 'Vehicles', slideIndex: 9 },
-    { label: 'SOH-Pipeline', label_en: 'SOH Pipeline', slideIndex: 10 },
+    { label: 'Entladung', label_en: 'Discharge', slideIndex: 9 },
+    { label: 'CC-CV Ladung', label_en: 'CC-CV Charging', slideIndex: 10 },
+    { label: 'Fahrzeuge', label_en: 'Vehicles', slideIndex: 11 },
+    { label: 'SOH-Pipeline', label_en: 'SOH Pipeline', slideIndex: 12 },
   ]},
-  { id: 'results', label: 'Ergebnisse', label_en: 'Results', icon: 'bar-chart-3', slideIndex: 11, subs: [
-    { label: 'Methodenvergleich', label_en: 'Method Comparison', slideIndex: 11 },
-    { label: 'Reproduzierbarkeit', label_en: 'Reproducibility', slideIndex: 12 },
-    { label: 'Temperatureffekt', label_en: 'Temperature Effect', slideIndex: 13 },
-    { label: 'Innenwiderstand', label_en: 'Resistance', slideIndex: 14 },
-    { label: 'Fehlerfall', label_en: 'Failure Case', slideIndex: 15 },
-    { label: 'Inter-System', label_en: 'Inter-System', slideIndex: 16 },
-    { label: 'ICA/DVA', label_en: 'ICA/DVA', slideIndex: 17 },
-    { label: 'Community-Daten', label_en: 'Community Data', slideIndex: 18 },
-    { label: 'Demo (Pro)', label_en: 'Demo (Pro)', slideIndex: 19 },
-    { label: 'Demo (Easy)', label_en: 'Demo (Easy)', slideIndex: 20 },
+  { id: 'results', label: 'Ergebnisse', label_en: 'Results', icon: 'bar-chart-3', slideIndex: 13, subs: [
+    { label: 'Methodenvergleich', label_en: 'Method Comparison', slideIndex: 13 },
+    { label: 'Reproduzierbarkeit', label_en: 'Reproducibility', slideIndex: 14 },
+    { label: 'Temperatureffekt', label_en: 'Temperature Effect', slideIndex: 15 },
+    { label: 'Innenwiderstand', label_en: 'Resistance', slideIndex: 16 },
+    { label: 'Fehlerfall', label_en: 'Failure Case', slideIndex: 17 },
+    { label: 'Inter-System', label_en: 'Inter-System', slideIndex: 18 },
+    { label: 'ICA/DVA', label_en: 'ICA/DVA', slideIndex: 19 },
+    { label: 'Community-Daten', label_en: 'Community Data', slideIndex: 20 },
+    { label: 'Demo (Pro)', label_en: 'Demo (Pro)', slideIndex: 21 },
+    { label: 'Demo (Easy)', label_en: 'Demo (Easy)', slideIndex: 22 },
   ]},
-  { id: 'discussion', label: 'Diskussion', label_en: 'Discussion', icon: 'message-square', slideIndex: 21, subs: [
-    { label: 'Stärken & Grenzen', label_en: 'Strengths & Limits', slideIndex: 21 },
-    { label: 'Unsicherheitsbudget', label_en: 'Uncertainty Budget', slideIndex: 22 },
+  { id: 'discussion', label: 'Diskussion', label_en: 'Discussion', icon: 'message-square', slideIndex: 23, subs: [
+    { label: 'Stärken & Grenzen', label_en: 'Strengths & Limits', slideIndex: 23 },
+    { label: 'Unsicherheitsbudget', label_en: 'Uncertainty Budget', slideIndex: 24 },
   ]},
-  { id: 'flowcharts', label: 'Diagramme', label_en: 'Diagrams', icon: 'workflow', slideIndex: 23, subs: [
-    { label: 'Galerie', label_en: 'Gallery', slideIndex: 23 },
+  { id: 'flowcharts', label: 'Diagramme', label_en: 'Diagrams', icon: 'workflow', slideIndex: 25, subs: [
+    { label: 'Galerie', label_en: 'Gallery', slideIndex: 25 },
   ]},
-  { id: 'conclusion', label: 'Fazit', label_en: 'Conclusion', icon: 'target', slideIndex: 24, subs: [
-    { label: 'Kernaussage', label_en: 'Core Finding', slideIndex: 24 },
-    { label: 'Ausblick', label_en: 'Outlook', slideIndex: 25 },
+  { id: 'conclusion', label: 'Fazit', label_en: 'Conclusion', icon: 'target', slideIndex: 26, subs: [
+    { label: 'Kernaussage', label_en: 'Core Finding', slideIndex: 26 },
+    { label: 'Ausblick', label_en: 'Outlook', slideIndex: 27 },
   ]},
 ];
 

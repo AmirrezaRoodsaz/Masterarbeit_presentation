@@ -1,0 +1,54 @@
+{
+  "steps": [
+    {
+      "id": 1,
+      "label": "Ausgangszustand",
+      "label_en": "Initial State",
+      "detail": "Fahrzeug bei beliebigem SOC",
+      "detail_en": "Vehicle at arbitrary SOC",
+      "color": "#6b7280"
+    },
+    {
+      "id": 2,
+      "label": "Normale Fahrt",
+      "label_en": "Normal Driving",
+      "detail": "Fahren bis Display-SOC ≈ 0 %",
+      "detail_en": "Drive until display SOC ≈ 0%",
+      "color": "#3b82f6"
+    },
+    {
+      "id": 3,
+      "label": "Batterie-Warnung",
+      "label_en": "Battery Warning",
+      "detail": "Warnmeldung im Fahrzeug erscheint",
+      "detail_en": "Warning message appears in vehicle",
+      "color": "#f59e0b"
+    },
+    {
+      "id": 4,
+      "label": "Dokumentation",
+      "label_en": "Documentation",
+      "detail": "Umgebungstemperatur (15–30 °C), km-Stand notieren",
+      "detail_en": "Record ambient temperature (15–30 °C), odometer reading",
+      "color": "#8b5cf6"
+    },
+    {
+      "id": 5,
+      "label": "Messbereit",
+      "label_en": "Ready for Measurement",
+      "detail": "Display-SOC = 0 % (BMS-SOC ≈ 5,75 %)",
+      "detail_en": "Display SOC = 0% (BMS SOC ≈ 5.75%)",
+      "color": "#10b981"
+    }
+  ],
+  "soc_gauge": {
+    "start": 72,
+    "end": 0,
+    "bms_at_zero": 5.75,
+    "usable_window_pct": 90
+  },
+  "insight": {
+    "de": "Display-SOC = 0 % entspricht BMS-SOC ≈ 5,75 % — das nutzbare Fenster beträgt ca. 90 % der physikalischen Kapazität.",
+    "en": "Display SOC = 0% corresponds to BMS SOC ≈ 5.75% — the usable window covers approx. 90% of physical capacity."
+  }
+}

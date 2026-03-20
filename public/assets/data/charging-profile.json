@@ -1,0 +1,61 @@
+{
+  "vehicle": "VW ID.4 (77 kWh)",
+  "charger": "AC Wallbox 11 kW",
+  "c_rate": "0,1–0,15C",
+  "c_rate_en": "0.1–0.15C",
+  "cc_phase": {
+    "label": "CC-Phase",
+    "label_en": "CC Phase",
+    "description": "Konstantstrom: Spannung steigt bis U_max",
+    "description_en": "Constant current: voltage rises to U_max",
+    "soh_use": "Kapazitäts- & energiebasierte SOH-Methoden",
+    "soh_use_en": "Capacity- & energy-based SOH methods"
+  },
+  "cv_phase": {
+    "label": "CV-Phase",
+    "label_en": "CV Phase",
+    "description": "Konstantspannung: Strom sinkt exponentiell",
+    "description_en": "Constant voltage: current decreases exponentially",
+    "soh_use": "ICA-Analyse (Inkrementelle Kapazitätsanalyse)",
+    "soh_use_en": "ICA analysis (Incremental Capacity Analysis)"
+  },
+  "profile": [
+    { "soc": 0,   "voltage": 310, "current": 16.0 },
+    { "soc": 5,   "voltage": 320, "current": 16.0 },
+    { "soc": 10,  "voltage": 330, "current": 16.0 },
+    { "soc": 15,  "voltage": 337, "current": 16.0 },
+    { "soc": 20,  "voltage": 345, "current": 16.0 },
+    { "soc": 25,  "voltage": 350, "current": 16.0 },
+    { "soc": 30,  "voltage": 355, "current": 16.0 },
+    { "soc": 35,  "voltage": 359, "current": 16.0 },
+    { "soc": 40,  "voltage": 363, "current": 16.0 },
+    { "soc": 45,  "voltage": 367, "current": 16.0 },
+    { "soc": 50,  "voltage": 370, "current": 16.0 },
+    { "soc": 55,  "voltage": 374, "current": 16.0 },
+    { "soc": 60,  "voltage": 378, "current": 16.0 },
+    { "soc": 65,  "voltage": 384, "current": 16.0 },
+    { "soc": 70,  "voltage": 390, "current": 16.0 },
+    { "soc": 75,  "voltage": 399, "current": 16.0 },
+    { "soc": 80,  "voltage": 408, "current": 16.0 },
+    { "soc": 82,  "voltage": 408, "current": 13.0 },
+    { "soc": 85,  "voltage": 408, "current": 10.0 },
+    { "soc": 88,  "voltage": 408, "current": 7.5 },
+    { "soc": 90,  "voltage": 408, "current": 6.0 },
+    { "soc": 92,  "voltage": 408, "current": 4.5 },
+    { "soc": 95,  "voltage": 408, "current": 3.0 },
+    { "soc": 97,  "voltage": 408, "current": 2.0 },
+    { "soc": 98,  "voltage": 408, "current": 1.5 },
+    { "soc": 99,  "voltage": 408, "current": 0.8 },
+    { "soc": 100, "voltage": 408, "current": 0.5 }
+  ],
+  "transition_soc": 80,
+  "end_current_a": 0.5,
+  "recording_note": {
+    "de": "OBD-Aufzeichnung startet VOR Ladestation-Anschluss — 194 Sensorkanäle, ~1 s Abtastrate",
+    "en": "OBD recording starts BEFORE charger connection — 194 sensor channels, ~1 s sampling rate"
+  },
+  "insight": {
+    "de": "CC-Phase liefert Daten für kapazitäts- und energiebasierte SOH. CV-Phase ist entscheidend für ICA-Analyse.",
+    "en": "CC phase provides data for capacity- and energy-based SOH. CV phase is critical for ICA analysis."
+  }
+}
