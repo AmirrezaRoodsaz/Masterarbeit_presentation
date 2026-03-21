@@ -1344,11 +1344,425 @@ function renderChargingProfile(container, data) {
   container.appendChild(sohNote);
 }
 
+// ── Convergence Flow (Pipeline) ─────────────────────────────────────
+
+function renderConvergenceFlow(container) {
+  container.innerHTML = '';
+
+  const en = isEnglish();
+  const width = 1100;
+  const height = 700;
+
+  const methods = [
+    { id: 'sohe', label: 'SOH\u2091', value: '99,6 %', color: '#4C9AFF', type: en ? 'Energy-based' : 'Energiebasiert' },
+    { id: 'sohc', label: 'SOH\u1D04', value: '91,8 %', color: '#4C9AFF', type: en ? 'Capacity-based' : 'Kapazitätsbasiert' },
+    { id: 'cap',  label: 'SOH\u2096\u2090\u209A', value: '89,7 %', color: '#00C9A7', type: en ? 'Capacity-based' : 'Kapazitätsbasiert' },
+    { id: 'sohr', label: 'SOH\u1D3F', value: '100,0 %', color: '#FFB800', type: en ? 'Resistance-based' : 'Widerstandsbasiert' },
+    { id: 'ica',  label: 'ICA', value: en ? 'Diagnostic' : 'Diagnostisch', color: '#9F7AEA', type: en ? 'Incremental' : 'Inkrementell' },
+    { id: 'dva',  label: 'DVA', value: en ? 'Diagnostic' : 'Diagnostisch', color: '#9F7AEA', type: en ? 'Differential' : 'Differentiell' },
+  ];
+
+  const svg = d3.select(container)
+    .append('svg')
+    .attr('viewBox', `0 0 ${width} ${height}`)
+    .attr('preserveAspectRatio', 'xMidYMid meet')
+    .style('width', '100%')
+    .style('height', '100%');
+
+  // Positions
+  const inputX = 150;
+  const methodX = 420;
+  const mergeX = 780;
+  const outputX = 950;
+  const centerY = height / 2 - 80;
+  const spacing = 75;
+  const methodYs = methods.map((_, i) => centerY + (i - 2.5) * spacing);
+
+  // ── Gradient defs ──
+  const defs = svg.append('defs');
+  methods.forEach((m, i) => {
+    const grad = defs.append('linearGradient')
+      .attr('id', `flow-grad-${m.id}`)
+      .attr('x1', '0%').attr('x2', '100%');
+    grad.append('stop').attr('offset', '0%').attr('stop-color', m.color).attr('stop-opacity', 0.6);
+    grad.append('stop').attr('offset', '100%').attr('stop-color', '#E2001A').attr('stop-opacity', 0.7);
+  });
+
+  // Glow filter
+  const glow = defs.append('filter').attr('id', 'flow-glow');
+  glow.append('feGaussianBlur').attr('stdDeviation', '3').attr('result', 'blur');
+  const merge = glow.append('feMerge');
+  merge.append('feMergeNode').attr('in', 'blur');
+  merge.append('feMergeNode').attr('in', 'SourceGraphic');
+
+  // ── Input node ──
+  const inputG = svg.append('g').attr('transform', `translate(${inputX}, ${centerY})`);
+  inputG.append('rect')
+    .attr('x', -80).attr('y', -55)
+    .attr('width', 160).attr('height', 110)
+    .attr('rx', 14)
+    .attr('fill', 'rgba(76, 154, 255, 0.12)')
+    .attr('stroke', '#4C9AFF')
+    .attr('stroke-width', 1.5);
+  inputG.append('text')
+    .attr('y', -8)
+    .attr('text-anchor', 'middle')
+    .attr('fill', '#4C9AFF')
+    .attr('font-size', '16px')
+    .attr('font-weight', '700')
+    .text(en ? 'OBD Raw Data' : 'OBD-Rohdaten');
+  inputG.append('text')
+    .attr('y', 16)
+    .attr('text-anchor', 'middle')
+    .attr('fill', getCSSVar('--text-secondary'))
+    .attr('font-size', '11px')
+    .text('194 Sensoren · CSV');
+
+  // ── Flow paths: input → methods ──
+  methods.forEach((m, i) => {
+    const sy = centerY;
+    const ey = methodYs[i];
+    const path = d3.path();
+    path.moveTo(inputX + 80, sy);
+    path.bezierCurveTo(inputX + 160, sy, methodX - 80, ey, methodX - 50, ey);
+
+    svg.append('path')
+      .attr('d', path.toString())
+      .attr('fill', 'none')
+      .attr('stroke', m.color)
+      .attr('stroke-width', 3)
+      .attr('opacity', 0.25);
+
+    svg.append('path')
+      .attr('d', path.toString())
+      .attr('fill', 'none')
+      .attr('stroke', m.color)
+      .attr('stroke-width', 1.5)
+      .attr('opacity', 0.7)
+      .attr('filter', 'url(#flow-glow)');
+  });
+
+  // ── Method nodes ──
+  methods.forEach((m, i) => {
+    const my = methodYs[i];
+    const mg = svg.append('g').attr('transform', `translate(${methodX}, ${my})`);
+
+    mg.append('rect')
+      .attr('x', -50).attr('y', -28)
+      .attr('width', 100).attr('height', 56)
+      .attr('rx', 10)
+      .attr('fill', `rgba(${hexToRgb(m.color)}, 0.1)`)
+      .attr('stroke', m.color)
+      .attr('stroke-width', 1.5);
+
+    mg.append('text')
+      .attr('y', -6)
+      .attr('text-anchor', 'middle')
+      .attr('fill', m.color)
+      .attr('font-size', '16px')
+      .attr('font-weight', '700')
+      .text(m.label);
+
+    mg.append('text')
+      .attr('y', 16)
+      .attr('text-anchor', 'middle')
+      .attr('fill', getCSSVar('--text-secondary'))
+      .attr('font-size', '11px')
+      .text(m.value);
+  });
+
+  // ── Flow paths: methods → merge point ──
+  methods.forEach((m, i) => {
+    const sy = methodYs[i];
+    const path = d3.path();
+    path.moveTo(methodX + 50, sy);
+    path.bezierCurveTo(methodX + 180, sy, mergeX - 120, centerY, mergeX, centerY);
+
+    svg.append('path')
+      .attr('d', path.toString())
+      .attr('fill', 'none')
+      .attr('stroke', `url(#flow-grad-${m.id})`)
+      .attr('stroke-width', 3)
+      .attr('opacity', 0.3);
+
+    svg.append('path')
+      .attr('d', path.toString())
+      .attr('fill', 'none')
+      .attr('stroke', `url(#flow-grad-${m.id})`)
+      .attr('stroke-width', 1.5)
+      .attr('opacity', 0.8)
+      .attr('filter', 'url(#flow-glow)');
+  });
+
+  // ── Merge point glow ──
+  svg.append('circle')
+    .attr('cx', mergeX).attr('cy', centerY)
+    .attr('r', 20)
+    .attr('fill', 'rgba(226, 0, 26, 0.15)')
+    .attr('filter', 'url(#flow-glow)');
+
+  // ── Flow: merge → output ──
+  const outPath = d3.path();
+  outPath.moveTo(mergeX + 20, centerY);
+  outPath.bezierCurveTo(mergeX + 80, centerY, outputX - 100, centerY, outputX - 70, centerY);
+
+  svg.append('path')
+    .attr('d', outPath.toString())
+    .attr('fill', 'none')
+    .attr('stroke', '#E2001A')
+    .attr('stroke-width', 4)
+    .attr('opacity', 0.4);
+
+  svg.append('path')
+    .attr('d', outPath.toString())
+    .attr('fill', 'none')
+    .attr('stroke', '#E2001A')
+    .attr('stroke-width', 2)
+    .attr('opacity', 0.9)
+    .attr('filter', 'url(#flow-glow)');
+
+  // ── Output node ──
+  const outputG = svg.append('g').attr('transform', `translate(${outputX}, ${centerY})`);
+  outputG.append('rect')
+    .attr('x', -70).attr('y', -55)
+    .attr('width', 140).attr('height', 110)
+    .attr('rx', 14)
+    .attr('fill', 'rgba(226, 0, 26, 0.1)')
+    .attr('stroke', '#E2001A')
+    .attr('stroke-width', 2);
+
+  outputG.append('text')
+    .attr('y', -15)
+    .attr('text-anchor', 'middle')
+    .attr('fill', getCSSVar('--text-primary'))
+    .attr('font-size', '14px')
+    .attr('font-weight', '600')
+    .text(en ? 'Combined' : 'Kombiniert');
+
+  outputG.append('text')
+    .attr('y', 20)
+    .attr('text-anchor', 'middle')
+    .attr('fill', '#E2001A')
+    .attr('font-size', '28px')
+    .attr('font-weight', '800')
+    .text('95,7 %');
+
+  // ── AVL reference branch (bottom) ──
+  const avlY = centerY + 230;
+  const avlColor = '#00C9A7';
+
+  // AVL input node (below OBD)
+  const avlInputG = svg.append('g').attr('transform', `translate(${inputX}, ${avlY})`);
+  avlInputG.append('rect')
+    .attr('x', -80).attr('y', -40)
+    .attr('width', 160).attr('height', 80)
+    .attr('rx', 14)
+    .attr('fill', `rgba(0, 201, 167, 0.1)`)
+    .attr('stroke', avlColor)
+    .attr('stroke-width', 1.5);
+  avlInputG.append('text')
+    .attr('y', -5)
+    .attr('text-anchor', 'middle')
+    .attr('fill', avlColor)
+    .attr('font-size', '16px')
+    .attr('font-weight', '700')
+    .text('AVL HV-Check');
+  avlInputG.append('text')
+    .attr('y', 18)
+    .attr('text-anchor', 'middle')
+    .attr('fill', getCSSVar('--text-secondary'))
+    .attr('font-size', '11px')
+    .text(en ? 'Off-Board Reference' : 'Off-Board-Referenz');
+
+  // AVL output node (below Kombiniert)
+  const avlOutputG = svg.append('g').attr('transform', `translate(${outputX}, ${avlY})`);
+  avlOutputG.append('rect')
+    .attr('x', -70).attr('y', -45)
+    .attr('width', 140).attr('height', 90)
+    .attr('rx', 14)
+    .attr('fill', `rgba(0, 201, 167, 0.1)`)
+    .attr('stroke', avlColor)
+    .attr('stroke-width', 2);
+  avlOutputG.append('text')
+    .attr('y', -10)
+    .attr('text-anchor', 'middle')
+    .attr('fill', getCSSVar('--text-primary'))
+    .attr('font-size', '14px')
+    .attr('font-weight', '600')
+    .text(en ? 'AVL Reference' : 'AVL-Referenz');
+  avlOutputG.append('text')
+    .attr('y', 25)
+    .attr('text-anchor', 'middle')
+    .attr('fill', avlColor)
+    .attr('font-size', '28px')
+    .attr('font-weight', '800')
+    .text('97,3 %');
+
+  // AVL flow path: input → output
+  const avlPath = d3.path();
+  avlPath.moveTo(inputX + 80, avlY);
+  avlPath.bezierCurveTo(inputX + 300, avlY, outputX - 300, avlY, outputX - 70, avlY);
+
+  svg.append('path')
+    .attr('d', avlPath.toString())
+    .attr('fill', 'none')
+    .attr('stroke', avlColor)
+    .attr('stroke-width', 3)
+    .attr('opacity', 0.25);
+
+  svg.append('path')
+    .attr('d', avlPath.toString())
+    .attr('fill', 'none')
+    .attr('stroke', avlColor)
+    .attr('stroke-width', 1.5)
+    .attr('opacity', 0.7)
+    .attr('filter', 'url(#flow-glow)');
+
+  // Deviation label between the two output nodes
+  const midY = (centerY + avlY) / 2;
+  svg.append('text')
+    .attr('x', outputX)
+    .attr('y', midY + 5)
+    .attr('text-anchor', 'middle')
+    .attr('fill', getCSSVar('--text-secondary'))
+    .attr('font-size', '13px')
+    .attr('font-weight', '600')
+    .text('Δ = −1,6 Pp');
+
+  // Dashed connector between the two output boxes
+  svg.append('line')
+    .attr('x1', outputX).attr('x2', outputX)
+    .attr('y1', centerY + 55).attr('y2', avlY - 45)
+    .attr('stroke', getCSSVar('--text-secondary'))
+    .attr('stroke-width', 1)
+    .attr('stroke-dasharray', '4,4')
+    .attr('opacity', 0.4);
+}
+
+function hexToRgb(hex) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `${r}, ${g}, ${b}`;
+}
+
+// ── Vehicle Measurement Timeline ────────────────────────────────────
+
+function renderVehicleTimeline(container, data) {
+  container.innerHTML = '';
+  const tip = ensureTooltip(container);
+
+  const width = 900;
+  const height = 140;
+  const margin = { top: 30, right: 30, bottom: 35, left: 30 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const en = isEnglish();
+  const parseDate = d3.timeParse('%Y-%m-%d');
+
+  const svg = d3.select(container)
+    .append('svg')
+    .attr('viewBox', `0 0 ${width} ${height}`)
+    .attr('preserveAspectRatio', 'xMidYMid meet')
+    .style('width', '100%')
+    .style('height', '100%');
+
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const measurements = data.measurements.map(m => ({
+    ...m,
+    dateObj: parseDate(m.date),
+  }));
+
+  const systems = data.systems;
+
+  // X scale: time
+  const xDomain = [parseDate(data.period.start), parseDate(data.period.end)];
+  const x = d3.scaleTime().domain(xDomain).range([0, innerW]);
+
+  // Horizontal axis line
+  g.append('line')
+    .attr('x1', 0).attr('x2', innerW)
+    .attr('y1', innerH / 2).attr('y2', innerH / 2)
+    .attr('stroke', getCSSVar('--text-secondary'))
+    .attr('stroke-width', 1)
+    .attr('opacity', 0.3);
+
+  // Vertical year markers
+  [2024, 2025, 2026].forEach(year => {
+    const xPos = x(new Date(year, 0, 1));
+    if (xPos > 0 && xPos < innerW) {
+      g.append('line')
+        .attr('x1', xPos).attr('x2', xPos)
+        .attr('y1', 0).attr('y2', innerH)
+        .attr('stroke', getCSSVar('--text-secondary'))
+        .attr('stroke-width', 0.5)
+        .attr('stroke-dasharray', '4,4')
+        .attr('opacity', 0.2);
+    }
+  });
+
+  // X axis
+  const formatMonth = d3.timeFormat('%b %y');
+  g.append('g')
+    .attr('class', 'axis')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(x).ticks(d3.timeMonth.every(3)).tickFormat(formatMonth))
+    .selectAll('text')
+    .style('font-size', '8px');
+
+  // System lanes: spread dots vertically by system
+  const laneY = { AVL: innerH / 2 - 18, OBD: innerH / 2, AUTEL: innerH / 2 + 18 };
+
+  // Dots
+  measurements.forEach(m => {
+    const cx = x(m.dateObj);
+    const cy = laneY[m.system] + (m.offset_y ? 12 : 0);
+    const color = systems[m.system].color;
+
+    g.append('circle')
+      .attr('cx', cx)
+      .attr('cy', cy)
+      .attr('r', 5)
+      .attr('fill', color)
+      .attr('stroke', 'rgba(0,0,0,0.3)')
+      .attr('stroke-width', 0.5)
+      .style('cursor', 'pointer')
+      .on('mouseenter', (event) => {
+        d3.select(event.target).transition().duration(150).attr('r', 8);
+        const label = en ? m.label_en : m.label;
+        let html = `<div class="tooltip-method">${label}</div>`;
+        html += `<div class="tooltip-value">${m.date}</div>`;
+        if (m.km) html += `<div class="tooltip-value">${m.km.toLocaleString('de-DE')} km</div>`;
+        if (m.soh != null) html += `<div class="tooltip-value">SOH: ${m.soh} %</div>`;
+        if (m.temp != null) html += `<div class="tooltip-value">${m.temp} °C</div>`;
+        showTooltip(tip, html, event, container);
+      })
+      .on('mouseleave', (event) => {
+        d3.select(event.target).transition().duration(150).attr('r', 5);
+        hideTooltip(tip);
+      });
+  });
+
+  // Legend — below chart as HTML
+  const legend = document.createElement('div');
+  legend.className = 'chart-legend';
+  legend.style.marginTop = '4px';
+  Object.entries(systems).forEach(([, sys]) => {
+    const item = document.createElement('span');
+    item.className = 'chart-legend-item';
+    item.innerHTML = `<span class="chart-legend-swatch" style="background:${sys.color}"></span>${sys.label} (n=${sys.count})`;
+    legend.appendChild(item);
+  });
+  container.appendChild(legend);
+}
+
 // ── Init ─────────────────────────────────────────────────────────────
 
 export async function initCharts() {
   // Fetch all data in parallel
-  const [methodsData, reproData, tempData, resistData, avlTimelineData, communityData, chargingData] = await Promise.all([
+  const [methodsData, reproData, tempData, resistData, avlTimelineData, communityData, chargingData, vehicleTimelineData] = await Promise.all([
     fetch('/assets/data/soh-methods.json').then(r => r.json()),
     fetch('/assets/data/reproducibility.json').then(r => r.json()),
     fetch('/assets/data/temperature-comparison.json').then(r => r.json()),
@@ -1356,6 +1770,7 @@ export async function initCharts() {
     fetch('/assets/data/avl-timeline.json').then(r => r.json()),
     fetch('/assets/data/community-comparison.json').then(r => r.json()),
     fetch('/assets/data/charging-profile.json').then(r => r.json()),
+    fetch('/assets/data/vehicle-timeline.json').then(r => r.json()),
   ]);
 
   const charts = [
@@ -1366,6 +1781,8 @@ export async function initCharts() {
     { id: 'chart-avl-timeline', render: renderAVLTimeline, data: avlTimelineData },
     { id: 'chart-community', render: renderCommunityComparison, data: communityData },
     { id: 'chart-charging-profile', render: renderChargingProfile, data: chargingData },
+    { id: 'chart-vehicle-timeline', render: renderVehicleTimeline, data: vehicleTimelineData },
+    { id: 'chart-convergence', render: renderConvergenceFlow, data: null },
   ];
 
   // Initial render

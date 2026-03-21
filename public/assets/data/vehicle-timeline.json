@@ -1,0 +1,166 @@
+{
+  "vehicle": "VW ID.4 (IfE)",
+  "period": { "start": "2024-02-01", "end": "2026-01-01" },
+  "measurements": [
+    {
+      "date": "2024-02-21",
+      "system": "OBD",
+      "label": "OCV Test",
+      "label_en": "OCV Test",
+      "km": null,
+      "soh": null,
+      "temp": null
+    },
+    {
+      "date": "2024-03-08",
+      "system": "OBD",
+      "label": "AC Wallbox (Ladesitzung A)",
+      "label_en": "AC Wallbox (Session A)",
+      "km": null,
+      "soh": null,
+      "temp": 19
+    },
+    {
+      "date": "2024-04-25",
+      "system": "OBD",
+      "label": "AC Wallbox (Ladesitzung B)",
+      "label_en": "AC Wallbox (Session B)",
+      "km": null,
+      "soh": null,
+      "temp": 9.8
+    },
+    {
+      "date": "2024-08-29",
+      "system": "OBD",
+      "label": "AC-Puls bei 50 % SOC",
+      "label_en": "AC Pulse at 50% SOC",
+      "km": null,
+      "soh": null,
+      "temp": 34
+    },
+    {
+      "date": "2024-08-29",
+      "system": "OBD",
+      "label": "DC-Puls bei 50 % SOC",
+      "label_en": "DC Pulse at 50% SOC",
+      "km": null,
+      "soh": null,
+      "temp": 34,
+      "offset_y": 1
+    },
+    {
+      "date": "2024-12-19",
+      "system": "AVL",
+      "label": "AVL HV-Check #1",
+      "label_en": "AVL HV-Check #1",
+      "km": 9285,
+      "soh": 99.2,
+      "temp": 11.5
+    },
+    {
+      "date": "2025-01-15",
+      "system": "AUTEL",
+      "label": "AUTEL Messung #1",
+      "label_en": "AUTEL Measurement #1",
+      "km": null,
+      "soh": null,
+      "temp": null
+    },
+    {
+      "date": "2025-03-14",
+      "system": "AVL",
+      "label": "AVL HV-Check #2",
+      "label_en": "AVL HV-Check #2",
+      "km": 9558,
+      "soh": 100.0,
+      "temp": 4.0
+    },
+    {
+      "date": "2025-04-09",
+      "system": "AVL",
+      "label": "AVL HV-Check #3",
+      "label_en": "AVL HV-Check #3",
+      "km": null,
+      "soh": null,
+      "temp": null
+    },
+    {
+      "date": "2025-04-25",
+      "system": "AVL",
+      "label": "AVL HV-Check #4a",
+      "label_en": "AVL HV-Check #4a",
+      "km": 9872,
+      "soh": 100.0,
+      "temp": 10.5
+    },
+    {
+      "date": "2025-04-25",
+      "system": "AVL",
+      "label": "AVL HV-Check #4b (Reproduzierbarkeit)",
+      "label_en": "AVL HV-Check #4b (Reproducibility)",
+      "km": 9872,
+      "soh": 100.0,
+      "temp": 10.5,
+      "offset_y": 1
+    },
+    {
+      "date": "2025-05-20",
+      "system": "AUTEL",
+      "label": "AUTEL Messung #2",
+      "label_en": "AUTEL Measurement #2",
+      "km": null,
+      "soh": null,
+      "temp": null
+    },
+    {
+      "date": "2025-07-02",
+      "system": "AVL",
+      "label": "AVL HV-Check #5",
+      "label_en": "AVL HV-Check #5",
+      "km": null,
+      "soh": null,
+      "temp": null
+    },
+    {
+      "date": "2025-08-21",
+      "system": "OBD",
+      "label": "Puls-Test (hochauflösend)",
+      "label_en": "Pulse Test (high-resolution)",
+      "km": null,
+      "soh": null,
+      "temp": null
+    },
+    {
+      "date": "2025-09-29",
+      "system": "OBD",
+      "label": "Wallbox-Pulstest",
+      "label_en": "Wallbox Pulse Test",
+      "km": null,
+      "soh": null,
+      "temp": null
+    },
+    {
+      "date": "2025-10-15",
+      "system": "AUTEL",
+      "label": "AUTEL Messung #3",
+      "label_en": "AUTEL Measurement #3",
+      "km": null,
+      "soh": null,
+      "temp": null
+    },
+    {
+      "date": "2025-12-03",
+      "system": "AVL",
+      "label": "AVL HV-Check #6 (Referenz)",
+      "label_en": "AVL HV-Check #6 (Reference)",
+      "km": 10801,
+      "soh": 97.3,
+      "temp": 24.0
+    }
+  ],
+  "systems": {
+    "OBD": { "color": "#4C9AFF", "label": "OBDLink MX+", "count": 7 },
+    "AVL": { "color": "#00C9A7", "label": "AVL HV-Check", "count": 6 },
+    "AUTEL": { "color": "#9F7AEA", "label": "AUTEL MaxiSYS Ultra", "count": 3 }
+  }
+}

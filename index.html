@@ -1110,58 +1110,61 @@
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
-                <div class="two-col">
-                  <div>
-                    <table class="data-table">
-                      <thead>
-                        <tr>
-                          <th><span class="lang-de">Eigenschaft</span><span class="lang-en" hidden>Property</span></th>
-                          <th>VW ID.4 (IfE)</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr><td><span class="lang-de">Plattform</span><span class="lang-en" hidden>Platform</span></td><td>MEB</td></tr>
-                        <tr><td><span class="lang-de">Batterie</span><span class="lang-en" hidden>Battery</span></td><td class="highlight">77 kWh (netto: 72 kWh)</td></tr>
-                        <tr><td><span class="lang-de">Zellchemie</span><span class="lang-en" hidden>Cell Chemistry</span></td><td>NMC 712</td></tr>
-                        <tr><td><span class="lang-de">Konfiguration</span><span class="lang-en" hidden>Configuration</span></td><td>12 Module × 24 Zellen = 288</td></tr>
-                        <tr><td><span class="lang-de">Nennspannung</span><span class="lang-en" hidden>Nominal Voltage</span></td><td>~350 V (300–408 V)</td></tr>
-                        <tr><td><span class="lang-de">Kilometerstand</span><span class="lang-en" hidden>Mileage</span></td><td>10.801 km</td></tr>
-                        <tr><td><span class="lang-de">Zustand</span><span class="lang-en" hidden>Condition</span></td><td class="highlight"><span class="lang-de">Exzellent (SOH 97,3 %)</span><span class="lang-en" hidden>Excellent (SOH 97.3%)</span></td></tr>
-                      </tbody>
-                    </table>
+                <!-- Top zone: vehicle card + diagnostic systems -->
+                <div class="vehicle-top-row">
+                  <!-- Left: vehicle image + spec badges -->
+                  <div class="vehicle-card">
+                    <div class="vehicle-sticker-wrap">
+                      <img src="assets/images/vehicle-id4.png" alt="VW ID.4" class="vehicle-sticker">
+                    </div>
+                    <div class="spec-badges">
+                      <span class="spec-badge accent">77 kWh</span>
+                      <span class="spec-badge">NMC 712</span>
+                      <span class="spec-badge">288 <span class="lang-de">Zellen</span><span class="lang-en" hidden>Cells</span></span>
+                      <span class="spec-badge">MEB</span>
+                      <span class="spec-badge">10.801 km</span>
+                      <span class="spec-badge accent">SOH 97,3 %</span>
+                    </div>
                   </div>
-                  <div>
-                    <h3><span class="lang-de">Messumfang</span><span class="lang-en" hidden>Measurement Scope</span></h3>
-                    <table class="data-table">
-                      <thead>
-                        <tr>
-                          <th><span class="lang-de">Diagnosesystem</span><span class="lang-en" hidden>Diagnostic System</span></th>
-                          <th>n</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr><td>AVL HV-Check</td><td class="highlight">6</td></tr>
-                        <tr><td>OBDLink MX+ (kontinuierlich)</td><td class="highlight">7</td></tr>
-                        <tr><td>AUTEL MaxiSYS Ultra</td><td>3</td></tr>
-                      </tbody>
-                    </table>
-                    <h3 style="margin-top: 1rem;"><span class="lang-de">Warum VW ID.4?</span><span class="lang-en" hidden>Why VW ID.4?</span></h3>
-                    <ul class="styled-list" style="font-size: var(--fs-caption);">
-                      <li><span class="lang-de">MEB-Plattform: meistverkaufte EV-Architektur in Europa</span><span class="lang-en" hidden>MEB platform: best-selling EV architecture in Europe</span></li>
-                      <li><span class="lang-de">NMC 712: branchenübliche Zellchemie</span><span class="lang-en" hidden>NMC 712: industry-standard cell chemistry</span></li>
-                      <li><span class="lang-de">Vollständiger OBD-Zugang (96 Zellspannungen, Temperaturen)</span><span class="lang-en" hidden>Full OBD access (96 cell voltages, temperatures)</span></li>
-                    </ul>
-                    <p style="font-size: var(--fs-small); color: var(--text-secondary); margin-top: 0.5rem;">
-                      <span class="lang-de">Messzeitraum: Dez. 2024 – Dez. 2025 · Diagnosesysteme zusätzlich an BMW i3s, Skoda Elroq, Cupra Born und Renault Zoe zur Werkzeugvalidierung getestet.</span>
-                      <span class="lang-en" hidden>Measurement period: Dec. 2024 – Dec. 2025 · Diagnostic systems additionally tested on BMW i3s, Skoda Elroq, Cupra Born and Renault Zoe for tool validation.</span>
-                    </p>
+
+                  <!-- Right: diagnostic systems with hover images -->
+                  <div class="diag-systems">
+                    <h3><span class="lang-de">Diagnosesysteme</span><span class="lang-en" hidden>Diagnostic Systems</span></h3>
+                    <div class="diag-system">
+                      <span class="diag-dot" style="background: #00C9A7;"></span>
+                      <span class="diag-name">AVL HV-Check</span>
+                      <span class="diag-count">6</span>
+                    </div>
+                    <div class="diag-system">
+                      <span class="diag-dot" style="background: #4C9AFF;"></span>
+                      <span class="diag-name">OBDLink MX+</span>
+                      <span class="diag-count">7</span>
+                    </div>
+                    <div class="diag-system">
+                      <span class="diag-dot" style="background: #9F7AEA;"></span>
+                      <span class="diag-name">AUTEL MaxiSYS Ultra</span>
+                      <span class="diag-count">3</span>
+                    </div>
+
+                    <div class="diag-rationale">
+                      <h3><span class="lang-de">Warum VW ID.4?</span><span class="lang-en" hidden>Why VW ID.4?</span></h3>
+                      <ul class="styled-list">
+                        <li><span class="lang-de">MEB: meistverkaufte EV-Architektur in Europa</span><span class="lang-en" hidden>MEB: best-selling EV architecture in Europe</span></li>
+                        <li><span class="lang-de">Vollständiger OBD-Zugang (96 Zellspannungen)</span><span class="lang-en" hidden>Full OBD access (96 cell voltages)</span></li>
+                      </ul>
+                    </div>
                   </div>
+                </div>
+
+                <!-- Bottom zone: measurement timeline -->
+                <div class="vehicle-timeline-wrap">
+                  <div class="chart-container" id="chart-vehicle-timeline"></div>
                 </div>
               </div>
             </div>
           </section>
 
-          <!-- Slide 11: SOH calculation pipeline (GSAP animated — Phase 9) -->
+          <!-- Slide 11: SOH calculation pipeline — convergence flow -->
           <section id="slide-pipeline" data-section="method">
             <h2>
               <span class="lang-de">Sechs Berechnungsmethoden konvergieren zu einem robusten kombinierten SOH-Wert</span>
@@ -1169,32 +1172,7 @@
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
-                <div id="gsap-pipeline" class="pipeline-container">
-                  <!-- Pipeline visualization — GSAP Phase 9 -->
-                  <div class="pipeline-flow">
-                    <div class="pipeline-node pipeline-input" id="pipeline-raw">
-                      <span class="lang-de">OBD-Rohdaten</span>
-                      <span class="lang-en" hidden>OBD Raw Data</span>
-                      <div class="pipeline-detail">194 Sensoren, CSV</div>
-                    </div>
-                    <div class="pipeline-arrow" id="pipeline-arrow-1">→</div>
-                    <div class="pipeline-methods">
-                      <div class="pipeline-node pipeline-method" id="method-sohe">SOH<sub>e</sub><div class="pipeline-detail">99,6 %</div></div>
-                      <div class="pipeline-node pipeline-method" id="method-sohc">SOH<sub>c</sub><div class="pipeline-detail">91,8 %</div></div>
-                      <div class="pipeline-node pipeline-method" id="method-cap">SOH<sub>kap</sub><div class="pipeline-detail">89,7 %</div></div>
-                      <div class="pipeline-node pipeline-method" id="method-sohr">SOH<sub>R</sub><div class="pipeline-detail">100,0 %</div></div>
-                      <div class="pipeline-node pipeline-method" id="method-ica">ICA<div class="pipeline-detail"><span class="lang-de">Diagnostisch</span><span class="lang-en" hidden>Diagnostic</span></div></div>
-                      <div class="pipeline-node pipeline-method" id="method-dva">DVA<div class="pipeline-detail"><span class="lang-de">Diagnostisch</span><span class="lang-en" hidden>Diagnostic</span></div></div>
-                    </div>
-                    <div class="pipeline-arrow" id="pipeline-arrow-2">→</div>
-                    <div class="pipeline-node pipeline-output" id="pipeline-combined">
-                      <span class="lang-de">Kombiniert</span>
-                      <span class="lang-en" hidden>Combined</span>
-                      <div class="pipeline-result">95,7 %</div>
-                      <div class="pipeline-detail">vs. AVL: 97,3 % (−1,6 Pp)</div>
-                    </div>
-                  </div>
-                </div>
+                <div class="chart-container convergence-chart" id="chart-convergence"></div>
               </div>
             </div>
           </section>
