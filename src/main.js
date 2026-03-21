@@ -141,4 +141,91 @@ if (progressCar) {
   });
 }
 
+// Zoomable image — continuous hero zoom from original position to center
+(function initImageZoom() {
+  // Create backdrop
+  const backdrop = document.createElement('div');
+  backdrop.className = 'zoom-backdrop';
+  document.body.appendChild(backdrop);
+
+  let activeClone = null;
+  let activeSource = null;
+
+  function openZoom(img) {
+    if (activeClone) return;
+    activeSource = img;
+
+    // Get original position
+    const rect = img.getBoundingClientRect();
+
+    // Create clone at exact original position
+    const clone = document.createElement('div');
+    clone.className = 'zoom-clone';
+    clone.style.top = rect.top + 'px';
+    clone.style.left = rect.left + 'px';
+    clone.style.width = rect.width + 'px';
+    clone.style.height = rect.height + 'px';
+
+    const cloneImg = document.createElement('img');
+    cloneImg.src = img.src;
+    clone.appendChild(cloneImg);
+    document.body.appendChild(clone);
+
+    // Hide original
+    img.style.visibility = 'hidden';
+
+    activeClone = clone;
+
+    // Force reflow then animate to center
+    clone.offsetHeight;
+    backdrop.classList.add('active');
+
+    // Target: wide enough to be readable, centered horizontally, scrollable vertically
+    const targetW = Math.min(window.innerWidth * 0.45, 600);
+    const targetH = window.innerHeight * 0.85;
+    const targetLeft = (window.innerWidth - targetW) / 2;
+    const targetTop = (window.innerHeight - targetH) / 2;
+
+    clone.style.top = targetTop + 'px';
+    clone.style.left = targetLeft + 'px';
+    clone.style.width = targetW + 'px';
+    clone.style.height = targetH + 'px';
+    clone.style.padding = '1rem';
+  }
+
+  function closeZoom() {
+    if (!activeClone || !activeSource) return;
+
+    // Animate back to original position
+    const rect = activeSource.getBoundingClientRect();
+    activeClone.style.top = rect.top + 'px';
+    activeClone.style.left = rect.left + 'px';
+    activeClone.style.width = rect.width + 'px';
+    activeClone.style.height = rect.height + 'px';
+    activeClone.style.padding = '0.25rem 0';
+
+    backdrop.classList.remove('active');
+
+    const clone = activeClone;
+    const source = activeSource;
+    activeClone = null;
+    activeSource = null;
+
+    // Remove clone after animation ends
+    setTimeout(() => {
+      source.style.visibility = '';
+      clone.remove();
+    }, 450);
+  }
+
+  backdrop.addEventListener('click', closeZoom);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && activeClone) closeZoom();
+  });
+
+  document.querySelectorAll('.zoomable-image').forEach(img => {
+    img.addEventListener('click', () => openZoom(img));
+  });
+})();
+
 export { deck };

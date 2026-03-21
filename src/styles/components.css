@@ -439,8 +439,9 @@ body.lang-en .lang-en.block:not(body) { display: block !important; }
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
+  justify-content: center;
+  height: 100%;
 }
 
 .protocol-step {
@@ -451,6 +452,7 @@ body.lang-en .lang-en.block:not(body) { display: block !important; }
   border-radius: var(--border-radius);
   padding: 1rem 1.5rem;
   border-left: 3px solid var(--accent);
+  text-align: left;
 }
 
 .step-number {
@@ -470,11 +472,76 @@ body.lang-en .lang-en.block:not(body) { display: block !important; }
   color: var(--text-primary);
   display: block;
   margin-bottom: 0.2rem;
+  font-size: 1.35em;
 }
 
 .step-content p {
   margin: 0;
-  font-size: var(--fs-caption);
+  font-size: 1.1em;
+}
+
+/* Protocol flowchart SVG */
+.protocol-flowchart {
+  width: auto;
+  height: 90%;
+  max-height: 90%;
+  display: block;
+  margin: 0 auto 0 -3px;
+  border-radius: var(--border-radius);
+  background: #fff;
+  padding: 0.25rem 0.5rem;
+  box-shadow: var(--shadow-card);
+  cursor: zoom-in;
+}
+
+/* Zoomable image — clickable hero zoom */
+.zoomable-image {
+  cursor: zoom-in;
+}
+.zoomable-image:hover {
+  filter: brightness(1.05);
+}
+
+/* Dark backdrop behind zoomed image */
+.zoom-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0, 0, 0, 0.85);
+  cursor: zoom-out;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.zoom-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* The flying clone that animates from original position to center */
+.zoom-clone {
+  position: fixed;
+  z-index: 9999;
+  border-radius: var(--border-radius);
+  background: #fff;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+  transition: top 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+              left 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+              width 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+              height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+              padding 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  cursor: default;
+  padding: 0.25rem 0;
+}
+.zoom-clone::-webkit-scrollbar {
+  display: none;
+}
+.zoom-clone img {
+  display: block;
+  width: 100%;
 }
 
 /* Vehicle list */

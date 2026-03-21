@@ -840,46 +840,48 @@
               <span class="lang-en" hidden>The standardized measurement protocol defines 5 phases for reproducible SOH determination</span>
             </h2>
             <div class="slide-content">
-              <div class="evidence-area">
-                <!-- Mermaid flowchart — Phase 7 -->
-                <div id="mermaid-protocol" class="mermaid-container">
+              <div class="evidence-area sticker-layout">
+                <div class="sticker-layout-text">
                   <div class="protocol-steps">
                     <div class="protocol-step fragment">
                       <div class="step-number">1</div>
                       <div class="step-content">
                         <strong><span class="lang-de">Vorbereitung</span><span class="lang-en" hidden>Preparation</span></strong>
-                        <p><span class="lang-de">Entladung auf ~0 % SOC, Umgebungstemperatur dokumentieren (15–30 °C), Kilometerstand notieren</span><span class="lang-en" hidden>Discharge to ~0% SOC, document ambient temperature (15–30 °C), record odometer</span></p>
+                        <p><span class="lang-de">Entladung auf ~0 % SOC (Display), Umgebungstemperatur dokumentieren, Kilometerstand notieren</span><span class="lang-en" hidden>Discharge to ~0% SOC (display), document ambient temperature, record odometer</span></p>
                       </div>
                     </div>
                     <div class="protocol-step fragment">
                       <div class="step-number">2</div>
                       <div class="step-content">
-                        <strong><span class="lang-de">Snapshot-Messung</span><span class="lang-en" hidden>Snapshot Measurement</span></strong>
-                        <p><span class="lang-de">AVL HV-Check + AUTEL — Referenz-SOH erfassen</span><span class="lang-en" hidden>AVL HV-Check + AUTEL — capture reference SOH</span></p>
+                        <strong><span class="lang-de">OBD2-Verbindungsaufbau</span><span class="lang-en" hidden>OBD2 Connection Setup</span></strong>
+                        <p><span class="lang-de">OBDLink MX+ in OBD-Port → Bluetooth → Car Scanner Pro App → alle BMS-PIDs wählen (SOC, U, I, 96 Zellspannungen, 24 Temperatursensoren)</span><span class="lang-en" hidden>OBDLink MX+ into OBD port → Bluetooth → Car Scanner Pro app → select all BMS PIDs (SOC, V, I, 96 cell voltages, 24 temperature sensors)</span></p>
                       </div>
                     </div>
                     <div class="protocol-step fragment">
                       <div class="step-number">3</div>
                       <div class="step-content">
-                        <strong><span class="lang-de">CC-CV Ladung</span><span class="lang-en" hidden>CC-CV Charging</span></strong>
-                        <p><span class="lang-de">OBD-Verbindungsaufbau → AC-Wallbox 0→100 %, 0,1–0,15C, kontinuierliches Logging (194 Sensoren)</span><span class="lang-en" hidden>OBD connection setup → AC wallbox 0→100%, 0.1–0.15C, continuous logging (194 sensors)</span></p>
+                        <strong><span class="lang-de">Ladevorgang</span><span class="lang-en" hidden>Charging Process</span></strong>
+                        <p><span class="lang-de">Aufzeichnung starten <em>vor</em> Ladebeginn → CCS/AC-Ladung 0→100 % SOC, ~1 s Abtastrate, kontinuierliches Logging</span><span class="lang-en" hidden>Start recording <em>before</em> charging begins → CCS/AC charging 0→100% SOC, ~1 s sampling rate, continuous logging</span></p>
                       </div>
                     </div>
                     <div class="protocol-step fragment">
                       <div class="step-number">4</div>
                       <div class="step-content">
-                        <strong><span class="lang-de">DC-Puls-Test</span><span class="lang-en" hidden>DC Pulse Test</span></strong>
-                        <p><span class="lang-de">Innenwiderstand R<sub>i</sub> bestimmen (Lade- & Entladepuls)</span><span class="lang-en" hidden>Determine internal resistance R<sub>i</sub> (charge & discharge pulse)</span></p>
+                        <strong><span class="lang-de">Datenexport</span><span class="lang-en" hidden>Data Export</span></strong>
+                        <p><span class="lang-de">Aufzeichnung stoppen → CSV-Export (zeitgestempelte Messwerte aller Parameter)</span><span class="lang-en" hidden>Stop recording → CSV export (timestamped measurement values of all parameters)</span></p>
                       </div>
                     </div>
                     <div class="protocol-step fragment">
                       <div class="step-number">5</div>
                       <div class="step-content">
-                        <strong><span class="lang-de">Analyse & Berechnung</span><span class="lang-en" hidden>Analysis & Calculation</span></strong>
-                        <p><span class="lang-de">Python-App: 6 SOH-Methoden parallel berechnen</span><span class="lang-en" hidden>Python app: calculate 6 SOH methods in parallel</span></p>
+                        <strong><span class="lang-de">Analyse</span><span class="lang-en" hidden>Analysis</span></strong>
+                        <p><span class="lang-de">CSV in Python-App laden, ggf. AVL-PDF als Referenz importieren → automatische Berechnung aller SOH-Methoden</span><span class="lang-en" hidden>Load CSV into Python app, optionally import AVL PDF as reference → automatic calculation of all SOH methods</span></p>
                       </div>
                     </div>
                   </div>
+                </div>
+                <div class="sticker-layout-visual" style="flex: 0 0 35%;">
+                  <img src="assets/diagrams/flowcharts/02_Messprotokoll.svg" alt="Messprotokoll Flowchart" class="protocol-flowchart zoomable-image" />
                 </div>
               </div>
             </div>
