@@ -178,7 +178,7 @@ if (progressCar) {
     document.body.appendChild(clone);
 
     // Hide original
-    img.style.visibility = 'hidden';
+    el.style.visibility = 'hidden';
 
     activeClone = clone;
 
