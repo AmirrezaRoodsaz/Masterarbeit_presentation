@@ -629,8 +629,9 @@
               <span class="lang-en" hidden>Li-ion batteries age through calendar and cyclic degradation</span>
             </h2>
             <div class="slide-content">
-              <div class="evidence-area">
-                <div class="two-col">
+              <div class="sticker-layout">
+                <!-- Left: stacked text columns -->
+                <div class="sticker-layout-text">
                   <div>
                     <h3>
                       <span class="lang-de">Kalendarische Alterung</span>
@@ -642,12 +643,16 @@
                         <span class="lang-en" hidden>SEI growth → Loss of Lithium Inventory (LLI)</span>
                       </li>
                       <li class="fragment">
+                        <span class="lang-de">Kathoden-Degradation → Metallionen-Auflösung → LAM</span>
+                        <span class="lang-en" hidden>Cathode degradation → metal ion dissolution → LAM</span>
+                      </li>
+                      <li class="fragment">
                         <span class="lang-de">Elektrolyt-Zersetzung → Kapazitätsverlust</span>
                         <span class="lang-en" hidden>Electrolyte decomposition → capacity loss</span>
                       </li>
                       <li class="fragment">
-                        <span class="lang-de">Arrhenius-Verhalten: Höhere Temperatur = exponentiell schnellere Alterung</span>
-                        <span class="lang-en" hidden>Arrhenius behavior: Higher temperature = exponentially faster aging</span>
+                        <span class="lang-de">Arrhenius-Verhalten: T↑ = exponentiell schnellere Alterung</span>
+                        <span class="lang-en" hidden>Arrhenius behavior: T↑ = exponentially faster aging</span>
                       </li>
                     </ul>
                   </div>
@@ -658,71 +663,106 @@
                     </h3>
                     <ul class="styled-list">
                       <li class="fragment">
-                        <span class="lang-de">Mechanische Beanspruchung → Partikelriss → LAM</span>
-                        <span class="lang-en" hidden>Mechanical stress → particle cracking → LAM</span>
+                        <span class="lang-de">Volumenänderung → Partikelriss → LAM</span>
+                        <span class="lang-en" hidden>Volume change → particle cracking → LAM</span>
                       </li>
                       <li class="fragment">
-                        <span class="lang-de">Lithium-Plating: Li⁺ lagert sich als Metall ab (Risiko: Dendriten)</span>
-                        <span class="lang-en" hidden>Lithium plating: Li⁺ deposits as metal (risk: dendrites)</span>
+                        <span class="lang-de">Lithium-Plating → Dendriten → interner Kurzschluss</span>
+                        <span class="lang-en" hidden>Lithium plating → dendrites → internal short circuit</span>
                       </li>
                       <li class="fragment">
-                        <span class="lang-de">Hoher Strom + niedrige Temperatur + hoher SOC beschleunigen Alterung</span>
-                        <span class="lang-en" hidden>High current + low temperature + high SOC accelerate aging</span>
+                        <span class="lang-de">Große Entladetiefe (DoD) → stärkere mechanische Belastung</span>
+                        <span class="lang-en" hidden>Large depth of discharge (DoD) → stronger mechanical stress</span>
+                      </li>
+                      <li class="fragment">
+                        <span class="lang-de">Hohe C-Rate + niedrige Temp. + hoher SOC beschleunigen</span>
+                        <span class="lang-en" hidden>High C-rate + low temp. + high SOC accelerate aging</span>
                       </li>
                     </ul>
                   </div>
+                </div>
+                <!-- Right: sticker -->
+                <div class="sticker-layout-visual">
+                  <img src="assets/images/sticker-analysis.png" alt="" class="slide-sticker" />
                 </div>
               </div>
               <div class="context-note fragment" style="margin-top: 1rem; padding: 0.8rem 1.2rem; border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: var(--border-radius-sm);">
                 <span class="lang-de"><strong>Testfahrzeug VW ID.4:</strong> NMC 712 Pouch-Zellen · 288 Zellen (12 Module × 24) · 77 kWh brutto / 72 kWh netto · 300–408 V</span>
                 <span class="lang-en" hidden><strong>Test vehicle VW ID.4:</strong> NMC 712 pouch cells · 288 cells (12 modules × 24) · 77 kWh gross / 72 kWh net · 300–408 V</span>
               </div>
-              <!-- Mermaid diagram placeholder — Phase 7 -->
-              <div id="mermaid-aging" class="mermaid-container"></div>
             </div>
           </section>
 
           <!-- Slide 7: SOH definitions + equations -->
           <section id="slide-soh-definitions" data-section="theory">
             <h2>
-              <span class="lang-de">Vier komplementäre SOH-Methoden erfassen unterschiedliche Aspekte der Batteriealterung</span>
-              <span class="lang-en" hidden>Four complementary SOH methods capture different aspects of battery aging</span>
+              <span class="lang-de">Fünf komplementäre SOH-Methoden erfassen unterschiedliche Aspekte der Batteriealterung</span>
+              <span class="lang-en" hidden>Five complementary SOH methods capture different aspects of battery aging</span>
             </h2>
             <div class="slide-content">
-              <div class="evidence-area">
-                <div class="equation-stack">
-                  <div class="equation-row">
-                    <span class="equation-label">SOH<sub>C</sub></span>
-                    <div class="katex-eq">$$\text{SOH}_C = \frac{C_\text{aktuell}}{C_\text{nenn}} \times 100\%$$</div>
-                    <span class="equation-desc">
-                      <span class="lang-de">Kapazitätsbasiert</span>
-                      <span class="lang-en" hidden>Capacity-based</span>
-                    </span>
+              <div class="evidence-area sticker-layout">
+                <div class="sticker-layout-text">
+                  <div class="equation-stack">
+                    <div class="equation-row fragment">
+                      <span class="equation-label">SOH<sub>cap</sub></span>
+                      <div class="katex-eq">$$\text{SOH}_{\text{cap}} = \frac{E_{\text{aktuell}}}{E_{\text{nenn}}} \times 100\%$$</div>
+                      <span class="equation-desc">
+                        <span class="lang-de">Kapazitätsbasiert (BMS-Direktwert)</span>
+                        <span class="lang-en" hidden>Capacity-based (BMS direct)</span>
+                      </span>
+                      <span class="equation-fallback">
+                        <span class="lang-de">Fallback: Extrapolation wenn SOC &lt; 90% (nur wenn SOC ≥ 50%)</span>
+                        <span class="lang-en" hidden>Fallback: Extrapolation if SOC &lt; 90% (only if SOC ≥ 50%)</span>
+                      </span>
+                    </div>
+                    <div class="equation-row fragment">
+                      <span class="equation-label">SOH<sub>e</sub></span>
+                      <div class="katex-eq">$$\text{SOH}_e = \frac{\int_0^T V(t) \cdot |I(t)| \, dt}{E_{\text{nenn}}} \times 100\%$$</div>
+                      <span class="equation-desc">
+                        <span class="lang-de">Energiebasiert (Integration)</span>
+                        <span class="lang-en" hidden>Energy-based (integration)</span>
+                      </span>
+                      <span class="equation-fallback">
+                        <span class="lang-de">Fallback: BMS-Parameter „aktueller Energiegehalt"</span>
+                        <span class="lang-en" hidden>Fallback: BMS parameter "current energy content"</span>
+                      </span>
+                    </div>
+                    <div class="equation-row fragment">
+                      <span class="equation-label">SOH<sub>c</sub></span>
+                      <div class="katex-eq">$$\text{SOH}_c = \frac{\int_0^T |I(t)| \, dt}{Q_{\text{nenn}}} \times 100\%$$</div>
+                      <span class="equation-desc">
+                        <span class="lang-de">Coulomb-Counting</span>
+                        <span class="lang-en" hidden>Coulomb Counting</span>
+                      </span>
+                      <span class="equation-fallback">
+                        <span class="lang-de">Fallback: BMS-Parameter „kumulierte Ladung"</span>
+                        <span class="lang-en" hidden>Fallback: BMS parameter "cumulative charge"</span>
+                      </span>
+                    </div>
+                    <div class="equation-row fragment">
+                      <span class="equation-label">SOH<sub>R</sub></span>
+                      <div class="katex-eq">$$\text{SOH}_R = \frac{R_{i,\text{Baseline}}}{R_{i,\text{aktuell}}} \times 100\%$$</div>
+                      <span class="equation-desc">
+                        <span class="lang-de">Widerstandsbasiert</span>
+                        <span class="lang-en" hidden>Resistance-based</span>
+                      </span>
+                      <span class="equation-fallback">
+                        <span class="lang-de">R<sub>i</sub> = |ΔV / ΔI|, |ΔI| &gt; 1 A, 0 &lt; R<sub>i</sub> &lt; 500 mΩ</span>
+                        <span class="lang-en" hidden>R<sub>i</sub> = |ΔV / ΔI|, |ΔI| &gt; 1 A, 0 &lt; R<sub>i</sub> &lt; 500 mΩ</span>
+                      </span>
+                    </div>
+                    <div class="equation-row fragment">
+                      <span class="equation-label">SOH<sub>komb</sub></span>
+                      <div class="katex-eq">$$\text{SOH}_{\text{komb}} = \frac{\text{SOH}_e + \text{SOH}_c}{2}$$</div>
+                      <span class="equation-desc">
+                        <span class="lang-de">Kombiniert (empfohlen)</span>
+                        <span class="lang-en" hidden>Combined (recommended)</span>
+                      </span>
+                    </div>
                   </div>
-                  <div class="equation-row">
-                    <span class="equation-label">SOH<sub>E</sub></span>
-                    <div class="katex-eq">$$\text{SOH}_E = \frac{E_\text{aktuell}}{E_\text{nenn}} \times 100\%$$</div>
-                    <span class="equation-desc">
-                      <span class="lang-de">Energiebasiert</span>
-                      <span class="lang-en" hidden>Energy-based</span>
-                    </span>
-                  </div>
-                  <div class="equation-row">
-                    <span class="equation-label">SOH<sub>c</sub></span>
-                    <div class="katex-eq">$$\text{SOH}_c = \frac{\int_0^t I \, dt}{C_\text{nenn}} \times 100\%$$</div>
-                    <span class="equation-desc">
-                      <span class="lang-de">Coulomb-Counting (Ladungsbilanz)</span>
-                      <span class="lang-en" hidden>Coulomb Counting (charge balance)</span>
-                    </span>
-                  </div>
-                  <div class="equation-row">
-                    <span class="equation-label">SOH<sub>R</sub></span>
-                    <div class="katex-eq">$$\text{SOH}_R = \frac{R_{i,\text{Baseline}}}{R_{i,\text{aktuell}}} \times 100\%$$</div>
-                    <span class="equation-desc">
-                      <span class="lang-de">Widerstandsbasiert</span>
-                      <span class="lang-en" hidden>Resistance-based</span>
-                    </span>
-                  </div>
+                </div>
+                <div class="sticker-layout-visual">
+                  <img src="assets/images/sticker-ideas.png" alt="" class="slide-sticker" />
                 </div>
               </div>
             </div>
@@ -740,40 +780,55 @@
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
-                <table class="data-table">
-                  <thead>
-                    <tr>
-                      <th><span class="lang-de">System</span><span class="lang-en" hidden>System</span></th>
-                      <th><span class="lang-de">Typ</span><span class="lang-en" hidden>Type</span></th>
-                      <th><span class="lang-de">Datenerfassung</span><span class="lang-en" hidden>Data Acquisition</span></th>
-                      <th><span class="lang-de">Kosten</span><span class="lang-en" hidden>Cost</span></th>
-                      <th><span class="lang-de">Einsatz</span><span class="lang-en" hidden>Application</span></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="highlight">AVL HV-Check</td>
-                      <td><span class="lang-de">Off-Board (professionell)</span><span class="lang-en" hidden>Off-Board (professional)</span></td>
-                      <td><span class="lang-de">Snapshot (Minuten)</span><span class="lang-en" hidden>Snapshot (minutes)</span></td>
-                      <td>&gt;€10.000</td>
-                      <td><span class="lang-de">Referenzmessung</span><span class="lang-en" hidden>Reference measurement</span></td>
-                    </tr>
-                    <tr>
-                      <td class="highlight">OBDLink MX+</td>
-                      <td><span class="lang-de">On-Board (Bluetooth)</span><span class="lang-en" hidden>On-Board (Bluetooth)</span></td>
-                      <td><span class="lang-de">Kontinuierlich (CSV)</span><span class="lang-en" hidden>Continuous (CSV)</span></td>
-                      <td>~€50</td>
-                      <td><span class="lang-de">Datenquelle für 6 SOH-Methoden</span><span class="lang-en" hidden>Data source for 6 SOH methods</span></td>
-                    </tr>
-                    <tr>
-                      <td class="highlight">AUTEL MaxiSYS Ultra</td>
-                      <td><span class="lang-de">Off-Board (universell)</span><span class="lang-en" hidden>Off-Board (universal)</span></td>
-                      <td><span class="lang-de">Snapshot</span><span class="lang-en" hidden>Snapshot</span></td>
-                      <td>&gt;€5.000</td>
-                      <td><span class="lang-de">Kreuzvalidierung</span><span class="lang-en" hidden>Cross-validation</span></td>
-                    </tr>
-                  </tbody>
-                </table>
+                <div class="tools-table-wrap">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th><span class="lang-de">System</span><span class="lang-en" hidden>System</span></th>
+                        <th><span class="lang-de">Typ</span><span class="lang-en" hidden>Type</span></th>
+                        <th><span class="lang-de">Anschluss</span><span class="lang-en" hidden>Connection</span></th>
+                        <th><span class="lang-de">Datencharakter</span><span class="lang-en" hidden>Data Character</span></th>
+                        <th><span class="lang-de">Ausgabeformat</span><span class="lang-en" hidden>Output Format</span></th>
+                        <th><span class="lang-de">Kosten</span><span class="lang-en" hidden>Cost</span></th>
+                        <th><span class="lang-de">Rolle</span><span class="lang-en" hidden>Role</span></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="highlight">AVL HV-Check</td>
+                        <td><span class="lang-de">Off-Board, professionell</span><span class="lang-en" hidden>Off-board, professional</span></td>
+                        <td>OBD-Port</td>
+                        <td>Snapshot</td>
+                        <td><span class="lang-de">PDF-Prüfbericht</span><span class="lang-en" hidden>PDF test report</span></td>
+                        <td>~67 €/Monat</td>
+                        <td><span class="lang-de">Referenzmessung (SOH)</span><span class="lang-en" hidden>Reference measurement (SOH)</span></td>
+                      </tr>
+                      <tr>
+                        <td class="highlight">OBDLink MX+</td>
+                        <td><span class="lang-de">On-Board, Consumer</span><span class="lang-en" hidden>On-board, consumer</span></td>
+                        <td>OBD-Port (Bluetooth)</td>
+                        <td><span class="lang-de">Kontinuierliche Zeitreihe</span><span class="lang-en" hidden>Continuous time series</span></td>
+                        <td>CSV</td>
+                        <td>~130 €</td>
+                        <td><span class="lang-de">Hauptdatenquelle (Zeitreihen)</span><span class="lang-en" hidden>Primary data source (time series)</span></td>
+                      </tr>
+                      <tr>
+                        <td class="highlight">AUTEL MaxiSYS Ultra</td>
+                        <td><span class="lang-de">Off-Board, professionell</span><span class="lang-en" hidden>Off-board, professional</span></td>
+                        <td>OBD-Port (VCMI)</td>
+                        <td>Snapshot</td>
+                        <td><span class="lang-de">Diagnosebericht</span><span class="lang-en" hidden>Diagnostic report</span></td>
+                        <td>&gt;5.500 €</td>
+                        <td><span class="lang-de">Zweite Referenz (Snapshot)</span><span class="lang-en" hidden>Second reference (snapshot)</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="tool-stickers-row">
+                  <img src="assets/images/tool-avl.png" alt="AVL HV-Check" class="slide-sticker tool-sticker" style="transform: rotate(-3deg);" />
+                  <img src="assets/images/tool-obdlink.png" alt="OBDLink MX+" class="slide-sticker tool-sticker" style="transform: rotate(4deg);" />
+                  <img src="assets/images/tool-autel.png" alt="AUTEL MaxiSYS Ultra" class="slide-sticker tool-sticker" style="transform: rotate(-2deg);" />
+                </div>
               </div>
             </div>
           </section>
@@ -1398,8 +1453,8 @@
               <span class="lang-en" hidden>Applications & Outlook</span>
             </h2>
             <div class="slide-content">
-              <div class="evidence-area">
-                <div class="two-col">
+              <div class="evidence-area sticker-layout">
+                <div class="sticker-layout-text">
                   <div>
                     <h3><span class="lang-de">Praxisanwendungen</span><span class="lang-en" hidden>Practical Applications</span></h3>
                     <div class="application-grid">
@@ -1431,6 +1486,9 @@
                       <li class="fragment"><span class="lang-de">EU-Batteriepass (Verordnung 2023/1542 — ab 2027 verpflichtend)</span><span class="lang-en" hidden>EU Battery Passport (Regulation 2023/1542 — mandatory from 2027)</span></li>
                     </ul>
                   </div>
+                </div>
+                <div class="sticker-layout-visual">
+                  <img src="assets/images/sticker-curiosity.png" alt="" class="slide-sticker" />
                 </div>
               </div>
             </div>
@@ -1751,6 +1809,7 @@
       <!-- Custom progress bar -->
       <div id="progress-container">
         <div id="progress-bar"></div>
+        <img id="progress-car" src="assets/images/progress-car.png" alt="" />
         <span id="section-title"></span>
       </div>
     </main>

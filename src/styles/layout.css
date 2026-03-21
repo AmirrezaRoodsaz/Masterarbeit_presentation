@@ -48,8 +48,6 @@ body.defense-mode #main-area {
   height: var(--progress-height);
   background: rgba(255, 255, 255, 0.05);
   z-index: 200;
-  display: flex;
-  align-items: center;
 }
 
 #progress-bar {
@@ -57,6 +55,26 @@ body.defense-mode #main-area {
   background: var(--accent);
   width: 0%;
   transition: width var(--transition-default);
+}
+
+#progress-car {
+  position: fixed;
+  bottom: 0px;
+  left: 0%;
+  height: 17px;
+  width: auto;
+  z-index: 202;
+  pointer-events: auto;
+  cursor: pointer;
+  transform: translateX(-50%) scaleX(-1);
+  transition: left var(--transition-default), transform 0.15s ease;
+  filter:
+    drop-shadow(0 0 0 #fff)
+    drop-shadow(1px 0 0 #fff)
+    drop-shadow(-1px 0 0 #fff)
+    drop-shadow(0 1px 0 #fff)
+    drop-shadow(0 -1px 0 #fff)
+    drop-shadow(0 -2px 4px rgba(0, 0, 0, 0.4));
 }
 
 #section-title {

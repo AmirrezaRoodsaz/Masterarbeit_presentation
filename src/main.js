@@ -84,6 +84,7 @@ deck.initialize().then(() => {
 // Custom progress bar
 function updateProgressBar() {
   const bar = document.getElementById('progress-bar');
+  const car = document.getElementById('progress-car');
   const sectionTitle = document.getElementById('section-title');
   if (!bar) return;
 
@@ -92,14 +93,52 @@ function updateProgressBar() {
   const percent = (current / total) * 100;
   bar.style.width = `${percent}%`;
 
-  // Update section title
+  // Move the car to the progress position
+  if (car) {
+    car.style.left = `${percent}%`;
+  }
+
+  // Update section title with language-aware labels
   const currentSlide = deck.getCurrentSlide();
   if (currentSlide && sectionTitle) {
     const section = currentSlide.getAttribute('data-section') || '';
-    sectionTitle.textContent = section;
+    const labels = {
+      opening:    { de: 'Einleitung',   en: 'Introduction' },
+      motivation: { de: 'Motivation',   en: 'Motivation' },
+      theory:     { de: 'Theorie',      en: 'Theory' },
+      method:     { de: 'Methodik',     en: 'Methodology' },
+      results:    { de: 'Ergebnisse',   en: 'Results' },
+      discussion: { de: 'Diskussion',   en: 'Discussion' },
+      flowcharts: { de: 'Diagramme',    en: 'Diagrams' },
+      conclusion: { de: 'Fazit',        en: 'Conclusion' },
+    };
+    const l = labels[section];
+    if (l) {
+      const isEn = document.documentElement.lang === 'en';
+      sectionTitle.innerHTML =
+        `<span class="lang-de"${isEn ? ' hidden' : ''}>${l.de}</span>` +
+        `<span class="lang-en"${isEn ? '' : ' hidden'}>${l.en}</span>`;
+    } else {
+      sectionTitle.textContent = section;
+    }
   }
 }
 
 deck.on('slidechanged', updateProgressBar);
+
+// Easter egg: honk when clicking the car
+const progressCar = document.getElementById('progress-car');
+if (progressCar) {
+  const hornSound = new Audio('assets/audio/horn.mp3');
+  progressCar.addEventListener('click', () => {
+    hornSound.currentTime = 0;
+    hornSound.play();
+    // Little bounce animation
+    progressCar.style.transform = 'translateX(-50%) scaleX(-1) scale(1.3)';
+    setTimeout(() => {
+      progressCar.style.transform = 'translateX(-50%) scaleX(-1) scale(1)';
+    }, 200);
+  });
+}
 
 export { deck };
