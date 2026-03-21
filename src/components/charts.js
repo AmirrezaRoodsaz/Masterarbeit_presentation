@@ -1077,9 +1077,9 @@ function renderChargingProfile(container, data) {
   container.innerHTML = '';
   const tip = ensureTooltip(container);
 
-  const width = 900;
-  const height = 480;
-  const margin = { top: 40, right: 80, bottom: 70, left: 70 };
+  const width = 363;
+  const height = 194;
+  const margin = { top: 18, right: 35, bottom: 28, left: 32 };
   const innerW = width - margin.left - margin.right;
   const innerH = height - margin.top - margin.bottom;
 
@@ -1127,19 +1127,19 @@ function renderChargingProfile(container, data) {
   // Phase labels at top
   g.append('text')
     .attr('x', x(transitionSOC / 2))
-    .attr('y', -8)
+    .attr('y', -4)
     .attr('text-anchor', 'middle')
     .attr('fill', chartBlue)
-    .attr('font-size', '15px')
+    .attr('font-size', '6px')
     .attr('font-weight', '700')
     .text(en ? data.cc_phase.label_en : data.cc_phase.label);
 
   g.append('text')
     .attr('x', x(transitionSOC + (100 - transitionSOC) / 2))
-    .attr('y', -8)
+    .attr('y', -4)
     .attr('text-anchor', 'middle')
     .attr('fill', chartOrange)
-    .attr('font-size', '15px')
+    .attr('font-size', '6px')
     .attr('font-weight', '700')
     .text(en ? data.cv_phase.label_en : data.cv_phase.label);
 
@@ -1154,45 +1154,48 @@ function renderChargingProfile(container, data) {
 
   g.append('text')
     .attr('x', x(transitionSOC))
-    .attr('y', -18)
+    .attr('y', -9)
     .attr('text-anchor', 'middle')
     .attr('fill', getCSSVar('--text-secondary'))
-    .attr('font-size', '11px')
+    .attr('font-size', '5px')
     .text(`${transitionSOC} % SOC`);
 
   // ── Grid ──
   g.append('g')
     .attr('class', 'grid')
-    .call(d3.axisLeft(yVoltage).tickSize(-innerW).tickFormat('').ticks(7));
+    .call(d3.axisLeft(yVoltage).tickSize(-innerW).tickFormat('').ticks(5));
 
   // ── X axis ──
   g.append('g')
     .attr('class', 'axis')
     .attr('transform', `translate(0,${innerH})`)
-    .call(d3.axisBottom(x).ticks(10).tickFormat(d => `${d} %`));
+    .call(d3.axisBottom(x).ticks(10).tickFormat(d => `${d} %`))
+    .selectAll('text')
+    .style('font-size', '5px');
 
   g.append('text')
     .attr('x', innerW / 2)
-    .attr('y', innerH + 40)
+    .attr('y', innerH + 20)
     .attr('text-anchor', 'middle')
     .attr('fill', getCSSVar('--text-secondary'))
-    .attr('font-size', '13px')
+    .attr('font-size', '6px')
     .text('SOC (%)');
 
   // ── Left Y axis (Voltage) ──
   g.append('g')
     .attr('class', 'axis')
-    .call(d3.axisLeft(yVoltage).ticks(7).tickFormat(d => `${d} V`))
+    .call(d3.axisLeft(yVoltage).ticks(5).tickFormat(d => `${d} V`))
     .selectAll('text')
-    .style('fill', chartBlue);
+    .style('fill', chartBlue)
+    .style('font-size', '5px');
 
   g.append('text')
     .attr('transform', 'rotate(-90)')
     .attr('x', -innerH / 2)
-    .attr('y', -50)
+    .attr('y', -22)
     .attr('text-anchor', 'middle')
     .attr('fill', chartBlue)
-    .attr('font-size', '13px')
+    .attr('font-size', '6px')
     .attr('font-weight', '600')
     .text(en ? 'Voltage (V)' : 'Spannung (V)');
 
@@ -1200,17 +1203,18 @@ function renderChargingProfile(container, data) {
   g.append('g')
     .attr('class', 'axis')
     .attr('transform', `translate(${innerW},0)`)
-    .call(d3.axisRight(yCurrent).ticks(5).tickFormat(d => `${d} A`))
+    .call(d3.axisRight(yCurrent).ticks(4).tickFormat(d => `${d} A`))
     .selectAll('text')
-    .style('fill', chartOrange);
+    .style('fill', chartOrange)
+    .style('font-size', '5px');
 
   g.append('text')
     .attr('transform', 'rotate(90)')
     .attr('x', innerH / 2)
-    .attr('y', -innerW - 55)
+    .attr('y', -innerW - 25)
     .attr('text-anchor', 'middle')
     .attr('fill', chartOrange)
-    .attr('font-size', '13px')
+    .attr('font-size', '6px')
     .attr('font-weight', '600')
     .text(en ? 'Current (A)' : 'Strom (A)');
 
@@ -1224,7 +1228,7 @@ function renderChargingProfile(container, data) {
     .datum(profile)
     .attr('fill', 'none')
     .attr('stroke', chartBlue)
-    .attr('stroke-width', 3)
+    .attr('stroke-width', 1.5)
     .attr('d', voltageLine);
 
   // ── Current line ──
@@ -1237,44 +1241,44 @@ function renderChargingProfile(container, data) {
     .datum(profile)
     .attr('fill', 'none')
     .attr('stroke', chartOrange)
-    .attr('stroke-width', 3)
+    .attr('stroke-width', 1.5)
     .attr('d', currentLine);
 
   // ── Key value annotations ──
   // CC constant current label
   g.append('text')
     .attr('x', x(40))
-    .attr('y', yCurrent(16) - 12)
+    .attr('y', yCurrent(16) - 8)
     .attr('text-anchor', 'middle')
     .attr('fill', chartOrange)
-    .attr('font-size', '12px')
+    .attr('font-size', '5px')
     .attr('font-weight', '600')
     .text(`I = ${profile[0].current} A`);
 
   // CV constant voltage label
   g.append('text')
     .attr('x', x(92))
-    .attr('y', yVoltage(408) - 12)
+    .attr('y', yVoltage(408) - 6)
     .attr('text-anchor', 'middle')
     .attr('fill', chartBlue)
-    .attr('font-size', '12px')
+    .attr('font-size', '5px')
     .attr('font-weight', '600')
     .text(`U = ${profile[profile.length - 1].voltage} V`);
 
   // End current annotation
   g.append('text')
-    .attr('x', x(100) + 4)
-    .attr('y', yCurrent(0.5) + 4)
+    .attr('x', x(100) + 2)
+    .attr('y', yCurrent(0.5) + 2)
     .attr('text-anchor', 'start')
     .attr('fill', accent)
-    .attr('font-size', '11px')
+    .attr('font-size', '5px')
     .attr('font-weight', '600')
     .text(`I < ${data.end_current_a} A`);
 
   // ── Interactive overlay ──
   const bisect = d3.bisector(d => d.soc).left;
-  const focusV = g.append('circle').attr('r', 5).attr('fill', chartBlue).style('display', 'none');
-  const focusI = g.append('circle').attr('r', 5).attr('fill', chartOrange).style('display', 'none');
+  const focusV = g.append('circle').attr('r', 2).attr('fill', chartBlue).style('display', 'none');
+  const focusI = g.append('circle').attr('r', 2).attr('fill', chartOrange).style('display', 'none');
   const focusLine = g.append('line')
     .attr('stroke', getCSSVar('--text-secondary'))
     .attr('stroke-width', 1)
@@ -1286,7 +1290,10 @@ function renderChargingProfile(container, data) {
     .attr('height', innerH)
     .attr('fill', 'transparent')
     .on('mousemove', (event) => {
-      const [mx] = d3.pointer(event);
+      const svgNode = svg.node();
+      const bcr = svgNode.getBoundingClientRect();
+      const vb = svgNode.viewBox.baseVal;
+      const mx = (event.clientX - bcr.left) / bcr.width * vb.width - margin.left;
       const soc = x.invert(mx);
       const idx = bisect(profile, soc, 1);
       const d0 = profile[idx - 1];
@@ -1295,7 +1302,7 @@ function renderChargingProfile(container, data) {
 
       focusV.attr('cx', x(d.soc)).attr('cy', yVoltage(d.voltage)).style('display', null);
       focusI.attr('cx', x(d.soc)).attr('cy', yCurrent(d.current)).style('display', null);
-      focusLine.attr('x1', x(d.soc)).attr('x2', x(d.soc)).attr('y1', 0).attr('y2', innerH).style('display', null);
+      focusLine.attr('x1', mx).attr('x2', mx).attr('y1', 0).attr('y2', innerH).style('display', null);
 
       const phase = d.soc <= transitionSOC ? (en ? 'CC Phase' : 'CC-Phase') : (en ? 'CV Phase' : 'CV-Phase');
       showTooltip(tip, `
@@ -1328,8 +1335,8 @@ function renderChargingProfile(container, data) {
   // SOH method usage annotation
   const sohNote = document.createElement('div');
   sohNote.className = 'chart-legend';
-  sohNote.style.marginTop = '4px';
-  sohNote.style.fontSize = '12px';
+  sohNote.style.marginTop = '2px';
+  sohNote.style.fontSize = '8px';
   sohNote.style.opacity = '0.8';
   sohNote.innerHTML = `<span style="color:${chartBlue}">CC → ${en ? data.cc_phase.soh_use_en : data.cc_phase.soh_use}</span> · <span style="color:${chartOrange}">CV → ${en ? data.cv_phase.soh_use_en : data.cv_phase.soh_use}</span>`;
 
@@ -1341,14 +1348,13 @@ function renderChargingProfile(container, data) {
 
 export async function initCharts() {
   // Fetch all data in parallel
-  const [methodsData, reproData, tempData, resistData, avlTimelineData, communityData, dischargeData, chargingData] = await Promise.all([
+  const [methodsData, reproData, tempData, resistData, avlTimelineData, communityData, chargingData] = await Promise.all([
     fetch('/assets/data/soh-methods.json').then(r => r.json()),
     fetch('/assets/data/reproducibility.json').then(r => r.json()),
     fetch('/assets/data/temperature-comparison.json').then(r => r.json()),
     fetch('/assets/data/resistance.json').then(r => r.json()),
     fetch('/assets/data/avl-timeline.json').then(r => r.json()),
     fetch('/assets/data/community-comparison.json').then(r => r.json()),
-    fetch('/assets/data/discharge-protocol.json').then(r => r.json()),
     fetch('/assets/data/charging-profile.json').then(r => r.json()),
   ]);
 
@@ -1359,7 +1365,6 @@ export async function initCharts() {
     { id: 'chart-resistance', render: renderResistance, data: resistData },
     { id: 'chart-avl-timeline', render: renderAVLTimeline, data: avlTimelineData },
     { id: 'chart-community', render: renderCommunityComparison, data: communityData },
-    { id: 'chart-discharge-protocol', render: renderDischargeProtocol, data: dischargeData },
     { id: 'chart-charging-profile', render: renderChargingProfile, data: chargingData },
   ];
 

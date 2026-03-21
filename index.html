@@ -351,7 +351,7 @@
                 </div>
               </div>
 
-              <div class="takeaway-box fragment">
+              <div class="takeaway-box">
                 <div class="takeaway-label">Kernproblem</div>
                 <p>
                   <span class="lang-de">Beim Gebrauchtfahrzeugkauf kann der Batteriezustand nicht zuverlässig bewertet werden — ein reproduzierbares, herstellerunabhängiges Verfahren fehlt.</span>
@@ -465,7 +465,7 @@
                 </div>
               </div>
 
-              <div class="takeaway-box fragment">
+              <div class="takeaway-box">
                 <div class="takeaway-label">Forschungslücke</div>
                 <p>
                   <span class="lang-de">Es fehlt eine standardisierte, reproduzierbare Methodik zum Vergleich von SOH-Diagnosesystemen an realen Fahrzeugen.</span>
@@ -638,19 +638,19 @@
                       <span class="lang-en" hidden>Calendar Aging</span>
                     </h3>
                     <ul class="styled-list">
-                      <li class="fragment">
+                      <li>
                         <span class="lang-de">SEI-Wachstum → Verlust von Lithium-Inventar (LLI)</span>
                         <span class="lang-en" hidden>SEI growth → Loss of Lithium Inventory (LLI)</span>
                       </li>
-                      <li class="fragment">
+                      <li>
                         <span class="lang-de">Kathoden-Degradation → Metallionen-Auflösung → LAM</span>
                         <span class="lang-en" hidden>Cathode degradation → metal ion dissolution → LAM</span>
                       </li>
-                      <li class="fragment">
+                      <li>
                         <span class="lang-de">Elektrolyt-Zersetzung → Kapazitätsverlust</span>
                         <span class="lang-en" hidden>Electrolyte decomposition → capacity loss</span>
                       </li>
-                      <li class="fragment">
+                      <li>
                         <span class="lang-de">Arrhenius-Verhalten: T↑ = exponentiell schnellere Alterung</span>
                         <span class="lang-en" hidden>Arrhenius behavior: T↑ = exponentially faster aging</span>
                       </li>
@@ -662,19 +662,19 @@
                       <span class="lang-en" hidden>Cyclic Aging</span>
                     </h3>
                     <ul class="styled-list">
-                      <li class="fragment">
+                      <li>
                         <span class="lang-de">Volumenänderung → Partikelriss → LAM</span>
                         <span class="lang-en" hidden>Volume change → particle cracking → LAM</span>
                       </li>
-                      <li class="fragment">
+                      <li>
                         <span class="lang-de">Lithium-Plating → Dendriten → interner Kurzschluss</span>
                         <span class="lang-en" hidden>Lithium plating → dendrites → internal short circuit</span>
                       </li>
-                      <li class="fragment">
+                      <li>
                         <span class="lang-de">Große Entladetiefe (DoD) → stärkere mechanische Belastung</span>
                         <span class="lang-en" hidden>Large depth of discharge (DoD) → stronger mechanical stress</span>
                       </li>
-                      <li class="fragment">
+                      <li>
                         <span class="lang-de">Hohe C-Rate + niedrige Temp. + hoher SOC beschleunigen</span>
                         <span class="lang-en" hidden>High C-rate + low temp. + high SOC accelerate aging</span>
                       </li>
@@ -686,7 +686,7 @@
                   <img src="assets/images/sticker-analysis.png" alt="" class="slide-sticker" />
                 </div>
               </div>
-              <div class="context-note fragment" style="margin-top: 1rem; padding: 0.8rem 1.2rem; border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: var(--border-radius-sm);">
+              <div class="context-note" style="margin-top: 1rem; padding: 0.8rem 1.2rem; border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: var(--border-radius-sm);">
                 <span class="lang-de"><strong>Testfahrzeug VW ID.4:</strong> NMC 712 Pouch-Zellen · 288 Zellen (12 Module × 24) · 77 kWh brutto / 72 kWh netto · 300–408 V</span>
                 <span class="lang-en" hidden><strong>Test vehicle VW ID.4:</strong> NMC 712 pouch cells · 288 cells (12 modules × 24) · 77 kWh gross / 72 kWh net · 300–408 V</span>
               </div>
@@ -703,7 +703,7 @@
               <div class="evidence-area sticker-layout">
                 <div class="sticker-layout-text">
                   <div class="equation-stack">
-                    <div class="equation-row fragment">
+                    <div class="equation-row">
                       <span class="equation-label">SOH<sub>cap</sub></span>
                       <div class="katex-eq">$$\text{SOH}_{\text{cap}} = \frac{E_{\text{aktuell}}}{E_{\text{nenn}}} \times 100\%$$</div>
                       <span class="equation-desc">
@@ -715,7 +715,7 @@
                         <span class="lang-en" hidden>Fallback: Extrapolation if SOC &lt; 90% (only if SOC ≥ 50%)</span>
                       </span>
                     </div>
-                    <div class="equation-row fragment">
+                    <div class="equation-row">
                       <span class="equation-label">SOH<sub>e</sub></span>
                       <div class="katex-eq">$$\text{SOH}_e = \frac{\int_0^T V(t) \cdot |I(t)| \, dt}{E_{\text{nenn}}} \times 100\%$$</div>
                       <span class="equation-desc">
@@ -727,7 +727,7 @@
                         <span class="lang-en" hidden>Fallback: BMS parameter "current energy content"</span>
                       </span>
                     </div>
-                    <div class="equation-row fragment">
+                    <div class="equation-row">
                       <span class="equation-label">SOH<sub>c</sub></span>
                       <div class="katex-eq">$$\text{SOH}_c = \frac{\int_0^T |I(t)| \, dt}{Q_{\text{nenn}}} \times 100\%$$</div>
                       <span class="equation-desc">
@@ -739,7 +739,7 @@
                         <span class="lang-en" hidden>Fallback: BMS parameter "cumulative charge"</span>
                       </span>
                     </div>
-                    <div class="equation-row fragment">
+                    <div class="equation-row">
                       <span class="equation-label">SOH<sub>R</sub></span>
                       <div class="katex-eq">$$\text{SOH}_R = \frac{R_{i,\text{Baseline}}}{R_{i,\text{aktuell}}} \times 100\%$$</div>
                       <span class="equation-desc">
@@ -751,7 +751,7 @@
                         <span class="lang-en" hidden>R<sub>i</sub> = |ΔV / ΔI|, |ΔI| &gt; 1 A, 0 &lt; R<sub>i</sub> &lt; 500 mΩ</span>
                       </span>
                     </div>
-                    <div class="equation-row fragment">
+                    <div class="equation-row">
                       <span class="equation-label">SOH<sub>komb</sub></span>
                       <div class="katex-eq">$$\text{SOH}_{\text{komb}} = \frac{\text{SOH}_e + \text{SOH}_c}{2}$$</div>
                       <span class="equation-desc">
@@ -843,35 +843,35 @@
               <div class="evidence-area sticker-layout">
                 <div class="sticker-layout-text">
                   <div class="protocol-steps">
-                    <div class="protocol-step fragment">
+                    <div class="protocol-step">
                       <div class="step-number">1</div>
                       <div class="step-content">
                         <strong><span class="lang-de">Vorbereitung</span><span class="lang-en" hidden>Preparation</span></strong>
                         <p><span class="lang-de">Entladung auf ~0 % SOC (Display), Umgebungstemperatur dokumentieren, Kilometerstand notieren</span><span class="lang-en" hidden>Discharge to ~0% SOC (display), document ambient temperature, record odometer</span></p>
                       </div>
                     </div>
-                    <div class="protocol-step fragment">
+                    <div class="protocol-step">
                       <div class="step-number">2</div>
                       <div class="step-content">
                         <strong><span class="lang-de">OBD2-Verbindungsaufbau</span><span class="lang-en" hidden>OBD2 Connection Setup</span></strong>
                         <p><span class="lang-de">OBDLink MX+ in OBD-Port → Bluetooth → Car Scanner Pro App → alle BMS-PIDs wählen (SOC, U, I, 96 Zellspannungen, 24 Temperatursensoren)</span><span class="lang-en" hidden>OBDLink MX+ into OBD port → Bluetooth → Car Scanner Pro app → select all BMS PIDs (SOC, V, I, 96 cell voltages, 24 temperature sensors)</span></p>
                       </div>
                     </div>
-                    <div class="protocol-step fragment">
+                    <div class="protocol-step">
                       <div class="step-number">3</div>
                       <div class="step-content">
                         <strong><span class="lang-de">Ladevorgang</span><span class="lang-en" hidden>Charging Process</span></strong>
                         <p><span class="lang-de">Aufzeichnung starten <em>vor</em> Ladebeginn → CCS/AC-Ladung 0→100 % SOC, ~1 s Abtastrate, kontinuierliches Logging</span><span class="lang-en" hidden>Start recording <em>before</em> charging begins → CCS/AC charging 0→100% SOC, ~1 s sampling rate, continuous logging</span></p>
                       </div>
                     </div>
-                    <div class="protocol-step fragment">
+                    <div class="protocol-step">
                       <div class="step-number">4</div>
                       <div class="step-content">
                         <strong><span class="lang-de">Datenexport</span><span class="lang-en" hidden>Data Export</span></strong>
                         <p><span class="lang-de">Aufzeichnung stoppen → CSV-Export (zeitgestempelte Messwerte aller Parameter)</span><span class="lang-en" hidden>Stop recording → CSV export (timestamped measurement values of all parameters)</span></p>
                       </div>
                     </div>
-                    <div class="protocol-step fragment">
+                    <div class="protocol-step">
                       <div class="step-number">5</div>
                       <div class="step-content">
                         <strong><span class="lang-de">Analyse</span><span class="lang-en" hidden>Analysis</span></strong>
@@ -887,7 +887,7 @@
             </div>
           </section>
 
-          <!-- Slide 10: Discharge Protocol (Entladung) -->
+          <!-- Slide 10: Discharge Protocol (Entladung) — Dashboard Cluster -->
           <section id="slide-discharge" data-section="method">
             <h2>
               <span class="lang-de">Entladung durch normale Fahrt bis Display-SOC = 0 % (BMS-SOC ≈ 5,75 %)</span>
@@ -895,7 +895,123 @@
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
-                <div class="chart-container" id="chart-discharge-protocol"></div>
+                <!-- Dashboard cluster — two gauges -->
+                <div class="dashboard-cluster">
+
+                  <!-- Left gauge: Steps 1–5 around a circle -->
+                  <div class="dash-gauge-block">
+                    <svg class="dash-gauge" viewBox="0 0 360 360">
+                      <!-- Background arc -->
+                      <circle cx="180" cy="180" r="140" fill="none" stroke="var(--bg-surface)" stroke-width="18" stroke-linecap="round"
+                              stroke-dasharray="660" stroke-dashoffset="132" transform="rotate(135 180 180)" />
+                      <!-- Tick marks for each step (6 positions, 54° apart) -->
+                      <!-- Step 1: 135° -->
+                      <circle cx="180" cy="180" r="118" fill="none" stroke="#6b7280" stroke-width="2" stroke-dasharray="2 740" transform="rotate(135 180 180)" />
+                      <!-- Step 2: 189° -->
+                      <circle cx="180" cy="180" r="118" fill="none" stroke="#3b82f6" stroke-width="2" stroke-dasharray="2 740" transform="rotate(189 180 180)" />
+                      <!-- Step 3: 243° -->
+                      <circle cx="180" cy="180" r="118" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="2 740" transform="rotate(243 180 180)" />
+                      <!-- Step 4: 297° -->
+                      <circle cx="180" cy="180" r="118" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="2 740" transform="rotate(297 180 180)" />
+                      <!-- Step 5: 351° -->
+                      <circle cx="180" cy="180" r="118" fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="2 740" transform="rotate(351 180 180)" />
+                      <!-- Gauge needle — Mercedes-style, points at step 5 (351°) -->
+                      <defs>
+                        <linearGradient id="needleGrad" x1="0" y1="1" x2="0" y2="0">
+                          <stop offset="0%" stop-color="#94a3b8" />
+                          <stop offset="100%" stop-color="#e2e8f0" />
+                        </linearGradient>
+                        <radialGradient id="hubGrad">
+                          <stop offset="0%" stop-color="#334155" />
+                          <stop offset="80%" stop-color="#1e293b" />
+                          <stop offset="100%" stop-color="#0f172a" />
+                        </radialGradient>
+                        <filter id="needleGlow">
+                          <feGaussianBlur stdDeviation="2" result="blur" />
+                          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+                        </filter>
+                      </defs>
+                      <g transform="rotate(351 180 180)" filter="url(#needleGlow)">
+                        <!-- Needle body — thin tapered shape -->
+                        <polygon points="178.5,175 180,58 181.5,175" fill="url(#needleGrad)" />
+                        <!-- Counterweight -->
+                        <polygon points="177,185 180,175 183,185 180,200" fill="#475569" />
+                      </g>
+                      <!-- Center hub — metallic ring -->
+                      <circle cx="180" cy="180" r="14" fill="url(#hubGrad)" stroke="#475569" stroke-width="1.5" />
+                      <circle cx="180" cy="180" r="5" fill="#64748b" />
+                      <circle cx="180" cy="180" r="2.5" fill="#94a3b8" />
+                    </svg>
+                    <!-- Step labels around the gauge (7 positions, 45° apart; 6-7 are invisible spacers) -->
+                    <div class="dash-step-labels">
+                      <div class="dash-step-label" style="--i: 0; --step-color: #6b7280;">
+                        <span class="dash-step-num">1</span>
+                        <span class="dash-step-text"><span class="lang-de">Ausgangszustand</span><span class="lang-en" hidden>Initial State</span></span>
+                        <span class="dash-step-tip"><span class="lang-de">Fahrzeug bei beliebigem SOC — keine Vorbedingung nötig, Start jederzeit möglich</span><span class="lang-en" hidden>Vehicle at arbitrary SOC — no precondition needed, start anytime</span></span>
+                      </div>
+                      <div class="dash-step-label" style="--i: 1; --step-color: #3b82f6;">
+                        <span class="dash-step-num">2</span>
+                        <span class="dash-step-text"><span class="lang-de">Normale Fahrt</span><span class="lang-en" hidden>Normal Driving</span></span>
+                        <span class="dash-step-tip"><span class="lang-de">Fahren bis Display-SOC ≈ 0 % — normaler Fahrbetrieb, keine Sondermodi erforderlich</span><span class="lang-en" hidden>Drive until display SOC ≈ 0% — normal driving, no special modes required</span></span>
+                      </div>
+                      <div class="dash-step-label" style="--i: 2; --step-color: #f59e0b;">
+                        <span class="dash-step-num">3</span>
+                        <span class="dash-step-text"><span class="lang-de">Batterie-Warnung</span><span class="lang-en" hidden>Battery Warning</span></span>
+                        <span class="dash-step-tip"><span class="lang-de">Warnmeldung im Fahrzeug — Leistungsreduzierung, Fahrzeug sicher abstellen</span><span class="lang-en" hidden>Warning message in vehicle — power reduction, park vehicle safely</span></span>
+                      </div>
+                      <div class="dash-step-label" style="--i: 3; --step-color: #8b5cf6;">
+                        <span class="dash-step-num">4</span>
+                        <span class="dash-step-text"><span class="lang-de">Dokumentation</span><span class="lang-en" hidden>Documentation</span></span>
+                        <span class="dash-step-tip"><span class="lang-de">Umgebungstemperatur (15–30 °C), km-Stand und Zeitstempel notieren</span><span class="lang-en" hidden>Record ambient temperature (15–30 °C), odometer reading and timestamp</span></span>
+                      </div>
+                      <div class="dash-step-label" style="--i: 4; --step-color: #10b981;">
+                        <span class="dash-step-num">5</span>
+                        <span class="dash-step-text"><span class="lang-de">Messbereit</span><span class="lang-en" hidden>Ready</span></span>
+                        <span class="dash-step-tip"><span class="lang-de">Display-SOC = 0 % (BMS-SOC ≈ 5,75 %) — Ladung kann nun gestartet werden</span><span class="lang-en" hidden>Display SOC = 0% (BMS SOC ≈ 5.75%) — charging can now begin</span></span>
+                      </div>
+                      <div class="dash-step-label dash-step-spacer" style="--i: 5;"></div>
+                    </div>
+                  </div>
+
+                  <!-- Right gauge: SOC -->
+                  <div class="dash-gauge-block">
+                    <svg class="dash-gauge" viewBox="0 0 360 360">
+                      <!-- Background arc -->
+                      <circle cx="180" cy="180" r="140" fill="none" stroke="var(--bg-surface)" stroke-width="18" stroke-linecap="round"
+                              stroke-dasharray="660" stroke-dashoffset="132" transform="rotate(135 180 180)" />
+                      <!-- SOC fill arc (72% of 528 usable = ~380) → dashoffset = 660-380 = 280 -->
+                      <circle class="soc-gauge-fill" cx="180" cy="180" r="140" fill="none" stroke="url(#socGrad2)" stroke-width="18" stroke-linecap="round"
+                              stroke-dasharray="660" stroke-dashoffset="280" transform="rotate(135 180 180)" />
+                      <!-- BMS reserve sliver at bottom -->
+                      <circle cx="180" cy="180" r="140" fill="none" stroke="#f59e0b" stroke-width="18" stroke-linecap="round" opacity="0.5"
+                              stroke-dasharray="660" stroke-dashoffset="628" transform="rotate(135 180 180)" />
+                      <defs>
+                        <linearGradient id="socGrad2" x1="0%" y1="100%" x2="100%" y2="0%">
+                          <stop offset="0%" stop-color="#10b981" />
+                          <stop offset="50%" stop-color="#3b82f6" />
+                          <stop offset="100%" stop-color="#6366f1" />
+                        </linearGradient>
+                      </defs>
+                      <!-- Center: SOC percentage -->
+                      <text x="180" y="158" text-anchor="middle" fill="var(--text-primary)" font-size="56" font-weight="700">72</text>
+                      <text x="180" y="158" text-anchor="middle" fill="var(--text-secondary)" font-size="20" dx="46">%</text>
+                      <text x="180" y="185" text-anchor="middle" fill="var(--text-secondary)" font-size="15">SOC</text>
+                      <!-- Bottom labels -->
+                      <text x="180" y="220" text-anchor="middle" fill="var(--text-secondary)" font-size="12">Display → 0 %</text>
+                      <text x="180" y="240" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="600">BMS ≈ 5,75 %</text>
+                    </svg>
+                  </div>
+
+                </div>
+
+                <!-- Insight — same position as Kernproblem on slide 3 -->
+                <div class="takeaway-box">
+                  <div class="takeaway-label">Insight</div>
+                  <p>
+                    <span class="lang-de">Display-SOC = 0 % entspricht BMS-SOC ≈ 5,75 % — das nutzbare Fenster beträgt ca. 90 % der physikalischen Kapazität.</span>
+                    <span class="lang-en" hidden>Display SOC = 0% corresponds to BMS SOC ≈ 5.75% — the usable window covers approx. 90% of physical capacity.</span>
+                  </p>
+                </div>
               </div>
             </div>
           </section>
@@ -908,7 +1024,80 @@
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
-                <div class="chart-container" id="chart-charging-profile"></div>
+                <!-- Dashboard cluster — gauge + chart side by side -->
+                <div class="dashboard-cluster charging-cluster">
+
+                  <!-- Left gauge: Charging steps 1–5 -->
+                  <div class="dash-gauge-block charging-gauge">
+                    <svg class="dash-gauge" viewBox="0 0 360 360">
+                      <!-- Background arc -->
+                      <circle cx="180" cy="180" r="140" fill="none" stroke="var(--bg-surface)" stroke-width="18" stroke-linecap="round"
+                              stroke-dasharray="660" stroke-dashoffset="132" transform="rotate(135 180 180)" />
+                      <!-- Tick marks (6 positions, 54° apart) -->
+                      <circle cx="180" cy="180" r="118" fill="none" stroke="#6b7280" stroke-width="2" stroke-dasharray="2 740" transform="rotate(135 180 180)" />
+                      <circle cx="180" cy="180" r="118" fill="none" stroke="#3b82f6" stroke-width="2" stroke-dasharray="2 740" transform="rotate(189 180 180)" />
+                      <circle cx="180" cy="180" r="118" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="2 740" transform="rotate(243 180 180)" />
+                      <circle cx="180" cy="180" r="118" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="2 740" transform="rotate(297 180 180)" />
+                      <circle cx="180" cy="180" r="118" fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="2 740" transform="rotate(351 180 180)" />
+                      <!-- Gauge needle — points at step 5 (351°) -->
+                      <defs>
+                        <linearGradient id="needleGrad2" x1="0" y1="1" x2="0" y2="0">
+                          <stop offset="0%" stop-color="#94a3b8" />
+                          <stop offset="100%" stop-color="#e2e8f0" />
+                        </linearGradient>
+                        <radialGradient id="hubGrad2">
+                          <stop offset="0%" stop-color="#334155" />
+                          <stop offset="80%" stop-color="#1e293b" />
+                          <stop offset="100%" stop-color="#0f172a" />
+                        </radialGradient>
+                        <filter id="needleGlow2">
+                          <feGaussianBlur stdDeviation="2" result="blur" />
+                          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+                        </filter>
+                      </defs>
+                      <g transform="rotate(351 180 180)" filter="url(#needleGlow2)">
+                        <polygon points="178.5,175 180,58 181.5,175" fill="url(#needleGrad2)" />
+                        <polygon points="177,185 180,175 183,185 180,200" fill="#475569" />
+                      </g>
+                      <circle cx="180" cy="180" r="14" fill="url(#hubGrad2)" stroke="#475569" stroke-width="1.5" />
+                      <circle cx="180" cy="180" r="5" fill="#64748b" />
+                      <circle cx="180" cy="180" r="2.5" fill="#94a3b8" />
+                    </svg>
+                    <!-- Step labels (6 positions, 54° apart; 6 is spacer) -->
+                    <div class="dash-step-labels">
+                      <div class="dash-step-label" style="--i: 0; --step-color: #6b7280;">
+                        <span class="dash-step-num">1</span>
+                        <span class="dash-step-text"><span class="lang-de">Vorbereitung</span><span class="lang-en" hidden>Preparation</span></span>
+                        <span class="dash-step-tip"><span class="lang-de">SOC ≈ 0 %, Temperatur & km-Stand dokumentieren</span><span class="lang-en" hidden>SOC ≈ 0%, document temperature & odometer</span></span>
+                      </div>
+                      <div class="dash-step-label" style="--i: 1; --step-color: #3b82f6;">
+                        <span class="dash-step-num">2</span>
+                        <span class="dash-step-text"><span class="lang-de">OBD<br>Verbindung</span><span class="lang-en" hidden>OBD<br>Connection</span></span>
+                        <span class="dash-step-tip"><span class="lang-de">OBDLink MX+ anschließen, 194 BMS-Kanäle auswählen, ~1 s Abtastrate</span><span class="lang-en" hidden>Connect OBDLink MX+, select 194 BMS channels, ~1 s sampling rate</span></span>
+                      </div>
+                      <div class="dash-step-label" style="--i: 2; --step-color: #f59e0b;">
+                        <span class="dash-step-num">3</span>
+                        <span class="dash-step-text"><span class="lang-de">Ladevorgang</span><span class="lang-en" hidden>Charging</span></span>
+                        <span class="dash-step-tip"><span class="lang-de">Aufzeichnung VOR Anschluss starten — AC 11 kW Wallbox, laden bis 100 % SOC</span><span class="lang-en" hidden>Start recording BEFORE connection — AC 11 kW wallbox, charge to 100% SOC</span></span>
+                      </div>
+                      <div class="dash-step-label" style="--i: 3; --step-color: #8b5cf6;">
+                        <span class="dash-step-num">4</span>
+                        <span class="dash-step-text"><span class="lang-de">Datenexport</span><span class="lang-en" hidden>Data Export</span></span>
+                        <span class="dash-step-tip"><span class="lang-de">CSV-Export mit Zeitstempel — SOC, Spannung, Strom, 96 Zellgruppen, 24 Temperaturen</span><span class="lang-en" hidden>CSV export with timestamps — SOC, voltage, current, 96 cell groups, 24 temperatures</span></span>
+                      </div>
+                      <div class="dash-step-label" style="--i: 4; --step-color: #10b981;">
+                        <span class="dash-step-num">5</span>
+                        <span class="dash-step-text"><span class="lang-de">Analyse</span><span class="lang-en" hidden>Analysis</span></span>
+                        <span class="dash-step-tip"><span class="lang-de">SOH-Berechnung: Kapazität, Energie, ICA — automatisierter Ergebnisbericht</span><span class="lang-en" hidden>SOH calculation: capacity, energy, ICA — automated results report</span></span>
+                      </div>
+                      <div class="dash-step-label dash-step-spacer" style="--i: 5;"></div>
+                    </div>
+                  </div>
+
+                  <!-- Right: CC-CV chart (zoomable) -->
+                  <div class="chart-container" id="chart-charging-profile"></div>
+
+                </div>
               </div>
             </div>
           </section>
@@ -1026,7 +1215,7 @@
                   <!-- D3 chart — Phase 8 -->
                 </div>
               </div>
-              <div class="takeaway-box fragment">
+              <div class="takeaway-box">
                 <div class="takeaway-label">Takeaway</div>
                 <p>
                   <span class="lang-de">Die Mittelung von SOH_e (+2,3 Pp) und SOH_c (−5,5 Pp) kompensiert systematische Fehler beider Methoden.</span>
@@ -1053,7 +1242,7 @@
                   </div>
                 </div>
               </div>
-              <div class="takeaway-box fragment">
+              <div class="takeaway-box">
                 <div class="takeaway-label">Takeaway</div>
                 <p>
                   <span class="lang-de">VW ID.4: σ = 1,20 % über 5 AVL-Messungen (12 Monate). Algorithmisch: nur 0,2 Pp Streuung über 3 identische Durchläufe.</span>
@@ -1075,7 +1264,7 @@
                   <!-- D3 chart — Phase 8 -->
                 </div>
               </div>
-              <div class="takeaway-box fragment">
+              <div class="takeaway-box">
                 <div class="takeaway-label">Takeaway</div>
                 <p>
                   <span class="lang-de">SOH_e steigt bei Kälte (+1,2 Pp), SOH_c sinkt (−1,3 Pp) — kombiniert: nur 0,1 Pp Differenz zwischen 9,8 °C und 19 °C.</span>
@@ -1151,7 +1340,7 @@
                   </div>
                 </div>
               </div>
-              <div class="takeaway-box fragment">
+              <div class="takeaway-box">
                 <div class="takeaway-label">Takeaway</div>
                 <p>
                   <span class="lang-de">Die Coulomb-Zählung (SOH_c) fällt bei kleinem SOC-Fenster auf 54,6 % — immer mit maximalem SOC-Fenster messen!</span>
@@ -1210,7 +1399,7 @@
                   </div>
                 </div>
               </div>
-              <div class="takeaway-box fragment">
+              <div class="takeaway-box">
                 <div class="takeaway-label">Takeaway</div>
                 <p>
                   <span class="lang-de">Die On-Board-Methode erreicht mit nur 1,6 Pp Abweichung eine praxistaugliche Genauigkeit — bei einem Bruchteil der Kosten des professionellen AVL-Systems.</span>
@@ -1280,7 +1469,7 @@
                   <!-- D3 chart — Community data positioning -->
                 </div>
               </div>
-              <div class="takeaway-box fragment">
+              <div class="takeaway-box">
                 <div class="takeaway-label">Takeaway</div>
                 <p>
                   <span class="lang-de">Der eigene Messwert (VW ID.4: 99,6 % SOH_e) liegt im erwarteten Bereich der Community-Daten — externe Plausibilitätsprüfung bestanden.</span>
@@ -1332,20 +1521,20 @@
                   <div>
                     <h3 style="color: var(--success)"><span class="lang-de">Stärken</span><span class="lang-en" hidden>Strengths</span></h3>
                     <ul class="styled-list">
-                      <li class="fragment"><span class="lang-de">Reproduzierbarer SOH mit ~€50 OBD-Hardware (±1,6 Pp vs. Referenz)</span><span class="lang-en" hidden>Reproducible SOH with ~€50 OBD hardware (±1.6 pp vs. reference)</span></li>
-                      <li class="fragment"><span class="lang-de">Kombinierte Methode robust gegen Temperatur (0,1 Pp über 9–19 °C)</span><span class="lang-en" hidden>Combined method robust against temperature (0.1 pp across 9–19°C)</span></li>
-                      <li class="fragment"><span class="lang-de">Inter-System-Übereinstimmung: 1,6 Pp zwischen AVL und OBD</span><span class="lang-en" hidden>Inter-system agreement: 1.6 pp between AVL and OBD</span></li>
-                      <li class="fragment"><span class="lang-de">Automatisierte Python-App für Werkstattpraxis</span><span class="lang-en" hidden>Automated Python app for workshop practice</span></li>
+                      <li><span class="lang-de">Reproduzierbarer SOH mit ~€50 OBD-Hardware (±1,6 Pp vs. Referenz)</span><span class="lang-en" hidden>Reproducible SOH with ~€50 OBD hardware (±1.6 pp vs. reference)</span></li>
+                      <li><span class="lang-de">Kombinierte Methode robust gegen Temperatur (0,1 Pp über 9–19 °C)</span><span class="lang-en" hidden>Combined method robust against temperature (0.1 pp across 9–19°C)</span></li>
+                      <li><span class="lang-de">Inter-System-Übereinstimmung: 1,6 Pp zwischen AVL und OBD</span><span class="lang-en" hidden>Inter-system agreement: 1.6 pp between AVL and OBD</span></li>
+                      <li><span class="lang-de">Automatisierte Python-App für Werkstattpraxis</span><span class="lang-en" hidden>Automated Python app for workshop practice</span></li>
                     </ul>
                   </div>
                   <div>
                     <h3 style="color: var(--warning)"><span class="lang-de">Limitationen</span><span class="lang-en" hidden>Limitations</span></h3>
                     <ul class="styled-list">
-                      <li class="fragment"><span class="lang-de">Einzelnes Primärfahrzeug (VW ID.4) — Übertragbarkeit unklar</span><span class="lang-en" hidden>Single primary vehicle (VW ID.4) — transferability unclear</span></li>
-                      <li class="fragment"><span class="lang-de">Nur AC-Ladung — keine DC-Schnellladedaten</span><span class="lang-en" hidden>AC charging only — no DC fast charging data</span></li>
-                      <li class="fragment"><span class="lang-de">Keine signifikante Alterung beobachtet (SOH &gt; 97 %)</span><span class="lang-en" hidden>No significant aging observed (SOH &gt; 97%)</span></li>
-                      <li class="fragment"><span class="lang-de">Keine Temperaturkorrektur implementiert — Messungen bei &lt;15 °C eingeschränkt vergleichbar</span><span class="lang-en" hidden>No temperature correction implemented — measurements at &lt;15°C have limited comparability</span></li>
-                      <li class="fragment"><span class="lang-de">Keine unabhängige Laborvalidierung (ISO 12405)</span><span class="lang-en" hidden>No independent lab validation (ISO 12405)</span></li>
+                      <li><span class="lang-de">Einzelnes Primärfahrzeug (VW ID.4) — Übertragbarkeit unklar</span><span class="lang-en" hidden>Single primary vehicle (VW ID.4) — transferability unclear</span></li>
+                      <li><span class="lang-de">Nur AC-Ladung — keine DC-Schnellladedaten</span><span class="lang-en" hidden>AC charging only — no DC fast charging data</span></li>
+                      <li><span class="lang-de">Keine signifikante Alterung beobachtet (SOH &gt; 97 %)</span><span class="lang-en" hidden>No significant aging observed (SOH &gt; 97%)</span></li>
+                      <li><span class="lang-de">Keine Temperaturkorrektur implementiert — Messungen bei &lt;15 °C eingeschränkt vergleichbar</span><span class="lang-en" hidden>No temperature correction implemented — measurements at &lt;15°C have limited comparability</span></li>
+                      <li><span class="lang-de">Keine unabhängige Laborvalidierung (ISO 12405)</span><span class="lang-en" hidden>No independent lab validation (ISO 12405)</span></li>
                     </ul>
                   </div>
                 </div>
@@ -1366,22 +1555,22 @@
                 </div>
                 <div class="uncertainty-components" style="margin-top: 2rem;">
                   <div class="three-col" style="grid-template-columns: repeat(4, 1fr);">
-                    <div class="stat-card fragment">
+                    <div class="stat-card">
                       <div class="stat-value" style="font-size: 2rem;">~1 Pp</div>
                       <div class="stat-label">u<sub>Mess</sub></div>
                       <div class="stat-sublabel"><span class="lang-de">OBD-AVL Kreuzvalidierung</span><span class="lang-en" hidden>OBD-AVL cross-validation</span></div>
                     </div>
-                    <div class="stat-card fragment">
+                    <div class="stat-card">
                       <div class="stat-value success" style="font-size: 2rem;">~0,1 Pp</div>
                       <div class="stat-label">u<sub>Temp</sub></div>
                       <div class="stat-sublabel">9,8 °C vs. 19 °C</div>
                     </div>
-                    <div class="stat-card fragment">
+                    <div class="stat-card">
                       <div class="stat-value warning" style="font-size: 2rem;">~2 Pp</div>
                       <div class="stat-label">u<sub>SOC</sub></div>
                       <div class="stat-sublabel"><span class="lang-de">SOC-Fenster Qualität</span><span class="lang-en" hidden>SOC window quality</span></div>
                     </div>
-                    <div class="stat-card fragment">
+                    <div class="stat-card">
                       <div class="stat-value accent" style="font-size: 2rem;">~4 Pp</div>
                       <div class="stat-label">u<sub>Methode</sub></div>
                       <div class="stat-sublabel"><span class="lang-de">SOH_e vs. SOH_c Streuung</span><span class="lang-en" hidden>SOH_e vs. SOH_c spread</span></div>
@@ -1428,17 +1617,17 @@
                   </p>
                 </div>
                 <div class="three-col" style="margin-top: 3rem; max-width: 1000px; margin-left: auto; margin-right: auto;">
-                  <div class="stat-card fragment">
+                  <div class="stat-card">
                     <div class="stat-value success">95,7 %</div>
                     <div class="stat-label">SOH kombiniert</div>
                     <div class="stat-sublabel">vs. AVL 97,3 %</div>
                   </div>
-                  <div class="stat-card fragment">
+                  <div class="stat-card">
                     <div class="stat-value" style="color: var(--chart-blue);">0,1 Pp</div>
                     <div class="stat-label"><span class="lang-de">Temperaturrobustheit</span><span class="lang-en" hidden>Temperature robustness</span></div>
                     <div class="stat-sublabel">9,8 °C – 19 °C</div>
                   </div>
-                  <div class="stat-card fragment">
+                  <div class="stat-card">
                     <div class="stat-value success">1,6 Pp</div>
                     <div class="stat-label"><span class="lang-de">AVL ↔ OBD</span><span class="lang-en" hidden>AVL ↔ OBD</span></div>
                     <div class="stat-sublabel">VW ID.4 (IfE)</div>
@@ -1460,19 +1649,19 @@
                   <div>
                     <h3><span class="lang-de">Praxisanwendungen</span><span class="lang-en" hidden>Practical Applications</span></h3>
                     <div class="application-grid">
-                      <div class="application-item fragment">
+                      <div class="application-item">
                         <strong><span class="lang-de">Werkstätten</span><span class="lang-en" hidden>Workshops</span></strong>
                         <p><span class="lang-de">Standardisierte SOH-Prüfung mit OBD-Adapter + Python-App</span><span class="lang-en" hidden>Standardized SOH testing with OBD adapter + Python app</span></p>
                       </div>
-                      <div class="application-item fragment">
+                      <div class="application-item">
                         <strong><span class="lang-de">Flottenbetreiber</span><span class="lang-en" hidden>Fleet Operators</span></strong>
                         <p><span class="lang-de">Langzeit-Monitoring und Degradationsvorhersage</span><span class="lang-en" hidden>Long-term monitoring and degradation prediction</span></p>
                       </div>
-                      <div class="application-item fragment">
+                      <div class="application-item">
                         <strong><span class="lang-de">Versicherungen</span><span class="lang-en" hidden>Insurance</span></strong>
                         <p><span class="lang-de">Objektive Batteriebewertung für Restwertbestimmung</span><span class="lang-en" hidden>Objective battery assessment for residual value determination</span></p>
                       </div>
-                      <div class="application-item fragment">
+                      <div class="application-item">
                         <strong>Second Life</strong>
                         <p><span class="lang-de">Klassifizierung: A (&gt;90 %), B (80–89 %), C (70–79 %)</span><span class="lang-en" hidden>Classification: A (&gt;90%), B (80–89%), C (70–79%)</span></p>
                       </div>
@@ -1481,11 +1670,11 @@
                   <div>
                     <h3><span class="lang-de">Zukünftige Forschung</span><span class="lang-en" hidden>Future Research</span></h3>
                     <ul class="styled-list">
-                      <li class="fragment"><span class="lang-de">Erweiterung auf LFP-Chemie (BYD, Tesla) und weitere MEB-Plattformen</span><span class="lang-en" hidden>Extension to LFP chemistry (BYD, Tesla) and more MEB platforms</span></li>
-                      <li class="fragment"><span class="lang-de">DC-Schnelllade-Messungen (hohe C-Rate-Effekte)</span><span class="lang-en" hidden>DC fast charging measurements (high C-rate effects)</span></li>
-                      <li class="fragment"><span class="lang-de">Gealterte Fahrzeuge (50k–150k km) für ICA/DVA-Validierung</span><span class="lang-en" hidden>Aged vehicles (50k–150k km) for ICA/DVA validation</span></li>
-                      <li class="fragment"><span class="lang-de">ML-basierte Korrektur: Ridge/Random-Forest auf AVL-Referenz</span><span class="lang-en" hidden>ML-based correction: Ridge/Random Forest on AVL reference</span></li>
-                      <li class="fragment"><span class="lang-de">EU-Batteriepass (Verordnung 2023/1542 — ab 2027 verpflichtend)</span><span class="lang-en" hidden>EU Battery Passport (Regulation 2023/1542 — mandatory from 2027)</span></li>
+                      <li><span class="lang-de">Erweiterung auf LFP-Chemie (BYD, Tesla) und weitere MEB-Plattformen</span><span class="lang-en" hidden>Extension to LFP chemistry (BYD, Tesla) and more MEB platforms</span></li>
+                      <li><span class="lang-de">DC-Schnelllade-Messungen (hohe C-Rate-Effekte)</span><span class="lang-en" hidden>DC fast charging measurements (high C-rate effects)</span></li>
+                      <li><span class="lang-de">Gealterte Fahrzeuge (50k–150k km) für ICA/DVA-Validierung</span><span class="lang-en" hidden>Aged vehicles (50k–150k km) for ICA/DVA validation</span></li>
+                      <li><span class="lang-de">ML-basierte Korrektur: Ridge/Random-Forest auf AVL-Referenz</span><span class="lang-en" hidden>ML-based correction: Ridge/Random Forest on AVL reference</span></li>
+                      <li><span class="lang-de">EU-Batteriepass (Verordnung 2023/1542 — ab 2027 verpflichtend)</span><span class="lang-en" hidden>EU Battery Passport (Regulation 2023/1542 — mandatory from 2027)</span></li>
                     </ul>
                   </div>
                 </div>

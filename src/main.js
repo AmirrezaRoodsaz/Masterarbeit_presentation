@@ -151,12 +151,12 @@ if (progressCar) {
   let activeClone = null;
   let activeSource = null;
 
-  function openZoom(img) {
+  function openZoom(el) {
     if (activeClone) return;
-    activeSource = img;
+    activeSource = el;
 
     // Get original position
-    const rect = img.getBoundingClientRect();
+    const rect = el.getBoundingClientRect();
 
     // Create clone at exact original position
     const clone = document.createElement('div');
@@ -166,9 +166,15 @@ if (progressCar) {
     clone.style.width = rect.width + 'px';
     clone.style.height = rect.height + 'px';
 
-    const cloneImg = document.createElement('img');
-    cloneImg.src = img.src;
-    clone.appendChild(cloneImg);
+    // Clone content: image or chart SVG
+    if (el.tagName === 'IMG') {
+      const cloneImg = document.createElement('img');
+      cloneImg.src = el.src;
+      clone.appendChild(cloneImg);
+    } else {
+      // Clone the entire container (chart with SVG)
+      clone.innerHTML = el.innerHTML;
+    }
     document.body.appendChild(clone);
 
     // Hide original
@@ -180,8 +186,9 @@ if (progressCar) {
     clone.offsetHeight;
     backdrop.classList.add('active');
 
-    // Target: wide enough to be readable, centered horizontally, scrollable vertically
-    const targetW = Math.min(window.innerWidth * 0.45, 600);
+    // Target: charts get wider, images stay narrower
+    const isChart = !el.tagName || el.tagName !== 'IMG';
+    const targetW = isChart ? Math.min(window.innerWidth * 0.75, 1200) : Math.min(window.innerWidth * 0.45, 600);
     const targetH = window.innerHeight * 0.85;
     const targetLeft = (window.innerWidth - targetW) / 2;
     const targetTop = (window.innerHeight - targetH) / 2;
