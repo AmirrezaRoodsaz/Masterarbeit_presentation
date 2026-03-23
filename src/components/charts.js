@@ -45,15 +45,41 @@ function renderMethodComparison(container, data) {
   container.innerHTML = '';
   const tip = ensureTooltip(container);
 
-  const width = 900;
-  const height = 480;
-  const margin = { top: 30, right: 80, bottom: 40, left: 240 };
+  const width = 720;
+  const height = 460;
+  const margin = { top: 36, right: 60, bottom: 44, left: 130 };
   const innerW = width - margin.left - margin.right;
   const innerH = height - margin.top - margin.bottom;
 
   const en = isEnglish();
   const accent = getCSSVar('--accent');
-  const chartBlue = getCSSVar('--chart-blue');
+
+  // Short labels for chart (details are in the annotation panel)
+  const shortLabels = {
+    'AVL HV-Check': 'AVL',
+    'SOH_e (Energie-direkt)': 'SOHe',
+    'SOH_e (Energy-direct)': 'SOHe',
+    'SOH_c (Coulomb-Zählung)': 'SOHc',
+    'SOH_c (Coulomb-counting)': 'SOHc',
+    'SOH kapazitätsbasiert': 'SOHkap',
+    'SOH capacity-based': 'SOHkap',
+    'SOH kombiniert (e+c)/2': 'Kombiniert',
+    'SOH combined (e+c)/2': 'Combined',
+    'SOH_R (Widerstand)': 'SOHR',
+    'SOH_R (Resistance)': 'SOHR',
+  };
+
+  // Build unified list: all methods + AVL as equal peers
+  const allMethods = [
+    { ...data.reference, delta: 0, note: en ? 'Off-board professional device' : 'Off-Board-Profigerät', note_en: 'Off-board professional device', isRef: true },
+    ...data.methods,
+  ];
+
+  // Map to short labels
+  allMethods.forEach(d => {
+    const fullLabel = en ? d.method_en : d.method;
+    d._short = shortLabels[fullLabel] || fullLabel;
+  });
 
   const svg = d3.select(container)
     .append('svg')
@@ -62,115 +88,186 @@ function renderMethodComparison(container, data) {
     .style('width', '100%')
     .style('height', '100%');
 
+  const defs = svg.append('defs');
+  const glow = defs.append('filter').attr('id', 'dot-glow');
+  glow.append('feGaussianBlur').attr('stdDeviation', '2.5').attr('result', 'blur');
+  const mg = glow.append('feMerge');
+  mg.append('feMergeNode').attr('in', 'blur');
+  mg.append('feMergeNode').attr('in', 'SourceGraphic');
+
   const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 
-  // Scales
-  const x = d3.scaleLinear().domain([85, 102]).range([0, innerW]);
+  // X scale: absolute SOH %
+  const x = d3.scaleLinear().domain([87, 102]).range([0, innerW]);
   const y = d3.scaleBand()
-    .domain(data.methods.map(d => en ? d.method_en : d.method))
+    .domain(allMethods.map(d => d._short))
     .range([0, innerH])
-    .padding(0.3);
+    .padding(0.25);
 
-  // Grid lines
-  g.append('g')
-    .attr('class', 'grid')
-    .call(d3.axisBottom(x).tickSize(innerH).tickFormat('').ticks(6))
-    .attr('transform', 'translate(0,0)');
+  // Alternating row backgrounds
+  allMethods.forEach((d, i) => {
+    if (i % 2 === 0) {
+      g.append('rect')
+        .attr('x', -margin.left + 10)
+        .attr('y', y(d._short) - y.step() * y.padding() / 2)
+        .attr('width', innerW + margin.left - 10 + margin.right - 10)
+        .attr('height', y.step())
+        .attr('fill', getCSSVar('--text-secondary'))
+        .attr('opacity', 0.04)
+        .attr('rx', 4);
+    }
+  });
+
+  // Subtle vertical grid
+  [90, 92, 94, 96, 98, 100].forEach(tick => {
+    g.append('line')
+      .attr('x1', x(tick)).attr('x2', x(tick))
+      .attr('y1', -5).attr('y2', innerH)
+      .attr('stroke', getCSSVar('--text-secondary'))
+      .attr('stroke-width', 0.5)
+      .attr('opacity', 0.12);
+  });
 
   // X axis
   g.append('g')
     .attr('class', 'axis')
     .attr('transform', `translate(0,${innerH})`)
-    .call(d3.axisBottom(x).ticks(6).tickFormat(d => `${d} %`));
-
-  // Y axis
-  g.append('g')
-    .attr('class', 'axis')
-    .call(d3.axisLeft(y).tickSize(0))
+    .call(d3.axisBottom(x).ticks(8).tickFormat(d => `${d} %`))
     .selectAll('text')
-    .style('font-size', '14px')
-    .style('fill', getCSSVar('--text-primary'));
+    .style('font-size', '10px');
 
-  // Remove y-axis line
-  g.select('.axis .domain').remove();
-
-  // Reference line (AVL)
-  const refX = x(data.reference.soh);
+  // Mean line of all methods
+  const allValues = allMethods.map(d => d.soh);
+  const mean = allValues.reduce((a, b) => a + b, 0) / allValues.length;
+  const meanX = x(mean);
   g.append('line')
-    .attr('class', 'reference-line')
-    .attr('x1', refX).attr('x2', refX)
-    .attr('y1', -10).attr('y2', innerH + 5);
+    .attr('x1', meanX).attr('x2', meanX)
+    .attr('y1', -10).attr('y2', innerH)
+    .attr('stroke', getCSSVar('--text-secondary'))
+    .attr('stroke-width', 1)
+    .attr('stroke-dasharray', '5,3')
+    .attr('opacity', 0.35);
 
   g.append('text')
-    .attr('class', 'reference-label')
-    .attr('x', refX)
-    .attr('y', -15)
+    .attr('x', meanX)
+    .attr('y', -14)
     .attr('text-anchor', 'middle')
-    .text(`AVL: ${data.reference.soh} %`);
+    .attr('fill', getCSSVar('--text-secondary'))
+    .attr('font-size', '9px')
+    .attr('font-style', 'italic')
+    .text(`μ = ${mean.toFixed(1)} %`);
 
-  // Bars
-  g.selectAll('.bar')
-    .data(data.methods)
-    .join('rect')
-    .attr('class', 'bar')
-    .attr('y', d => y(en ? d.method_en : d.method))
-    .attr('x', x(85))
-    .attr('width', d => x(d.soh) - x(85))
-    .attr('height', y.bandwidth())
-    .attr('rx', 4)
-    .attr('fill', d => d.method.includes('kombiniert') ? accent : chartBlue)
-    .on('mousemove', (event, d) => {
-      const method = en ? d.method_en : d.method;
-      const note = en ? d.note_en : d.note;
-      showTooltip(tip, `
-        <div class="tooltip-method">${method}</div>
-        <div class="tooltip-value">SOH: ${d.soh.toFixed(1)} %</div>
-        <div class="tooltip-delta">${d.delta > 0 ? '+' : ''}${d.delta.toFixed(1)} Pp ${en ? 'vs. reference' : 'vs. Referenz'}</div>
-        <div class="tooltip-note">${note}</div>
-      `, event, container);
-    })
-    .on('mouseleave', () => hideTooltip(tip));
+  // Method labels + lollipops
+  allMethods.forEach(d => {
+    const cy = y(d._short) + y.bandwidth() / 2;
+    const dotX = x(d.soh);
+    const isCombined = d.method.includes('kombiniert');
+    const isRef = d.isRef;
 
-  // Value + delta labels
-  data.methods.forEach(d => {
-    const barY = y(en ? d.method_en : d.method) + y.bandwidth() / 2;
-    const barEnd = x(d.soh);
+    // Color scheme
+    let color;
+    if (isCombined) color = accent;
+    else if (isRef) color = '#00C9A7';
+    else color = '#4C9AFF';
 
-    // SOH value
+    // Y-axis label (short)
     g.append('text')
-      .attr('class', 'bar-value')
-      .attr('x', barEnd + 6)
-      .attr('y', barY - 3)
+      .attr('x', -14)
+      .attr('y', cy)
+      .attr('text-anchor', 'end')
       .attr('dominant-baseline', 'middle')
+      .attr('fill', isCombined ? accent : (isRef ? '#00C9A7' : getCSSVar('--text-primary')))
+      .attr('font-size', '13px')
+      .attr('font-weight', (isCombined || isRef) ? '700' : '600')
+      .text(d._short);
+
+    // Horizontal lollipop stem from mean to dot
+    g.append('line')
+      .attr('x1', meanX).attr('x2', dotX)
+      .attr('y1', cy).attr('y2', cy)
+      .attr('stroke', color)
+      .attr('stroke-width', isCombined ? 3 : 2)
+      .attr('opacity', isCombined ? 0.8 : 0.35)
+      .attr('stroke-linecap', 'round');
+
+    // Dot
+    const dotR = isCombined ? 10 : (isRef ? 9 : 7);
+    g.append('circle')
+      .attr('cx', dotX)
+      .attr('cy', cy)
+      .attr('r', dotR)
+      .attr('fill', color)
+      .attr('opacity', (isCombined || isRef) ? 1 : 0.85)
+      .attr('filter', isCombined ? 'url(#dot-glow)' : null)
+      .style('cursor', 'pointer')
+      .on('mouseenter', (event) => {
+        d3.select(event.target).transition().duration(150).attr('r', dotR + 3);
+        const method = en ? d.method_en : d.method;
+        const note = en ? (d.note_en || d.note) : d.note;
+        let html = `<div class="tooltip-method">${method}</div>`;
+        html += `<div class="tooltip-value">SOH: ${d.soh.toFixed(1)} %</div>`;
+        if (!isRef) html += `<div class="tooltip-delta">Δ AVL: ${d.delta > 0 ? '+' : ''}${d.delta.toFixed(1)} Pp</div>`;
+        html += `<div class="tooltip-note">${note}</div>`;
+        showTooltip(tip, html, event, container);
+      })
+      .on('mouseleave', (event) => {
+        d3.select(event.target).transition().duration(150).attr('r', dotR);
+        hideTooltip(tip);
+      });
+
+    // Value label (right of dot)
+    g.append('text')
+      .attr('x', dotX + dotR + 6)
+      .attr('y', cy)
+      .attr('dominant-baseline', 'middle')
+      .attr('fill', color)
+      .attr('font-size', (isCombined || isRef) ? '13px' : '11px')
+      .attr('font-weight', '700')
       .text(`${d.soh.toFixed(1)} %`);
-
-    // Delta
-    const deltaClass = d.method.includes('kombiniert') ? 'best' : (d.delta >= 0 ? 'positive' : 'negative');
-    g.append('text')
-      .attr('class', `delta-label ${deltaClass}`)
-      .attr('x', barEnd + 6)
-      .attr('y', barY + 14)
-      .attr('dominant-baseline', 'middle')
-      .text(`${d.delta > 0 ? '+' : ''}${d.delta.toFixed(1)} Pp`);
   });
+
+  // Condition note (top-right)
+  g.append('text')
+    .attr('x', innerW)
+    .attr('y', -18)
+    .attr('text-anchor', 'end')
+    .attr('fill', getCSSVar('--text-secondary'))
+    .attr('font-size', '9px')
+    .attr('opacity', 0.7)
+    .text(`${data.conditions.vehicle} · ${en ? 'Session' : 'Sitzung'} ${data.conditions.session} · ${data.conditions.temperature} °C`);
 }
 
 // ── Chart 2: Reproducibility (Slide 13) ──────────────────────────────
 
 function renderReproducibility(container, data) {
   container.innerHTML = '';
-  const tip = ensureTooltip(container);
-
-  const width = 700;
-  const height = 480;
-  const margin = { top: 40, right: 30, bottom: 60, left: 60 };
-  const innerW = width - margin.left - margin.right;
-  const innerH = height - margin.top - margin.bottom;
 
   const en = isEnglish();
   const chartBlue = getCSSVar('--chart-blue');
   const chartYellow = getCSSVar('--chart-yellow');
   const accent = getCSSVar('--accent');
+  const success = getCSSVar('--success');
+
+  const runs = data.algorithmic.runs;
+  const methods = ['soh_e', 'soh_c', 'combined'];
+  const methodLabels = en
+    ? ['SOHe', 'SOHc', 'Combined']
+    : ['SOHe', 'SOHc', 'Kombiniert'];
+  const methodColors = [chartBlue, chartYellow, accent];
+
+  const width = 480;
+  const height = 320;
+  const cellW = 90;
+  const cellH = 52;
+  const cellGap = 8;
+  const cellR = 8;
+  const labelW = 100;
+  const headerH = 36;
+  const deltaColW = 70;
+
+  // Grid origin
+  const ox = labelW;
+  const oy = headerH + 10;
 
   const svg = d3.select(container)
     .append('svg')
@@ -179,99 +276,119 @@ function renderReproducibility(container, data) {
     .style('width', '100%')
     .style('height', '100%');
 
-  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
-
-  const runs = data.algorithmic.runs;
-  const methods = ['soh_e', 'soh_c', 'combined'];
-  const methodLabels = en
-    ? ['SOH_e', 'SOH_c', 'Combined']
-    : ['SOH_e', 'SOH_c', 'Kombiniert'];
-  const methodColors = [chartBlue, chartYellow, accent];
-
-  // Scales
-  const x0 = d3.scaleBand()
-    .domain(runs.map((_, i) => `${en ? 'Run' : 'Lauf'} ${i + 1}`))
-    .range([0, innerW])
-    .padding(0.3);
-
-  const x1 = d3.scaleBand()
-    .domain(methods)
-    .range([0, x0.bandwidth()])
-    .padding(0.08);
-
-  const y = d3.scaleLinear().domain([88, 102]).range([innerH, 0]);
-
-  // Grid
-  g.append('g')
-    .attr('class', 'grid')
-    .call(d3.axisLeft(y).tickSize(-innerW).tickFormat('').ticks(7));
-
-  // Axes
-  g.append('g')
-    .attr('class', 'axis')
-    .attr('transform', `translate(0,${innerH})`)
-    .call(d3.axisBottom(x0).tickSize(0))
-    .selectAll('text')
-    .style('font-size', '14px')
-    .style('fill', getCSSVar('--text-primary'));
-
-  g.append('g')
-    .attr('class', 'axis')
-    .call(d3.axisLeft(y).ticks(7).tickFormat(d => `${d} %`));
-
-  // Bars
-  runs.forEach((run, runIdx) => {
-    const groupLabel = `${en ? 'Run' : 'Lauf'} ${runIdx + 1}`;
-    methods.forEach((method, mIdx) => {
-      const val = run[method];
-      g.append('rect')
-        .attr('class', 'bar')
-        .attr('x', x0(groupLabel) + x1(method))
-        .attr('y', y(val))
-        .attr('width', x1.bandwidth())
-        .attr('height', innerH - y(val))
-        .attr('rx', 3)
-        .attr('fill', methodColors[mIdx])
-        .on('mousemove', (event) => {
-          showTooltip(tip, `
-            <div class="tooltip-method">${methodLabels[mIdx]}</div>
-            <div class="tooltip-value">${val.toFixed(1)} %</div>
-            <div class="tooltip-note">${groupLabel}</div>
-          `, event, container);
-        })
-        .on('mouseleave', () => hideTooltip(tip));
-
-      // Value on top
-      g.append('text')
-        .attr('class', 'bar-value')
-        .attr('x', x0(groupLabel) + x1(method) + x1.bandwidth() / 2)
-        .attr('y', y(val) - 6)
-        .attr('text-anchor', 'middle')
-        .style('font-size', '12px')
-        .text(`${val.toFixed(1)}`);
-    });
+  // Column headers (Run 1, 2, 3, Δ)
+  const runLabels = runs.map((_, i) => en ? `Run ${i + 1}` : `Lauf ${i + 1}`);
+  runLabels.forEach((label, col) => {
+    svg.append('text')
+      .attr('x', ox + col * (cellW + cellGap) + cellW / 2)
+      .attr('y', oy - 8)
+      .attr('text-anchor', 'middle')
+      .attr('fill', getCSSVar('--text-secondary'))
+      .attr('font-size', '11px')
+      .attr('font-weight', '600')
+      .text(label);
   });
-
-  // Spread annotation
-  const success = getCSSVar('--success');
-  g.append('text')
-    .attr('class', 'annotation-badge')
-    .attr('x', innerW / 2)
-    .attr('y', -12)
+  // Delta header
+  const deltaX = ox + 3 * (cellW + cellGap);
+  svg.append('text')
+    .attr('x', deltaX + deltaColW / 2)
+    .attr('y', oy - 8)
     .attr('text-anchor', 'middle')
-    .attr('fill', success)
-    .text(`${en ? 'Spread' : 'Streuung'}: ${data.algorithmic.spread_pp} Pp — ${en ? data.algorithmic.rating_en : data.algorithmic.rating}`);
+    .attr('fill', getCSSVar('--text-secondary'))
+    .attr('font-size', '11px')
+    .attr('font-weight', '600')
+    .text(en ? 'Spread' : 'Streuung');
 
-  // Legend
-  const legendDiv = document.createElement('div');
-  legendDiv.className = 'chart-legend';
-  methodLabels.forEach((label, i) => {
-    const item = document.createElement('span');
-    item.className = 'chart-legend-item';
-    item.innerHTML = `<span class="chart-legend-swatch" style="background:${methodColors[i]}"></span>${label}`;
-    legendDiv.appendChild(item);
+  // Row for each method
+  methods.forEach((method, row) => {
+    const color = methodColors[row];
+    const isCombined = row === 2;
+    const rowY = oy + row * (cellH + cellGap);
+    const vals = runs.map(r => r[method]);
+    const spread = (Math.max(...vals) - Math.min(...vals)).toFixed(1);
+
+    // Row label
+    svg.append('text')
+      .attr('x', ox - 14)
+      .attr('y', rowY + cellH / 2)
+      .attr('text-anchor', 'end')
+      .attr('dominant-baseline', 'middle')
+      .attr('fill', isCombined ? accent : getCSSVar('--text-primary'))
+      .attr('font-size', '14px')
+      .attr('font-weight', isCombined ? '700' : '600')
+      .text(methodLabels[row]);
+
+    // Value cells
+    runs.forEach((run, col) => {
+      const val = run[method];
+      const cx = ox + col * (cellW + cellGap);
+
+      // Cell background
+      svg.append('rect')
+        .attr('x', cx)
+        .attr('y', rowY)
+        .attr('width', cellW)
+        .attr('height', cellH)
+        .attr('rx', cellR)
+        .attr('fill', color)
+        .attr('opacity', isCombined ? 0.18 : 0.12);
+
+      // Value text
+      svg.append('text')
+        .attr('x', cx + cellW / 2)
+        .attr('y', rowY + cellH / 2)
+        .attr('text-anchor', 'middle')
+        .attr('dominant-baseline', 'middle')
+        .attr('fill', isCombined ? accent : getCSSVar('--text-primary'))
+        .attr('font-size', '18px')
+        .attr('font-weight', '700')
+        .text(`${val.toFixed(1)} %`);
+    });
+
+    // Delta cell
+    svg.append('rect')
+      .attr('x', deltaX)
+      .attr('y', rowY)
+      .attr('width', deltaColW)
+      .attr('height', cellH)
+      .attr('rx', cellR)
+      .attr('fill', success)
+      .attr('opacity', spread === '0.0' ? 0.2 : 0.1);
+
+    svg.append('text')
+      .attr('x', deltaX + deltaColW / 2)
+      .attr('y', rowY + cellH / 2)
+      .attr('text-anchor', 'middle')
+      .attr('dominant-baseline', 'middle')
+      .attr('fill', success)
+      .attr('font-size', '16px')
+      .attr('font-weight', '700')
+      .text(`${spread} Pp`);
   });
-  container.appendChild(legendDiv);
+
+  // Bottom badge
+  const badgeY = oy + 3 * (cellH + cellGap) + 8;
+  const badgeW = 3 * (cellW + cellGap) - cellGap;
+  svg.append('rect')
+    .attr('x', ox)
+    .attr('y', badgeY)
+    .attr('width', badgeW + deltaColW + cellGap)
+    .attr('height', 28)
+    .attr('rx', 14)
+    .attr('fill', success)
+    .attr('opacity', 0.12);
+
+  svg.append('text')
+    .attr('x', ox + (badgeW + deltaColW + cellGap) / 2)
+    .attr('y', badgeY + 15)
+    .attr('text-anchor', 'middle')
+    .attr('dominant-baseline', 'middle')
+    .attr('fill', success)
+    .attr('font-size', '12px')
+    .attr('font-weight', '700')
+    .text(en
+      ? `Max spread: ${data.algorithmic.spread_pp} Pp — ${data.algorithmic.rating_en}`
+      : `Max. Streuung: ${data.algorithmic.spread_pp} Pp — ${data.algorithmic.rating}`);
 }
 
 // ── Chart 3: Temperature Effect (Slide 14) ───────────────────────────
@@ -280,9 +397,9 @@ function renderTemperature(container, data) {
   container.innerHTML = '';
   const tip = ensureTooltip(container);
 
-  const width = 900;
-  const height = 480;
-  const margin = { top: 40, right: 30, bottom: 60, left: 60 };
+  const width = 600;
+  const height = 400;
+  const margin = { top: 30, right: 70, bottom: 30, left: 120 };
   const innerW = width - margin.left - margin.right;
   const innerH = height - margin.top - margin.bottom;
 
@@ -291,6 +408,16 @@ function renderTemperature(container, data) {
   const chartYellow = getCSSVar('--chart-yellow');
   const accent = getCSSVar('--accent');
 
+  const sessions = data.sessions;
+  const methods = ['soh_e', 'soh_c', 'combined'];
+  const methodLabels = en
+    ? ['SOHe', 'SOHc', 'Combined']
+    : ['SOHe', 'SOHc', 'Kombiniert'];
+  const methodColors = [chartBlue, chartYellow, accent];
+
+  // Compute deltas: Session B (cold) minus Session A (warm)
+  const deltaValues = methods.map(m => sessions[1][m] - sessions[0][m]);
+
   const svg = d3.select(container)
     .append('svg')
     .attr('viewBox', `0 0 ${width} ${height}`)
@@ -298,134 +425,175 @@ function renderTemperature(container, data) {
     .style('width', '100%')
     .style('height', '100%');
 
+  const defs = svg.append('defs');
+  const glow = defs.append('filter').attr('id', 'temp-glow');
+  glow.append('feGaussianBlur').attr('stdDeviation', '2').attr('result', 'blur');
+  const mg = glow.append('feMerge');
+  mg.append('feMergeNode').attr('in', 'blur');
+  mg.append('feMergeNode').attr('in', 'SourceGraphic');
+
   const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 
-  const sessions = data.sessions;
-  const methods = ['soh_e', 'soh_c', 'combined'];
-  const methodLabels = en
-    ? ['SOH_e', 'SOH_c', 'Combined']
-    : ['SOH_e', 'SOH_c', 'Kombiniert'];
-  const methodColors = [chartBlue, chartYellow, accent];
-
-  // Scales
-  const x0 = d3.scaleBand()
-    .domain(sessions.map(s => en ? s.label_en : s.label))
-    .range([0, innerW])
+  // Y scale: one row per method
+  const yBand = d3.scaleBand()
+    .domain(methodLabels)
+    .range([0, innerH])
     .padding(0.3);
 
-  const x1 = d3.scaleBand()
-    .domain(methods)
-    .range([0, x0.bandwidth()])
-    .padding(0.08);
+  // X scale: delta in Pp (symmetric around 0)
+  const maxAbs = Math.max(...deltaValues.map(Math.abs));
+  const xDomain = Math.ceil(maxAbs + 0.5);
+  const x = d3.scaleLinear().domain([-xDomain, xDomain]).range([0, innerW]);
+  const zeroX = x(0);
 
-  const y = d3.scaleLinear().domain([88, 103]).range([innerH, 0]);
-
-  // Grid
-  g.append('g')
-    .attr('class', 'grid')
-    .call(d3.axisLeft(y).tickSize(-innerW).tickFormat('').ticks(6));
-
-  // Axes
-  g.append('g')
-    .attr('class', 'axis')
-    .attr('transform', `translate(0,${innerH})`)
-    .call(d3.axisBottom(x0).tickSize(0))
-    .selectAll('text')
-    .style('font-size', '15px')
-    .style('fill', getCSSVar('--text-primary'));
-
-  g.append('g')
-    .attr('class', 'axis')
-    .call(d3.axisLeft(y).ticks(6).tickFormat(d => `${d} %`));
-
-  // Bars
-  sessions.forEach(session => {
-    const groupLabel = en ? session.label_en : session.label;
-    methods.forEach((method, mIdx) => {
-      const val = session[method];
-      g.append('rect')
-        .attr('class', 'bar')
-        .attr('x', x0(groupLabel) + x1(method))
-        .attr('y', y(val))
-        .attr('width', x1.bandwidth())
-        .attr('height', innerH - y(val))
-        .attr('rx', 3)
-        .attr('fill', methodColors[mIdx])
-        .on('mousemove', (event) => {
-          showTooltip(tip, `
-            <div class="tooltip-method">${methodLabels[mIdx]} @ ${groupLabel}</div>
-            <div class="tooltip-value">${val.toFixed(1)} %</div>
-          `, event, container);
-        })
-        .on('mouseleave', () => hideTooltip(tip));
-
-      // Value on top
-      g.append('text')
-        .attr('class', 'bar-value')
-        .attr('x', x0(groupLabel) + x1(method) + x1.bandwidth() / 2)
-        .attr('y', y(val) - 6)
-        .attr('text-anchor', 'middle')
-        .style('font-size', '13px')
-        .text(`${val.toFixed(1)}`);
-    });
-  });
-
-  // Delta annotations between temperature groups
-  const deltas = [
-    { method: 'soh_e', delta: '+1,2', delta_en: '+1.2' },
-    { method: 'soh_c', delta: '−1,3', delta_en: '−1.3' },
-    { method: 'combined', delta: '−0,1', delta_en: '−0.1' },
-  ];
-
-  const group1 = en ? sessions[0].label_en : sessions[0].label;
-  const group2 = en ? sessions[1].label_en : sessions[1].label;
-
-  deltas.forEach((d, i) => {
-    const x1Pos = x0(group1) + x1(d.method) + x1.bandwidth() / 2;
-    const x2Pos = x0(group2) + x1(d.method) + x1.bandwidth() / 2;
-    const midX = (x1Pos + x2Pos) / 2;
-    const topY = y(103) + 5;
-
-    // Delta text
-    const deltaText = en ? d.delta_en : d.delta;
-    const color = d.method === 'combined' ? accent : getCSSVar('--text-secondary');
-    g.append('text')
-      .attr('x', midX)
-      .attr('y', topY)
-      .attr('text-anchor', 'middle')
-      .attr('fill', color)
-      .attr('font-size', d.method === 'combined' ? '14px' : '12px')
-      .attr('font-weight', d.method === 'combined' ? '700' : '600')
-      .text(`${deltaText} Pp`);
-  });
-
-  // Legend
-  const legendDiv = document.createElement('div');
-  legendDiv.className = 'chart-legend';
+  // Alternating row backgrounds
   methodLabels.forEach((label, i) => {
-    const item = document.createElement('span');
-    item.className = 'chart-legend-item';
-    item.innerHTML = `<span class="chart-legend-swatch" style="background:${methodColors[i]}"></span>${label}`;
-    legendDiv.appendChild(item);
+    if (i % 2 === 0) {
+      g.append('rect')
+        .attr('x', -margin.left + 10)
+        .attr('y', yBand(label) - yBand.step() * yBand.padding() / 2)
+        .attr('width', innerW + margin.left - 10 + margin.right - 10)
+        .attr('height', yBand.step())
+        .attr('fill', getCSSVar('--text-secondary'))
+        .attr('opacity', 0.04)
+        .attr('rx', 4);
+    }
   });
-  container.appendChild(legendDiv);
+
+  // Zero line (center axis)
+  g.append('line')
+    .attr('x1', zeroX).attr('x2', zeroX)
+    .attr('y1', -10).attr('y2', innerH + 10)
+    .attr('stroke', getCSSVar('--text-secondary'))
+    .attr('stroke-width', 1.5)
+    .attr('opacity', 0.3);
+
+  g.append('text')
+    .attr('x', zeroX)
+    .attr('y', -16)
+    .attr('text-anchor', 'middle')
+    .attr('fill', getCSSVar('--text-secondary'))
+    .attr('font-size', '10px')
+    .text('0');
+
+  // Axis labels at top
+  g.append('text')
+    .attr('x', x(-xDomain))
+    .attr('y', -16)
+    .attr('text-anchor', 'start')
+    .attr('fill', getCSSVar('--text-secondary'))
+    .attr('font-size', '9px')
+    .attr('opacity', 0.6)
+    .text(en ? '← lower at 9.8°C' : '← niedriger bei 9,8 °C');
+
+  g.append('text')
+    .attr('x', x(xDomain))
+    .attr('y', -16)
+    .attr('text-anchor', 'end')
+    .attr('fill', getCSSVar('--text-secondary'))
+    .attr('font-size', '9px')
+    .attr('opacity', 0.6)
+    .text(en ? 'higher at 9.8°C →' : 'höher bei 9,8 °C →');
+
+  // X axis ticks
+  g.append('g')
+    .attr('class', 'axis')
+    .attr('transform', `translate(0,${innerH + 5})`)
+    .call(d3.axisBottom(x).ticks(5).tickFormat(d => d === 0 ? '' : `${d > 0 ? '+' : ''}${d} Pp`))
+    .selectAll('text')
+    .style('font-size', '9px');
+
+  // Butterfly bars
+  methods.forEach((method, mIdx) => {
+    const label = methodLabels[mIdx];
+    const cy = yBand(label) + yBand.bandwidth() / 2;
+    const delta = deltaValues[mIdx];
+    const color = methodColors[mIdx];
+    const isCombined = mIdx === 2;
+    const barH = yBand.bandwidth() * 0.7;
+
+    // Bar from zero to delta
+    const barX = delta >= 0 ? zeroX : x(delta);
+    const barW = Math.abs(x(delta) - zeroX);
+
+    g.append('rect')
+      .attr('x', barX)
+      .attr('y', cy - barH / 2)
+      .attr('width', Math.max(barW, 2))
+      .attr('height', barH)
+      .attr('rx', 4)
+      .attr('fill', color)
+      .attr('opacity', isCombined ? 0.85 : 0.6)
+      .attr('filter', isCombined ? 'url(#temp-glow)' : null)
+      .style('cursor', 'pointer')
+      .on('mouseenter', (event) => {
+        const v1 = sessions[0][method];
+        const v2 = sessions[1][method];
+        showTooltip(tip, `
+          <div class="tooltip-method">${label}</div>
+          <div class="tooltip-value">19 °C: ${v1.toFixed(1)} % → 9,8 °C: ${v2.toFixed(1)} %</div>
+          <div class="tooltip-delta">Δ: ${delta > 0 ? '+' : ''}${delta.toFixed(1)} Pp</div>
+        `, event, container);
+      })
+      .on('mouseleave', () => hideTooltip(tip));
+
+    // Method label (left)
+    g.append('text')
+      .attr('x', -14)
+      .attr('y', cy)
+      .attr('text-anchor', 'end')
+      .attr('dominant-baseline', 'middle')
+      .attr('fill', isCombined ? accent : getCSSVar('--text-primary'))
+      .attr('font-size', '14px')
+      .attr('font-weight', isCombined ? '700' : '600')
+      .text(label);
+
+    // Delta value at end of bar
+    const valX = x(delta) + (delta >= 0 ? 8 : -8);
+    const valAnchor = delta >= 0 ? 'start' : 'end';
+    g.append('text')
+      .attr('x', valX)
+      .attr('y', cy)
+      .attr('text-anchor', valAnchor)
+      .attr('dominant-baseline', 'middle')
+      .attr('fill', color)
+      .attr('font-size', isCombined ? '16px' : '13px')
+      .attr('font-weight', '700')
+      .text(`${delta > 0 ? '+' : ''}${en ? delta.toFixed(1) : delta.toFixed(1).replace('.', ',')} Pp`);
+
+    // Absolute values below method label
+    const v1 = sessions[0][method];
+    const v2 = sessions[1][method];
+    g.append('text')
+      .attr('x', -14)
+      .attr('y', cy + 16)
+      .attr('text-anchor', 'end')
+      .attr('fill', getCSSVar('--text-secondary'))
+      .attr('font-size', '9px')
+      .attr('opacity', 0.6)
+      .text(`${v1.toFixed(1)} → ${v2.toFixed(1)} %`);
+  });
 }
 
 // ── Chart 4: Resistance Comparison (Slide 15) ────────────────────────
 
 function renderResistance(container, data) {
   container.innerHTML = '';
-  const tip = ensureTooltip(container);
-
-  const width = 600;
-  const height = 480;
-  const margin = { top: 30, right: 30, bottom: 60, left: 70 };
-  const innerW = width - margin.left - margin.right;
-  const innerH = height - margin.top - margin.bottom;
 
   const en = isEnglish();
   const success = getCSSVar('--success');
-  const warning = getCSSVar('--warning');
+  const v = data.vehicles[0];
+
+  const width = 520;
+  const height = 340;
+  const margin = { top: 20, right: 80, bottom: 20, left: 140 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const barData = [
+    { label: en ? 'Charging' : 'Laden', value: v.r_charge_mohm, sub: 'R_i,charge' },
+    { label: en ? 'Discharging' : 'Entladen', value: v.r_discharge_mohm, sub: 'R_i,discharge' },
+  ];
 
   const svg = d3.select(container)
     .append('svg')
@@ -434,82 +602,116 @@ function renderResistance(container, data) {
     .style('width', '100%')
     .style('height', '100%');
 
+  const defs = svg.append('defs');
+  const glow = defs.append('filter').attr('id', 'res-glow');
+  glow.append('feGaussianBlur').attr('stdDeviation', '3').attr('result', 'blur');
+  const mg = glow.append('feMerge');
+  mg.append('feMergeNode').attr('in', 'blur');
+  mg.append('feMergeNode').attr('in', 'SourceGraphic');
+
   const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 
-  const vehicles = data.vehicles;
-  const barData = [
-    { label: 'VW ID.4', sublabel: en ? 'Charging' : 'Laden', value: vehicles[0].r_charge_mohm, color: success },
-    { label: 'VW ID.4', sublabel: en ? 'Discharging' : 'Entladen', value: vehicles[0].r_discharge_mohm, color: d3.color(success).darker(0.5).formatHex() },
-  ];
+  // Y scale: one row per measurement
+  const yBand = d3.scaleBand()
+    .domain(barData.map(d => d.label))
+    .range([0, innerH * 0.5])
+    .padding(0.4);
 
-  // Scales
-  const x = d3.scaleBand()
-    .domain(barData.map(d => `${d.label}\n${d.sublabel}`))
-    .range([0, innerW])
-    .padding(0.35);
+  // X scale: 0 to 60 mΩ
+  const x = d3.scaleLinear().domain([0, 55]).range([0, innerW]);
 
-  const y = d3.scaleLinear().domain([0, 60]).range([innerH, 0]);
+  // Horizontal gauge bars
+  barData.forEach((d, i) => {
+    const cy = yBand(d.label) + yBand.bandwidth() / 2;
+    const barH = yBand.bandwidth();
+    const barW = x(d.value);
+    const colorShade = i === 0 ? success : d3.color(success).darker(0.4).formatHex();
 
-  // Grid
-  g.append('g')
-    .attr('class', 'grid')
-    .call(d3.axisLeft(y).tickSize(-innerW).tickFormat('').ticks(6));
+    // Track background
+    g.append('rect')
+      .attr('x', 0)
+      .attr('y', cy - barH / 2)
+      .attr('width', innerW)
+      .attr('height', barH)
+      .attr('rx', barH / 2)
+      .attr('fill', getCSSVar('--text-secondary'))
+      .attr('opacity', 0.06);
 
-  // Y axis
-  g.append('g')
-    .attr('class', 'axis')
-    .call(d3.axisLeft(y).ticks(6).tickFormat(d => `${d} mΩ`));
+    // Value bar
+    g.append('rect')
+      .attr('x', 0)
+      .attr('y', cy - barH / 2)
+      .attr('width', barW)
+      .attr('height', barH)
+      .attr('rx', barH / 2)
+      .attr('fill', colorShade)
+      .attr('opacity', 0.7)
+      .attr('filter', 'url(#res-glow)');
 
-  // X axis labels (custom — two-line)
-  barData.forEach(d => {
-    const xPos = x(`${d.label}\n${d.sublabel}`) + x.bandwidth() / 2;
+    // Label (left)
     g.append('text')
-      .attr('x', xPos)
-      .attr('y', innerH + 20)
-      .attr('text-anchor', 'middle')
+      .attr('x', -14)
+      .attr('y', cy)
+      .attr('text-anchor', 'end')
+      .attr('dominant-baseline', 'middle')
       .attr('fill', getCSSVar('--text-primary'))
-      .attr('font-size', '14px')
+      .attr('font-size', '15px')
       .attr('font-weight', '600')
       .text(d.label);
-    g.append('text')
-      .attr('x', xPos)
-      .attr('y', innerH + 38)
-      .attr('text-anchor', 'middle')
-      .attr('fill', getCSSVar('--text-secondary'))
-      .attr('font-size', '12px')
-      .text(`(${d.sublabel})`);
-  });
 
-  // Bars
-  barData.forEach(d => {
-    const key = `${d.label}\n${d.sublabel}`;
-    g.append('rect')
-      .attr('class', 'bar')
-      .attr('x', x(key))
-      .attr('y', y(d.value))
-      .attr('width', x.bandwidth())
-      .attr('height', innerH - y(d.value))
-      .attr('rx', 4)
-      .attr('fill', d.color)
-      .on('mousemove', (event) => {
-        const note = en ? vehicles[0].note_en : vehicles[0].note;
-        showTooltip(tip, `
-          <div class="tooltip-method">${d.label} — ${d.sublabel}</div>
-          <div class="tooltip-value">R<sub>i</sub>: ${d.value} mΩ</div>
-          <div class="tooltip-note">${note}</div>
-        `, event, container);
-      })
-      .on('mouseleave', () => hideTooltip(tip));
-
-    // Value on top
+    // Value (right of bar)
     g.append('text')
-      .attr('class', 'bar-value')
-      .attr('x', x(key) + x.bandwidth() / 2)
-      .attr('y', y(d.value) - 8)
-      .attr('text-anchor', 'middle')
-      .attr('font-size', '16px')
+      .attr('x', barW + 12)
+      .attr('y', cy)
+      .attr('dominant-baseline', 'middle')
+      .attr('fill', colorShade)
+      .attr('font-size', '20px')
+      .attr('font-weight', '700')
       .text(`${d.value} mΩ`);
   });
+
+  // Condition badges below
+  const badgeY = innerH * 0.5 + 40;
+  const conditions = [
+    { icon: '⚡', label: 'DC-Puls' },
+    { icon: '🔋', label: `${v.soc_percent} % SOC` },
+    { icon: '🌡', label: `${v.temp_celsius} °C` },
+  ];
+  const badgeSpacing = 120;
+  const badgeStartX = innerW / 2 - badgeSpacing;
+
+  conditions.forEach((c, i) => {
+    const bx = badgeStartX + i * badgeSpacing;
+    g.append('rect')
+      .attr('x', bx - 40)
+      .attr('y', badgeY - 12)
+      .attr('width', 100)
+      .attr('height', 26)
+      .attr('rx', 13)
+      .attr('fill', getCSSVar('--text-secondary'))
+      .attr('opacity', 0.08);
+    g.append('text')
+      .attr('x', bx + 10)
+      .attr('y', badgeY + 2)
+      .attr('text-anchor', 'middle')
+      .attr('dominant-baseline', 'middle')
+      .attr('fill', getCSSVar('--text-secondary'))
+      .attr('font-size', '11px')
+      .text(`${c.icon} ${c.label}`);
+  });
+
+  // Explanation text
+  const noteY = badgeY + 50;
+  g.append('text')
+    .attr('x', innerW / 2)
+    .attr('y', noteY)
+    .attr('text-anchor', 'middle')
+    .attr('fill', getCSSVar('--text-secondary'))
+    .attr('font-size', '10px')
+    .attr('opacity', 0.6)
+    .text(en
+      ? 'Asymmetric R_i due to electrode-electrolyte interface impedance'
+      : 'Asymmetrisches R_i durch Impedanz der Elektroden-Elektrolyt-Grenzfläche');
 }
 
 // ── Chart 5: AVL SOH Timeline (Slide 13, right panel) ────────────────
@@ -718,8 +920,9 @@ function renderCommunityComparison(container, data) {
     .attr('class', 'axis')
     .call(d3.axisLeft(y).tickSize(0))
     .selectAll('text')
-    .style('font-size', '14px')
-    .style('fill', getCSSVar('--text-primary'));
+    .style('font-size', '18px')
+    .style('font-weight', '600')
+    .attr('class', 'community-label');
 
   g.select('.axis .domain').remove();
 
@@ -749,39 +952,39 @@ function renderCommunityComparison(container, data) {
     // Mean label
     g.append('text')
       .attr('x', x(d.mean))
-      .attr('y', barY - 8)
+      .attr('y', barY - 10)
       .attr('text-anchor', 'middle')
       .attr('fill', chartBlue)
-      .attr('font-size', '11px')
+      .attr('font-size', '15px')
       .attr('font-weight', '600')
       .text(`μ = ${d.mean} %`);
 
     // Min/max labels
     g.append('text')
-      .attr('x', x(d.min) - 4)
+      .attr('x', x(d.min) - 6)
       .attr('y', barY + barH / 2)
       .attr('text-anchor', 'end')
       .attr('dominant-baseline', 'middle')
-      .attr('fill', getCSSVar('--text-secondary'))
-      .attr('font-size', '10px')
+      .attr('class', 'community-label')
+      .attr('font-size', '14px')
       .text(`${d.min}`);
 
     g.append('text')
-      .attr('x', x(d.max) + 4)
+      .attr('x', x(d.max) + 6)
       .attr('y', barY + barH / 2)
       .attr('text-anchor', 'start')
       .attr('dominant-baseline', 'middle')
-      .attr('fill', getCSSVar('--text-secondary'))
-      .attr('font-size', '10px')
+      .attr('class', 'community-label')
+      .attr('font-size', '14px')
       .text(`${d.max}`);
 
     // n label
     g.append('text')
       .attr('x', x(d.mean))
-      .attr('y', barY + barH + 16)
+      .attr('y', barY + barH + 18)
       .attr('text-anchor', 'middle')
-      .attr('fill', getCSSVar('--text-secondary'))
-      .attr('font-size', '10px')
+      .attr('class', 'community-label')
+      .attr('font-size', '13px')
       .text(`n = ${d.n}`);
   });
 

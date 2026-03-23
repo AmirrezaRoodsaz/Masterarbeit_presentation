@@ -5,6 +5,9 @@
   font-family: var(--font-primary);
   fill: var(--text-secondary);
 }
+.chart-container svg text.community-label {
+  fill: var(--text-primary);
+}
 
 /* Axis styles */
 .chart-container .axis path,
