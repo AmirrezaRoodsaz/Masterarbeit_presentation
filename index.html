@@ -1002,6 +1002,30 @@
                     </svg>
                   </div>
 
+                  <!-- Trip computer — car instrument cluster LCD -->
+                  <div class="dash-trip-computer">
+                    <div class="dash-trip-bezel">
+                      <div class="dash-trip-screen">
+                        <!-- Warning indicators row -->
+                        <div class="dash-trip-warnings">
+                          <!-- Battery warning -->
+                          <svg class="dash-warn-icon warn-battery" viewBox="0 0 24 18" fill="currentColor"><rect x="1" y="4" width="19" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5" fill="none"/><rect x="20" y="7" width="3" height="4" rx="0.5"/><line x1="7" y1="7" x2="7" y2="11" stroke="currentColor" stroke-width="1.5"/><line x1="5" y1="9" x2="9" y2="9" stroke="currentColor" stroke-width="1.5"/><line x1="13" y1="7" x2="13" y2="11" stroke="currentColor" stroke-width="1.5"/></svg>
+                          <!-- Temperature warning -->
+                          <svg class="dash-warn-icon warn-temp" viewBox="0 0 16 22" fill="currentColor"><path d="M10 13.5V3.5a2 2 0 10-4 0v10a4 4 0 104 0z" stroke="currentColor" stroke-width="1.3" fill="none"/><circle cx="8" cy="15" r="1.5"/></svg>
+                          <!-- EV / plug warning -->
+                          <svg class="dash-warn-icon warn-ev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M11 1L5 11h5l-1 8 6-10h-5l1-8z" fill="currentColor"/></svg>
+                          <!-- Check engine -->
+                          <svg class="dash-warn-icon warn-engine" viewBox="0 0 24 18" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="4" y="5" width="14" height="9" rx="1.5"/><path d="M7 5V3M11 5V3M15 5V3"/><path d="M1 8h3M20 8h3"/><path d="M7 14v2h4v-2"/></svg>
+                          <!-- ABS -->
+                          <span class="dash-warn-text warn-abs">ABS</span>
+                        </div>
+                        <div class="dash-trip-divider"></div>
+                        <!-- Main area — empty, filled by animation in Phase 14 -->
+                        <div class="dash-trip-main" id="trip-display"></div>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
 
                 <!-- Insight — same position as Kernproblem on slide 3 -->
@@ -1094,8 +1118,25 @@
                     </div>
                   </div>
 
+                  <!-- Trip computer — car instrument cluster LCD -->
+                  <div class="dash-trip-computer">
+                    <div class="dash-trip-bezel">
+                      <div class="dash-trip-screen">
+                        <div class="dash-trip-warnings">
+                          <svg class="dash-warn-icon warn-battery" viewBox="0 0 24 18" fill="currentColor"><rect x="1" y="4" width="19" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5" fill="none"/><rect x="20" y="7" width="3" height="4" rx="0.5"/><line x1="7" y1="7" x2="7" y2="11" stroke="currentColor" stroke-width="1.5"/><line x1="5" y1="9" x2="9" y2="9" stroke="currentColor" stroke-width="1.5"/><line x1="13" y1="7" x2="13" y2="11" stroke="currentColor" stroke-width="1.5"/></svg>
+                          <svg class="dash-warn-icon warn-temp" viewBox="0 0 16 22" fill="currentColor"><path d="M10 13.5V3.5a2 2 0 10-4 0v10a4 4 0 104 0z" stroke="currentColor" stroke-width="1.3" fill="none"/><circle cx="8" cy="15" r="1.5"/></svg>
+                          <svg class="dash-warn-icon warn-ev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M11 1L5 11h5l-1 8 6-10h-5l1-8z" fill="currentColor"/></svg>
+                          <svg class="dash-warn-icon warn-engine" viewBox="0 0 24 18" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="4" y="5" width="14" height="9" rx="1.5"/><path d="M7 5V3M11 5V3M15 5V3"/><path d="M1 8h3M20 8h3"/><path d="M7 14v2h4v-2"/></svg>
+                          <span class="dash-warn-text warn-abs">ABS</span>
+                        </div>
+                        <div class="dash-trip-divider"></div>
+                        <div class="dash-trip-main" id="trip-display-charging"></div>
+                      </div>
+                    </div>
+                  </div>
+
                   <!-- Right: CC-CV chart (zoomable) -->
-                  <div class="chart-container" id="chart-charging-profile"></div>
+                  <div class="chart-container zoomable-image" id="chart-charging-profile"></div>
 
                 </div>
               </div>
@@ -1158,7 +1199,7 @@
 
                 <!-- Bottom zone: measurement timeline -->
                 <div class="vehicle-timeline-wrap">
-                  <div class="chart-container" id="chart-vehicle-timeline"></div>
+                  <div class="chart-container zoomable-image" id="chart-vehicle-timeline"></div>
                 </div>
               </div>
             </div>
@@ -1172,7 +1213,7 @@
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
-                <div class="chart-container convergence-chart" id="chart-convergence"></div>
+                <div class="chart-container convergence-chart zoomable-image" id="chart-convergence"></div>
               </div>
             </div>
           </section>
@@ -1190,7 +1231,7 @@
             <div class="slide-content">
               <div class="evidence-area">
                 <div class="method-comparison-layout">
-                  <div class="chart-container" id="chart-method-comparison">
+                  <div class="chart-container zoomable-image" id="chart-method-comparison">
                     <!-- D3 lollipop chart -->
                   </div>
                   <div class="method-annotations">
@@ -1273,7 +1314,7 @@
                       <span class="lang-de">Algorithmische Reproduzierbarkeit</span>
                       <span class="lang-en" hidden>Algorithmic Reproducibility</span>
                     </div>
-                    <div class="chart-container" id="chart-reproducibility">
+                    <div class="chart-container zoomable-image" id="chart-reproducibility">
                       <!-- D3 value matrix -->
                     </div>
                     <div class="repro-explanation">
@@ -1286,7 +1327,7 @@
                       <span class="lang-de">Messwiederholbarkeit AVL HV-Check</span>
                       <span class="lang-en" hidden>Measurement Repeatability AVL HV-Check</span>
                     </div>
-                    <div class="chart-container" id="chart-avl-timeline">
+                    <div class="chart-container zoomable-image" id="chart-avl-timeline">
                       <!-- D3 AVL SOH timeline -->
                     </div>
                     <div class="repro-explanation">
@@ -1315,7 +1356,7 @@
             <div class="slide-content">
               <div class="evidence-area">
                 <div class="temp-layout">
-                  <div class="chart-container" id="chart-temperature">
+                  <div class="chart-container zoomable-image" id="chart-temperature">
                     <!-- D3 slope chart -->
                   </div>
                   <div class="temp-annotations">
@@ -1369,7 +1410,7 @@
             <div class="slide-content">
               <div class="evidence-area">
                 <div class="resistance-layout">
-                  <div class="chart-container" id="chart-resistance">
+                  <div class="chart-container zoomable-image" id="chart-resistance">
                     <!-- D3 horizontal gauge bars -->
                   </div>
                   <div class="resistance-annotations">
@@ -1743,7 +1784,7 @@
             <div class="slide-content">
               <div class="evidence-area">
                 <div class="community-layout">
-                  <div class="chart-container" id="chart-community">
+                  <div class="chart-container zoomable-image" id="chart-community">
                     <!-- D3 chart — Community data positioning -->
                   </div>
                   <div class="community-annotations">
@@ -1842,88 +1883,54 @@
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
-                <div class="discussion-layout">
-                  <div class="discussion-column strengths">
-                    <div class="discussion-column-header">
-                      <div class="badge success"><span class="lang-de">Stärken</span><span class="lang-en" hidden>Strengths</span></div>
-                    </div>
-                    <div class="discussion-item">
-                      <span class="method-note-dot" style="background:var(--success)"></span>
-                      <div>
-                        <strong>±1,6 Pp</strong>
-                        <span class="lang-de"> — reproduzierbarer SOH mit ~€50 OBD-Hardware vs. AVL-Referenz</span>
-                        <span class="lang-en" hidden> — reproducible SOH with ~€50 OBD hardware vs. AVL reference</span>
-                      </div>
-                    </div>
-                    <div class="discussion-item">
-                      <span class="method-note-dot" style="background:var(--success)"></span>
-                      <div>
-                        <strong>0,1 Pp</strong>
-                        <span class="lang-de"> — kombinierte Methode robust gegen Temperatur (9–19 °C)</span>
-                        <span class="lang-en" hidden> — combined method robust against temperature (9–19°C)</span>
-                      </div>
-                    </div>
-                    <div class="discussion-item">
-                      <span class="method-note-dot" style="background:var(--success)"></span>
-                      <div>
-                        <strong><span class="lang-de">Kostenfaktor 200×</span><span class="lang-en" hidden>Cost factor 200×</span></strong>
-                        <span class="lang-de"> — Inter-System-Übereinstimmung AVL ↔ OBD bei 1/200 der Kosten</span>
-                        <span class="lang-en" hidden> — inter-system agreement AVL ↔ OBD at 1/200 the cost</span>
-                      </div>
-                    </div>
-                    <div class="discussion-item">
-                      <span class="method-note-dot" style="background:var(--success)"></span>
-                      <div>
-                        <strong>Python-App</strong>
-                        <span class="lang-de"> — automatisierte SOH-Berechnung für Werkstattpraxis</span>
-                        <span class="lang-en" hidden> — automated SOH calculation for workshop practice</span>
-                      </div>
-                    </div>
+                <div class="discussion-list">
+                  <div class="discussion-section-label success"><span class="lang-de">Stärken</span><span class="lang-en" hidden>Strengths</span></div>
+                  <div class="discussion-row success">
+                    <div class="discussion-bar"></div>
+                    <div class="discussion-key">±1,6 Pp</div>
+                    <div class="discussion-desc"><span class="lang-de">Reproduzierbarer SOH mit ~€50 OBD-Hardware vs. AVL-Referenz</span><span class="lang-en" hidden>Reproducible SOH with ~€50 OBD hardware vs. AVL reference</span></div>
                   </div>
-                  <div class="discussion-column limitations">
-                    <div class="discussion-column-header">
-                      <div class="badge danger"><span class="lang-de">Limitationen</span><span class="lang-en" hidden>Limitations</span></div>
-                    </div>
-                    <div class="discussion-item">
-                      <span class="method-note-dot" style="background:var(--danger)"></span>
-                      <div>
-                        <strong><span class="lang-de">1 Fahrzeug</span><span class="lang-en" hidden>1 vehicle</span></strong>
-                        <span class="lang-de"> — einzelnes Primärfahrzeug (VW ID.4), Übertragbarkeit unklar</span>
-                        <span class="lang-en" hidden> — single primary vehicle (VW ID.4), transferability unclear</span>
-                      </div>
-                    </div>
-                    <div class="discussion-item">
-                      <span class="method-note-dot" style="background:var(--danger)"></span>
-                      <div>
-                        <strong><span class="lang-de">Nur AC</span><span class="lang-en" hidden>AC only</span></strong>
-                        <span class="lang-de"> — keine DC-Schnellladedaten, kein Hochstrom-Vergleich</span>
-                        <span class="lang-en" hidden> — no DC fast charging data, no high C-rate comparison</span>
-                      </div>
-                    </div>
-                    <div class="discussion-item">
-                      <span class="method-note-dot" style="background:var(--danger)"></span>
-                      <div>
-                        <strong>SOH &gt; 97 %</strong>
-                        <span class="lang-de"> — keine signifikante Alterung im Messzeitraum beobachtet</span>
-                        <span class="lang-en" hidden> — no significant aging observed in measurement period</span>
-                      </div>
-                    </div>
-                    <div class="discussion-item">
-                      <span class="method-note-dot" style="background:var(--danger)"></span>
-                      <div>
-                        <strong><span class="lang-de">Keine T-Korrektur</span><span class="lang-en" hidden>No T correction</span></strong>
-                        <span class="lang-de"> — Messungen bei &lt;15 °C eingeschränkt vergleichbar</span>
-                        <span class="lang-en" hidden> — measurements at &lt;15°C have limited comparability</span>
-                      </div>
-                    </div>
-                    <div class="discussion-item">
-                      <span class="method-note-dot" style="background:var(--danger)"></span>
-                      <div>
-                        <strong>ISO 12405</strong>
-                        <span class="lang-de"> — keine unabhängige Laborvalidierung durchgeführt</span>
-                        <span class="lang-en" hidden> — no independent lab validation performed</span>
-                      </div>
-                    </div>
+                  <div class="discussion-row success">
+                    <div class="discussion-bar"></div>
+                    <div class="discussion-key">0,1 Pp</div>
+                    <div class="discussion-desc"><span class="lang-de">Kombinierte Methode robust gegen Temperatur (9–19 °C)</span><span class="lang-en" hidden>Combined method robust against temperature (9–19°C)</span></div>
+                  </div>
+                  <div class="discussion-row success">
+                    <div class="discussion-bar"></div>
+                    <div class="discussion-key">200×</div>
+                    <div class="discussion-desc"><span class="lang-de">Inter-System-Übereinstimmung AVL ↔ OBD bei 1/200 der Kosten</span><span class="lang-en" hidden>Inter-system agreement AVL ↔ OBD at 1/200 the cost</span></div>
+                  </div>
+                  <div class="discussion-row success">
+                    <div class="discussion-bar"></div>
+                    <div class="discussion-key">App</div>
+                    <div class="discussion-desc"><span class="lang-de">Automatisierte Python-App für Werkstattpraxis</span><span class="lang-en" hidden>Automated Python app for workshop practice</span></div>
+                  </div>
+                  <div class="discussion-divider"></div>
+                  <div class="discussion-section-label danger"><span class="lang-de">Limitationen</span><span class="lang-en" hidden>Limitations</span></div>
+                  <div class="discussion-row danger">
+                    <div class="discussion-bar"></div>
+                    <div class="discussion-key"><span class="lang-de">1 Fzg.</span><span class="lang-en" hidden>1 veh.</span></div>
+                    <div class="discussion-desc"><span class="lang-de">Einzelnes Primärfahrzeug (VW ID.4), Übertragbarkeit unklar</span><span class="lang-en" hidden>Single primary vehicle (VW ID.4), transferability unclear</span></div>
+                  </div>
+                  <div class="discussion-row danger">
+                    <div class="discussion-bar"></div>
+                    <div class="discussion-key"><span class="lang-de">Nur AC</span><span class="lang-en" hidden>AC only</span></div>
+                    <div class="discussion-desc"><span class="lang-de">Keine DC-Schnellladedaten, kein Hochstrom-Vergleich</span><span class="lang-en" hidden>No DC fast charging data, no high C-rate comparison</span></div>
+                  </div>
+                  <div class="discussion-row danger">
+                    <div class="discussion-bar"></div>
+                    <div class="discussion-key">&gt;97 %</div>
+                    <div class="discussion-desc"><span class="lang-de">Keine signifikante Alterung im Messzeitraum beobachtet</span><span class="lang-en" hidden>No significant aging observed in measurement period</span></div>
+                  </div>
+                  <div class="discussion-row danger">
+                    <div class="discussion-bar"></div>
+                    <div class="discussion-key"><span class="lang-de">T-Korr.</span><span class="lang-en" hidden>T corr.</span></div>
+                    <div class="discussion-desc"><span class="lang-de">Keine Temperaturkorrektur — Messungen bei &lt;15 °C eingeschränkt vergleichbar</span><span class="lang-en" hidden>No temperature correction — measurements at &lt;15°C limited comparability</span></div>
+                  </div>
+                  <div class="discussion-row danger">
+                    <div class="discussion-bar"></div>
+                    <div class="discussion-key">ISO</div>
+                    <div class="discussion-desc"><span class="lang-de">Keine unabhängige Laborvalidierung (ISO 12405)</span><span class="lang-en" hidden>No independent lab validation (ISO 12405)</span></div>
                   </div>
                 </div>
               </div>
@@ -1938,30 +1945,69 @@
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
-                <div class="equation-block" style="max-width: 900px; margin: 0 auto;">
-                  <div class="katex-eq">$$u_\text{gesamt} = \sqrt{u_\text{Mess}^2 + u_\text{Temp}^2 + u_\text{SOC}^2 + u_\text{Methode}^2} \approx \pm 4{,}5 \text{ Pp}$$</div>
-                </div>
-                <div class="uncertainty-components" style="margin-top: 2rem;">
-                  <div class="three-col" style="grid-template-columns: repeat(4, 1fr);">
-                    <div class="stat-card">
-                      <div class="stat-value" style="font-size: 2rem;">~1 Pp</div>
-                      <div class="stat-label">u<sub>Mess</sub></div>
-                      <div class="stat-sublabel"><span class="lang-de">OBD-AVL Kreuzvalidierung</span><span class="lang-en" hidden>OBD-AVL cross-validation</span></div>
+                <div class="uncertainty-layout">
+                  <!-- Left: equation + component bars -->
+                  <div class="uncertainty-main">
+                    <div class="equation-block" style="margin-bottom: 1.5rem;">
+                      <div class="katex-eq">$$u_\text{gesamt} = \sqrt{u_\text{Mess}^2 + u_\text{Temp}^2 + u_\text{SOC}^2 + u_\text{Methode}^2} \approx \pm 4{,}5 \text{ Pp}$$</div>
                     </div>
-                    <div class="stat-card">
-                      <div class="stat-value success" style="font-size: 2rem;">~0,1 Pp</div>
-                      <div class="stat-label">u<sub>Temp</sub></div>
-                      <div class="stat-sublabel">9,8 °C vs. 19 °C</div>
+                    <div class="uncertainty-bars">
+                      <div class="uncertainty-row">
+                        <div class="uncertainty-label">u<sub>Methode</sub></div>
+                        <div class="uncertainty-bar-track">
+                          <div class="uncertainty-bar accent" style="width: 89%;"></div>
+                        </div>
+                        <div class="uncertainty-value accent">~4 Pp</div>
+                        <div class="uncertainty-desc"><span class="lang-de">SOH<sub>e</sub> vs. SOH<sub>c</sub> Streuung (99,6% − 91,8%) / 2</span><span class="lang-en" hidden>SOH<sub>e</sub> vs. SOH<sub>c</sub> spread (99.6% − 91.8%) / 2</span></div>
+                      </div>
+                      <div class="uncertainty-row">
+                        <div class="uncertainty-label">u<sub>SOC</sub></div>
+                        <div class="uncertainty-bar-track">
+                          <div class="uncertainty-bar warning" style="width: 44%;"></div>
+                        </div>
+                        <div class="uncertainty-value warning">~2 Pp</div>
+                        <div class="uncertainty-desc"><span class="lang-de">SOC-Fenster Qualität (&gt;50% empfohlen)</span><span class="lang-en" hidden>SOC window quality (&gt;50% recommended)</span></div>
+                      </div>
+                      <div class="uncertainty-row">
+                        <div class="uncertainty-label">u<sub>Mess</sub></div>
+                        <div class="uncertainty-bar-track">
+                          <div class="uncertainty-bar info" style="width: 22%;"></div>
+                        </div>
+                        <div class="uncertainty-value">~1 Pp</div>
+                        <div class="uncertainty-desc"><span class="lang-de">OBD-AVL Kreuzvalidierung (SOC ±1,2%, Temp ±5 °C)</span><span class="lang-en" hidden>OBD-AVL cross-validation (SOC ±1.2%, Temp ±5 °C)</span></div>
+                      </div>
+                      <div class="uncertainty-row">
+                        <div class="uncertainty-label">u<sub>Temp</sub></div>
+                        <div class="uncertainty-bar-track">
+                          <div class="uncertainty-bar success" style="width: 2%;"></div>
+                        </div>
+                        <div class="uncertainty-value success">~0,1 Pp</div>
+                        <div class="uncertainty-desc"><span class="lang-de">19 °C vs. 9,8 °C → kompensierende Effekte</span><span class="lang-en" hidden>19 °C vs. 9.8 °C → compensating effects</span></div>
+                      </div>
                     </div>
-                    <div class="stat-card">
-                      <div class="stat-value warning" style="font-size: 2rem;">~2 Pp</div>
-                      <div class="stat-label">u<sub>SOC</sub></div>
-                      <div class="stat-sublabel"><span class="lang-de">SOC-Fenster Qualität</span><span class="lang-en" hidden>SOC window quality</span></div>
+                  </div>
+                  <!-- Right: annotations -->
+                  <div class="method-annotations uncertainty-annotations">
+                    <div class="method-annotations-header"><span class="lang-de">Kontext</span><span class="lang-en" hidden>Context</span></div>
+                    <div class="method-note">
+                      <strong><span class="lang-de">Dominante Quelle</span><span class="lang-en" hidden>Dominant source</span></strong><br>
+                      <span class="lang-de">u<sub>Methode</sub> allein macht 88% der Gesamtunsicherheit aus — Coulomb-Counting unterschätzt systematisch um ~5,5 Pp</span>
+                      <span class="lang-en" hidden>u<sub>Methode</sub> alone accounts for 88% of total uncertainty — Coulomb counting systematically underestimates by ~5.5 pp</span>
                     </div>
-                    <div class="stat-card">
-                      <div class="stat-value accent" style="font-size: 2rem;">~4 Pp</div>
-                      <div class="stat-label">u<sub>Methode</sub></div>
-                      <div class="stat-sublabel"><span class="lang-de">SOH_e vs. SOH_c Streuung</span><span class="lang-en" hidden>SOH_e vs. SOH_c spread</span></div>
+                    <div class="method-note">
+                      <strong><span class="lang-de">Praxisrelevanz</span><span class="lang-en" hidden>Practical relevance</span></strong><br>
+                      <span class="lang-de">Zustandskategorien liegen 10 Pp auseinander (≥90% / ≥80% / &lt;70%) → ±4,5 Pp erlaubt zuverlässige Unterscheidung</span>
+                      <span class="lang-en" hidden>Condition categories are 10 pp apart (≥90% / ≥80% / &lt;70%) → ±4.5 pp allows reliable discrimination</span>
+                    </div>
+                    <div class="method-note">
+                      <strong><span class="lang-de">Temperatureffekt</span><span class="lang-en" hidden>Temperature effect</span></strong><br>
+                      <span class="lang-de">SOH<sub>e</sub> steigt, SOH<sub>c</sub> sinkt bei Kälte → gegenläufige Effekte kompensieren sich (Δ = 0,1 Pp)</span>
+                      <span class="lang-en" hidden>SOH<sub>e</sub> rises, SOH<sub>c</sub> drops in cold → opposing effects cancel out (Δ = 0.1 pp)</span>
+                    </div>
+                    <div class="method-note">
+                      <strong><span class="lang-de">SOC-Fenster</span><span class="lang-en" hidden>SOC window</span></strong><br>
+                      <span class="lang-de">Wichtigster beeinflussbarer Parameter — bei schlechtem Fenster bis zu 21 Pp Abweichung möglich</span>
+                      <span class="lang-en" hidden>Most controllable parameter — poor window can cause up to 21 pp deviation</span>
                     </div>
                   </div>
                 </div>
@@ -1998,27 +2044,29 @@
             </h2>
             <div class="slide-content">
               <div class="evidence-area" style="text-align: center;">
-                <div class="core-claim" style="max-width: 1200px; margin: 0 auto;">
-                  <p style="font-size: var(--fs-h2); color: var(--text-primary); font-weight: var(--fw-semibold); line-height: 1.5;">
-                    <span class="lang-de">Die Kombination von energiebasierter und integrativer SOH-Methode ermöglicht eine <span style="color: var(--accent);">reproduzierbare Bestimmung des Batteriezustands</span> mit einem kostengünstigen OBD-Adapter (~€50) bei einer Abweichung von nur <span style="color: var(--success);">±1,6 Prozentpunkten</span> zur professionellen Off-Board-Referenz.</span>
-                    <span class="lang-en" hidden>The combination of energy-based and integrative SOH methods enables <span style="color: var(--accent);">reproducible battery health determination</span> with a low-cost OBD adapter (~€50) at a deviation of only <span style="color: var(--success);">±1.6 percentage points</span> from the professional off-board reference.</span>
-                  </p>
-                </div>
-                <div class="three-col" style="margin-top: 3rem; max-width: 1000px; margin-left: auto; margin-right: auto;">
-                  <div class="stat-card">
-                    <div class="stat-value success">95,7 %</div>
-                    <div class="stat-label">SOH kombiniert</div>
-                    <div class="stat-sublabel">vs. AVL 97,3 %</div>
+                <div class="conclusion-zoomable zoomable-image" style="cursor: pointer;">
+                  <div class="core-claim" style="max-width: 1200px; margin: 0 auto;">
+                    <p style="font-size: var(--fs-h2); color: var(--text-primary); font-weight: var(--fw-semibold); line-height: 1.5;">
+                      <span class="lang-de">Die Kombination von energiebasierter und integrativer SOH-Methode ermöglicht eine <span style="color: var(--accent);">reproduzierbare Bestimmung des Batteriezustands</span> mit einem kostengünstigen OBD-Adapter (~€50) bei einer Abweichung von nur <span style="color: var(--success);">±1,6 Prozentpunkten</span> zur professionellen Off-Board-Referenz.</span>
+                      <span class="lang-en" hidden>The combination of energy-based and integrative SOH methods enables <span style="color: var(--accent);">reproducible battery health determination</span> with a low-cost OBD adapter (~€50) at a deviation of only <span style="color: var(--success);">±1.6 percentage points</span> from the professional off-board reference.</span>
+                    </p>
                   </div>
-                  <div class="stat-card">
-                    <div class="stat-value" style="color: var(--chart-blue);">0,1 Pp</div>
-                    <div class="stat-label"><span class="lang-de">Temperaturrobustheit</span><span class="lang-en" hidden>Temperature robustness</span></div>
-                    <div class="stat-sublabel">9,8 °C – 19 °C</div>
-                  </div>
-                  <div class="stat-card">
-                    <div class="stat-value success">1,6 Pp</div>
-                    <div class="stat-label"><span class="lang-de">AVL ↔ OBD</span><span class="lang-en" hidden>AVL ↔ OBD</span></div>
-                    <div class="stat-sublabel">VW ID.4 (IfE)</div>
+                  <div class="three-col" style="margin-top: 3rem; max-width: 1000px; margin-left: auto; margin-right: auto;">
+                    <div class="stat-card">
+                      <div class="stat-value success">95,7 %</div>
+                      <div class="stat-label">SOH kombiniert</div>
+                      <div class="stat-sublabel">vs. AVL 97,3 %</div>
+                    </div>
+                    <div class="stat-card">
+                      <div class="stat-value" style="color: var(--chart-blue);">0,1 Pp</div>
+                      <div class="stat-label"><span class="lang-de">Temperaturrobustheit</span><span class="lang-en" hidden>Temperature robustness</span></div>
+                      <div class="stat-sublabel">9,8 °C – 19 °C</div>
+                    </div>
+                    <div class="stat-card">
+                      <div class="stat-value success">1,6 Pp</div>
+                      <div class="stat-label"><span class="lang-de">AVL ↔ OBD</span><span class="lang-en" hidden>AVL ↔ OBD</span></div>
+                      <div class="stat-sublabel">VW ID.4 (IfE)</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2077,226 +2125,393 @@
           <!-- BACKUP SLIDES (hidden in Defense Mode)                        -->
           <!-- ============================================================ -->
 
+          <!-- Backup 1: Tool Validation -->
           <section id="slide-backup-intersystem" data-section="backup" data-visibility="uncounted">
             <h2>
-              <span class="lang-de">Backup: Werkzeugvalidierung an weiteren Fahrzeugen</span>
-              <span class="lang-en" hidden>Backup: Tool Validation on Additional Vehicles</span>
+              <span class="lang-de">Funktionieren die drei Diagnosesysteme auch an anderen Fahrzeugen?</span>
+              <span class="lang-en" hidden>Do the three diagnostic systems also work on other vehicles?</span>
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
-                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
-                  <span class="lang-de">Die Diagnosewerkzeuge wurden zusätzlich an weiteren Fahrzeugen auf grundsätzliche Funktionsfähigkeit getestet. Diese Messungen dienten der Werkzeugvalidierung — die Daten sind nicht Gegenstand der quantitativen Analyse.</span>
-                  <span class="lang-en" hidden>The diagnostic tools were additionally tested on further vehicles for basic functionality. These measurements served tool validation — the data are not part of the quantitative analysis.</span>
-                </p>
-                <table class="data-table">
-                  <thead>
-                    <tr>
-                      <th><span class="lang-de">Fahrzeug</span><span class="lang-en" hidden>Vehicle</span></th>
-                      <th><span class="lang-de">Getestete Systeme</span><span class="lang-en" hidden>Tested Systems</span></th>
-                      <th><span class="lang-de">Zweck</span><span class="lang-en" hidden>Purpose</span></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><td>BMW i3s</td><td>AVL, AUTEL, OBD</td><td><span class="lang-de">Werkzeugvalidierung, Inter-System-Test</span><span class="lang-en" hidden>Tool validation, inter-system test</span></td></tr>
-                    <tr><td>Skoda Elroq</td><td>AVL, AUTEL</td><td><span class="lang-de">Werkzeugvalidierung, Neufahrzeug-Referenz</span><span class="lang-en" hidden>Tool validation, new vehicle reference</span></td></tr>
-                    <tr><td>Cupra Born</td><td>AVL</td><td><span class="lang-de">MEB-Plattform-Kompatibilität</span><span class="lang-en" hidden>MEB platform compatibility</span></td></tr>
-                    <tr><td>Renault Zoe</td><td>AUTEL, OBD</td><td><span class="lang-de">Nicht-MEB-Kompatibilität</span><span class="lang-en" hidden>Non-MEB compatibility</span></td></tr>
-                  </tbody>
-                </table>
+                <div class="backup-layout">
+                  <div class="backup-main">
+                    <div class="backup-vehicle-cards">
+                      <div class="backup-vehicle-row">
+                        <div class="backup-vehicle-name">BMW i3s</div>
+                        <div class="backup-vehicle-tools">
+                          <span class="backup-tool-badge" style="background: var(--success);">AVL</span>
+                          <span class="backup-tool-badge" style="background: var(--chart-purple);">AUTEL</span>
+                          <span class="backup-tool-badge" style="background: var(--chart-blue);">OBD</span>
+                        </div>
+                        <div class="backup-vehicle-purpose"><span class="lang-de">Alle 3 Systeme getestet — Inter-System-Vergleich</span><span class="lang-en" hidden>All 3 systems tested — inter-system comparison</span></div>
+                      </div>
+                      <div class="backup-vehicle-row">
+                        <div class="backup-vehicle-name">Skoda Elroq</div>
+                        <div class="backup-vehicle-tools">
+                          <span class="backup-tool-badge" style="background: var(--success);">AVL</span>
+                          <span class="backup-tool-badge" style="background: var(--chart-purple);">AUTEL</span>
+                        </div>
+                        <div class="backup-vehicle-purpose"><span class="lang-de">Neufahrzeug — Plausibilitätsprüfung (SOH ≈ 100%)</span><span class="lang-en" hidden>New vehicle — plausibility check (SOH ≈ 100%)</span></div>
+                      </div>
+                      <div class="backup-vehicle-row">
+                        <div class="backup-vehicle-name">Cupra Born</div>
+                        <div class="backup-vehicle-tools">
+                          <span class="backup-tool-badge" style="background: var(--success);">AVL</span>
+                        </div>
+                        <div class="backup-vehicle-purpose"><span class="lang-de">MEB-Plattform — Übertragbarkeit bestätigt</span><span class="lang-en" hidden>MEB platform — transferability confirmed</span></div>
+                      </div>
+                      <div class="backup-vehicle-row">
+                        <div class="backup-vehicle-name">Renault Zoe</div>
+                        <div class="backup-vehicle-tools">
+                          <span class="backup-tool-badge" style="background: var(--chart-purple);">AUTEL</span>
+                          <span class="backup-tool-badge" style="background: var(--chart-blue);">OBD</span>
+                        </div>
+                        <div class="backup-vehicle-purpose"><span class="lang-de">Nicht-MEB — plattformübergreifend einsetzbar</span><span class="lang-en" hidden>Non-MEB — cross-platform applicability</span></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="method-annotations backup-annotations">
+                    <div class="method-annotations-header"><span class="lang-de">Kontext</span><span class="lang-en" hidden>Context</span></div>
+                    <div class="method-note">
+                      <strong><span class="lang-de">3 Systeme, 5 Fahrzeuge</span><span class="lang-en" hidden>3 systems, 5 vehicles</span></strong><br>
+                      <span class="lang-de">AVL, AUTEL und OBD wurden einzeln und im Vergleich an unterschiedlichen Fahrzeugen geprüft</span>
+                      <span class="lang-en" hidden>AVL, AUTEL and OBD were tested individually and comparatively on different vehicles</span>
+                    </div>
+                    <div class="method-note">
+                      <strong><span class="lang-de">Nur Funktionsprüfung</span><span class="lang-en" hidden>Functional testing only</span></strong><br>
+                      <span class="lang-de">Diese Daten dienen der Werkzeugvalidierung — die quantitative SOH-Analyse erfolgt ausschließlich am VW ID.4</span>
+                      <span class="lang-en" hidden>This data serves tool validation — quantitative SOH analysis is performed exclusively on the VW ID.4</span>
+                    </div>
+                    <div class="method-note">
+                      <strong><span class="lang-de">Ergebnis</span><span class="lang-en" hidden>Result</span></strong><br>
+                      <span class="lang-de">Alle drei Systeme liefern plausible Ergebnisse an verschiedenen Plattformen — keine Inkompatibilität festgestellt</span>
+                      <span class="lang-en" hidden>All three systems deliver plausible results on different platforms — no incompatibility detected</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </section>
 
+          <!-- Backup 2: Degradation Rate -->
           <section id="slide-backup-degradation" data-section="backup" data-visibility="uncounted">
             <h2>
-              <span class="lang-de">Backup: Degradationsrate im Vergleich</span>
-              <span class="lang-en" hidden>Backup: Degradation Rate Comparison</span>
+              <span class="lang-de">Wie schnell degradiert die Batterie im Vergleich zur Community?</span>
+              <span class="lang-en" hidden>How fast does the battery degrade compared to the community?</span>
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
-                <div class="two-col">
-                  <div class="stat-card">
-                    <div class="stat-value warning">~1,7 Pp / 11k km</div>
-                    <div class="stat-label">VW ID.4 (FP, 65.467 km)</div>
-                    <div class="stat-sublabel">98,1 % → 96,4 % über 6 Monate</div>
+                <div class="backup-layout">
+                  <div class="backup-main">
+                    <div class="backup-comparison-cards">
+                      <div class="backup-degrad-card">
+                        <div class="backup-degrad-source"><span class="lang-de">Eigene Messung</span><span class="lang-en" hidden>Own measurement</span></div>
+                        <div class="backup-degrad-vehicle">VW ID.4 (FP, 65.467 km)</div>
+                        <div class="backup-degrad-rate" style="color: var(--warning);">~1,7 Pp / 11k km</div>
+                        <div class="backup-degrad-detail">98,1 % → 96,4 %<br><span class="lang-de">über 6 Monate (mehrere Systeme)</span><span class="lang-en" hidden>over 6 months (multiple systems)</span></div>
+                      </div>
+                      <div class="backup-degrad-vs">vs.</div>
+                      <div class="backup-degrad-card">
+                        <div class="backup-degrad-source">Community</div>
+                        <div class="backup-degrad-vehicle"><span class="lang-de">MEB-Plattform (n=192)</span><span class="lang-en" hidden>MEB Platform (n=192)</span></div>
+                        <div class="backup-degrad-rate" style="color: var(--text-primary);">~1 Pp / 10k km</div>
+                        <div class="backup-degrad-detail">95 % → 92 %<br><span class="lang-de">über 40.000 km (Langzeitbeobachtung)</span><span class="lang-en" hidden>over 40,000 km (long-term observation)</span></div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="stat-card">
-                    <div class="stat-value">~1 Pp / 10k km</div>
-                    <div class="stat-label">MEB-Plattform (Community)</div>
-                    <div class="stat-sublabel">95 % → 92 % über 40.000 km</div>
+                  <div class="method-annotations backup-annotations">
+                    <div class="method-annotations-header"><span class="lang-de">Kontext</span><span class="lang-en" hidden>Context</span></div>
+                    <div class="method-note">
+                      <strong><span class="lang-de">Vergleichbarkeit</span><span class="lang-en" hidden>Comparability</span></strong><br>
+                      <span class="lang-de">Eigene Rate leicht über Community — erklärbar durch kurzen Beobachtungszeitraum und Messstreuung</span>
+                      <span class="lang-en" hidden>Own rate slightly above community — explainable by short observation period and measurement variance</span>
+                    </div>
+                    <div class="method-note">
+                      <strong><span class="lang-de">Community-Quelle</span><span class="lang-en" hidden>Community source</span></strong><br>
+                      <span class="lang-de">Škoda Enyaq 80X Langzeitbeobachtung — gleiche MEB-Plattform, NMC-Zellchemie</span>
+                      <span class="lang-en" hidden>Škoda Enyaq 80X long-term observation — same MEB platform, NMC cell chemistry</span>
+                    </div>
+                    <div class="method-note">
+                      <strong><span class="lang-de">Einordnung</span><span class="lang-en" hidden>Classification</span></strong><br>
+                      <span class="lang-de">Bei ~1 Pp/10k km → 90% SOH erst nach ~100.000 km → innerhalb der Garantie (8 Jahre / 160.000 km)</span>
+                      <span class="lang-en" hidden>At ~1 pp/10k km → 90% SOH only after ~100,000 km → within warranty (8 years / 160,000 km)</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </section>
 
+          <!-- Backup 3: Off-Board Measurement Time Series -->
           <section id="slide-backup-avl-timeseries" data-section="backup" data-visibility="uncounted">
             <h2>
-              <span class="lang-de">Backup: AVL-Messzeitreihe VW ID.4 (IfE)</span>
-              <span class="lang-en" hidden>Backup: AVL Measurement Time Series VW ID.4 (IfE)</span>
+              <span class="lang-de">Wie reproduzierbar sind die Off-Board-Messungen (AVL) über 12 Monate?</span>
+              <span class="lang-en" hidden>How reproducible are the off-board measurements (AVL) over 12 months?</span>
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
-                <table class="data-table">
-                  <thead>
-                    <tr>
-                      <th><span class="lang-de">Datum</span><span class="lang-en" hidden>Date</span></th>
-                      <th>km</th>
-                      <th>T [°C]</th>
-                      <th>SOC [%]</th>
-                      <th>SOH [%]</th>
-                      <th>ΔV<sub>max</sub> [V]</th>
-                      <th>R<sub>iso</sub> [kΩ]</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><td>19.12.2024</td><td>9.285</td><td>11,5</td><td>78,0</td><td>99,2</td><td>0,012</td><td>4.630</td></tr>
-                    <tr><td>14.03.2025</td><td>9.558</td><td class="highlight" style="color: var(--chart-blue);">4,0</td><td>92,8</td><td class="highlight">100,0</td><td>0,007</td><td>4.640</td></tr>
-                    <tr><td>25.04.2025</td><td>9.872</td><td>10,5</td><td>77,6</td><td class="highlight">100,0</td><td>0,010</td><td>3.990</td></tr>
-                    <tr><td>25.04.2025</td><td>9.872</td><td>10,5</td><td>77,6</td><td class="highlight">100,0</td><td>0,010</td><td>4.070</td></tr>
-                    <tr><td>03.12.2025</td><td>10.801</td><td class="highlight" style="color: var(--success);">24,0</td><td>94,8</td><td>97,3</td><td>0,006</td><td>4.680</td></tr>
-                  </tbody>
-                </table>
-                <div class="takeaway-box" style="margin-top: 1rem;">
-                  <div class="takeaway-label">Takeaway</div>
-                  <p>
-                    <span class="lang-de">Messungen bei niedrigen Temperaturen (4–10,5 °C) liefern systematisch höhere SOH-Werte (100 %). Der Wert bei 24 °C (97,3 %) ist am repräsentativsten. Doppelmessung am 25.04.2025 bestätigt hohe Kurzzeit-Reproduzierbarkeit.</span>
-                    <span class="lang-en" hidden>Measurements at low temperatures (4–10.5°C) systematically yield higher SOH values (100%). The value at 24°C (97.3%) is most representative. Double measurement on 25.04.2025 confirms high short-term reproducibility.</span>
-                  </p>
+                <div class="backup-layout">
+                  <div class="backup-main">
+                    <div class="backup-timeline-rows">
+                      <div class="backup-timeline-header">
+                        <span style="flex: 1.2;"><span class="lang-de">Datum</span><span class="lang-en" hidden>Date</span></span>
+                        <span style="flex: 0.8;">km</span>
+                        <span style="flex: 0.6;">T [°C]</span>
+                        <span style="flex: 0.6;">SOC [%]</span>
+                        <span style="flex: 0.7; font-weight: 700;">SOH [%]</span>
+                        <span style="flex: 0.7;">ΔV<sub>max</sub> [V]</span>
+                        <span style="flex: 0.8;">R<sub>iso</sub> [kΩ]</span>
+                      </div>
+                      <div class="backup-timeline-row">
+                        <span style="flex: 1.2;">19.12.2024</span>
+                        <span style="flex: 0.8;">9.285</span>
+                        <span style="flex: 0.6;">11,5</span>
+                        <span style="flex: 0.6;">78,0</span>
+                        <span style="flex: 0.7; font-weight: 700;">99,2</span>
+                        <span style="flex: 0.7;">0,012</span>
+                        <span style="flex: 0.8;">4.630</span>
+                      </div>
+                      <div class="backup-timeline-row" style="background: rgba(var(--chart-blue-rgb, 59, 130, 246), 0.08);">
+                        <span style="flex: 1.2;">14.03.2025</span>
+                        <span style="flex: 0.8;">9.558</span>
+                        <span style="flex: 0.6; color: var(--chart-blue); font-weight: 700;">4,0</span>
+                        <span style="flex: 0.6;">92,8</span>
+                        <span style="flex: 0.7; font-weight: 700; color: var(--warning);">100,0</span>
+                        <span style="flex: 0.7;">0,007</span>
+                        <span style="flex: 0.8;">4.640</span>
+                      </div>
+                      <div class="backup-timeline-row">
+                        <span style="flex: 1.2;">25.04.2025</span>
+                        <span style="flex: 0.8;">9.872</span>
+                        <span style="flex: 0.6;">10,5</span>
+                        <span style="flex: 0.6;">77,6</span>
+                        <span style="flex: 0.7; font-weight: 700; color: var(--warning);">100,0</span>
+                        <span style="flex: 0.7;">0,010</span>
+                        <span style="flex: 0.8;">3.990</span>
+                      </div>
+                      <div class="backup-timeline-row" style="background: rgba(var(--chart-blue-rgb, 59, 130, 246), 0.08);">
+                        <span style="flex: 1.2;">25.04.2025</span>
+                        <span style="flex: 0.8;">9.872</span>
+                        <span style="flex: 0.6;">10,5</span>
+                        <span style="flex: 0.6;">77,6</span>
+                        <span style="flex: 0.7; font-weight: 700; color: var(--warning);">100,0</span>
+                        <span style="flex: 0.7;">0,010</span>
+                        <span style="flex: 0.8;">4.070</span>
+                      </div>
+                      <div class="backup-timeline-row" style="border-left: 3px solid var(--success);">
+                        <span style="flex: 1.2; font-weight: 700;">03.12.2025</span>
+                        <span style="flex: 0.8;">10.801</span>
+                        <span style="flex: 0.6; color: var(--success); font-weight: 700;">24,0</span>
+                        <span style="flex: 0.6;">94,8</span>
+                        <span style="flex: 0.7; font-weight: 700;">97,3</span>
+                        <span style="flex: 0.7;">0,006</span>
+                        <span style="flex: 0.8;">4.680</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="method-annotations backup-annotations">
+                    <div class="method-annotations-header"><span class="lang-de">Kontext</span><span class="lang-en" hidden>Context</span></div>
+                    <div class="method-note">
+                      <strong><span class="lang-de">AVL = ein System von dreien</span><span class="lang-en" hidden>AVL = one of three systems</span></strong><br>
+                      <span class="lang-de">Off-Board-Messung mit professionellem Laborgerät (0–1000V DC, ±0,5% Genauigkeit) — ergänzt OBD und AUTEL</span>
+                      <span class="lang-en" hidden>Off-board measurement with professional lab device (0–1000V DC, ±0.5% accuracy) — complements OBD and AUTEL</span>
+                    </div>
+                    <div class="method-note">
+                      <strong><span class="lang-de">Temperaturabhängigkeit</span><span class="lang-en" hidden>Temperature dependency</span></strong><br>
+                      <span class="lang-de">Auch das AVL zeigt Temperatureinfluss: SOH = 100% bei Kälte, 97,3% bei 24 °C — kein System ist immun</span>
+                      <span class="lang-en" hidden>AVL also shows temperature influence: SOH = 100% in cold, 97.3% at 24°C — no system is immune</span>
+                    </div>
+                    <div class="method-note">
+                      <strong><span class="lang-de">Doppelmessung</span><span class="lang-en" hidden>Double measurement</span></strong><br>
+                      <span class="lang-de">25.04.2025: identisches Ergebnis (100,0%) → hohe Kurzzeit-Reproduzierbarkeit</span>
+                      <span class="lang-en" hidden>25.04.2025: identical result (100.0%) → high short-term reproducibility</span>
+                    </div>
+                    <div class="method-note">
+                      <strong>σ = 1,20 %</strong><br>
+                      <span class="lang-de">Streuung über 12 Monate — dominiert durch Temperatur und Fahrzeugzustand, nicht durch das Messgerät</span>
+                      <span class="lang-en" hidden>Variance over 12 months — dominated by temperature and vehicle state, not by the measurement device</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </section>
 
+          <!-- Backup 4: Detailed Method Comparison -->
           <section id="slide-backup-methods-detail" data-section="backup" data-visibility="uncounted">
             <h2>
-              <span class="lang-de">Backup: Detaillierter Methodenvergleich</span>
-              <span class="lang-en" hidden>Backup: Detailed Method Comparison</span>
+              <span class="lang-de">Welche SOH-Werte liefern die sechs Berechnungsmethoden?</span>
+              <span class="lang-en" hidden>What SOH values do the six calculation methods deliver?</span>
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
-                <table class="data-table">
-                  <thead>
-                    <tr>
-                      <th><span class="lang-de">Methode</span><span class="lang-en" hidden>Method</span></th>
-                      <th><span class="lang-de">Datenquelle</span><span class="lang-en" hidden>Data Source</span></th>
-                      <th>SOH [%]</th>
-                      <th>Δ AVL</th>
-                      <th><span class="lang-de">Bewertung</span><span class="lang-en" hidden>Assessment</span></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><td class="highlight">AVL HV-Check</td><td>Off-Board</td><td>97,3</td><td>—</td><td><span class="lang-de">Referenz</span><span class="lang-en" hidden>Reference</span></td></tr>
-                    <tr><td class="highlight">SOH<sub>e</sub> (direkt)</td><td>BMS-PID E<sub>aktuell</sub></td><td class="highlight" style="color: var(--success);">99,6</td><td>+2,3 Pp</td><td><span class="lang-de">Beste Einzelmethode</span><span class="lang-en" hidden>Best single method</span></td></tr>
-                    <tr><td class="highlight">SOH<sub>c</sub> (Integration)</td><td>∫|I| dt</td><td>91,8</td><td>−5,5 Pp</td><td><span class="lang-de">Systematische Unterschätzung</span><span class="lang-en" hidden>Systematic underestimation</span></td></tr>
-                    <tr><td class="highlight">SOH<sub>kap</sub></td><td>BMS-PID C<sub>Wh</sub></td><td>89,7</td><td>−7,6 Pp</td><td><span class="lang-de">Größte Abweichung</span><span class="lang-en" hidden>Largest deviation</span></td></tr>
-                    <tr><td class="highlight" style="color: var(--accent);">SOH kombiniert</td><td>(SOH<sub>e</sub>+SOH<sub>c</sub>)/2</td><td class="highlight" style="color: var(--accent);">95,7</td><td style="color: var(--success);">−1,6 Pp</td><td><span class="lang-de">Robusteste Methode</span><span class="lang-en" hidden>Most robust method</span></td></tr>
-                    <tr><td class="highlight">SOH<sub>R</sub></td><td>R<sub>i,Baseline</sub>/R<sub>i,aktuell</sub></td><td>100,0</td><td>+2,7 Pp</td><td><span class="lang-de">Nur für Langzeittrend</span><span class="lang-en" hidden>Only for long-term trend</span></td></tr>
-                  </tbody>
-                </table>
-                <p style="font-size: var(--fs-small); color: var(--text-secondary); margin-top: 0.75rem;">
-                  <span class="lang-de">Methodenabweichung: (max − min) / Mittelwert = 8,7 % → Bewertung: gering</span>
-                  <span class="lang-en" hidden>Method deviation: (max − min) / mean = 8.7% → Rating: low</span>
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <section id="slide-backup-charging" data-section="backup" data-visibility="uncounted">
-            <h2>
-              <span class="lang-de">Backup: Ladeprofil & Innenwiderstand</span>
-              <span class="lang-en" hidden>Backup: Charging Profile & Internal Resistance</span>
-            </h2>
-            <div class="slide-content">
-              <div class="evidence-area">
-                <div class="two-col">
-                  <div>
-                    <h3><span class="lang-de">CC-CV Ladeprofil (Session A)</span><span class="lang-en" hidden>CC-CV Charging Profile (Session A)</span></h3>
-                    <table class="data-table">
-                      <thead>
-                        <tr>
-                          <th><span class="lang-de">Parameter</span><span class="lang-en" hidden>Parameter</span></th>
-                          <th><span class="lang-de">Wert</span><span class="lang-en" hidden>Value</span></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr><td><span class="lang-de">Ladeart</span><span class="lang-en" hidden>Charging type</span></td><td>AC Wallbox</td></tr>
-                        <tr><td><span class="lang-de">Packspannung</span><span class="lang-en" hidden>Pack voltage</span></td><td>~330 V → ~397 V</td></tr>
-                        <tr><td><span class="lang-de">Ladestrom</span><span class="lang-en" hidden>Charging current</span></td><td>~30 A (CC-Phase)</td></tr>
-                        <tr><td><span class="lang-de">Ladeleistung</span><span class="lang-en" hidden>Charging power</span></td><td>~10 kW (konstant)</td></tr>
-                        <tr><td>C-Rate</td><td>0,1–0,15 C</td></tr>
-                        <tr><td><span class="lang-de">Ladeenergie</span><span class="lang-en" hidden>Charging energy</span></td><td>73,9 kWh</td></tr>
-                        <tr><td><span class="lang-de">Ladedauer</span><span class="lang-en" hidden>Charging duration</span></td><td>465 min</td></tr>
-                      </tbody>
-                    </table>
+                <div class="backup-layout">
+                  <div class="backup-main">
+                    <div class="backup-method-rows">
+                      <div class="backup-method-row">
+                        <div class="backup-method-name">SOH<sub>e</sub> <span style="opacity: 0.6;">(direkt)</span></div>
+                        <div class="backup-method-source">BMS-PID E<sub>aktuell</sub></div>
+                        <div class="backup-method-soh" style="color: var(--success);">99,6 %</div>
+                        <div class="backup-method-badge" style="background: var(--success);"><span class="lang-de">Genaueste Einzelmethode</span><span class="lang-en" hidden>Most accurate single method</span></div>
+                      </div>
+                      <div class="backup-method-row">
+                        <div class="backup-method-name">SOH<sub>R</sub></div>
+                        <div class="backup-method-source">R<sub>i</sub> Baseline/aktuell</div>
+                        <div class="backup-method-soh">100,0 %</div>
+                        <div class="backup-method-badge" style="background: var(--text-secondary);"><span class="lang-de">Nur Langzeittrend</span><span class="lang-en" hidden>Long-term trend only</span></div>
+                      </div>
+                      <div class="backup-method-row">
+                        <div class="backup-method-name">AVL HV-Check</div>
+                        <div class="backup-method-source">Off-Board</div>
+                        <div class="backup-method-soh">97,3 %</div>
+                        <div class="backup-method-badge" style="background: var(--chart-blue);"><span class="lang-de">Off-Board-Vergleich</span><span class="lang-en" hidden>Off-board comparison</span></div>
+                      </div>
+                      <div class="backup-method-row backup-method-highlight">
+                        <div class="backup-method-name" style="color: var(--accent);">SOH kombiniert</div>
+                        <div class="backup-method-source">(SOH<sub>e</sub>+SOH<sub>c</sub>)/2</div>
+                        <div class="backup-method-soh" style="color: var(--accent); font-size: 1.5rem;">95,7 %</div>
+                        <div class="backup-method-badge" style="background: var(--accent);"><span class="lang-de">Robustester Wert</span><span class="lang-en" hidden>Most robust value</span></div>
+                      </div>
+                      <div class="backup-method-row">
+                        <div class="backup-method-name">SOH<sub>c</sub> <span style="opacity: 0.6;">(Integration)</span></div>
+                        <div class="backup-method-source">∫|I| dt</div>
+                        <div class="backup-method-soh">91,8 %</div>
+                        <div class="backup-method-badge" style="background: var(--warning);"><span class="lang-de">Syst. Unterschätzung</span><span class="lang-en" hidden>Syst. underestimation</span></div>
+                      </div>
+                      <div class="backup-method-row">
+                        <div class="backup-method-name">SOH<sub>kap</sub></div>
+                        <div class="backup-method-source">BMS-PID C<sub>Wh</sub></div>
+                        <div class="backup-method-soh">89,7 %</div>
+                        <div class="backup-method-badge" style="background: var(--accent);"><span class="lang-de">Größte Abweichung</span><span class="lang-en" hidden>Largest deviation</span></div>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h3><span class="lang-de">DC-Puls-Test (Aug. 2024)</span><span class="lang-en" hidden>DC Pulse Test (Aug. 2024)</span></h3>
-                    <table class="data-table">
-                      <thead>
-                        <tr>
-                          <th><span class="lang-de">Parameter</span><span class="lang-en" hidden>Parameter</span></th>
-                          <th><span class="lang-de">Wert</span><span class="lang-en" hidden>Value</span></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr><td>SOC</td><td>51,2 %</td></tr>
-                        <tr><td><span class="lang-de">Temperatur</span><span class="lang-en" hidden>Temperature</span></td><td>34 °C</td></tr>
-                        <tr><td>R<sub>i,Laden</sub></td><td class="highlight" style="color: var(--success);">40,0 mΩ</td></tr>
-                        <tr><td>R<sub>i,Entladen</sub></td><td>32,8 mΩ</td></tr>
-                      </tbody>
-                    </table>
-                    <p style="font-size: var(--fs-small); color: var(--text-secondary); margin-top: 0.5rem;">
-                      <span class="lang-de">Unterschiedliche Lade-/Entladewiderstände resultieren aus asymmetrischer Impedanz an der Elektroden-Elektrolyt-Grenzfläche.</span>
-                      <span class="lang-en" hidden>Different charge/discharge resistances result from asymmetric impedance at the electrode-electrolyte interface.</span>
-                    </p>
+                  <div class="method-annotations backup-annotations">
+                    <div class="method-annotations-header"><span class="lang-de">Kontext</span><span class="lang-en" hidden>Context</span></div>
+                    <div class="method-note">
+                      <strong><span class="lang-de">Spannweite</span><span class="lang-en" hidden>Spread</span></strong><br>
+                      <span class="lang-de">89,7% bis 100,0% → 10,3 Pp. Jede Methode hat eigene Stärken und Schwächen</span>
+                      <span class="lang-en" hidden>89.7% to 100.0% → 10.3 pp. Each method has its own strengths and weaknesses</span>
+                    </div>
+                    <div class="method-note">
+                      <strong><span class="lang-de">Kombination als Schlüssel</span><span class="lang-en" hidden>Combination is key</span></strong><br>
+                      <span class="lang-de">SOH<sub>e</sub> überschätzt leicht, SOH<sub>c</sub> unterschätzt systematisch → Mittelwert gleicht aus</span>
+                      <span class="lang-en" hidden>SOH<sub>e</sub> slightly overestimates, SOH<sub>c</sub> systematically underestimates → mean balances out</span>
+                    </div>
+                    <div class="method-note">
+                      <strong><span class="lang-de">Sortierung nach Wert</span><span class="lang-en" hidden>Sorted by value</span></strong><br>
+                      <span class="lang-de">Absteigend sortiert — zeigt die natürliche Streuung zwischen den Ansätzen, nicht Abweichung von einem „Referenz"-System</span>
+                      <span class="lang-en" hidden>Sorted descending — shows natural spread between approaches, not deviation from a "reference" system</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </section>
 
-          <section id="slide-backup-recommendations" data-section="backup" data-visibility="uncounted">
+          <!-- Backup 5: Charging Profile & Internal Resistance -->
+          <section id="slide-backup-charging" data-section="backup" data-visibility="uncounted">
             <h2>
-              <span class="lang-de">Backup: Praxisempfehlungen</span>
-              <span class="lang-en" hidden>Backup: Practical Recommendations</span>
+              <span class="lang-de">Wie wurde geladen und wie hoch ist der Innenwiderstand?</span>
+              <span class="lang-en" hidden>How was charging performed and what is the internal resistance?</span>
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
-                <div class="protocol-steps">
-                  <div class="protocol-step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                      <strong>SOH<sub>e</sub> <span class="lang-de">bevorzugen</span><span class="lang-en" hidden>preferred</span></strong>
+                <div class="backup-layout">
+                  <div class="backup-main">
+                    <div class="backup-two-panels">
+                      <div class="backup-panel">
+                        <div class="backup-panel-title"><span class="lang-de">CC-CV Ladeprofil (Session A)</span><span class="lang-en" hidden>CC-CV Charging Profile (Session A)</span></div>
+                        <div class="backup-param-rows">
+                          <div class="backup-param-row"><span class="backup-param-label"><span class="lang-de">Ladeart</span><span class="lang-en" hidden>Type</span></span><span class="backup-param-value">AC Wallbox</span></div>
+                          <div class="backup-param-row"><span class="backup-param-label"><span class="lang-de">Packspannung</span><span class="lang-en" hidden>Pack voltage</span></span><span class="backup-param-value">~330 → ~397 V</span></div>
+                          <div class="backup-param-row"><span class="backup-param-label"><span class="lang-de">Ladestrom</span><span class="lang-en" hidden>Current</span></span><span class="backup-param-value">~30 A (CC)</span></div>
+                          <div class="backup-param-row"><span class="backup-param-label"><span class="lang-de">Leistung</span><span class="lang-en" hidden>Power</span></span><span class="backup-param-value">~10 kW</span></div>
+                          <div class="backup-param-row"><span class="backup-param-label">C-Rate</span><span class="backup-param-value">0,1–0,15 C</span></div>
+                          <div class="backup-param-row"><span class="backup-param-label"><span class="lang-de">Energie</span><span class="lang-en" hidden>Energy</span></span><span class="backup-param-value" style="color: var(--success); font-weight: 700;">73,9 kWh</span></div>
+                          <div class="backup-param-row"><span class="backup-param-label"><span class="lang-de">Dauer</span><span class="lang-en" hidden>Duration</span></span><span class="backup-param-value">465 min (~7,75 h)</span></div>
+                        </div>
+                      </div>
+                      <div class="backup-panel">
+                        <div class="backup-panel-title"><span class="lang-de">DC-Puls-Test (OBD, Aug. 2024)</span><span class="lang-en" hidden>DC Pulse Test (OBD, Aug. 2024)</span></div>
+                        <div class="backup-param-rows">
+                          <div class="backup-param-row"><span class="backup-param-label">SOC</span><span class="backup-param-value">51,2 %</span></div>
+                          <div class="backup-param-row"><span class="backup-param-label"><span class="lang-de">Temperatur</span><span class="lang-en" hidden>Temperature</span></span><span class="backup-param-value">34 °C</span></div>
+                          <div class="backup-param-row"><span class="backup-param-label">R<sub>i,Laden</sub></span><span class="backup-param-value" style="color: var(--success); font-weight: 700;">40,0 mΩ</span></div>
+                          <div class="backup-param-row"><span class="backup-param-label">R<sub>i,Entladen</sub></span><span class="backup-param-value">32,8 mΩ</span></div>
+                        </div>
+                        <div class="backup-note" style="margin-top: auto;">
+                          <span class="lang-de">Asymmetrische Widerstände durch unterschiedliche Impedanz an der Elektroden-Elektrolyt-Grenzfläche</span>
+                          <span class="lang-en" hidden>Asymmetric resistances due to different impedance at the electrode-electrolyte interface</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="method-annotations backup-annotations">
+                    <div class="method-annotations-header"><span class="lang-de">Kontext</span><span class="lang-en" hidden>Context</span></div>
+                    <div class="method-note">
+                      <strong><span class="lang-de">Niedrige C-Rate</span><span class="lang-en" hidden>Low C-rate</span></strong><br>
+                      <span class="lang-de">0,1–0,15 C minimiert thermische Effekte und ermöglicht quasi-stationäre Messung — gilt für alle On-Board-Methoden</span>
+                      <span class="lang-en" hidden>0.1–0.15 C minimizes thermal effects and enables quasi-stationary measurement — applies to all on-board methods</span>
+                    </div>
+                    <div class="method-note">
+                      <strong><span class="lang-de">Ladeenergie → SOH<sub>e</sub></span><span class="lang-en" hidden>Charge energy → SOH<sub>e</sub></span></strong><br>
+                      <span class="lang-de">73,9 kWh / 77 kWh = 95,97% — direkte Grundlage für die energiebasierte SOH-Berechnung</span>
+                      <span class="lang-en" hidden>73.9 kWh / 77 kWh = 95.97% — direct basis for energy-based SOH calculation</span>
+                    </div>
+                    <div class="method-note">
+                      <strong>R<sub>i</sub> <span class="lang-de">Bewertung</span><span class="lang-en" hidden>Assessment</span></strong><br>
+                      <span class="lang-de">40 mΩ bei 51% SOC → Neuzustandsbereich. Dient als Baseline für SOH<sub>R</sub>-Langzeittrend</span>
+                      <span class="lang-en" hidden>40 mΩ at 51% SOC → new-condition range. Serves as baseline for SOH<sub>R</sub> long-term trend</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Backup 6: Practical Recommendations -->
+          <section id="slide-backup-recommendations" data-section="backup" data-visibility="uncounted">
+            <h2>
+              <span class="lang-de">Welche Empfehlungen ergeben sich für die praktische SOH-Bestimmung?</span>
+              <span class="lang-en" hidden>What recommendations emerge for practical SOH determination?</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="backup-recommendations">
+                  <div class="backup-rec-row">
+                    <div class="backup-rec-number">1</div>
+                    <div class="backup-rec-content">
+                      <strong>SOH<sub>e</sub> <span class="lang-de">als bevorzugte Einzelmethode</span><span class="lang-en" hidden>as preferred single method</span></strong>
                       <p><span class="lang-de">Wenn BMS-PID für maximale Energiekapazität verfügbar → genauester Einzelwert (≤ 3 Pp Abweichung)</span><span class="lang-en" hidden>When BMS PID for max energy capacity available → most accurate single value (≤ 3 pp deviation)</span></p>
                     </div>
                   </div>
-                  <div class="protocol-step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                      <strong><span class="lang-de">Kombinierten SOH als Gesamtbewertung</span><span class="lang-en" hidden>Combined SOH as overall assessment</span></strong>
-                      <p><span class="lang-de">Mittelwert von SOH_e und SOH_c kompensiert systematische Fehler → ≤ 2 Pp Abweichung</span><span class="lang-en" hidden>Mean of SOH_e and SOH_c compensates systematic errors → ≤ 2 pp deviation</span></p>
+                  <div class="backup-rec-row">
+                    <div class="backup-rec-number">2</div>
+                    <div class="backup-rec-content">
+                      <strong><span class="lang-de">Kombinierten SOH als robustesten Gesamtwert</span><span class="lang-en" hidden>Combined SOH as most robust overall value</span></strong>
+                      <p><span class="lang-de">Mittelwert von SOH<sub>e</sub> und SOH<sub>c</sub> kompensiert systematische Fehler beider Methoden → ±1,6 Pp Inter-System-Abweichung</span><span class="lang-en" hidden>Mean of SOH<sub>e</sub> and SOH<sub>c</sub> compensates systematic errors of both methods → ±1.6 pp inter-system deviation</span></p>
                     </div>
                   </div>
-                  <div class="protocol-step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                      <strong><span class="lang-de">SOC-Fenster maximieren</span><span class="lang-en" hidden>Maximize SOC window</span></strong>
-                      <p><span class="lang-de">Ladung bei &lt; 10 % SOC starten, bis &gt; 90 % SOC laden. Minimum: 50 %, ideal: &gt; 80 %</span><span class="lang-en" hidden>Start charging at &lt; 10% SOC, charge to &gt; 90% SOC. Minimum: 50%, ideal: &gt; 80%</span></p>
+                  <div class="backup-rec-row">
+                    <div class="backup-rec-number">3</div>
+                    <div class="backup-rec-content">
+                      <strong><span class="lang-de">SOC-Fenster maximieren — wichtigster Einflussfaktor</span><span class="lang-en" hidden>Maximize SOC window — most important factor</span></strong>
+                      <p><span class="lang-de">Ladung bei &lt; 10% SOC starten, bis &gt; 90% laden. Minimum: 50%, ideal: &gt; 80%. Bei schlechtem Fenster bis 21 Pp Fehler möglich!</span><span class="lang-en" hidden>Start charging at &lt; 10% SOC, charge to &gt; 90%. Minimum: 50%, ideal: &gt; 80%. Poor window can cause up to 21 pp error!</span></p>
                     </div>
                   </div>
-                  <div class="protocol-step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                      <strong><span class="lang-de">Temperaturbereich einhalten</span><span class="lang-en" hidden>Maintain temperature range</span></strong>
-                      <p><span class="lang-de">15–30 °C für konsistente Ergebnisse. Temperaturkorrektur in diesem Bereich unnötig.</span><span class="lang-en" hidden>15–30°C for consistent results. Temperature correction unnecessary in this range.</span></p>
+                  <div class="backup-rec-row">
+                    <div class="backup-rec-number">4</div>
+                    <div class="backup-rec-content">
+                      <strong><span class="lang-de">Temperaturbereich 15–30 °C einhalten</span><span class="lang-en" hidden>Maintain 15–30°C temperature range</span></strong>
+                      <p><span class="lang-de">Kompensierende Effekte (SOH<sub>e</sub> ↑, SOH<sub>c</sub> ↓) machen Temperaturkorrektur in diesem Bereich unnötig — gilt für alle Systeme</span><span class="lang-en" hidden>Compensating effects (SOH<sub>e</sub> ↑, SOH<sub>c</sub> ↓) make temperature correction unnecessary in this range — applies to all systems</span></p>
                     </div>
                   </div>
-                  <div class="protocol-step">
-                    <div class="step-number">5</div>
-                    <div class="step-content">
-                      <strong><span class="lang-de">Off-Board-Validierung empfohlen</span><span class="lang-en" hidden>Off-board validation recommended</span></strong>
-                      <p><span class="lang-de">Für sicherheitskritische Anwendungen (Second Life, Garantieprüfung) On-Board-Analyse mit Off-Board-Messung ergänzen.</span><span class="lang-en" hidden>For safety-critical applications (second life, warranty checks) supplement on-board analysis with off-board measurement.</span></p>
+                  <div class="backup-rec-row">
+                    <div class="backup-rec-number">5</div>
+                    <div class="backup-rec-content">
+                      <strong><span class="lang-de">Mehrere Systeme nutzen für kritische Entscheidungen</span><span class="lang-en" hidden>Use multiple systems for critical decisions</span></strong>
+                      <p><span class="lang-de">Für Second Life, Garantieprüfung oder Versicherungsbewertung: mindestens zwei Diagnosesysteme kombinieren (On-Board + Off-Board)</span><span class="lang-en" hidden>For second life, warranty checks or insurance assessment: combine at least two diagnostic systems (on-board + off-board)</span></p>
                     </div>
                   </div>
                 </div>
@@ -2304,78 +2519,121 @@
             </div>
           </section>
 
+          <!-- Backup 7: EU Battery Passport & Grading -->
           <section id="slide-backup-battery-passport" data-section="backup" data-visibility="uncounted">
             <h2>
-              <span class="lang-de">Backup: EU-Batteriepass & Second-Life-Grading</span>
-              <span class="lang-en" hidden>Backup: EU Battery Passport & Second-Life Grading</span>
+              <span class="lang-de">Wie passt diese Arbeit zum EU-Batteriepass ab 2027?</span>
+              <span class="lang-en" hidden>How does this work relate to the EU Battery Passport from 2027?</span>
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
-                <div class="two-col">
-                  <div>
-                    <h3><span class="lang-de">EU-Batterieverordnung 2023/1542</span><span class="lang-en" hidden>EU Battery Regulation 2023/1542</span></h3>
-                    <ul class="styled-list">
-                      <li><span class="lang-de">Ab 2027 verpflichtend für Traktionsbatterien</span><span class="lang-en" hidden>Mandatory from 2027 for traction batteries</span></li>
-                      <li><span class="lang-de">Digitaler Batteriepass mit standardisierten Daten</span><span class="lang-en" hidden>Digital battery passport with standardized data</span></li>
-                      <li><span class="lang-de">Anwendung erfasst bereits Großteil der geforderten Daten</span><span class="lang-en" hidden>Application already captures most required data</span></li>
-                      <li><span class="lang-de">Strukturierter Export als Basis für Batteriepass-Schema möglich</span><span class="lang-en" hidden>Structured export as basis for battery passport schema possible</span></li>
-                    </ul>
+                <div class="backup-layout">
+                  <div class="backup-main">
+                    <div class="backup-two-panels">
+                      <div class="backup-panel">
+                        <div class="backup-panel-title"><span class="lang-de">EU-Verordnung 2023/1542</span><span class="lang-en" hidden>EU Regulation 2023/1542</span></div>
+                        <div class="backup-passport-list">
+                          <div class="backup-passport-item"><span class="backup-passport-check">&#10003;</span><span class="lang-de">Ab 2027 verpflichtend für Traktionsbatterien &gt; 2 kWh</span><span class="lang-en" hidden>Mandatory from 2027 for traction batteries &gt; 2 kWh</span></div>
+                          <div class="backup-passport-item"><span class="backup-passport-check">&#10003;</span><span class="lang-de">Digitaler Batteriepass mit standardisierten SOH-Daten</span><span class="lang-en" hidden>Digital battery passport with standardized SOH data</span></div>
+                          <div class="backup-passport-item"><span class="backup-passport-check">&#10003;</span><span class="lang-de">Unsere App erfasst bereits den Großteil der geforderten Parameter</span><span class="lang-en" hidden>Our app already captures most required parameters</span></div>
+                          <div class="backup-passport-item"><span class="backup-passport-check">&#10003;</span><span class="lang-de">Strukturierter Export als Basis für Batteriepass-Schema möglich</span><span class="lang-en" hidden>Structured export as basis for battery passport schema possible</span></div>
+                        </div>
+                      </div>
+                      <div class="backup-panel">
+                        <div class="backup-panel-title">Second-Life Grading</div>
+                        <div class="backup-grading-rows">
+                          <div class="backup-grading-row">
+                            <span class="backup-grade" style="background: var(--success);">A</span>
+                            <span class="backup-grade-soh">≥ 90%</span>
+                            <span class="backup-grade-use"><span class="lang-de">Weiterverwendung im Fahrzeug</span><span class="lang-en" hidden>Continued vehicle use</span></span>
+                          </div>
+                          <div class="backup-grading-row">
+                            <span class="backup-grade" style="background: var(--chart-blue);">B</span>
+                            <span class="backup-grade-soh">80–89%</span>
+                            <span class="backup-grade-use"><span class="lang-de">Stationäre Speicher</span><span class="lang-en" hidden>Stationary storage</span></span>
+                          </div>
+                          <div class="backup-grading-row">
+                            <span class="backup-grade" style="background: var(--warning);">C</span>
+                            <span class="backup-grade-soh">70–79%</span>
+                            <span class="backup-grade-use"><span class="lang-de">Eingeschränkte Nutzung</span><span class="lang-en" hidden>Restricted use</span></span>
+                          </div>
+                          <div class="backup-grading-row">
+                            <span class="backup-grade" style="background: var(--accent);">D</span>
+                            <span class="backup-grade-soh">&lt; 70%</span>
+                            <span class="backup-grade-use"><span class="lang-de">Recycling</span><span class="lang-en" hidden>Recycling</span></span>
+                          </div>
+                        </div>
+                        <div class="backup-note">
+                          <span class="lang-de">Score aus SOH, R<sub>i</sub> und Zellbalance — systemunabhängig anwendbar</span>
+                          <span class="lang-en" hidden>Score from SOH, R<sub>i</sub> and cell balance — applicable system-independently</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h3>Second-Life Grading</h3>
-                    <table class="data-table">
-                      <thead>
-                        <tr>
-                          <th>Grade</th>
-                          <th>SOH</th>
-                          <th><span class="lang-de">Verwendung</span><span class="lang-en" hidden>Usage</span></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr><td class="highlight" style="color: var(--success);">A</td><td>≥ 90 %</td><td><span class="lang-de">Weiterverwendung im Fahrzeug</span><span class="lang-en" hidden>Continued vehicle use</span></td></tr>
-                        <tr><td class="highlight" style="color: var(--chart-blue);">B</td><td>80–89 %</td><td><span class="lang-de">Stationäre Speicher</span><span class="lang-en" hidden>Stationary storage</span></td></tr>
-                        <tr><td class="highlight" style="color: var(--warning);">C</td><td>70–79 %</td><td><span class="lang-de">Eingeschränkte Nutzung</span><span class="lang-en" hidden>Restricted use</span></td></tr>
-                        <tr><td class="highlight" style="color: var(--accent);">D</td><td>&lt; 70 %</td><td><span class="lang-de">Recycling</span><span class="lang-en" hidden>Recycling</span></td></tr>
-                      </tbody>
-                    </table>
-                    <p style="font-size: var(--fs-small); color: var(--text-secondary); margin-top: 0.5rem;">
-                      <span class="lang-de">Basierend auf kombiniertem Score aus SOH, R<sub>i</sub> und Zellbalance</span>
-                      <span class="lang-en" hidden>Based on combined score of SOH, R<sub>i</sub> and cell balance</span>
-                    </p>
+                  <div class="method-annotations backup-annotations">
+                    <div class="method-annotations-header"><span class="lang-de">Kontext</span><span class="lang-en" hidden>Context</span></div>
+                    <div class="method-note">
+                      <strong><span class="lang-de">Unser Fahrzeug</span><span class="lang-en" hidden>Our vehicle</span></strong><br>
+                      <span class="lang-de">VW ID.4 mit SOH 95,7% (kombiniert) → Grade A → volle Fahrzeugtauglichkeit, unabhängig vom Messsystem</span>
+                      <span class="lang-en" hidden>VW ID.4 with SOH 95.7% (combined) → Grade A → full vehicle suitability, regardless of measurement system</span>
+                    </div>
+                    <div class="method-note">
+                      <strong><span class="lang-de">Genauigkeit ausreichend</span><span class="lang-en" hidden>Accuracy sufficient</span></strong><br>
+                      <span class="lang-de">±4,5 Pp Unsicherheit bei 10 Pp Kategorieabstand → zuverlässige Einordnung mit jedem der drei Systeme</span>
+                      <span class="lang-en" hidden>±4.5 pp uncertainty at 10 pp category spacing → reliable classification with any of the three systems</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </section>
 
+          <!-- Backup 8: Python SOH App -->
           <section id="slide-backup-app" data-section="backup" data-visibility="uncounted">
             <h2>
-              <span class="lang-de">Backup: Python SOH-App Architektur</span>
-              <span class="lang-en" hidden>Backup: Python SOH App Architecture</span>
+              <span class="lang-de">Wie ist die SOH-Analyse-Software aufgebaut?</span>
+              <span class="lang-en" hidden>How is the SOH analysis software structured?</span>
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
-                <div class="two-col">
-                  <div>
-                    <h3><span class="lang-de">Funktionen</span><span class="lang-en" hidden>Features</span></h3>
-                    <ul class="styled-list">
-                      <li>Auto-Import: OBD CSV + AVL PDF</li>
-                      <li><span class="lang-de">6 SOH-Methoden parallel</span><span class="lang-en" hidden>6 SOH methods in parallel</span></li>
-                      <li>SQLite: <span class="lang-de">Fahrzeughistorie</span><span class="lang-en" hidden>Vehicle history</span></li>
-                      <li>PDF-Report + PNG Export</li>
-                      <li>Pro Mode + Easy Mode</li>
-                      <li><span class="lang-de">Zweisprachig (DE/EN)</span><span class="lang-en" hidden>Bilingual (DE/EN)</span></li>
-                    </ul>
+                <div class="backup-layout">
+                  <div class="backup-main">
+                    <div class="backup-two-panels">
+                      <div class="backup-panel">
+                        <div class="backup-panel-title"><span class="lang-de">Funktionen</span><span class="lang-en" hidden>Features</span></div>
+                        <div class="backup-feature-list">
+                          <div class="backup-feature-item"><span class="backup-feature-icon" style="color: var(--chart-blue);">&#9656;</span> <span class="lang-de">Import: OBD CSV, AVL PDF, AUTEL-Daten</span><span class="lang-en" hidden>Import: OBD CSV, AVL PDF, AUTEL data</span></div>
+                          <div class="backup-feature-item"><span class="backup-feature-icon" style="color: var(--success);">&#9656;</span> <span class="lang-de">6 SOH-Methoden parallel berechnet</span><span class="lang-en" hidden>6 SOH methods calculated in parallel</span></div>
+                          <div class="backup-feature-item"><span class="backup-feature-icon" style="color: var(--warning);">&#9656;</span> <span class="lang-de">Inter-System-Vergleich (OBD ↔ AVL ↔ AUTEL)</span><span class="lang-en" hidden>Inter-system comparison (OBD ↔ AVL ↔ AUTEL)</span></div>
+                          <div class="backup-feature-item"><span class="backup-feature-icon" style="color: var(--chart-purple);">&#9656;</span> SQLite: <span class="lang-de">Fahrzeughistorie & Messarchiv</span><span class="lang-en" hidden>Vehicle history & measurement archive</span></div>
+                          <div class="backup-feature-item"><span class="backup-feature-icon" style="color: var(--accent);">&#9656;</span> PDF-Report + PNG Export</div>
+                          <div class="backup-feature-item"><span class="backup-feature-icon" style="color: var(--text-primary);">&#9656;</span> Pro Mode + Easy Mode + <span class="lang-de">Zweisprachig</span><span class="lang-en" hidden>Bilingual</span></div>
+                        </div>
+                      </div>
+                      <div class="backup-panel">
+                        <div class="backup-panel-title">Tech Stack</div>
+                        <div class="backup-param-rows">
+                          <div class="backup-param-row"><span class="backup-param-label">Frontend</span><span class="backup-param-value">Streamlit</span></div>
+                          <div class="backup-param-row"><span class="backup-param-label">Backend</span><span class="backup-param-value">FastAPI (REST)</span></div>
+                          <div class="backup-param-row"><span class="backup-param-label">Charts</span><span class="backup-param-value">Plotly</span></div>
+                          <div class="backup-param-row"><span class="backup-param-label">Analyse</span><span class="backup-param-value">scikit-learn, scipy, numpy</span></div>
+                          <div class="backup-param-row"><span class="backup-param-label">Version</span><span class="backup-param-value" style="color: var(--accent); font-weight: 700;">2.9.3</span></div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h3>Tech Stack</h3>
-                    <ul class="styled-list">
-                      <li>Streamlit (Frontend)</li>
-                      <li>FastAPI (Backend REST API)</li>
-                      <li>Plotly (Charts)</li>
-                      <li>scikit-learn, scipy, numpy</li>
-                      <li>Version 2.9.3</li>
-                    </ul>
+                  <div class="method-annotations backup-annotations">
+                    <div class="method-annotations-header"><span class="lang-de">Kontext</span><span class="lang-en" hidden>Context</span></div>
+                    <div class="method-note">
+                      <strong><span class="lang-de">Systemübergreifend</span><span class="lang-en" hidden>Cross-system</span></strong><br>
+                      <span class="lang-de">Die App verarbeitet Daten aller drei Diagnosesysteme (OBD, AVL, AUTEL) gleichwertig</span>
+                      <span class="lang-en" hidden>The app processes data from all three diagnostic systems (OBD, AVL, AUTEL) equally</span>
+                    </div>
+                    <div class="method-note">
+                      <strong><span class="lang-de">Vollautomatisch</span><span class="lang-en" hidden>Fully automatic</span></strong><br>
+                      <span class="lang-de">Datei hochladen → automatische Erkennung des Fahrzeugtyps und Datenquelle → alle 6 SOH-Methoden in &lt; 30s</span>
+                      <span class="lang-en" hidden>Upload file → automatic vehicle type and data source detection → all 6 SOH methods in &lt; 30s</span>
+                    </div>
                   </div>
                 </div>
               </div>

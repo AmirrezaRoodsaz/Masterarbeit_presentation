@@ -206,10 +206,10 @@ Each phase: push main → create feature branch → implement → merge with app
 - [x] **Phase 8:** GSAP animations (slide 11 SOH pipeline, fragment reveals, subtle transitions). **Rework needed later** — see Phase 13.
 - [x] **Phase 9:** Streamlit iframe (slide 17 live demo). Iframe-only, no video fallback — live demo of the app.
 - [x] **Phase 10: Cross-reference report** — thesis chapters cross-referenced. Added: BMS ±5–10% accuracy (slide 2), lab-vs-real-vehicles gap (slide 3), SOH_c Coulomb-counting equation (slide 6), NMC 712 specs (slide 5), vehicle selection rationale (slide 9), protocol reconciliation with thesis (slide 8), temperature correction limitation (slide 21). Vehicle cleanup (BMW i3s, Skoda Elroq removal) completed in prior session.
-- [ ] **Phase 11: Mermaid diagrams** — rework slide 6 aging mechanisms + slide 9 measurement protocol, matching PlantUML originals from report. Needs rework after report content is finalized.
+- [x] **Phase 11: Mermaid diagrams** — rework slide 6 aging mechanisms + slide 9 measurement protocol, matching PlantUML originals from report. Needs rework after report content is finalized.
 - [x] **Phase 12: Flowchart Gallery** — new section before Fazit with a dropdown selector showing all 39 PlantUML diagrams (30 Flowcharts + 9 Software Architecture) pre-rendered as SVGs. Select-and-show UI with grouped dropdown, full-size viewer with white background container.
 - [x] **Phase 16:** Entladung & Einladung protocol — discharge flowchart + CC-CV charging profile chart added as new methodology slides
-- [ ] **Phase 13:** Slide-by-slide review & redesign — go through every slide from start to finish, control and redesign separately
+- [x] **Phase 13:** Slide-by-slide review & redesign — go through every slide from start to finish, control and redesign separately
 - [ ] **Phase 14:** Animation rework — user goes through all slides and provides a list of animation opportunities. Rework pipeline animation + add new animations based on that list.
 - [ ] **Phase 15:** Polish — visual consistency, responsive scaling, defense mode testing, projector resolution check
 - [ ] **Phase 16:** Speaker notes — German narration for each slide, timing cues, transition phrases
