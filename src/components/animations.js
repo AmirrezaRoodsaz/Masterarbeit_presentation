@@ -2,6 +2,11 @@
  * GSAP Animations — pipeline build animation (slide 11) + fragment enhancements.
  */
 import gsap from 'gsap';
+import { getSettings } from './settings-store.js';
+
+function animationsEnabled() {
+  return getSettings().display.animationsEnabled !== false;
+}
 
 // ── Pipeline Animation (Slide 11) ────────────────────────────────────
 
@@ -123,97 +128,79 @@ function initFragmentAnimations(deck) {
   });
 
   deck.on('fragmentshown', (event) => {
+    const noAnim = !animationsEnabled();
     event.fragments.forEach(el => {
       if (el.classList.contains('agenda-reveal')) {
-        // Remove glow from all previous agenda items
         agendaFragments.forEach(af => af.classList.remove('agenda-active'));
-        // Light up this card + add glow
-        gsap.to(el, { opacity: 1, duration: 0.6, ease: 'power2.out' });
+        gsap.to(el, { opacity: 1, duration: noAnim ? 0 : 0.6, ease: 'power2.out' });
         el.classList.add('agenda-active');
       } else if (el.classList.contains('cycle-reveal')) {
         if (el.classList.contains('takeaway-box')) {
-          // Takeaway box — slide up from below
-          gsap.to(el, { opacity: 1, y: 0, duration: 0.7, ease: 'back.out(1.2)' });
+          gsap.to(el, { opacity: 1, y: 0, duration: noAnim ? 0 : 0.7, ease: 'back.out(1.2)' });
           return;
         }
-        // Fade in text block
-        gsap.to(el, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' });
-        // Highlight matching pentagon segment + icon
+        gsap.to(el, { opacity: 1, x: 0, duration: noAnim ? 0 : 0.5, ease: 'power2.out' });
         const segNum = el.dataset.segment;
         if (segNum) {
           const section = el.closest('section');
           const seg = section.querySelector(`.cycle-segment[data-segment="${segNum}"]`);
           const icon = section.querySelector(`.cycle-icon-g[data-segment="${segNum}"]`);
           const color = seg ? seg.getAttribute('fill') : '#E2001A';
-          if (seg) {
-            gsap.to(seg, {
-              opacity: 1,
-              filter: `drop-shadow(0 0 14px ${color})`,
-              duration: 0.6, ease: 'power2.out',
-            });
-          }
-          if (icon) {
-            gsap.to(icon, {
-              opacity: 1,
-              filter: `drop-shadow(0 0 8px ${color})`,
-              duration: 0.6, ease: 'power2.out',
-            });
-          }
+          if (seg) gsap.to(seg, { opacity: 1, filter: `drop-shadow(0 0 14px ${color})`, duration: noAnim ? 0 : 0.6, ease: 'power2.out' });
+          if (icon) gsap.to(icon, { opacity: 1, filter: `drop-shadow(0 0 8px ${color})`, duration: noAnim ? 0 : 0.6, ease: 'power2.out' });
         }
       } else if (el.classList.contains('slide-up')) {
-        gsap.to(el, { opacity: 1, y: 0, duration: 0.7, ease: 'back.out(1.2)' });
+        gsap.to(el, { opacity: 1, y: 0, duration: noAnim ? 0 : 0.7, ease: 'back.out(1.2)' });
       } else if (el.classList.contains('slide-right')) {
-        gsap.to(el, { opacity: 1, x: 0, duration: 0.7, ease: 'power2.out' });
+        gsap.to(el, { opacity: 1, x: 0, duration: noAnim ? 0 : 0.7, ease: 'power2.out' });
       } else if (el.id === 'chart-method-comparison') {
-        // Custom animation handled separately — just ensure container is visible
-        gsap.to(el, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' });
+        gsap.to(el, { opacity: 1, y: 0, duration: noAnim ? 0 : 0.3, ease: 'power2.out' });
+        if (noAnim) showMethodComparisonFinal();
       } else if (el.classList.contains('repro-panel')) {
-        // Custom animation handled separately — just ensure container is visible
-        gsap.to(el, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' });
+        gsap.to(el, { opacity: 1, y: 0, duration: noAnim ? 0 : 0.3, ease: 'power2.out' });
+        if (noAnim) showReproMatrixFinal();
       } else {
-        gsap.to(el, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' });
+        gsap.to(el, { opacity: 1, y: 0, duration: noAnim ? 0 : 0.45, ease: 'power2.out' });
       }
     });
   });
 
   deck.on('fragmenthidden', (event) => {
+    const noAnim = !animationsEnabled();
     event.fragments.forEach(el => {
       if (el.classList.contains('agenda-reveal')) {
         el.classList.remove('agenda-active');
-        gsap.to(el, { opacity: 0.15, duration: 0.3, ease: 'power2.in' });
-        // Restore glow to the previous visible agenda item
+        gsap.to(el, { opacity: 0.15, duration: noAnim ? 0 : 0.3, ease: 'power2.in' });
         const visibleItems = [...agendaFragments].filter(af => af.classList.contains('visible'));
         if (visibleItems.length > 0) visibleItems[visibleItems.length - 1].classList.add('agenda-active');
       } else if (el.classList.contains('cycle-reveal')) {
         if (el.classList.contains('takeaway-box')) {
-          gsap.to(el, { opacity: 0, y: 150, duration: 0.3, ease: 'power2.in' });
+          gsap.to(el, { opacity: 0, y: 150, duration: noAnim ? 0 : 0.3, ease: 'power2.in' });
           return;
         }
         const isLeft = el.closest('.cycle-texts-left');
         const isRight = el.closest('.cycle-texts-right');
-        gsap.to(el, { opacity: 0, x: isLeft ? -30 : isRight ? 30 : 0, duration: 0.3, ease: 'power2.in' });
+        gsap.to(el, { opacity: 0, x: isLeft ? -30 : isRight ? 30 : 0, duration: noAnim ? 0 : 0.3, ease: 'power2.in' });
         const segNum = el.dataset.segment;
         if (segNum) {
           const section = el.closest('section');
           const seg = section.querySelector(`.cycle-segment[data-segment="${segNum}"]`);
           const icon = section.querySelector(`.cycle-icon-g[data-segment="${segNum}"]`);
-          if (seg) gsap.to(seg, { opacity: 0.3, filter: 'none', duration: 0.3, ease: 'power2.in' });
-          if (icon) gsap.to(icon, { opacity: 0.3, filter: 'none', duration: 0.3, ease: 'power2.in' });
+          if (seg) gsap.to(seg, { opacity: 0.3, filter: 'none', duration: noAnim ? 0 : 0.3, ease: 'power2.in' });
+          if (icon) gsap.to(icon, { opacity: 0.3, filter: 'none', duration: noAnim ? 0 : 0.3, ease: 'power2.in' });
         }
       } else if (el.classList.contains('slide-up')) {
-        gsap.to(el, { opacity: 0, y: 150, duration: 0.3, ease: 'power2.in' });
+        gsap.to(el, { opacity: 0, y: 150, duration: noAnim ? 0 : 0.3, ease: 'power2.in' });
       } else if (el.classList.contains('slide-right')) {
-        gsap.to(el, { opacity: 0, x: 200, duration: 0.3, ease: 'power2.in' });
+        gsap.to(el, { opacity: 0, x: 200, duration: noAnim ? 0 : 0.3, ease: 'power2.in' });
       } else if (el.id === 'chart-method-comparison') {
-        // Reset internal SVG elements + hide container
         resetMethodComparison();
-        gsap.to(el, { opacity: 0, y: 20, duration: 0.3, ease: 'power2.in' });
+        gsap.to(el, { opacity: 0, y: 20, duration: noAnim ? 0 : 0.3, ease: 'power2.in' });
       } else if (el.classList.contains('repro-panel')) {
-        // Reset internal SVG elements + hide container
         resetReproMatrix();
-        gsap.to(el, { opacity: 0, y: 20, duration: 0.3, ease: 'power2.in' });
+        gsap.to(el, { opacity: 0, y: 20, duration: noAnim ? 0 : 0.3, ease: 'power2.in' });
       } else {
-        gsap.to(el, { opacity: 0, y: 20, duration: 0.3, ease: 'power2.in' });
+        gsap.to(el, { opacity: 0, y: 20, duration: noAnim ? 0 : 0.3, ease: 'power2.in' });
       }
     });
   });
@@ -276,6 +263,22 @@ function animateMethodComparison() {
   });
 
   return tl;
+}
+
+function showMethodComparisonFinal() {
+  const container = document.getElementById('chart-method-comparison');
+  if (!container) return;
+  const svg = container.querySelector('svg');
+  if (!svg) return;
+
+  svg.querySelectorAll('.lollipop-stem').forEach(stem => {
+    stem.setAttribute('x2', stem.getAttribute('data-target-x2'));
+  });
+  svg.querySelectorAll('.lollipop-dot').forEach(dot => {
+    dot.setAttribute('r', dot.getAttribute('data-target-r'));
+  });
+  svg.querySelectorAll('.lollipop-value').forEach(val => val.setAttribute('opacity', '1'));
+  svg.querySelectorAll('.lollipop-label').forEach(label => label.setAttribute('opacity', '1'));
 }
 
 function resetMethodComparison() {
@@ -1624,12 +1627,15 @@ export function initAnimations(deck) {
       const prevId = getSlideId(event.previousSlide);
 
       if (currentId === 'slide-pipeline') {
-        pipelineTL.restart();
-        // Start electron animation (looping) after pipeline build finishes
-        stopConvergenceElectrons();
-        setTimeout(() => {
-          convergenceElectronTL = buildConvergenceElectronAnimation();
-        }, 5500); // pipeline build takes ~5.5s
+        if (animationsEnabled()) {
+          pipelineTL.restart();
+          stopConvergenceElectrons();
+          setTimeout(() => {
+            convergenceElectronTL = buildConvergenceElectronAnimation();
+          }, 5500);
+        } else {
+          pipelineTL.progress(1);
+        }
       } else if (prevId === 'slide-pipeline') {
         pipelineTL.pause(0);
         stopConvergenceElectrons();
@@ -1651,7 +1657,8 @@ export function initAnimations(deck) {
   deck.on('fragmentshown', (event) => {
     event.fragments.forEach(el => {
       if (el.id === 'chart-method-comparison') {
-        animateMethodComparison();
+        if (animationsEnabled()) animateMethodComparison();
+        else showMethodComparisonFinal();
       }
     });
   });
@@ -1696,9 +1703,9 @@ export function initAnimations(deck) {
   // Slide 13 reproducibility — animate matrix when fragment shown + AVL timeline on slide entry
   deck.on('fragmentshown', (event) => {
     event.fragments.forEach(el => {
-      // The repro-panel fragment contains the reproducibility chart
       if (el.classList.contains('repro-panel') && el.closest('#slide-reproducibility')) {
-        animateReproMatrix();
+        if (animationsEnabled()) animateReproMatrix();
+        else showReproMatrixFinal();
       }
     });
   });
@@ -1717,10 +1724,9 @@ export function initAnimations(deck) {
     const prevId = getSlideId(event.previousSlide);
 
     if (currentId === 'slide-reproducibility') {
-      // Animate AVL timeline on entry
-      animateAVLTimeline();
+      if (animationsEnabled()) animateAVLTimeline();
+      else showAVLTimelineFinal();
 
-      // Handle backward nav — if repro fragment already visible, show final state
       const reproPanel = event.currentSlide.querySelector('.repro-panel.fragment');
       if (reproPanel && reproPanel.classList.contains('visible')) {
         showReproMatrixFinal();
@@ -1740,62 +1746,61 @@ export function initAnimations(deck) {
     const prevId = getSlideId(event.previousSlide);
 
     if (currentId === 'slide-temperature') {
-      // Small delay to ensure D3 chart is rendered
-      setTimeout(() => animateTemperature(), 50);
+      setTimeout(() => animationsEnabled() ? animateTemperature() : showTemperatureFinal(), 50);
     } else if (prevId === 'slide-temperature') {
       resetTemperature();
     }
 
     if (currentId === 'slide-resistance') {
-      setTimeout(() => animateResistance(), 50);
+      setTimeout(() => animationsEnabled() ? animateResistance() : showResistanceFinal(), 50);
     } else if (prevId === 'slide-resistance') {
       resetResistance();
     }
 
     if (currentId === 'slide-community') {
-      setTimeout(() => animateCommunity(), 50);
+      setTimeout(() => animationsEnabled() ? animateCommunity() : showCommunityFinal(), 50);
     } else if (prevId === 'slide-community') {
       resetCommunity();
     }
 
     if (currentId === 'slide-failure') {
-      animateFailure();
+      animationsEnabled() ? animateFailure() : showFailureFinal();
     } else if (prevId === 'slide-failure') {
       resetFailure();
     }
 
     if (currentId === 'slide-intersystem') {
-      animateIntersystem();
+      animationsEnabled() ? animateIntersystem() : showIntersystemFinal();
     } else if (prevId === 'slide-intersystem') {
       resetIntersystem();
     }
 
     if (currentId === 'slide-ica-dva') {
-      animateIcaDva();
+      animationsEnabled() ? animateIcaDva() : showIcaDvaFinal();
     } else if (prevId === 'slide-ica-dva') {
       resetIcaDva();
     }
 
     if (currentId === 'slide-discussion') {
-      animateDiscussion();
+      animationsEnabled() ? animateDiscussion() : showDiscussionFinal();
     } else if (prevId === 'slide-discussion') {
       resetDiscussion();
     }
 
     if (currentId === 'slide-uncertainty') {
-      animateUncertainty();
+      animationsEnabled() ? animateUncertainty() : showUncertaintyFinal();
     } else if (prevId === 'slide-uncertainty') {
       resetUncertainty();
     }
 
     if (currentId === 'slide-conclusion') {
-      animateConclusion();
+      animationsEnabled() ? animateConclusion() : showConclusionFinal();
     } else if (prevId === 'slide-conclusion') {
       resetConclusion();
     }
 
     if (currentId === 'slide-outlook') {
-      animateOutlook();
+      animationsEnabled() ? animateOutlook() : showOutlookFinal();
     } else if (prevId === 'slide-outlook') {
       resetOutlook();
     }
@@ -1910,11 +1915,12 @@ export function initAnimations(deck) {
 
     function animateGaugeTo(step, duration = 0.8) {
       const s = STEPS[step];
+      const d = animationsEnabled() ? duration : 0;
       gsap.killTweensOf(gaugeState);
       gsap.to(gaugeState, {
         angle: s.angle,
         soc: s.soc,
-        duration,
+        duration: d,
         ease: 'power2.inOut',
         onUpdate: () => {
           gaugeNeedle.setAttribute('transform', `rotate(${gaugeState.angle} 180 180)`);
@@ -1923,17 +1929,17 @@ export function initAnimations(deck) {
       });
       gsap.to(socFill, {
         attr: { 'stroke-dashoffset': s.offset },
-        duration,
+        duration: d,
         ease: 'power2.inOut'
       });
-      // Warning light
       if (warnBattery) {
+        const wd = animationsEnabled() ? 0.3 : 0;
         if (step >= 4) {
-          gsap.to(warnBattery, { opacity: 1, color: '#ef4444', duration: 0.3 }); // red — click 5
+          gsap.to(warnBattery, { opacity: 1, color: '#ef4444', duration: wd });
         } else if (step >= 3) {
-          gsap.to(warnBattery, { opacity: 1, color: '#f59e0b', duration: 0.3 }); // yellow — click 4
+          gsap.to(warnBattery, { opacity: 1, color: '#f59e0b', duration: wd });
         } else {
-          gsap.to(warnBattery, { opacity: 0.55, color: '#4a6a20', duration: 0.3 }); // default
+          gsap.to(warnBattery, { opacity: 0.55, color: '#4a6a20', duration: wd });
         }
       }
     }
@@ -1963,15 +1969,16 @@ export function initAnimations(deck) {
       if (idx >= 0) {
         animateGaugeTo(idx);
       } else {
+        const d = animationsEnabled() ? 0.4 : 0;
         gsap.to(gaugeState, {
-          angle: INITIAL.angle, soc: INITIAL.soc, duration: 0.4, ease: 'power2.inOut',
+          angle: INITIAL.angle, soc: INITIAL.soc, duration: d, ease: 'power2.inOut',
           onUpdate: () => {
             gaugeNeedle.setAttribute('transform', `rotate(${gaugeState.angle} 180 180)`);
             socText.textContent = Math.round(gaugeState.soc);
           }
         });
-        gsap.to(socFill, { attr: { 'stroke-dashoffset': INITIAL.offset }, duration: 0.4, ease: 'power2.inOut' });
-        if (warnBattery) gsap.to(warnBattery, { opacity: 0.55, color: '#4a6a20', duration: 0.3 });
+        gsap.to(socFill, { attr: { 'stroke-dashoffset': INITIAL.offset }, duration: d, ease: 'power2.inOut' });
+        if (warnBattery) gsap.to(warnBattery, { opacity: 0.55, color: '#4a6a20', duration: d });
       }
     });
 
@@ -2007,11 +2014,12 @@ export function initAnimations(deck) {
 
     function animateChargingTo(step, duration = 0.8) {
       const s = CH_STEPS[step];
+      const d = animationsEnabled() ? duration : 0;
       gsap.killTweensOf(chState);
       gsap.to(chState, {
         angle: s.angle,
         soc: s.soc,
-        duration,
+        duration: d,
         ease: 'power2.inOut',
         onUpdate: () => {
           chargingNeedle.setAttribute('transform', `rotate(${chState.angle} 180 180)`);
@@ -2021,7 +2029,7 @@ export function initAnimations(deck) {
       if (chSocFill) {
         gsap.to(chSocFill, {
           attr: { 'stroke-dashoffset': s.offset },
-          duration,
+          duration: d,
           ease: 'power2.inOut'
         });
       }
@@ -2051,14 +2059,15 @@ export function initAnimations(deck) {
       if (idx >= 0) {
         animateChargingTo(idx);
       } else {
+        const d = animationsEnabled() ? 0.4 : 0;
         gsap.to(chState, {
-          angle: CH_INITIAL.angle, soc: CH_INITIAL.soc, duration: 0.4, ease: 'power2.inOut',
+          angle: CH_INITIAL.angle, soc: CH_INITIAL.soc, duration: d, ease: 'power2.inOut',
           onUpdate: () => {
             chargingNeedle.setAttribute('transform', `rotate(${chState.angle} 180 180)`);
             if (chSocText) chSocText.textContent = Math.round(chState.soc);
           }
         });
-        if (chSocFill) gsap.to(chSocFill, { attr: { 'stroke-dashoffset': CH_INITIAL.offset }, duration: 0.4, ease: 'power2.inOut' });
+        if (chSocFill) gsap.to(chSocFill, { attr: { 'stroke-dashoffset': CH_INITIAL.offset }, duration: d, ease: 'power2.inOut' });
       }
     });
 
@@ -2162,6 +2171,127 @@ export function initAnimations(deck) {
     });
   });
 
+  // ── Animations ON/OFF toggle ──────────────────────────────────────────
+
+  function showAllFinalStates() {
+    // Show slide-specific animation final states for ALL slides
+    if (pipelineTL) pipelineTL.progress(1);
+    showMethodComparisonFinal();
+    showReproMatrixFinal();
+    showAVLTimelineFinal();
+    showTemperatureFinal();
+    showResistanceFinal();
+    showCommunityFinal();
+    showFailureFinal();
+    showIntersystemFinal();
+    showIcaDvaFinal();
+    showDiscussionFinal();
+    showUncertaintyFinal();
+    showConclusionFinal();
+    showOutlookFinal();
+
+    // Discharge gauge → final step 5 (SOC 0%, needle at 495°)
+    const gn = document.getElementById('gauge-needle');
+    if (gn) gn.setAttribute('transform', 'rotate(495 180 180)');
+    const sf = document.getElementById('soc-gauge-fill');
+    if (sf) sf.setAttribute('stroke-dashoffset', '660');
+    const st = document.getElementById('soc-gauge-text');
+    if (st) st.textContent = '0';
+    const wb = document.querySelector('#slide-discharge .warn-battery');
+    if (wb) { wb.style.opacity = '1'; wb.style.color = '#ef4444'; }
+
+    // Charging gauge → final step 5 (SOC 100%, needle at 495°)
+    const cn = document.getElementById('gauge-needle-charging');
+    if (cn) cn.setAttribute('transform', 'rotate(495 180 180)');
+    const csf = document.querySelector('#slide-charging .soc-gauge-fill');
+    if (csf) csf.setAttribute('stroke-dashoffset', '132');
+    const cst = document.querySelector('#slide-charging .dash-gauge text[font-size="56"]');
+    if (cst) cst.textContent = '100';
+  }
+
+  function disableAnimations() {
+    // 1. Disable Reveal.js fragment stepping — all content visible immediately
+    deck.configure({ fragments: false });
+
+    // 2. Kill all running GSAP tweens
+    gsap.globalTimeline.clear();
+    stopConvergenceElectrons();
+
+    // 3. Rebuild pipeline timeline (cleared above)
+    if (document.getElementById('gsap-pipeline')) {
+      pipelineTL = buildPipelineTimeline();
+    }
+
+    // 4. Set all fragments to visible (don't use clearProps — it wipes inline
+    //    CSS custom properties like --i and --step-color used for gauge positioning)
+    document.querySelectorAll('.reveal .fragment').forEach(el => {
+      gsap.set(el, { opacity: 1, y: 0, x: 0 });
+    });
+
+    // 5. Restore cycle segments/icons to full visibility
+    document.querySelectorAll('.cycle-segment[data-segment], .cycle-icon-g[data-segment]').forEach(el => {
+      gsap.set(el, { opacity: 1, filter: 'none' });
+    });
+
+    // 6. Show all slide-specific chart/animation final states
+    showAllFinalStates();
+  }
+
+  function enableAnimations() {
+    // 1. Re-enable Reveal.js fragment stepping
+    deck.configure({ fragments: true });
+
+    // 2. Re-apply GSAP hidden states to non-visible fragments on current slide
+    const current = deck.getCurrentSlide();
+    if (current) {
+      current.querySelectorAll('.fragment:not(.visible)').forEach(el => {
+        if (el.classList.contains('agenda-reveal')) {
+          gsap.set(el, { opacity: 0.15, y: 0 });
+        } else if (el.classList.contains('cycle-reveal')) {
+          if (el.classList.contains('takeaway-box')) {
+            gsap.set(el, { opacity: 0, y: 150 });
+          } else {
+            const isLeft = el.closest('.cycle-texts-left');
+            const isRight = el.closest('.cycle-texts-right');
+            gsap.set(el, { opacity: 0, x: isLeft ? -30 : isRight ? 30 : 0 });
+          }
+        } else if (el.classList.contains('slide-up')) {
+          gsap.set(el, { opacity: 0, y: 150 });
+        } else if (el.classList.contains('slide-right')) {
+          gsap.set(el, { opacity: 0, x: 200 });
+        } else {
+          gsap.set(el, { opacity: 0, y: 20 });
+        }
+      });
+      // Re-dim cycle segments for non-visible fragments
+      const cycleFrags = current.querySelectorAll('.fragment.cycle-reveal:not(.visible)');
+      cycleFrags.forEach(el => {
+        const segNum = el.dataset.segment;
+        if (segNum) {
+          const seg = current.querySelector(`.cycle-segment[data-segment="${segNum}"]`);
+          const icon = current.querySelector(`.cycle-icon-g[data-segment="${segNum}"]`);
+          if (seg) gsap.set(seg, { opacity: 0.3, filter: 'none' });
+          if (icon) gsap.set(icon, { opacity: 0.3, filter: 'none' });
+        }
+      });
+    }
+  }
+
+  // Live toggle via settings
+  document.addEventListener('settings-changed', (e) => {
+    if (e.detail.category !== 'display' || e.detail.key !== 'animationsEnabled') return;
+    if (e.detail.value === false) {
+      disableAnimations();
+    } else {
+      enableAnimations();
+    }
+  });
+
   // Enhance fragment transitions
   initFragmentAnimations(deck);
+
+  // Boot-time check — if animations were disabled in a previous session
+  if (!animationsEnabled()) {
+    disableAnimations();
+  }
 }

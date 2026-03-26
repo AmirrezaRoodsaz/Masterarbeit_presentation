@@ -88,7 +88,8 @@ deck.initialize().then(() => {
       };
       fetch('/local-ip.json').then(r => r.json()).then(d => { if (d.ip) qrUrl = `http://${d.ip}:3000`; }).catch(() => {}).finally(() => {
         renderQR();
-        gsap.to(qrWrap, { opacity: 1, duration: 2, delay: 1.5, ease: 'power2.inOut' });
+        const qrAnim = getSettings().display.animationsEnabled !== false;
+        gsap.to(qrWrap, { opacity: 1, duration: qrAnim ? 2 : 0, delay: qrAnim ? 1.5 : 0, ease: 'power2.inOut' });
       });
       // Re-render QR when theme changes
       new MutationObserver(() => renderQR()).observe(document.body, { attributes: true, attributeFilter: ['class'] });

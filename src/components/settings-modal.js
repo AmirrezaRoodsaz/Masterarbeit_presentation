@@ -318,6 +318,16 @@ function renderDisplayTab() {
           <option value="en" ${s.display.defaultLanguage === 'en' ? 'selected' : ''}>English</option>
         </select>
       </div>
+      <div class="setting-toggle">
+        <label class="toggle-label">
+          <span class="lang-de">Animationen</span>
+          <span class="lang-en" hidden>Animations</span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="display-animations" ${s.display.animationsEnabled !== false ? 'checked' : ''}>
+          <span class="slider"></span>
+        </label>
+      </div>
       <div class="setting-row">
         <label class="setting-label">
           <span class="lang-de">Timer-Ziel (Minuten)</span>
@@ -390,6 +400,11 @@ function bindTabEvents() {
       applyTheme(theme);
       renderTabContent();
     });
+  });
+
+  // Animations toggle
+  document.getElementById('display-animations')?.addEventListener('change', (e) => {
+    updateSettings('display', 'animationsEnabled', e.target.checked);
   });
 
   // Display settings
