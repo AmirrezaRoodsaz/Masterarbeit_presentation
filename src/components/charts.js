@@ -170,8 +170,9 @@ function renderMethodComparison(container, data) {
     else if (isRef) color = '#00C9A7';
     else color = '#4C9AFF';
 
-    // Y-axis label (short)
+    // Y-axis label (short) — starts hidden, animates with stem
     g.append('text')
+      .attr('class', 'lollipop-label')
       .attr('x', -14)
       .attr('y', cy)
       .attr('text-anchor', 'end')
@@ -179,23 +180,29 @@ function renderMethodComparison(container, data) {
       .attr('fill', isCombined ? accent : (isRef ? '#00C9A7' : getCSSVar('--text-primary')))
       .attr('font-size', '13px')
       .attr('font-weight', (isCombined || isRef) ? '700' : '600')
+      .attr('opacity', 0)
       .text(d._short);
 
     // Horizontal lollipop stem from mean to dot
+    // Starts at meanX (zero length) — GSAP animates x2 to dotX
     g.append('line')
-      .attr('x1', meanX).attr('x2', dotX)
+      .attr('class', 'lollipop-stem')
+      .attr('x1', meanX).attr('x2', meanX)
+      .attr('data-target-x2', dotX)
       .attr('y1', cy).attr('y2', cy)
       .attr('stroke', color)
       .attr('stroke-width', isCombined ? 3 : 2)
       .attr('opacity', isCombined ? 0.8 : 0.35)
       .attr('stroke-linecap', 'round');
 
-    // Dot
+    // Dot — starts at r=0, GSAP pops it in
     const dotR = isCombined ? 10 : (isRef ? 9 : 7);
     g.append('circle')
+      .attr('class', 'lollipop-dot')
       .attr('cx', dotX)
       .attr('cy', cy)
-      .attr('r', dotR)
+      .attr('r', 0)
+      .attr('data-target-r', dotR)
       .attr('fill', color)
       .attr('opacity', (isCombined || isRef) ? 1 : 0.85)
       .attr('filter', isCombined ? 'url(#dot-glow)' : null)
@@ -215,14 +222,16 @@ function renderMethodComparison(container, data) {
         hideTooltip(tip);
       });
 
-    // Value label (right of dot)
+    // Value label (right of dot) — starts hidden, GSAP fades in with dots
     g.append('text')
+      .attr('class', 'lollipop-value')
       .attr('x', dotX + dotR + 6)
       .attr('y', cy)
       .attr('dominant-baseline', 'middle')
       .attr('fill', color)
       .attr('font-size', (isCombined || isRef) ? '13px' : '11px')
       .attr('font-weight', '700')
+      .attr('opacity', 0)
       .text(`${d.soh.toFixed(1)} %`);
   });
 
@@ -299,7 +308,7 @@ function renderReproducibility(container, data) {
     .attr('font-weight', '600')
     .text(en ? 'Spread' : 'Streuung');
 
-  // Row for each method
+  // Row for each method — animated: row-by-row cascade, cells left→right
   methods.forEach((method, row) => {
     const color = methodColors[row];
     const isCombined = row === 2;
@@ -307,8 +316,10 @@ function renderReproducibility(container, data) {
     const vals = runs.map(r => r[method]);
     const spread = (Math.max(...vals) - Math.min(...vals)).toFixed(1);
 
-    // Row label
+    // Row label — starts hidden
     svg.append('text')
+      .attr('class', 'repro-label')
+      .attr('data-row', row)
       .attr('x', ox - 14)
       .attr('y', rowY + cellH / 2)
       .attr('text-anchor', 'end')
@@ -316,6 +327,7 @@ function renderReproducibility(container, data) {
       .attr('fill', isCombined ? accent : getCSSVar('--text-primary'))
       .attr('font-size', '14px')
       .attr('font-weight', isCombined ? '700' : '600')
+      .attr('opacity', 0)
       .text(methodLabels[row]);
 
     // Value cells
@@ -323,18 +335,24 @@ function renderReproducibility(container, data) {
       const val = run[method];
       const cx = ox + col * (cellW + cellGap);
 
-      // Cell background
+      // Cell background — starts hidden
       svg.append('rect')
+        .attr('class', 'repro-cell-bg')
+        .attr('data-row', row)
+        .attr('data-col', col)
         .attr('x', cx)
         .attr('y', rowY)
         .attr('width', cellW)
         .attr('height', cellH)
         .attr('rx', cellR)
         .attr('fill', color)
-        .attr('opacity', isCombined ? 0.18 : 0.12);
+        .attr('opacity', 0);
 
-      // Value text
+      // Value text — starts hidden
       svg.append('text')
+        .attr('class', 'repro-cell-val')
+        .attr('data-row', row)
+        .attr('data-col', col)
         .attr('x', cx + cellW / 2)
         .attr('y', rowY + cellH / 2)
         .attr('text-anchor', 'middle')
@@ -342,20 +360,25 @@ function renderReproducibility(container, data) {
         .attr('fill', isCombined ? accent : getCSSVar('--text-primary'))
         .attr('font-size', '18px')
         .attr('font-weight', '700')
+        .attr('opacity', 0)
         .text(`${val.toFixed(1)} %`);
     });
 
-    // Delta cell
+    // Delta cell — starts hidden
     svg.append('rect')
+      .attr('class', 'repro-delta-bg')
+      .attr('data-row', row)
       .attr('x', deltaX)
       .attr('y', rowY)
       .attr('width', deltaColW)
       .attr('height', cellH)
       .attr('rx', cellR)
       .attr('fill', success)
-      .attr('opacity', spread === '0.0' ? 0.2 : 0.1);
+      .attr('opacity', 0);
 
     svg.append('text')
+      .attr('class', 'repro-delta-val')
+      .attr('data-row', row)
       .attr('x', deltaX + deltaColW / 2)
       .attr('y', rowY + cellH / 2)
       .attr('text-anchor', 'middle')
@@ -363,22 +386,29 @@ function renderReproducibility(container, data) {
       .attr('fill', success)
       .attr('font-size', '16px')
       .attr('font-weight', '700')
+      .attr('opacity', 0)
       .text(`${spread} Pp`);
+
+    // Store target opacities as data attributes for animation reset
+    svg.selectAll(`.repro-cell-bg[data-row="${row}"]`).attr('data-target-opacity', isCombined ? 0.18 : 0.12);
+    svg.selectAll(`.repro-delta-bg[data-row="${row}"]`).attr('data-target-opacity', spread === '0.0' ? 0.2 : 0.1);
   });
 
-  // Bottom badge
+  // Bottom badge — starts hidden
   const badgeY = oy + 3 * (cellH + cellGap) + 8;
   const badgeW = 3 * (cellW + cellGap) - cellGap;
   svg.append('rect')
+    .attr('class', 'repro-badge-bg')
     .attr('x', ox)
     .attr('y', badgeY)
     .attr('width', badgeW + deltaColW + cellGap)
     .attr('height', 28)
     .attr('rx', 14)
     .attr('fill', success)
-    .attr('opacity', 0.12);
+    .attr('opacity', 0);
 
   svg.append('text')
+    .attr('class', 'repro-badge-text')
     .attr('x', ox + (badgeW + deltaColW + cellGap) / 2)
     .attr('y', badgeY + 15)
     .attr('text-anchor', 'middle')
@@ -386,6 +416,7 @@ function renderReproducibility(container, data) {
     .attr('fill', success)
     .attr('font-size', '12px')
     .attr('font-weight', '700')
+    .attr('opacity', 0)
     .text(en
       ? `Max spread: ${data.algorithmic.spread_pp} Pp — ${data.algorithmic.rating_en}`
       : `Max. Streuung: ${data.algorithmic.spread_pp} Pp — ${data.algorithmic.rating}`);
@@ -450,58 +481,64 @@ function renderTemperature(container, data) {
   methodLabels.forEach((label, i) => {
     if (i % 2 === 0) {
       g.append('rect')
+        .attr('class', 'temp-bg')
         .attr('x', -margin.left + 10)
         .attr('y', yBand(label) - yBand.step() * yBand.padding() / 2)
         .attr('width', innerW + margin.left - 10 + margin.right - 10)
         .attr('height', yBand.step())
         .attr('fill', getCSSVar('--text-secondary'))
-        .attr('opacity', 0.04)
+        .attr('opacity', 0)
         .attr('rx', 4);
     }
   });
 
   // Zero line (center axis)
   g.append('line')
+    .attr('class', 'temp-axis')
     .attr('x1', zeroX).attr('x2', zeroX)
     .attr('y1', -10).attr('y2', innerH + 10)
     .attr('stroke', getCSSVar('--text-secondary'))
     .attr('stroke-width', 1.5)
-    .attr('opacity', 0.3);
+    .attr('opacity', 0);
 
   g.append('text')
+    .attr('class', 'temp-axis')
     .attr('x', zeroX)
     .attr('y', -16)
     .attr('text-anchor', 'middle')
     .attr('fill', getCSSVar('--text-secondary'))
     .attr('font-size', '10px')
+    .attr('opacity', 0)
     .text('0');
 
   // Axis labels at top
   g.append('text')
+    .attr('class', 'temp-axis')
     .attr('x', x(-xDomain))
     .attr('y', -16)
     .attr('text-anchor', 'start')
     .attr('fill', getCSSVar('--text-secondary'))
     .attr('font-size', '9px')
-    .attr('opacity', 0.6)
+    .attr('opacity', 0)
     .text(en ? '← lower at 9.8°C' : '← niedriger bei 9,8 °C');
 
   g.append('text')
+    .attr('class', 'temp-axis')
     .attr('x', x(xDomain))
     .attr('y', -16)
     .attr('text-anchor', 'end')
     .attr('fill', getCSSVar('--text-secondary'))
     .attr('font-size', '9px')
-    .attr('opacity', 0.6)
+    .attr('opacity', 0)
     .text(en ? 'higher at 9.8°C →' : 'höher bei 9,8 °C →');
 
   // X axis ticks
-  g.append('g')
-    .attr('class', 'axis')
+  const xAxisG = g.append('g')
+    .attr('class', 'axis temp-x-axis')
     .attr('transform', `translate(0,${innerH + 5})`)
-    .call(d3.axisBottom(x).ticks(5).tickFormat(d => d === 0 ? '' : `${d > 0 ? '+' : ''}${d} Pp`))
-    .selectAll('text')
-    .style('font-size', '9px');
+    .call(d3.axisBottom(x).ticks(5).tickFormat(d => d === 0 ? '' : `${d > 0 ? '+' : ''}${d} Pp`));
+  xAxisG.selectAll('text').style('font-size', '9px');
+  xAxisG.attr('opacity', 0);
 
   // Butterfly bars
   methods.forEach((method, mIdx) => {
@@ -517,13 +554,17 @@ function renderTemperature(container, data) {
     const barW = Math.abs(x(delta) - zeroX);
 
     g.append('rect')
-      .attr('x', barX)
+      .attr('class', 'temp-bar')
+      .attr('data-target-x', barX)
+      .attr('data-target-width', Math.max(barW, 2))
+      .attr('data-target-opacity', isCombined ? 0.85 : 0.6)
+      .attr('x', zeroX)
       .attr('y', cy - barH / 2)
-      .attr('width', Math.max(barW, 2))
+      .attr('width', 0)
       .attr('height', barH)
       .attr('rx', 4)
       .attr('fill', color)
-      .attr('opacity', isCombined ? 0.85 : 0.6)
+      .attr('opacity', 0)
       .attr('filter', isCombined ? 'url(#temp-glow)' : null)
       .style('cursor', 'pointer')
       .on('mouseenter', (event) => {
@@ -539,6 +580,7 @@ function renderTemperature(container, data) {
 
     // Method label (left)
     g.append('text')
+      .attr('class', 'temp-label')
       .attr('x', -14)
       .attr('y', cy)
       .attr('text-anchor', 'end')
@@ -546,12 +588,14 @@ function renderTemperature(container, data) {
       .attr('fill', isCombined ? accent : getCSSVar('--text-primary'))
       .attr('font-size', '14px')
       .attr('font-weight', isCombined ? '700' : '600')
+      .attr('opacity', 0)
       .text(label);
 
     // Delta value at end of bar
     const valX = x(delta) + (delta >= 0 ? 8 : -8);
     const valAnchor = delta >= 0 ? 'start' : 'end';
     g.append('text')
+      .attr('class', 'temp-delta')
       .attr('x', valX)
       .attr('y', cy)
       .attr('text-anchor', valAnchor)
@@ -559,18 +603,20 @@ function renderTemperature(container, data) {
       .attr('fill', color)
       .attr('font-size', isCombined ? '16px' : '13px')
       .attr('font-weight', '700')
+      .attr('opacity', 0)
       .text(`${delta > 0 ? '+' : ''}${en ? delta.toFixed(1) : delta.toFixed(1).replace('.', ',')} Pp`);
 
     // Absolute values below method label
     const v1 = sessions[0][method];
     const v2 = sessions[1][method];
     g.append('text')
+      .attr('class', 'temp-abs')
       .attr('x', -14)
       .attr('y', cy + 16)
       .attr('text-anchor', 'end')
       .attr('fill', getCSSVar('--text-secondary'))
       .attr('font-size', '9px')
-      .attr('opacity', 0.6)
+      .attr('opacity', 0)
       .text(`${v1.toFixed(1)} → ${v2.toFixed(1)} %`);
   });
 }
@@ -629,27 +675,31 @@ function renderResistance(container, data) {
 
     // Track background
     g.append('rect')
+      .attr('class', 'res-track')
       .attr('x', 0)
       .attr('y', cy - barH / 2)
       .attr('width', innerW)
       .attr('height', barH)
       .attr('rx', barH / 2)
       .attr('fill', getCSSVar('--text-secondary'))
-      .attr('opacity', 0.06);
+      .attr('opacity', 0);
 
     // Value bar
     g.append('rect')
+      .attr('class', 'res-bar')
+      .attr('data-target-width', barW)
       .attr('x', 0)
       .attr('y', cy - barH / 2)
-      .attr('width', barW)
+      .attr('width', 0)
       .attr('height', barH)
       .attr('rx', barH / 2)
       .attr('fill', colorShade)
-      .attr('opacity', 0.7)
+      .attr('opacity', 0)
       .attr('filter', 'url(#res-glow)');
 
     // Label (left)
     g.append('text')
+      .attr('class', 'res-label')
       .attr('x', -14)
       .attr('y', cy)
       .attr('text-anchor', 'end')
@@ -657,16 +707,20 @@ function renderResistance(container, data) {
       .attr('fill', getCSSVar('--text-primary'))
       .attr('font-size', '15px')
       .attr('font-weight', '600')
+      .attr('opacity', 0)
       .text(d.label);
 
     // Value (right of bar)
     g.append('text')
-      .attr('x', barW + 12)
+      .attr('class', 'res-value')
+      .attr('data-target-x', barW + 12)
+      .attr('x', 12)
       .attr('y', cy)
       .attr('dominant-baseline', 'middle')
       .attr('fill', colorShade)
       .attr('font-size', '20px')
       .attr('font-weight', '700')
+      .attr('opacity', 0)
       .text(`${d.value} mΩ`);
   });
 
@@ -683,32 +737,36 @@ function renderResistance(container, data) {
   conditions.forEach((c, i) => {
     const bx = badgeStartX + i * badgeSpacing;
     g.append('rect')
+      .attr('class', 'res-badge-bg')
       .attr('x', bx - 40)
       .attr('y', badgeY - 12)
       .attr('width', 100)
       .attr('height', 26)
       .attr('rx', 13)
       .attr('fill', getCSSVar('--text-secondary'))
-      .attr('opacity', 0.08);
+      .attr('opacity', 0);
     g.append('text')
+      .attr('class', 'res-badge-text')
       .attr('x', bx + 10)
       .attr('y', badgeY + 2)
       .attr('text-anchor', 'middle')
       .attr('dominant-baseline', 'middle')
       .attr('fill', getCSSVar('--text-secondary'))
       .attr('font-size', '11px')
+      .attr('opacity', 0)
       .text(`${c.icon} ${c.label}`);
   });
 
   // Explanation text
   const noteY = badgeY + 50;
   g.append('text')
+    .attr('class', 'res-note')
     .attr('x', innerW / 2)
     .attr('y', noteY)
     .attr('text-anchor', 'middle')
     .attr('fill', getCSSVar('--text-secondary'))
     .attr('font-size', '10px')
-    .attr('opacity', 0.6)
+    .attr('opacity', 0)
     .text(en
       ? 'Asymmetric R_i due to electrode-electrolyte interface impedance'
       : 'Asymmetrisches R_i durch Impedanz der Elektroden-Elektrolyt-Grenzfläche');
@@ -806,27 +864,36 @@ function renderAVLTimeline(container, data) {
     .attr('class', 'axis')
     .call(d3.axisLeft(y).ticks(7).tickFormat(d => `${d} %`));
 
-  // Line connecting points
+  // Line connecting points — starts with zero length (stroke-dashoffset)
   const line = d3.line()
     .x(d => x(d.dateObj))
     .y(d => y(d.soh));
 
-  g.append('path')
+  const linePath = g.append('path')
     .datum(points)
+    .attr('class', 'avl-line')
     .attr('fill', 'none')
     .attr('stroke', success)
     .attr('stroke-width', 2)
     .attr('stroke-opacity', 0.5)
     .attr('d', line);
 
-  // Data points
-  g.selectAll('.point')
+  // Set stroke-dasharray/offset for line-draw animation
+  const lineNode = linePath.node();
+  const lineLen = lineNode.getTotalLength();
+  linePath
+    .attr('stroke-dasharray', lineLen)
+    .attr('stroke-dashoffset', lineLen);
+
+  // Data points — start at r=0
+  g.selectAll('.avl-dot')
     .data(points)
     .join('circle')
-    .attr('class', 'point')
+    .attr('class', 'avl-dot')
     .attr('cx', d => x(d.dateObj))
     .attr('cy', d => y(d.soh))
-    .attr('r', 7)
+    .attr('r', 0)
+    .attr('data-target-r', 7)
     .attr('fill', success)
     .attr('stroke', getCSSVar('--bg-surface'))
     .attr('stroke-width', 2)
@@ -841,17 +908,19 @@ function renderAVLTimeline(container, data) {
     })
     .on('mouseleave', () => hideTooltip(tip));
 
-  // Value labels on points
+  // Value labels on points — start hidden
   points.forEach((d, i) => {
     // Offset duplicate Apr 2025 points vertically
     const yOff = (i === 2 && points[3] && points[3].soh === d.soh) ? -16 : (i === 3 ? 20 : -14);
     g.append('text')
+      .attr('class', 'avl-value')
       .attr('x', x(d.dateObj))
       .attr('y', y(d.soh) + yOff)
       .attr('text-anchor', 'middle')
       .attr('fill', getCSSVar('--text-primary'))
       .attr('font-size', '11px')
       .attr('font-weight', '600')
+      .attr('opacity', 0)
       .text(`${d.soh} %`);
   });
 
@@ -904,25 +973,28 @@ function renderCommunityComparison(container, data) {
     .padding(0.5);
 
   // Grid
-  g.append('g')
-    .attr('class', 'grid')
+  const gridG = g.append('g')
+    .attr('class', 'grid comm-grid')
     .call(d3.axisBottom(x).tickSize(innerH).tickFormat('').ticks(8))
     .attr('transform', 'translate(0,0)');
+  gridG.attr('opacity', 0);
 
   // X axis
-  g.append('g')
-    .attr('class', 'axis')
+  const xAxisG = g.append('g')
+    .attr('class', 'axis comm-x-axis')
     .attr('transform', `translate(0,${innerH})`)
     .call(d3.axisBottom(x).ticks(8).tickFormat(d => `${d} %`));
+  xAxisG.attr('opacity', 0);
 
   // Y axis labels
-  g.append('g')
-    .attr('class', 'axis')
-    .call(d3.axisLeft(y).tickSize(0))
-    .selectAll('text')
+  const yAxisG = g.append('g')
+    .attr('class', 'axis comm-y-axis')
+    .call(d3.axisLeft(y).tickSize(0));
+  yAxisG.selectAll('text')
     .style('font-size', '18px')
     .style('font-weight', '600')
     .attr('class', 'community-label');
+  yAxisG.attr('opacity', 0);
 
   g.select('.axis .domain').remove();
 
@@ -933,58 +1005,69 @@ function renderCommunityComparison(container, data) {
     const barH = y.bandwidth();
 
     // Full range bar (light)
+    const rangeW = x(d.max) - x(d.min);
     g.append('rect')
-      .attr('x', x(d.min))
+      .attr('class', 'comm-range')
+      .attr('data-target-width', rangeW)
+      .attr('x', x(d.mean))
       .attr('y', barY)
-      .attr('width', x(d.max) - x(d.min))
+      .attr('width', 0)
       .attr('height', barH)
       .attr('rx', barH / 2)
       .attr('fill', chartBlue)
-      .attr('opacity', 0.2);
+      .attr('opacity', 0)
+      .attr('data-target-x', x(d.min));
 
     // Mean marker
     g.append('line')
+      .attr('class', 'comm-mean')
       .attr('x1', x(d.mean)).attr('x2', x(d.mean))
       .attr('y1', barY - 4).attr('y2', barY + barH + 4)
       .attr('stroke', chartBlue)
-      .attr('stroke-width', 2.5);
+      .attr('stroke-width', 2.5)
+      .attr('opacity', 0);
 
     // Mean label
     g.append('text')
+      .attr('class', 'comm-mean-label')
       .attr('x', x(d.mean))
       .attr('y', barY - 10)
       .attr('text-anchor', 'middle')
       .attr('fill', chartBlue)
       .attr('font-size', '15px')
       .attr('font-weight', '600')
+      .attr('opacity', 0)
       .text(`μ = ${d.mean} %`);
 
     // Min/max labels
     g.append('text')
+      .attr('class', 'comm-minmax')
       .attr('x', x(d.min) - 6)
       .attr('y', barY + barH / 2)
       .attr('text-anchor', 'end')
       .attr('dominant-baseline', 'middle')
-      .attr('class', 'community-label')
       .attr('font-size', '14px')
+      .attr('opacity', 0)
       .text(`${d.min}`);
 
     g.append('text')
+      .attr('class', 'comm-minmax')
       .attr('x', x(d.max) + 6)
       .attr('y', barY + barH / 2)
       .attr('text-anchor', 'start')
       .attr('dominant-baseline', 'middle')
-      .attr('class', 'community-label')
       .attr('font-size', '14px')
+      .attr('opacity', 0)
       .text(`${d.max}`);
 
     // n label
     g.append('text')
+      .attr('class', 'comm-n')
       .attr('x', x(d.mean))
       .attr('y', barY + barH + 18)
       .attr('text-anchor', 'middle')
-      .attr('class', 'community-label')
       .attr('font-size', '13px')
+      .attr('opacity', 0)
       .text(`n = ${d.n}`);
   });
 
@@ -1001,10 +1084,12 @@ function renderCommunityComparison(container, data) {
       // Diamond marker
       const size = 8;
       g.append('path')
+        .attr('class', 'comm-diamond')
         .attr('d', `M${cx},${cy - size} L${cx + size},${cy} L${cx},${cy + size} L${cx - size},${cy} Z`)
         .attr('fill', own.label.includes('FP') ? getCSSVar('--warning') : accent)
         .attr('stroke', getCSSVar('--bg-surface'))
         .attr('stroke-width', 1.5)
+        .attr('opacity', 0)
         .style('cursor', 'pointer')
         .on('mousemove', (event) => {
           showTooltip(tip, `
@@ -1019,7 +1104,8 @@ function renderCommunityComparison(container, data) {
 
   // Legend
   const legendDiv = document.createElement('div');
-  legendDiv.className = 'chart-legend';
+  legendDiv.className = 'chart-legend comm-legend';
+  legendDiv.style.opacity = '0';
   const items = [
     { color: chartBlue, label: en ? 'Community range' : 'Community-Bereich', opacity: '0.2' },
     { color: accent, label: 'VW ID.4 (IfE, 10.801 km)' },
@@ -1598,9 +1684,18 @@ function renderConvergenceFlow(container) {
   merge.append('feMergeNode').attr('in', 'blur');
   merge.append('feMergeNode').attr('in', 'SourceGraphic');
 
+  // Electron glow filter (brighter, larger radius)
+  const eGlow = defs.append('filter').attr('id', 'electron-glow').attr('x', '-100%').attr('y', '-100%').attr('width', '300%').attr('height', '300%');
+  eGlow.append('feGaussianBlur').attr('stdDeviation', '6').attr('result', 'blur');
+  const eMerge = eGlow.append('feMerge');
+  eMerge.append('feMergeNode').attr('in', 'blur');
+  eMerge.append('feMergeNode').attr('in', 'blur');
+  eMerge.append('feMergeNode').attr('in', 'SourceGraphic');
+
   // ── Input node ──
-  const inputG = svg.append('g').attr('transform', `translate(${inputX}, ${centerY})`);
+  const inputG = svg.append('g').attr('class', 'conv-node conv-input').attr('transform', `translate(${inputX}, ${centerY})`);
   inputG.append('rect')
+    .attr('class', 'conv-node-bg')
     .attr('x', -80).attr('y', -55)
     .attr('width', 160).attr('height', 110)
     .attr('rx', 14)
@@ -1637,6 +1732,9 @@ function renderConvergenceFlow(container) {
       .attr('opacity', 0.25);
 
     svg.append('path')
+      .attr('class', `conv-path-in conv-path-in-${i}`)
+      .attr('data-method-idx', i)
+      .attr('data-color', m.color)
       .attr('d', path.toString())
       .attr('fill', 'none')
       .attr('stroke', m.color)
@@ -1648,9 +1746,10 @@ function renderConvergenceFlow(container) {
   // ── Method nodes ──
   methods.forEach((m, i) => {
     const my = methodYs[i];
-    const mg = svg.append('g').attr('transform', `translate(${methodX}, ${my})`);
+    const mg = svg.append('g').attr('class', `conv-node conv-method conv-method-${i}`).attr('data-color', m.color).attr('transform', `translate(${methodX}, ${my})`);
 
     mg.append('rect')
+      .attr('class', 'conv-node-bg')
       .attr('x', -50).attr('y', -28)
       .attr('width', 100).attr('height', 56)
       .attr('rx', 10)
@@ -1689,6 +1788,9 @@ function renderConvergenceFlow(container) {
       .attr('opacity', 0.3);
 
     svg.append('path')
+      .attr('class', `conv-path-out conv-path-out-${i}`)
+      .attr('data-method-idx', i)
+      .attr('data-color', m.color)
       .attr('d', path.toString())
       .attr('fill', 'none')
       .attr('stroke', `url(#flow-grad-${m.id})`)
@@ -1717,6 +1819,7 @@ function renderConvergenceFlow(container) {
     .attr('opacity', 0.4);
 
   svg.append('path')
+    .attr('class', 'conv-path-merge')
     .attr('d', outPath.toString())
     .attr('fill', 'none')
     .attr('stroke', '#E2001A')
@@ -1725,8 +1828,9 @@ function renderConvergenceFlow(container) {
     .attr('filter', 'url(#flow-glow)');
 
   // ── Output node ──
-  const outputG = svg.append('g').attr('transform', `translate(${outputX}, ${centerY})`);
+  const outputG = svg.append('g').attr('class', 'conv-node conv-output').attr('transform', `translate(${outputX}, ${centerY})`);
   outputG.append('rect')
+    .attr('class', 'conv-node-bg')
     .attr('x', -70).attr('y', -55)
     .attr('width', 140).attr('height', 110)
     .attr('rx', 14)
@@ -1755,8 +1859,9 @@ function renderConvergenceFlow(container) {
   const avlColor = '#00C9A7';
 
   // AVL input node (below OBD)
-  const avlInputG = svg.append('g').attr('transform', `translate(${inputX}, ${avlY})`);
+  const avlInputG = svg.append('g').attr('class', 'conv-node conv-avl-input').attr('transform', `translate(${inputX}, ${avlY})`);
   avlInputG.append('rect')
+    .attr('class', 'conv-node-bg')
     .attr('x', -80).attr('y', -40)
     .attr('width', 160).attr('height', 80)
     .attr('rx', 14)
@@ -1778,8 +1883,9 @@ function renderConvergenceFlow(container) {
     .text(en ? 'Off-Board Reference' : 'Off-Board-Referenz');
 
   // AVL output node (below Kombiniert)
-  const avlOutputG = svg.append('g').attr('transform', `translate(${outputX}, ${avlY})`);
+  const avlOutputG = svg.append('g').attr('class', 'conv-node conv-avl-output').attr('transform', `translate(${outputX}, ${avlY})`);
   avlOutputG.append('rect')
+    .attr('class', 'conv-node-bg')
     .attr('x', -70).attr('y', -45)
     .attr('width', 140).attr('height', 90)
     .attr('rx', 14)
@@ -1814,6 +1920,8 @@ function renderConvergenceFlow(container) {
     .attr('opacity', 0.25);
 
   svg.append('path')
+    .attr('class', 'conv-path-avl')
+    .attr('data-color', avlColor)
     .attr('d', avlPath.toString())
     .attr('fill', 'none')
     .attr('stroke', avlColor)

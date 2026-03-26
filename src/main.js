@@ -9,6 +9,8 @@ import { initCharts } from './components/charts.js';
 import { initAnimations } from './components/animations.js';
 import { initDemoEmbed } from './components/demo-embed.js';
 import { initFlowchartGallery } from './components/flowchart-gallery.js';
+import QrCreator from 'qr-creator';
+import gsap from 'gsap';
 
 // KaTeX — local import (offline-first, no CDN)
 import renderMathInElement from 'katex/contrib/auto-render';
@@ -74,6 +76,24 @@ deck.initialize().then(() => {
 
   // Flowchart gallery (slide 20 — diagram selector)
   initFlowchartGallery().catch(err => console.warn('Flowchart gallery init failed:', err));
+
+  // Title slide QR code
+  try {
+    const qrCanvas = document.getElementById('title-qr-canvas');
+    const qrWrap = document.getElementById('title-qr');
+    if (qrCanvas && qrWrap) {
+      let qrUrl = window.location.origin;
+      const renderQR = () => {
+        QrCreator.render({ text: qrUrl, radius: 0.4, ecLevel: 'M', fill: getComputedStyle(document.body).getPropertyValue('--text-primary').trim() || '#e2e8f0', background: 'transparent', size: 140 }, qrCanvas);
+      };
+      fetch('/local-ip.json').then(r => r.json()).then(d => { if (d.ip) qrUrl = `http://${d.ip}:3000`; }).catch(() => {}).finally(() => {
+        renderQR();
+        gsap.to(qrWrap, { opacity: 1, duration: 3, delay: 5, ease: 'power2.inOut' });
+      });
+      // Re-render QR when theme changes
+      new MutationObserver(() => renderQR()).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    }
+  } catch (err) { console.warn('Title QR failed:', err); }
 
   // Apply default display settings
   if (s.display.defaultMode === 'defense') {

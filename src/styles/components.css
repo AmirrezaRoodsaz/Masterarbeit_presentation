@@ -1,3 +1,78 @@
+/* Title slide QR code — bottom right */
+.title-slide { position: relative; }
+.title-qr {
+  position: absolute;
+  bottom: calc(1rem - 30px);
+  right: 1rem;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.title-qr canvas {
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+.title-qr-label {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Agenda fragments — override Reveal.js default fragment hiding */
+.reveal .fragment.agenda-reveal {
+  visibility: visible !important;
+  opacity: 0.15;
+}
+.reveal .fragment.agenda-reveal.visible {
+  opacity: 1;
+}
+/* Glow on icon + title for the active (latest) card only */
+.reveal .fragment.agenda-reveal.agenda-active .agenda-icon {
+  animation: agenda-icon-glow 1.5s ease-in-out infinite alternate;
+  --glow-color: currentColor;
+}
+.reveal .fragment.agenda-reveal.agenda-active .agenda-title {
+  animation: agenda-text-glow 1.5s ease-in-out infinite alternate;
+}
+/* Per-card glow colors */
+.reveal .fragment.agenda-reveal:nth-child(1) { --glow-r: 226; --glow-g: 0; --glow-b: 26; }
+.reveal .fragment.agenda-reveal:nth-child(2) { --glow-r: 76; --glow-g: 154; --glow-b: 255; }
+.reveal .fragment.agenda-reveal:nth-child(3) { --glow-r: 0; --glow-g: 201; --glow-b: 167; }
+.reveal .fragment.agenda-reveal:nth-child(4) { --glow-r: 255; --glow-g: 184; --glow-b: 0; }
+.reveal .fragment.agenda-reveal:nth-child(5) { --glow-r: 159; --glow-g: 122; --glow-b: 234; }
+.reveal .fragment.agenda-reveal:nth-child(6) { --glow-r: 249; --glow-g: 115; --glow-b: 22; }
+@keyframes agenda-icon-glow {
+  0%   { filter: drop-shadow(0 0 6px rgba(var(--glow-r), var(--glow-g), var(--glow-b), 0.4)); }
+  50%  { filter: drop-shadow(0 0 14px rgba(var(--glow-r), var(--glow-g), var(--glow-b), 0.7)) drop-shadow(0 0 25px rgba(var(--glow-r), var(--glow-g), var(--glow-b), 0.3)); }
+  100% { filter: drop-shadow(0 0 8px rgba(var(--glow-r), var(--glow-g), var(--glow-b), 0.5)) drop-shadow(0 -3px 18px rgba(var(--glow-r), var(--glow-g), var(--glow-b), 0.25)); }
+}
+@keyframes agenda-text-glow {
+  0%   { text-shadow: 0 0 6px rgba(var(--glow-r), var(--glow-g), var(--glow-b), 0.3); }
+  50%  { text-shadow: 0 0 12px rgba(var(--glow-r), var(--glow-g), var(--glow-b), 0.6), 0 0 24px rgba(var(--glow-r), var(--glow-g), var(--glow-b), 0.2); }
+  100% { text-shadow: 0 0 8px rgba(var(--glow-r), var(--glow-g), var(--glow-b), 0.4); }
+}
+
+/* Cycle-reveal fragments (slide 3 pentagon) — override Reveal.js default */
+.reveal .fragment.cycle-reveal {
+  visibility: visible !important;
+  transition: none;
+}
+/* Slide-up fragments — slide in from below */
+.reveal .fragment.slide-up {
+  visibility: visible !important;
+  transition: none;
+}
+/* Slide-right fragments — slide in from right */
+.reveal .fragment.slide-right {
+  visibility: visible !important;
+  transition: none;
+}
+
+
 /* === Language Toggle === */
 /* Default: German visible, English hidden. When body.lang-en → swap. */
 /* Only target lang spans inside slides/sidebar, never the body itself */
@@ -533,7 +608,8 @@ body.lang-en .lang-en.block:not(body) { display: block !important; }
   border: 1.5px solid #8a8a7a;
   border-radius: 6px;
   padding: 0.8rem 1.6rem;
-  min-width: 260px;
+  width: 280px;
+  height: 10rem;
   overflow: hidden;
   box-shadow:
     inset 0 2px 6px rgba(0, 0, 0, 0.3),
@@ -622,11 +698,16 @@ body.lang-en .lang-en.block:not(body) { display: block !important; }
   color: #3a3f30;
   opacity: 0.4;
 }
-/* Main display area — empty until animation fills it */
+/* Main display area — fixed size, tip text shown on hover */
 .dash-trip-main {
   position: relative;
   z-index: 3;
-  min-height: 5.5rem;
+  padding-top: 0.4rem;
+  overflow: hidden;
+  flex: 1;
+}
+.dash-trip-main::-webkit-scrollbar {
+  display: none;
 }
 
 /* Slide-vehicles layout */
@@ -805,6 +886,7 @@ body.lang-en .lang-en.block:not(body) { display: block !important; }
 #slide-discharge .takeaway-box {
   max-width: 50%;
   width: 100%;
+  margin-top: -55px;
 }
 
 /* Slide-charging layout — gauge + chart side by side */
@@ -877,30 +959,9 @@ body.lang-en .lang-en.block:not(body) { display: block !important; }
   left: calc(100% + 8px);
 }
 
-/* Hover tooltip for step detail */
+/* Tip text is hidden in DOM — shown inside trip computer via JS */
 .dash-step-tip {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 0;
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: #f1f5f9;
-  font-size: 28px;
-  font-weight: 500;
-  white-space: nowrap;
-  padding: 8px 16px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s;
-  z-index: 10;
-}
-
-.dash-step-label:hover .dash-step-tip {
-  opacity: 1;
+  display: none;
 }
 
 .dash-step-label {
@@ -963,7 +1024,7 @@ body.lang-en .lang-en.block:not(body) { display: block !important; }
               width 0.45s cubic-bezier(0.4, 0, 0.2, 1),
               height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
               padding 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
+  overflow: auto;
   cursor: default;
   padding: 0.25rem 0;
 }
@@ -973,7 +1034,8 @@ body.lang-en .lang-en.block:not(body) { display: block !important; }
 .zoom-clone img {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
+  min-height: 100%;
   object-fit: contain;
 }
 .zoom-clone svg {
