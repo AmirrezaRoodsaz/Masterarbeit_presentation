@@ -6,7 +6,7 @@ import { createIcons, Keyboard, Monitor, Gamepad2, Settings, X, RotateCcw } from
 
 let modalEl = null;
 let isOpen = false;
-let activeTab = 'keyboard';
+let activeTab = 'display';
 let listeningFor = null; // { category, key } when capturing a new binding
 
 export function initSettingsModal() {
@@ -54,7 +54,12 @@ function createModalDOM() {
         </div>
       </div>
       <div class="settings-tabs">
-        <button class="settings-tab active" data-tab="keyboard">
+        <button class="settings-tab active" data-tab="display">
+          <i data-lucide="settings" style="width:16px;height:16px;"></i>
+          <span class="lang-de">Anzeige</span>
+          <span class="lang-en" hidden>Display</span>
+        </button>
+        <button class="settings-tab" data-tab="keyboard">
           <i data-lucide="keyboard" style="width:16px;height:16px;"></i>
           <span class="lang-de">Tastatur</span>
           <span class="lang-en" hidden>Keyboard</span>
@@ -66,11 +71,6 @@ function createModalDOM() {
         <button class="settings-tab" data-tab="gamepad">
           <i data-lucide="gamepad-2" style="width:16px;height:16px;"></i>
           <span>Gamepad</span>
-        </button>
-        <button class="settings-tab" data-tab="display">
-          <i data-lucide="settings" style="width:16px;height:16px;"></i>
-          <span class="lang-de">Anzeige</span>
-          <span class="lang-en" hidden>Display</span>
         </button>
       </div>
       <div class="settings-body" id="settings-body">
@@ -306,6 +306,15 @@ function renderDisplayTab() {
         <select id="display-mode" class="setting-select">
           <option value="browse" ${s.display.defaultMode === 'browse' ? 'selected' : ''}>Browse Mode</option>
           <option value="defense" ${s.display.defaultMode === 'defense' ? 'selected' : ''}>Defense Mode</option>
+        </select>
+      </div>
+      <div class="setting-row" style="opacity: 0.4; pointer-events: none;">
+        <label class="setting-label">
+          <span class="lang-de">Ansichtsmodus (in Arbeit)</span>
+          <span class="lang-en" hidden>View Mode (coming soon)</span>
+        </label>
+        <select id="display-viewmode" class="setting-select" disabled>
+          <option value="desktop" selected>Desktop</option>
         </select>
       </div>
       <div class="setting-row">

@@ -19,39 +19,39 @@ import 'katex/dist/katex.min.css';
 // Reveal.js core styles
 import 'reveal.js/dist/reveal.css';
 
+const s = getSettings();
+
 // Initialize Reveal.js
 const deck = Reveal({
   hash: true,
   hashOneBasedIndex: true,
   transition: 'fade',
   transitionSpeed: 'default',
-  embedded: true,          // Don't take over <body>; stay inside #main-area
-  controls: false,        // Custom nav shell replaces these
-  progress: false,        // Custom progress bar
-  slideNumber: false,     // Custom display
-  center: false,          // We manage layout ourselves
+  embedded: true,
+  controls: false,
+  progress: false,
+  slideNumber: false,
+  center: false,
   width: 1920,
   height: 1080,
   margin: 0,
   minScale: 0.2,
   maxScale: 1.5,
-  keyboard: false,         // Custom input-manager handles all keys
+  keyboard: false,
+  touch: false,
   plugins: [RevealNotes],
 });
-
-const s = getSettings();
 
 deck.initialize().then(() => {
   console.log('Reveal.js initialized');
 
-  // Initialize UI shell first (sidebar, input, settings, QR)
+  // Initialize UI shell (sidebar, input, settings, QR)
   initShell(deck);
   initInputManager(deck);
   initSettingsModal();
   initQrHub();
-  updateProgressBar();
 
-  // Render KaTeX equations (offline, no CDN) — after UI is ready
+  // Render KaTeX equations (lightweight, both modes)
   try {
     renderMathInElement(deck.getSlidesElement(), {
       delimiters: [
@@ -65,16 +65,11 @@ deck.initialize().then(() => {
     console.warn('KaTeX auto-render failed:', err);
   }
 
-  // Render D3.js charts (results slides 12–15)
+  updateProgressBar();
+
   initCharts().catch(err => console.warn('D3 charts init failed:', err));
-
-  // GSAP animations (pipeline slide 11 + fragment enhancements)
   initAnimations(deck);
-
-  // Streamlit demo embed (slide 17 — iframe or video fallback)
   initDemoEmbed().catch(err => console.warn('Demo embed init failed:', err));
-
-  // Flowchart gallery (slide 20 — diagram selector)
   initFlowchartGallery().catch(err => console.warn('Flowchart gallery init failed:', err));
 
   // Title slide QR code
@@ -91,7 +86,6 @@ deck.initialize().then(() => {
         const qrAnim = getSettings().display.animationsEnabled !== false;
         gsap.to(qrWrap, { opacity: 1, duration: qrAnim ? 2 : 0, delay: qrAnim ? 1.5 : 0, ease: 'power2.inOut' });
       });
-      // Re-render QR when theme changes
       new MutationObserver(() => renderQR()).observe(document.body, { attributes: true, attributeFilter: ['class'] });
     }
   } catch (err) { console.warn('Title QR failed:', err); }
@@ -101,6 +95,23 @@ deck.initialize().then(() => {
     document.body.classList.add('defense-mode');
   }
 });
+
+// Custom swipe handler — swipe right = forward, swipe left = backward
+(function initSwipe() {
+  let startX = 0;
+  const THRESHOLD = 50;
+
+  document.addEventListener('touchstart', (e) => {
+    startX = e.changedTouches[0].clientX;
+  }, { passive: true });
+
+  document.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) < THRESHOLD) return;
+    if (dx > 0) deck.next();
+    else deck.prev();
+  }, { passive: true });
+})();
 
 // Custom progress bar
 function updateProgressBar() {

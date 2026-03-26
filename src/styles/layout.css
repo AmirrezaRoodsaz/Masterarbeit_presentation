@@ -32,6 +32,41 @@ body.defense-mode #main-area {
   margin-left: 0;
 }
 
+/* Exit-defense tab — small arrow visible only in presentation mode */
+.defense-exit-tab {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 300;
+  width: 28px;
+  height: 60px;
+  border: none;
+  border-radius: 0 8px 8px 0;
+  background: var(--bg-surface, #1a1a2e);
+  color: var(--text-secondary, #999);
+  font-size: 16px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.2s, color 0.2s, opacity 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+  opacity: 0.7;
+}
+
+body.defense-mode .defense-exit-tab {
+  display: flex;
+}
+
+.defense-exit-tab:hover,
+.defense-exit-tab:active {
+  opacity: 1;
+  color: var(--text-primary, #fff);
+}
+
 /* Main area */
 #main-area {
   flex: 1;
@@ -211,4 +246,83 @@ body.defense-mode #main-area {
   color: var(--text-secondary);
   font-style: italic;
   min-height: 200px;
+}
+
+/* === Mobile Mode (Scroll View) === */
+
+/* Remove wrapper elements from layout so .reveal is effectively a direct child of body */
+body.mobile-mode #app-shell,
+body.mobile-mode #main-area {
+  display: contents;
+}
+
+body.mobile-mode .sidebar {
+  display: none;
+}
+
+/* Hide progress bar, section title, QR */
+body.mobile-mode #progress-container,
+body.mobile-mode #progress-car,
+body.mobile-mode #section-title,
+body.mobile-mode .title-qr { display: none; }
+
+/* Settings & QR panel go full-screen on mobile */
+body.mobile-mode .settings-overlay .settings-panel,
+body.mobile-mode .qr-overlay .qr-panel {
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  max-height: none;
+  border-radius: 0;
+}
+
+/* Floating settings button — bottom-right corner */
+.mobile-settings-btn {
+  display: none;
+  position: fixed;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  right: 16px;
+  z-index: 300;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+  padding: 0;
+}
+
+body.mobile-mode .mobile-settings-btn { display: flex; }
+.mobile-settings-btn svg { width: 20px; height: 20px; }
+.mobile-settings-btn:active { background: rgba(0, 0, 0, 0.7); }
+
+/* Mobile settings: no blur, bigger close button, scrollable body */
+body.mobile-mode .settings-overlay {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+body.mobile-mode .settings-panel {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+body.mobile-mode .settings-panel .settings-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg-surface);
+}
+
+body.mobile-mode .settings-close {
+  width: 44px;
+  height: 44px;
+}
+
+body.mobile-mode .settings-close svg {
+  width: 28px;
+  height: 28px;
 }

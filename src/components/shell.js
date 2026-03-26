@@ -60,6 +60,7 @@ export function initShell(deck) {
   // Update active section on slide change
   deck.on('slidechanged', () => updateActiveSection(deck));
   updateActiveSection(deck);
+
 }
 
 function buildSidebar(deck) {
@@ -130,6 +131,15 @@ function buildSidebar(deck) {
       deck.slide(idx);
     });
   });
+
+  // Defense mode exit tab (visible only in defense/presentation mode)
+  const exitTab = document.createElement('button');
+  exitTab.id = 'defense-exit-tab';
+  exitTab.className = 'defense-exit-tab';
+  exitTab.setAttribute('aria-label', 'Exit presentation mode');
+  exitTab.innerHTML = '&#x276F;'; // ❯
+  exitTab.addEventListener('click', toggleDefenseMode);
+  document.body.appendChild(exitTab);
 
   // Mode toggle
   document.getElementById('btn-mode')?.addEventListener('click', toggleDefenseMode);
@@ -258,3 +268,4 @@ function initLanguage() {
   // Listen for toggle event from input-manager
   document.addEventListener('toggle-language', toggleLanguage);
 }
+
