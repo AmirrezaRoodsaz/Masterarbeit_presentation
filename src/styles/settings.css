@@ -30,7 +30,7 @@
   display: flex;
   flex-direction: column;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-default);
 }
 
 /* Header */
@@ -39,7 +39,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .settings-header h2 {
@@ -66,7 +66,7 @@
   gap: 0.3rem;
   padding: 0.4rem 0.8rem;
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-medium);
   color: var(--text-secondary);
   font-size: var(--fs-small);
   font-family: var(--font-primary);
@@ -95,14 +95,14 @@
 }
 
 .settings-close:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--bg-hover);
   color: var(--text-primary);
 }
 
 /* Tabs */
 .settings-tabs {
   display: flex;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid var(--border-subtle);
   padding: 0 1rem;
 }
 
@@ -155,7 +155,7 @@
 }
 
 .binding-row:hover {
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-subtle);
 }
 
 .binding-label {
@@ -167,7 +167,7 @@
   min-width: 80px;
   padding: 0.4rem 0.8rem;
   background: var(--bg-primary);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--border-medium);
   border-radius: var(--border-radius-sm);
   color: var(--text-primary);
   font-family: var(--font-primary);
@@ -235,7 +235,7 @@
   position: absolute;
   cursor: pointer;
   inset: 0;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--bg-active);
   transition: var(--transition-fast);
   border-radius: 24px;
 }
@@ -276,7 +276,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.8rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .setting-label {
@@ -287,7 +287,7 @@
 .setting-select,
 .setting-input {
   background: var(--bg-primary);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--border-medium);
   border-radius: var(--border-radius-sm);
   color: var(--text-primary);
   font-family: var(--font-primary);
@@ -322,7 +322,7 @@
 .gamepad-live {
   margin-top: 1.5rem;
   padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid var(--border-subtle);
 }
 
 .gamepad-live h3 {
@@ -347,7 +347,7 @@
   text-align: center;
   color: var(--text-secondary);
   transition: all 100ms;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
 }
 
 .gamepad-btn-indicator.pressed {
@@ -391,7 +391,7 @@ body.blanked {
   padding: 0.5rem 1rem;
   border-radius: var(--border-radius);
   border: 2px solid transparent;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-subtle);
   color: var(--text-secondary);
   cursor: pointer;
   font-size: var(--fs-caption);
@@ -399,7 +399,7 @@ body.blanked {
 }
 
 .theme-option:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--bg-active);
   color: var(--text-primary);
 }
 

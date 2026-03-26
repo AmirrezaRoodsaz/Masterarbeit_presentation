@@ -25,7 +25,7 @@
   max-height: 85vh;
   overflow-y: auto;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-default);
   display: flex;
   flex-direction: column;
 }
@@ -37,11 +37,11 @@
   align-items: center;
   gap: 12px;
   padding: 20px 24px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .qr-header h2 {
-  font-family: var(--font-main);
+  font-family: var(--font-primary);
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--text-primary);
@@ -64,8 +64,8 @@
   font-size: 0.8rem;
   font-family: var(--font-mono, monospace);
   color: var(--text-secondary);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-default);
 }
 
 .qr-ip-badge svg {
@@ -95,7 +95,7 @@
 
 .qr-ip-edit:hover {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--bg-hover);
 }
 
 .qr-ip-edit svg {
@@ -115,7 +115,7 @@
 
 .qr-close:hover {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--bg-hover);
 }
 
 .qr-close svg {
@@ -158,7 +158,7 @@
 .qr-card {
   background: var(--bg-primary);
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
   padding: 16px;
   cursor: pointer;
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
@@ -275,7 +275,7 @@ a.qr-card-url svg {
 }
 
 .qr-zoomed-name {
-  font-family: var(--font-main);
+  font-family: var(--font-primary);
   font-size: 1.5rem;
   font-weight: 600;
   color: var(--text-primary);

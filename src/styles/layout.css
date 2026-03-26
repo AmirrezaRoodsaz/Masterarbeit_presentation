@@ -14,7 +14,7 @@
   width: var(--sidebar-width);
   height: 100vh;
   background: var(--bg-surface);
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  border-right: 1px solid var(--border-subtle);
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
@@ -22,14 +22,21 @@
   z-index: 100;
 }
 
-/* Defense mode: sidebar hidden */
+/* Defense mode: sidebar hidden, main area fills viewport */
 body.defense-mode .sidebar {
   transform: translateX(-100%);
   position: absolute;
+  left: 0;
+  top: 0;
 }
 
 body.defense-mode #main-area {
   margin-left: 0;
+  width: 100vw;
+}
+
+body.defense-mode #progress-container {
+  left: 0;
 }
 
 /* Exit-defense tab — small arrow visible only in presentation mode */
@@ -81,7 +88,7 @@ body.defense-mode .defense-exit-tab {
   left: 0;
   right: 0;
   height: var(--progress-height);
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-subtle);
   z-index: 200;
 }
 
@@ -237,7 +244,7 @@ body.defense-mode .defense-exit-tab {
 /* Placeholder styling (removed after Phase 3) */
 .placeholder {
   background: var(--bg-surface);
-  border: 2px dashed rgba(255, 255, 255, 0.1);
+  border: 2px dashed var(--border-medium);
   border-radius: var(--border-radius);
   padding: 2rem;
   display: flex;

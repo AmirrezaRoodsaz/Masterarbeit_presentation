@@ -44,6 +44,15 @@
   --transition-default: 300ms ease;
   --transition-slow: 500ms ease;
 
+  /* Borders & subtle backgrounds (dark-on-dark = white with opacity) */
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.15);
+  --bg-subtle: rgba(255, 255, 255, 0.05);
+  --bg-hover: rgba(255, 255, 255, 0.08);
+  --bg-active: rgba(255, 255, 255, 0.1);
+
   /* Shadows */
   --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
   --shadow-tooltip: 0 8px 32px rgba(0, 0, 0, 0.5);
@@ -72,6 +81,13 @@ body.theme-light {
   --chart-blue: #2b6cb0;
   --chart-green: #00997d;
   --chart-yellow: #cc9400;
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --border-default: rgba(0, 0, 0, 0.1);
+  --border-medium: rgba(0, 0, 0, 0.12);
+  --border-strong: rgba(0, 0, 0, 0.18);
+  --bg-subtle: rgba(0, 0, 0, 0.03);
+  --bg-hover: rgba(0, 0, 0, 0.06);
+  --bg-active: rgba(0, 0, 0, 0.1);
   --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.08);
   --shadow-tooltip: 0 8px 32px rgba(0, 0, 0, 0.12);
 }

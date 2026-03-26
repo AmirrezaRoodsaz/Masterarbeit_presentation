@@ -10,7 +10,7 @@
 
 .sidebar-header {
   padding: 0.5rem 1rem 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .sidebar-logos {
@@ -61,7 +61,7 @@ body.theme-light .sidebar-logo {
 }
 
 .nav-item:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-subtle);
   color: var(--text-primary);
 }
 
@@ -114,13 +114,13 @@ body.theme-light .sidebar-logo {
   font-size: var(--fs-small);
   cursor: pointer;
   text-align: left;
-  border-left: 2px solid rgba(255, 255, 255, 0.06);
+  border-left: 2px solid var(--border-subtle);
   transition: all var(--transition-fast);
 }
 
 .nav-sub-item:hover {
   color: var(--text-primary);
-  border-left-color: rgba(255, 255, 255, 0.2);
+  border-left-color: var(--border-strong);
 }
 
 .nav-sub-item.active {
@@ -132,7 +132,7 @@ body.theme-light .sidebar-logo {
 /* Sidebar footer */
 .sidebar-footer {
   padding: 0.75rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid var(--border-subtle);
 }
 
 .sidebar-controls {
@@ -156,7 +156,7 @@ body.theme-light .sidebar-logo {
 }
 
 .control-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--bg-hover);
   color: var(--text-primary);
 }
 
@@ -203,19 +203,4 @@ body.theme-light .sidebar-logo {
   50% { opacity: 0.5; }
 }
 
-/* === Defense Mode Overrides === */
-body.defense-mode .sidebar {
-  transform: translateX(-100%);
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-
-body.defense-mode #main-area {
-  width: 100vw;
-}
-
-/* Slide number overlay in defense mode */
-body.defense-mode #progress-container {
-  left: 0;
-}
+/* Defense mode overrides are consolidated in layout.css */

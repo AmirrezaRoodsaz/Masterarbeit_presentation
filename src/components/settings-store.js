@@ -43,7 +43,7 @@ const DEFAULT_SETTINGS = {
     defaultMode: 'browse',
     defaultLanguage: 'de',
     theme: 'light',
-    animationsEnabled: true,
+    animationsEnabled: false,
     viewMode: 'auto',
     timerTarget: 1200,
     timerWarning: 1080,

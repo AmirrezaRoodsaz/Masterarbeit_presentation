@@ -167,8 +167,8 @@ function renderMethodComparison(container, data) {
     // Color scheme
     let color;
     if (isCombined) color = accent;
-    else if (isRef) color = '#00C9A7';
-    else color = '#4C9AFF';
+    else if (isRef) color = getCSSVar('--success');
+    else color = getCSSVar('--chart-blue');
 
     // Y-axis label (short) — starts hidden, animates with stem
     g.append('text')
@@ -177,7 +177,7 @@ function renderMethodComparison(container, data) {
       .attr('y', cy)
       .attr('text-anchor', 'end')
       .attr('dominant-baseline', 'middle')
-      .attr('fill', isCombined ? accent : (isRef ? '#00C9A7' : getCSSVar('--text-primary')))
+      .attr('fill', isCombined ? accent : (isRef ? getCSSVar('--success') : getCSSVar('--text-primary')))
       .attr('font-size', '13px')
       .attr('font-weight', (isCombined || isRef) ? '700' : '600')
       .attr('opacity', 0)
@@ -1643,10 +1643,10 @@ function renderConvergenceFlow(container) {
   const height = 700;
 
   const methods = [
-    { id: 'sohe', label: 'SOH\u2091', value: '99,6 %', color: '#4C9AFF', type: en ? 'Energy-based' : 'Energiebasiert' },
-    { id: 'sohc', label: 'SOH\u1D04', value: '91,8 %', color: '#4C9AFF', type: en ? 'Capacity-based' : 'Kapazitätsbasiert' },
-    { id: 'cap',  label: 'SOH\u2096\u2090\u209A', value: '89,7 %', color: '#00C9A7', type: en ? 'Capacity-based' : 'Kapazitätsbasiert' },
-    { id: 'sohr', label: 'SOH\u1D3F', value: '100,0 %', color: '#FFB800', type: en ? 'Resistance-based' : 'Widerstandsbasiert' },
+    { id: 'sohe', label: 'SOH\u2091', value: '99,6 %', color: getCSSVar('--chart-blue'), type: en ? 'Energy-based' : 'Energiebasiert' },
+    { id: 'sohc', label: 'SOH\u1D04', value: '91,8 %', color: getCSSVar('--chart-blue'), type: en ? 'Capacity-based' : 'Kapazitätsbasiert' },
+    { id: 'cap',  label: 'SOH\u2096\u2090\u209A', value: '89,7 %', color: getCSSVar('--success'), type: en ? 'Capacity-based' : 'Kapazitätsbasiert' },
+    { id: 'sohr', label: 'SOH\u1D3F', value: '100,0 %', color: getCSSVar('--warning'), type: en ? 'Resistance-based' : 'Widerstandsbasiert' },
     { id: 'ica',  label: 'ICA', value: en ? 'Diagnostic' : 'Diagnostisch', color: '#9F7AEA', type: en ? 'Incremental' : 'Inkrementell' },
     { id: 'dva',  label: 'DVA', value: en ? 'Diagnostic' : 'Diagnostisch', color: '#9F7AEA', type: en ? 'Differential' : 'Differentiell' },
   ];
@@ -1674,7 +1674,7 @@ function renderConvergenceFlow(container) {
       .attr('id', `flow-grad-${m.id}`)
       .attr('x1', '0%').attr('x2', '100%');
     grad.append('stop').attr('offset', '0%').attr('stop-color', m.color).attr('stop-opacity', 0.6);
-    grad.append('stop').attr('offset', '100%').attr('stop-color', '#E2001A').attr('stop-opacity', 0.7);
+    grad.append('stop').attr('offset', '100%').attr('stop-color', getCSSVar('--accent')).attr('stop-opacity', 0.7);
   });
 
   // Glow filter
@@ -1700,12 +1700,12 @@ function renderConvergenceFlow(container) {
     .attr('width', 160).attr('height', 110)
     .attr('rx', 14)
     .attr('fill', 'rgba(76, 154, 255, 0.12)')
-    .attr('stroke', '#4C9AFF')
+    .attr('stroke', getCSSVar('--chart-blue'))
     .attr('stroke-width', 1.5);
   inputG.append('text')
     .attr('y', -8)
     .attr('text-anchor', 'middle')
-    .attr('fill', '#4C9AFF')
+    .attr('fill', getCSSVar('--chart-blue'))
     .attr('font-size', '16px')
     .attr('font-weight', '700')
     .text(en ? 'OBD Raw Data' : 'OBD-Rohdaten');
@@ -1814,7 +1814,7 @@ function renderConvergenceFlow(container) {
   svg.append('path')
     .attr('d', outPath.toString())
     .attr('fill', 'none')
-    .attr('stroke', '#E2001A')
+    .attr('stroke', getCSSVar('--accent'))
     .attr('stroke-width', 4)
     .attr('opacity', 0.4);
 
@@ -1822,7 +1822,7 @@ function renderConvergenceFlow(container) {
     .attr('class', 'conv-path-merge')
     .attr('d', outPath.toString())
     .attr('fill', 'none')
-    .attr('stroke', '#E2001A')
+    .attr('stroke', getCSSVar('--accent'))
     .attr('stroke-width', 2)
     .attr('opacity', 0.9)
     .attr('filter', 'url(#flow-glow)');
@@ -1835,7 +1835,7 @@ function renderConvergenceFlow(container) {
     .attr('width', 140).attr('height', 110)
     .attr('rx', 14)
     .attr('fill', 'rgba(226, 0, 26, 0.1)')
-    .attr('stroke', '#E2001A')
+    .attr('stroke', getCSSVar('--accent'))
     .attr('stroke-width', 2);
 
   outputG.append('text')
@@ -1849,14 +1849,14 @@ function renderConvergenceFlow(container) {
   outputG.append('text')
     .attr('y', 20)
     .attr('text-anchor', 'middle')
-    .attr('fill', '#E2001A')
+    .attr('fill', getCSSVar('--accent'))
     .attr('font-size', '28px')
     .attr('font-weight', '800')
     .text('95,7 %');
 
   // ── AVL reference branch (bottom) ──
   const avlY = centerY + 230;
-  const avlColor = '#00C9A7';
+  const avlColor = getCSSVar('--success');
 
   // AVL input node (below OBD)
   const avlInputG = svg.append('g').attr('class', 'conv-node conv-avl-input').attr('transform', `translate(${inputX}, ${avlY})`);
