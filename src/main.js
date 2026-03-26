@@ -88,7 +88,7 @@ deck.initialize().then(() => {
       };
       fetch('/local-ip.json').then(r => r.json()).then(d => { if (d.ip) qrUrl = `http://${d.ip}:3000`; }).catch(() => {}).finally(() => {
         renderQR();
-        gsap.to(qrWrap, { opacity: 1, duration: 3, delay: 5, ease: 'power2.inOut' });
+        gsap.to(qrWrap, { opacity: 1, duration: 2, delay: 1.5, ease: 'power2.inOut' });
       });
       // Re-render QR when theme changes
       new MutationObserver(() => renderQR()).observe(document.body, { attributes: true, attributeFilter: ['class'] });

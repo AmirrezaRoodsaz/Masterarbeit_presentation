@@ -210,7 +210,7 @@ Each phase: push main → create feature branch → implement → merge with app
 - [x] **Phase 12: Flowchart Gallery** — new section before Fazit with a dropdown selector showing all 39 PlantUML diagrams (30 Flowcharts + 9 Software Architecture) pre-rendered as SVGs. Select-and-show UI with grouped dropdown, full-size viewer with white background container.
 - [x] **Phase 16:** Entladung & Einladung protocol — discharge flowchart + CC-CV charging profile chart added as new methodology slides
 - [x] **Phase 13:** Slide-by-slide review & redesign — go through every slide from start to finish, control and redesign separately
-- [ ] **Phase 14:** Animation rework — user goes through all slides and provides a list of animation opportunities. Rework pipeline animation + add new animations based on that list.
+- [x] **Phase 14:** Animation rework — GSAP entry animations for slides 14, 15, 16 (Fehlerfall), 17 (Inter-System), 18 (ICA/DVA), 20 (Community), 24 (Stärken), 25 (Unsicherheit), 27 (Kernaussage), 28 (Ausblick). Auto-trigger first fragment on all slides so no slide is blank on entry. QR code delay reduced to 1.5s. All animations use GSAP inline styles to avoid CSS specificity conflicts.
 - [ ] **Phase 15:** Polish — visual consistency, responsive scaling, defense mode testing, projector resolution check
 - [ ] **Phase 16:** Speaker notes — German narration for each slide, timing cues, transition phrases
 - [ ] **Phase 17:** Fallbacks — PDF export, PPTX backup, demo video recording

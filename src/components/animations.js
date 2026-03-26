@@ -1801,6 +1801,19 @@ export function initAnimations(deck) {
     }
   });
 
+  // Auto-trigger first fragment on slide entry (no blank slides)
+  deck.on('slidechanged', (event) => {
+    const slide = event.currentSlide;
+    if (!slide) return;
+    // Only auto-trigger on forward navigation (no visible fragments yet)
+    const visibleFrags = slide.querySelectorAll('.fragment.visible');
+    const allFrags = slide.querySelectorAll('.fragment');
+    if (allFrags.length > 0 && visibleFrags.length === 0) {
+      // Small delay so slide transition finishes first
+      setTimeout(() => deck.nextFragment(), 300);
+    }
+  });
+
   // Trip computer — show step tip text on hover AND on fragment click (slides 10 & 11)
   function initTripComputer(slideId, displayId) {
     const display = document.getElementById(displayId);
