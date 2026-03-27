@@ -663,18 +663,26 @@ def step_launch(d, idx, lang):
 
     threading.Thread(target=open_browser, daemon=True).start()
 
-    # Final banner
+    # Final banner with URL modes
     w = 50
     print()
     print(f"  {'═' * w}")
     print(f"  {GREEN}{BOLD}\u2713 {m['ready']}{RESET} — {m['browser_auto']}")
     print(f"  {BOLD}Local:   {url}{RESET}")
     print(f"  {BOLD}Netzwerk:{RESET} {CYAN}{lan_url}{RESET}")
+    print(f"  {'─' * w}")
+    print(f"  {BOLD}URL-Modi{RESET}  {DIM}(im Browser eingeben){RESET}")
+    print()
+    print(f"    {YELLOW}{BOLD}P{RESET}  {CYAN}?presenter{RESET}            Speaker Notes (dann S)")
+    print(f"    {YELLOW}{BOLD}N{RESET}  {CYAN}?print-notes{RESET}          Druckbare Notizen")
+    print(f"    {YELLOW}{BOLD}I{RESET}  {CYAN}?presenter&follow{RESET}    iPad: Notizen + Auto-Sync")
     print()
     print(f"  {m['to_exit']} {YELLOW}Ctrl+C{RESET}")
     print(f"  {'═' * w}")
     print()
 
+    # Run Vite (stdin passed through — Vite's built-in shortcuts work:
+    # h+enter=help, r+enter=restart, u+enter=urls, o+enter=open, q+enter=quit)
     try:
         subprocess.run(
             [npx, "vite", "--host", "0.0.0.0", "--port", str(port)],

@@ -238,6 +238,20 @@ function renderGamepadTab() {
         <span class="slider"></span>
       </label>
     </div>
+    <div class="setting-toggle" style="margin-top:0.5rem;">
+      <label class="toggle-label">
+        <span class="lang-de">Stick: Notizen scrollen (Y-Achse)</span>
+        <span class="lang-en" hidden>Stick: Scroll notes (Y axis)</span>
+      </label>
+      <label class="switch">
+        <input type="checkbox" id="gamepad-scrollnotes" ${s.gamepad.stickScrollNotes ? 'checked' : ''}>
+        <span class="slider"></span>
+      </label>
+    </div>
+    <p class="setting-hint">
+      <span class="lang-de">Stick X-Achse = Folien, Stick Y-Achse = Notizen scrollen. Tasten oben frei belegbar.</span>
+      <span class="lang-en" hidden>Stick X axis = slides, Stick Y axis = scroll notes. Buttons above are fully customizable.</span>
+    </p>
     <div class="setting-row">
       <label class="setting-label">Deadzone</label>
       <input type="range" id="gamepad-deadzone" min="0.1" max="0.8" step="0.05" value="${s.gamepad.deadzone}">
@@ -249,7 +263,10 @@ function renderGamepadTab() {
   for (const [action, labels] of Object.entries(ACTION_LABELS.gamepad)) {
     const binding = s.gamepad[action];
     const isListening = listeningFor?.category === 'gamepad' && listeningFor?.key === action;
-    const btnName = binding?.index !== undefined ? (GAMEPAD_BUTTON_NAMES[binding.index] || `Button ${binding.index}`) : '—';
+    let btnName = '—';
+    if (binding && typeof binding === 'object' && binding.index !== undefined) {
+      btnName = GAMEPAD_BUTTON_NAMES[binding.index] || `Button ${binding.index}`;
+    }
     html += `
       <div class="binding-row">
         <span class="binding-label">${labels[lang]}</span>
@@ -351,6 +368,24 @@ function renderDisplayTab() {
         </label>
         <input type="number" id="display-timer-warning" class="setting-input" value="${warningMinutes}" min="1" max="120">
       </div>
+      <div class="url-cheatsheet">
+        <h3>
+          <span class="lang-de">URL-Modi</span>
+          <span class="lang-en" hidden>URL Modes</span>
+        </h3>
+        <div class="cheatsheet-grid">
+          <a class="cheatsheet-item cheatsheet-link" href="?print-notes" target="_blank" rel="noopener">
+            <code>?print-notes</code>
+            <span class="lang-de">Druckbare Notizen-Seite</span>
+            <span class="lang-en" hidden>Printable notes page</span>
+          </a>
+          <a class="cheatsheet-item cheatsheet-link" href="?presenter&follow" target="_blank" rel="noopener">
+            <code>?presenter&amp;follow</code>
+            <span class="lang-de">iPad: Notizen + Auto-Sync</span>
+            <span class="lang-en" hidden>iPad: Notes + auto-sync</span>
+          </a>
+        </div>
+      </div>
     </div>
   `;
 }
@@ -392,6 +427,10 @@ function bindTabEvents() {
 
   document.getElementById('gamepad-sticknav')?.addEventListener('change', (e) => {
     updateSettings('gamepad', 'stickNav', e.target.checked);
+  });
+
+  document.getElementById('gamepad-scrollnotes')?.addEventListener('change', (e) => {
+    updateSettings('gamepad', 'stickScrollNotes', e.target.checked);
   });
 
   // Deadzone slider

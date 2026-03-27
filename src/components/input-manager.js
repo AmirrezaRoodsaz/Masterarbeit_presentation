@@ -45,12 +45,6 @@ function dispatch(action) {
     case 'prevSlide':
       deck.prev();
       break;
-    case 'nextFragment':
-      deck.next();
-      break;
-    case 'prevFragment':
-      deck.prev();
-      break;
     case 'firstSlide':
       deck.slide(0);
       break;
@@ -96,6 +90,15 @@ function dispatch(action) {
       if (prev !== undefined) deck.slide(prev);
       break;
     }
+    case 'scrollNotesUp':
+      document.dispatchEvent(new CustomEvent('gamepad-scroll-notes', { detail: { delta: -120 } }));
+      break;
+    case 'scrollNotesDown':
+      document.dispatchEvent(new CustomEvent('gamepad-scroll-notes', { detail: { delta: 120 } }));
+      break;
+    case 'speakerView':
+      document.dispatchEvent(new CustomEvent('open-speaker-view'));
+      break;
   }
 }
 
@@ -126,6 +129,7 @@ function initKeyboardHandler() {
 
     // Check keyboard bindings
     for (const [action, boundKey] of Object.entries(s.keyboard)) {
+      if (!boundKey) continue;
       if (key === boundKey || key.toLowerCase() === boundKey) {
         e.preventDefault();
         dispatch(action);
@@ -205,7 +209,7 @@ function pollGamepad() {
       }
     }
 
-    // Stick navigation (left stick X axis)
+    // Stick navigation (left stick X axis → slide nav)
     if (s.gamepad.stickNav) {
       const now = Date.now();
       const axisX = gp.axes[0] || 0;
@@ -213,6 +217,16 @@ function pollGamepad() {
         if (axisX > s.gamepad.deadzone) dispatch('nextSlide');
         if (axisX < -s.gamepad.deadzone) dispatch('prevSlide');
         lastStickTime = now;
+      }
+    }
+
+    // Stick scroll (left stick Y axis → scroll speaker notes)
+    if (s.gamepad.stickScrollNotes) {
+      const axisY = gp.axes[1] || 0;
+      if (Math.abs(axisY) > s.gamepad.deadzone) {
+        document.dispatchEvent(new CustomEvent('gamepad-scroll-notes', {
+          detail: { delta: axisY * (s.gamepad.scrollSpeed || 80) },
+        }));
       }
     }
 

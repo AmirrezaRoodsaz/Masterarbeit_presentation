@@ -638,7 +638,7 @@ function renderResistance(container, data) {
 
   const barData = [
     { label: en ? 'Charging' : 'Laden', value: v.r_charge_mohm, sub: 'R_i,charge' },
-    { label: en ? 'Discharging' : 'Entladen', value: v.r_discharge_mohm, sub: 'R_i,discharge' },
+    { label: en ? 'Relaxation' : 'Relaxation', value: v.r_discharge_mohm, sub: 'R_i,relaxation' },
   ];
 
   const svg = d3.select(container)

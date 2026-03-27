@@ -9,6 +9,7 @@ import { initCharts } from './components/charts.js';
 import { initAnimations } from './components/animations.js';
 import { initDemoEmbed } from './components/demo-embed.js';
 import { initFlowchartGallery } from './components/flowchart-gallery.js';
+import { initNotesLoader } from './components/notes-loader.js';
 import QrCreator from 'qr-creator';
 import gsap from 'gsap';
 
@@ -18,6 +19,16 @@ import 'katex/dist/katex.min.css';
 
 // Reveal.js core styles
 import 'reveal.js/dist/reveal.css';
+
+// Auto-enable presenter mode if no mode params are set
+if (!window.location.search.includes('presenter') &&
+    !window.location.search.includes('print-notes') &&
+    !window.location.search.includes('follow') &&
+    !window.location.search.includes('receiver')) {
+  const url = new URL(window.location);
+  url.searchParams.set('presenter', '');
+  window.location.replace(url);
+}
 
 const s = getSettings();
 
@@ -71,6 +82,7 @@ deck.initialize().then(() => {
   initAnimations(deck);
   initDemoEmbed().catch(err => console.warn('Demo embed init failed:', err));
   initFlowchartGallery().catch(err => console.warn('Flowchart gallery init failed:', err));
+  initNotesLoader(deck);
 
   // Title slide QR code
   try {
@@ -81,14 +93,25 @@ deck.initialize().then(() => {
       const renderQR = () => {
         QrCreator.render({ text: qrUrl, radius: 0.4, ecLevel: 'M', fill: getComputedStyle(document.body).getPropertyValue('--text-primary').trim() || '#e2e8f0', background: 'transparent', size: 140 }, qrCanvas);
       };
+      const isReceiver = /[?&]receiver\b/.test(window.location.search);
       fetch('/local-ip.json').then(r => r.json()).then(d => { if (d.ip) qrUrl = `http://${d.ip}:3000`; }).catch(() => {}).finally(() => {
         renderQR();
-        const qrAnim = getSettings().display.animationsEnabled !== false;
+        const qrAnim = !isReceiver && getSettings().display.animationsEnabled !== false;
         gsap.to(qrWrap, { opacity: 1, duration: qrAnim ? 2 : 0, delay: qrAnim ? 1.5 : 0, ease: 'power2.inOut' });
       });
       new MutationObserver(() => renderQR()).observe(document.body, { attributes: true, attributeFilter: ['class'] });
     }
   } catch (err) { console.warn('Title QR failed:', err); }
+
+  // Speaker view iframes: hide sidebar + UI chrome so previews show only slides
+  if (/[?&]receiver\b/.test(window.location.search)) {
+    document.body.classList.add('defense-mode');
+    // Hide progress bar, section title, defense-exit tab
+    const hide = (sel) => { const el = document.querySelector(sel); if (el) el.style.display = 'none'; };
+    hide('#progress-container');
+    hide('#section-title');
+    hide('.defense-exit-tab');
+  }
 
   // Apply default display settings
   if (s.display.defaultMode === 'defense') {

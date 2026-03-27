@@ -416,3 +416,66 @@ body.blanked {
   border-radius: 50%;
   flex-shrink: 0;
 }
+
+/* URL cheat sheet */
+.url-cheatsheet {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.url-cheatsheet h3 {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+
+.cheatsheet-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cheatsheet-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--border-radius-sm);
+  background: var(--bg-subtle);
+}
+
+.cheatsheet-item code {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-medium);
+  border-radius: 4px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.cheatsheet-item span {
+  font-size: var(--fs-small);
+  color: var(--text-secondary);
+}
+
+a.cheatsheet-link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+a.cheatsheet-link:hover {
+  background: var(--bg-active);
+}
+
+a.cheatsheet-link:hover code {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}

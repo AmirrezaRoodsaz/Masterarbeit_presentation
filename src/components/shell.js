@@ -214,6 +214,29 @@ function initTimer() {
   // Don't auto-restore from sessionStorage — it can get stale and hide the sidebar.
 }
 
+/** Broadcast timer state to any listening speaker view popups */
+function broadcastTimerState() {
+  const ts = getSettings();
+  document.dispatchEvent(new CustomEvent('timer-sync', {
+    detail: {
+      seconds: timerSeconds,
+      running: timerRunning,
+      warning: timerSeconds >= ts.display.timerWarning && timerSeconds < ts.display.timerTarget,
+      overtime: timerSeconds >= ts.display.timerTarget,
+    },
+  }));
+}
+
+export function getTimerState() {
+  const ts = getSettings();
+  return {
+    seconds: timerSeconds,
+    running: timerRunning,
+    warning: timerSeconds >= ts.display.timerWarning && timerSeconds < ts.display.timerTarget,
+    overtime: timerSeconds >= ts.display.timerTarget,
+  };
+}
+
 export function toggleTimer() {
   const display = document.getElementById('timer-display');
   if (!display) return;
@@ -222,6 +245,7 @@ export function toggleTimer() {
     clearInterval(timerInterval);
     timerRunning = false;
     display.classList.remove('running');
+    broadcastTimerState();
   } else {
     display.hidden = false;
     timerRunning = true;
@@ -239,7 +263,10 @@ export function toggleTimer() {
       } else if (timerSeconds >= ts.display.timerWarning) {
         display.classList.add('warning');
       }
+
+      broadcastTimerState();
     }, 1000);
+    broadcastTimerState();
   }
 }
 

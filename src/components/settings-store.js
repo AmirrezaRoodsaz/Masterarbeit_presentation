@@ -7,18 +7,19 @@ const STORAGE_KEY = 'presentation-settings';
 
 const DEFAULT_SETTINGS = {
   keyboard: {
+    nextSlide: 'ArrowRight',
+    prevSlide: 'ArrowLeft',
+    scrollNotesUp: 'ArrowUp',
+    scrollNotesDown: 'ArrowDown',
+    firstSlide: 'Home',
+    lastSlide: 'End',
     defenseMode: 'd',
     timer: 't',
     language: 'l',
     qrHub: 'q',
     settings: ',',
-    nextSlide: 'ArrowRight',
-    prevSlide: 'ArrowLeft',
-    nextFragment: 'ArrowDown',
-    prevFragment: 'ArrowUp',
-    firstSlide: 'Home',
-    lastSlide: 'End',
     blank: 'b',
+    speakerView: 's',
   },
   presenter: {
     enabled: true,
@@ -29,13 +30,24 @@ const DEFAULT_SETTINGS = {
   },
   gamepad: {
     enabled: false,
-    nextSlide: { type: 'button', index: 0 },      // A / Cross
-    prevSlide: { type: 'button', index: 1 },       // B / Circle
-    nextSection: { type: 'button', index: 5 },     // RB / R1
-    prevSection: { type: 'button', index: 4 },     // LB / L1
-    defenseMode: { type: 'button', index: 3 },     // Y / Triangle
-    timer: { type: 'button', index: 2 },           // X / Square
-    stickNav: true,                                 // left stick for navigation
+    nextSlide: { type: 'button', index: 13 },      // D-Pad ↓
+    prevSlide: { type: 'button', index: 12 },       // D-Pad ↑
+    scrollNotesUp: { type: 'button', index: 14 },   // D-Pad ←
+    scrollNotesDown: { type: 'button', index: 15 }, // D-Pad →
+    nextSection: { type: 'button', index: 5 },      // RB / R1
+    prevSection: { type: 'button', index: 7 },      // RT / R2
+    defenseMode: { type: 'button', index: 3 },      // Y / Triangle
+    timer: { type: 'button', index: 0 },            // A / Cross
+    language: { type: 'button', index: 1 },          // B / Circle
+    qrHub: { type: 'button', index: 2 },             // X / Square
+    settings: null,
+    blank: null,
+    firstSlide: { type: 'button', index: 6 },       // LT / L2
+    lastSlide: { type: 'button', index: 4 },         // LB / L1
+    speakerView: null,
+    stickNav: true,                                 // left stick X axis for slide navigation
+    stickScrollNotes: true,                         // left stick Y axis scrolls speaker notes
+    scrollSpeed: 80,                                // pixels per frame when stick is pushed
     deadzone: 0.3,
     repeatDelay: 400,                               // ms before stick-repeat
   },
@@ -45,26 +57,27 @@ const DEFAULT_SETTINGS = {
     theme: 'light',
     animationsEnabled: false,
     viewMode: 'auto',
-    timerTarget: 1200,
-    timerWarning: 1080,
+    timerTarget: 1800,
+    timerWarning: 1620,
   },
 };
 
 // Action labels for the settings UI
 export const ACTION_LABELS = {
   keyboard: {
+    nextSlide: { de: 'Nächste Folie', en: 'Next Slide' },
+    prevSlide: { de: 'Vorherige Folie', en: 'Previous Slide' },
+    scrollNotesUp: { de: 'Notizen hoch', en: 'Scroll Notes Up' },
+    scrollNotesDown: { de: 'Notizen runter', en: 'Scroll Notes Down' },
+    firstSlide: { de: 'Erste Folie', en: 'First Slide' },
+    lastSlide: { de: 'Letzte Folie', en: 'Last Slide' },
     defenseMode: { de: 'Präsentationsmodus', en: 'Defense Mode' },
     timer: { de: 'Timer ein/aus', en: 'Toggle Timer' },
     language: { de: 'Sprache wechseln', en: 'Toggle Language' },
     qrHub: { de: 'QR-Code Hub', en: 'QR Code Hub' },
     settings: { de: 'Einstellungen', en: 'Settings' },
-    nextSlide: { de: 'Nächste Folie', en: 'Next Slide' },
-    prevSlide: { de: 'Vorherige Folie', en: 'Previous Slide' },
-    nextFragment: { de: 'Nächstes Fragment', en: 'Next Fragment' },
-    prevFragment: { de: 'Vorheriges Fragment', en: 'Previous Fragment' },
-    firstSlide: { de: 'Erste Folie', en: 'First Slide' },
-    lastSlide: { de: 'Letzte Folie', en: 'Last Slide' },
     blank: { de: 'Bildschirm schwarz', en: 'Blank Screen' },
+    speakerView: { de: 'Speaker View öffnen', en: 'Open Speaker View' },
   },
   presenter: {
     nextSlide: { de: 'Nächste Folie', en: 'Next Slide' },
@@ -75,15 +88,25 @@ export const ACTION_LABELS = {
   gamepad: {
     nextSlide: { de: 'Nächste Folie', en: 'Next Slide' },
     prevSlide: { de: 'Vorherige Folie', en: 'Previous Slide' },
+    scrollNotesUp: { de: 'Notizen hoch', en: 'Scroll Notes Up' },
+    scrollNotesDown: { de: 'Notizen runter', en: 'Scroll Notes Down' },
     nextSection: { de: 'Nächster Abschnitt', en: 'Next Section' },
     prevSection: { de: 'Vorheriger Abschnitt', en: 'Previous Section' },
     defenseMode: { de: 'Präsentationsmodus', en: 'Defense Mode' },
     timer: { de: 'Timer ein/aus', en: 'Toggle Timer' },
+    language: { de: 'Sprache wechseln', en: 'Toggle Language' },
+    qrHub: { de: 'QR-Code Hub', en: 'QR Code Hub' },
+    settings: { de: 'Einstellungen', en: 'Settings' },
+    blank: { de: 'Bildschirm schwarz', en: 'Blank Screen' },
+    firstSlide: { de: 'Erste Folie', en: 'First Slide' },
+    lastSlide: { de: 'Letzte Folie', en: 'Last Slide' },
+    speakerView: { de: 'Speaker View öffnen', en: 'Open Speaker View' },
   },
 };
 
 // Human-readable key names
 export function formatKey(key) {
+  if (!key) return '—';
   const MAP = {
     ArrowRight: '→', ArrowLeft: '←', ArrowUp: '↑', ArrowDown: '↓',
     PageDown: 'Page ↓', PageUp: 'Page ↑',

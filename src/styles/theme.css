@@ -76,6 +76,18 @@ html, body {
   margin-bottom: 0.8em;
   border-bottom: 2px solid var(--accent);
   padding-bottom: 0.3em;
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+.reveal h2::after {
+  content: '';
+  flex-shrink: 0;
+  margin-left: auto;
+  width: 224px;
+  height: 58px;
+  background: url('/assets/images/logos/Institut_Logo.png') no-repeat center / contain;
 }
 
 .reveal h3 {

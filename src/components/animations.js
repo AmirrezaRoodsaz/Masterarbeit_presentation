@@ -4,7 +4,15 @@
 import gsap from 'gsap';
 import { getSettings } from './settings-store.js';
 
+// Prevent GSAP from fast-forwarding animations when the window regains focus
+// (e.g. after clicking on the speaker view popup and back)
+gsap.ticker.lagSmoothing(500, 33);
+
+// Speaker view iframes load with ?receiver — always disable animations there
+const isSpeakerViewIframe = /[?&]receiver\b/.test(window.location.search);
+
 function animationsEnabled() {
+  if (isSpeakerViewIframe) return false;
   return getSettings().display.animationsEnabled !== false;
 }
 
@@ -1807,17 +1815,20 @@ export function initAnimations(deck) {
   });
 
   // Auto-trigger first fragment on slide entry (no blank slides)
-  deck.on('slidechanged', (event) => {
-    const slide = event.currentSlide;
-    if (!slide) return;
-    // Only auto-trigger on forward navigation (no visible fragments yet)
-    const visibleFrags = slide.querySelectorAll('.fragment.visible');
-    const allFrags = slide.querySelectorAll('.fragment');
-    if (allFrags.length > 0 && visibleFrags.length === 0) {
-      // Small delay so slide transition finishes first
-      setTimeout(() => deck.nextFragment(), 300);
-    }
-  });
+  // Skip in receiver iframes — their fragment events would sync back to the main window
+  if (!isSpeakerViewIframe) {
+    deck.on('slidechanged', (event) => {
+      const slide = event.currentSlide;
+      if (!slide) return;
+      // Only auto-trigger on forward navigation (no visible fragments yet)
+      const visibleFrags = slide.querySelectorAll('.fragment.visible');
+      const allFrags = slide.querySelectorAll('.fragment');
+      if (allFrags.length > 0 && visibleFrags.length === 0) {
+        // Small delay so slide transition finishes first
+        setTimeout(() => deck.nextFragment(), 300);
+      }
+    });
+  }
 
   // Trip computer — show step tip text on hover AND on fragment click (slides 10 & 11)
   function initTripComputer(slideId, displayId) {
@@ -2290,8 +2301,14 @@ export function initAnimations(deck) {
   // Enhance fragment transitions
   initFragmentAnimations(deck);
 
-  // Boot-time check — if animations were disabled in a previous session
-  if (!animationsEnabled()) {
+  // Boot-time check
+  if (isSpeakerViewIframe) {
+    // In receiver iframes: show final visual states but do NOT disable Reveal.js
+    // fragments — disabling fragments changes the state, which the speaker view
+    // popup would sync back to the main window, breaking animations there.
+    showAllFinalStates();
+  } else if (!animationsEnabled()) {
+    // User disabled animations in settings — full disable including fragments
     disableAnimations();
   }
 }
