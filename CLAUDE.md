@@ -211,11 +211,11 @@ Each phase: push main → create feature branch → implement → merge with app
 - [x] **Phase 16:** Entladung & Einladung protocol — discharge flowchart + CC-CV charging profile chart added as new methodology slides
 - [x] **Phase 13:** Slide-by-slide review & redesign — go through every slide from start to finish, control and redesign separately
 - [x] **Phase 14:** Animation rework — GSAP entry animations for slides 14, 15, 16 (Fehlerfall), 17 (Inter-System), 18 (ICA/DVA), 20 (Community), 24 (Stärken), 25 (Unsicherheit), 27 (Kernaussage), 28 (Ausblick). Auto-trigger first fragment on all slides so no slide is blank on entry. QR code delay reduced to 1.5s. All animations use GSAP inline styles to avoid CSS specificity conflicts.
-- [ ] **Phase 14a:** Animation on/off toggle in settings
-- [ ] **Phase 14b:** Desktop/mobile mode toggle in settings
-- [ ] **Phase 15:** Polish — visual consistency, responsive scaling, defense mode testing, projector resolution check
-- [ ] **Phase 16:** Speaker notes — German narration for each slide, timing cues, transition phrases
-- [ ] **Phase 17:** Fallbacks — PDF export, PPTX backup, demo video recording
+- [x] **Phase 14a:** Animation on/off toggle in settings
+- [x] **Phase 14b:** Desktop/mobile mode toggle in settings, touch swipe, defense exit tab
+- [x] **Phase 15:** Visual polish — theme-aware CSS variables, light theme fixes, responsive scaling
+- [x] **Phase 16:** Speaker view — notes system, resizable panels, timer sync, presenter mode default, header logos
+- [ ] **Phase 17:** Fallbacks — PDF export, PPTX backup (sidebar buttons, client-side html2canvas + jsPDF + PptxGenJS)
 - [ ] **Phase 18:** Verify institutional requirements — time limit, language, required elements (logo, declaration), Q&A format
 - [ ] **Phase 19:** Distill core contribution — one sentence: *"This thesis demonstrates that ___ by ___, resulting in ___"*
 

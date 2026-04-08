@@ -1,7 +1,7 @@
 /**
  * Navigation Shell — sidebar, section navigation, progress bar
  */
-import { createIcons, BookOpen, Zap, Beaker, Wrench, BarChart3, MessageSquare, Target, QrCode, Languages, Timer, Monitor, Presentation, Settings, Workflow } from 'lucide';
+import { createIcons, BookOpen, Zap, Beaker, Wrench, BarChart3, MessageSquare, Target, QrCode, Languages, Timer, Monitor, Presentation, Settings, Workflow, Download } from 'lucide';
 import { getSettings } from './settings-store.js';
 
 // Section definitions matching the slide structure
@@ -104,6 +104,9 @@ function buildSidebar(deck) {
       <button id="btn-qr" class="control-btn" title="QR Code Hub (Q)">
         <i data-lucide="qr-code"></i>
       </button>
+      <button id="btn-export" class="control-btn" title="Export (PDF / PPTX)">
+        <i data-lucide="download"></i>
+      </button>
       <button id="btn-lang" class="control-btn" title="Sprache / Language (L)">
         <i data-lucide="languages"></i>
         <span class="lang-indicator">DE</span>
@@ -155,9 +158,14 @@ function buildSidebar(deck) {
     document.dispatchEvent(new CustomEvent('toggle-settings'));
   });
 
+  // Export modal
+  document.getElementById('btn-export')?.addEventListener('click', () => {
+    document.dispatchEvent(new CustomEvent('toggle-export-modal'));
+  });
+
   // Initialize Lucide icons
   createIcons({
-    icons: { BookOpen, Zap, Beaker, Wrench, BarChart3, MessageSquare, Target, QrCode, Languages, Timer, Monitor, Presentation, Settings, Workflow },
+    icons: { BookOpen, Zap, Beaker, Wrench, BarChart3, MessageSquare, Target, QrCode, Languages, Timer, Monitor, Presentation, Settings, Workflow, Download },
   });
 
   // Update slide counter

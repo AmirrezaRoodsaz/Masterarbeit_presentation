@@ -9,13 +9,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "reveal.js": "^5.2.1",
     "d3": "^7.9.0",
     "gsap": "^3.12.7",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.2.1",
     "katex": "^0.16.21",
-    "mermaid": "^11.4.1",
     "lucide": "^0.469.0",
-    "qr-creator": "^1.0.0"
+    "mermaid": "^11.4.1",
+    "pptxgenjs": "^4.0.1",
+    "qr-creator": "^1.0.0",
+    "reveal.js": "^5.2.1"
   },
   "devDependencies": {
     "vite": "^6.2.2"

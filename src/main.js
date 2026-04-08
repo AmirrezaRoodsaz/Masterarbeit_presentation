@@ -10,6 +10,7 @@ import { initAnimations } from './components/animations.js';
 import { initDemoEmbed } from './components/demo-embed.js';
 import { initFlowchartGallery } from './components/flowchart-gallery.js';
 import { initNotesLoader } from './components/notes-loader.js';
+import { initExporter } from './components/exporter.js';
 import QrCreator from 'qr-creator';
 import gsap from 'gsap';
 
@@ -83,6 +84,7 @@ deck.initialize().then(() => {
   initDemoEmbed().catch(err => console.warn('Demo embed init failed:', err));
   initFlowchartGallery().catch(err => console.warn('Flowchart gallery init failed:', err));
   initNotesLoader(deck);
+  initExporter(deck);
 
   // Title slide QR code
   try {
