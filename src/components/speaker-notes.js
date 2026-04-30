@@ -544,7 +544,7 @@ export const SPEAKER_NOTES = {
   },
 
   'slide-temperature': {
-    time: '10:00 – 10:45 (45 s)',
+    time: 'Backup (temperature effect demoted in Phase 20 — last backup slide)',
     bullets: {
       de: [
         'Slope-Chart: Session A (19°C) vs. Session B (9,8°C)',

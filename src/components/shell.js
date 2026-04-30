@@ -31,19 +31,18 @@ const SECTIONS = [
   { id: 'results', label: 'Ergebnisse', label_en: 'Results', icon: 'bar-chart-3', slideIndex: 12, subs: [
     { label: 'Methodenvergleich', label_en: 'Method Comparison', slideIndex: 12 },
     { label: 'Reproduzierbarkeit', label_en: 'Reproducibility', slideIndex: 13 },
-    { label: 'Temperatureffekt', label_en: 'Temperature Effect', slideIndex: 14 },
-    { label: 'ICA/DVA', label_en: 'ICA/DVA', slideIndex: 18 },
-    { label: 'Demo (Pro)', label_en: 'Demo (Pro)', slideIndex: 20 },
-    { label: 'Demo (Easy)', label_en: 'Demo (Easy)', slideIndex: 21 },
+    { label: 'ICA/DVA', label_en: 'ICA/DVA', slideIndex: 17 },
+    { label: 'Demo (Pro)', label_en: 'Demo (Pro)', slideIndex: 19 },
+    { label: 'Demo (Easy)', label_en: 'Demo (Easy)', slideIndex: 20 },
   ]},
-  { id: 'discussion', label: 'Diskussion & Fazit', label_en: 'Discussion & Conclusion', icon: 'target', slideIndex: 22, subs: [
-    { label: 'Stärken & Reflexion', label_en: 'Strengths & Reflection', slideIndex: 22 },
-    { label: 'Kernaussage', label_en: 'Core Finding', slideIndex: 24 },
-    { label: 'Ausblick', label_en: 'Outlook', slideIndex: 25 },
-    { label: 'Danke', label_en: 'Thanks', slideIndex: 26 },
+  { id: 'discussion', label: 'Diskussion & Fazit', label_en: 'Discussion & Conclusion', icon: 'target', slideIndex: 21, subs: [
+    { label: 'Stärken & Reflexion', label_en: 'Strengths & Reflection', slideIndex: 21 },
+    { label: 'Kernaussage', label_en: 'Core Finding', slideIndex: 23 },
+    { label: 'Ausblick', label_en: 'Outlook', slideIndex: 24 },
+    { label: 'Danke', label_en: 'Thanks', slideIndex: 25 },
   ]},
-  { id: 'flowcharts', label: 'Diagramme (Q&A)', label_en: 'Diagrams (Q&A)', icon: 'workflow', slideIndex: 27, subs: [
-    { label: 'Galerie', label_en: 'Gallery', slideIndex: 27 },
+  { id: 'flowcharts', label: 'Diagramme (Q&A)', label_en: 'Diagrams (Q&A)', icon: 'workflow', slideIndex: 26, subs: [
+    { label: 'Galerie', label_en: 'Gallery', slideIndex: 26 },
   ]},
 ];
 

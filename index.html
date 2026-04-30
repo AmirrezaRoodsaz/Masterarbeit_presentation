@@ -1226,58 +1226,7 @@
           </section>
 
           <!-- Slide 14: Temperature effect -->
-          <section id="slide-temperature" data-section="results">
-            <h2>
-              <span class="lang-de">Gegenläufige Temperatureffekte heben sich im kombinierten SOH fast perfekt auf</span>
-              <span class="lang-en" hidden>Opposing temperature effects nearly perfectly cancel in the combined SOH</span>
-            </h2>
-            <div class="slide-content">
-              <div class="evidence-area">
-                <div class="temp-layout">
-                  <div class="chart-container zoomable-image" id="chart-temperature">
-                    <!-- D3 slope chart -->
-                  </div>
-                  <div class="temp-annotations">
-                    <div class="method-annotations-header">
-                      <span class="lang-de">Temperatureffekt</span>
-                      <span class="lang-en" hidden>Temperature Effect</span>
-                    </div>
-                    <div class="method-note">
-                      <span class="method-note-dot" style="background:var(--chart-blue)"></span>
-                      <div>
-                        <strong>SOH<sub>e</sub> +1,2 Pp</strong>
-                        <span class="lang-de"> — BMS meldet bei Kälte marginal höheren Energiegehalt</span>
-                        <span class="lang-en" hidden> — BMS reports marginally higher energy content in cold</span>
-                      </div>
-                    </div>
-                    <div class="method-note">
-                      <span class="method-note-dot" style="background:var(--chart-yellow)"></span>
-                      <div>
-                        <strong>SOH<sub>c</sub> −1,3 Pp</strong>
-                        <span class="lang-de"> — langsamere Ladung bei Kälte erhöht den Integrationsfehler</span>
-                        <span class="lang-en" hidden> — slower charging in cold increases integration error</span>
-                      </div>
-                    </div>
-                    <div class="method-note">
-                      <span class="method-note-dot" style="background:var(--accent)"></span>
-                      <div>
-                        <strong><span class="lang-de">Kombiniert −0,1 Pp</span><span class="lang-en" hidden>Combined −0.1 pp</span></strong>
-                        <span class="lang-de"> — gegenläufige Effekte kompensieren sich nahezu vollständig</span>
-                        <span class="lang-en" hidden> — opposing effects nearly perfectly cancel out</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="takeaway-box">
-                <div class="takeaway-label">Takeaway</div>
-                <p>
-                  <span class="lang-de">Die Kombination (e+c)/2 ist inhärent temperaturrobust — nur 0,1 Pp Differenz zwischen 9,8 °C und 19 °C.</span>
-                  <span class="lang-en" hidden>The combination (e+c)/2 is inherently temperature-robust — only 0.1 pp difference between 9.8°C and 19°C.</span>
-                </p>
-              </div>
-            </div>
-          </section>
+          <!-- slide-temperature moved to end of backups in Phase 20 -->
 
           <!-- Slide 15: DC pulse resistance -->
           <section id="slide-resistance" data-section="backup" data-visibility="uncounted">
@@ -2513,6 +2462,60 @@
           </section>
 
           <!-- Backup 8: Python SOH App -->
+          <!-- Last backup: temperature effect (moved from main results in Phase 20) -->
+          <section id="slide-temperature" data-section="backup" data-visibility="uncounted">
+            <h2>
+              <span class="lang-de">Gegenläufige Temperatureffekte heben sich im kombinierten SOH fast perfekt auf</span>
+              <span class="lang-en" hidden>Opposing temperature effects nearly perfectly cancel in the combined SOH</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div class="temp-layout">
+                  <div class="chart-container zoomable-image" id="chart-temperature">
+                    <!-- D3 slope chart -->
+                  </div>
+                  <div class="temp-annotations">
+                    <div class="method-annotations-header">
+                      <span class="lang-de">Temperatureffekt</span>
+                      <span class="lang-en" hidden>Temperature Effect</span>
+                    </div>
+                    <div class="method-note">
+                      <span class="method-note-dot" style="background:var(--chart-blue)"></span>
+                      <div>
+                        <strong>SOH<sub>e</sub> +1,2 Pp</strong>
+                        <span class="lang-de"> — BMS meldet bei Kälte marginal höheren Energiegehalt</span>
+                        <span class="lang-en" hidden> — BMS reports marginally higher energy content in cold</span>
+                      </div>
+                    </div>
+                    <div class="method-note">
+                      <span class="method-note-dot" style="background:var(--chart-yellow)"></span>
+                      <div>
+                        <strong>SOH<sub>c</sub> −1,3 Pp</strong>
+                        <span class="lang-de"> — langsamere Ladung bei Kälte erhöht den Integrationsfehler</span>
+                        <span class="lang-en" hidden> — slower charging in cold increases integration error</span>
+                      </div>
+                    </div>
+                    <div class="method-note">
+                      <span class="method-note-dot" style="background:var(--accent)"></span>
+                      <div>
+                        <strong><span class="lang-de">Kombiniert −0,1 Pp</span><span class="lang-en" hidden>Combined −0.1 pp</span></strong>
+                        <span class="lang-de"> — gegenläufige Effekte kompensieren sich nahezu vollständig</span>
+                        <span class="lang-en" hidden> — opposing effects nearly perfectly cancel out</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="takeaway-box">
+                <div class="takeaway-label">Takeaway</div>
+                <p>
+                  <span class="lang-de">Die Kombination (e+c)/2 ist inhärent temperaturrobust — nur 0,1 Pp Differenz zwischen 9,8 °C und 19 °C.</span>
+                  <span class="lang-en" hidden>The combination (e+c)/2 is inherently temperature-robust — only 0.1 pp difference between 9.8°C and 19°C.</span>
+                </p>
+              </div>
+            </div>
+          </section>
+
           <section id="slide-backup-app" data-section="backup" data-visibility="uncounted">
             <h2>
               <span class="lang-de">Wie ist die SOH-Analyse-Software aufgebaut?</span>

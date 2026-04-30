@@ -313,6 +313,102 @@ Each phase: push main → create feature branch → implement → merge with app
   ### Quality gates for "done"
   Every gate from the existing list (one message per slide, takeaway boxes on result slides, baseline + sensitivity shown, contributions explicit, backups prepared, PDF fallback exported, offline test passed, target resolution tested) must pass after Phase 20. Re-walk the gate list before marking 20.21 complete.
 
+- [ ] **Phase 21: Mobile Companion — extra feature, ships AFTER defense-tagged main**
+  Branch: `feat/mobile-companion` (off `main`, after Phase 20 is merged + tagged `defense-2026-05-06`). Each numbered task = one self-contained chunk that should commit cleanly. Spec: [docs/plans/2026-04-30-mobile-companion-design.md](docs/plans/2026-04-30-mobile-companion-design.md).
+
+  **Context.** The current deck is unusable on phones (Reveal.js scales 1920×1080 to ~20% on a phone — text becomes 3-4 px). Audience members who scan the QR should be able to read along on their own device at their own pace. Method **B** chosen: a parallel `mobile.html` route, no Reveal.js, mobile-first stylesheet, **B-curated** content from `src/mobile-content.js`. Desktop deck untouched — 95% additive, 5% surgical (one redirect snippet + one Vite config line).
+
+  **Locked decisions.**
+  - Method B (separate route), B-curated content (single source of truth in `src/mobile-content.js`)
+  - Redirect breakpoint: ≤ 1024 px (covers iPad portrait + landscape)
+  - 18 mobile slides — full curated list in spec §5.2 (demo / backups / flowchart-gallery omitted)
+  - Theme + language toggles persist via localStorage (same keys as desktop deck)
+  - Scroll position preserved across theme/lang re-renders
+  - **Defense-non-critical.** This is extra-features scope. The defense ships on the desktop deck.
+
+  ### Tasks
+
+  - [ ] **21.0 Branch + sanity** — confirm Phase 20 is merged into `main` and tagged `defense-2026-05-06`. Branch `feat/mobile-companion` from clean `main`. Run `npm install` to reset dev env. Confirm `npm run dev` serves the live deck on `localhost:3000`.
+
+  - [ ] **21.1 Vite multi-entry + `mobile.html` shell** — update [vite.config.js](vite.config.js) to add a second `rollupOptions.input` entry:
+    ```js
+    rollupOptions: {
+      input: {
+        main: 'index.html',
+        mobile: 'mobile.html',
+      },
+    }
+    ```
+    Create empty [mobile.html](mobile.html) with `<!DOCTYPE html>`, `<meta name="viewport" content="width=device-width, initial-scale=1.0">`, `<meta name="robots" content="noindex">`, link to `src/styles/mobile.css`, script tag for `src/mobile.js`, and a single `<main id="mobile-app"></main>` mount node. Verify `npm run dev` serves `localhost:3000/mobile.html` (blank but no 404).
+
+  - [ ] **21.2 Stylesheet `src/styles/mobile.css`** — mobile-first CSS, ~400 lines. Imports `./variables.css` for design tokens. Layout: `body` (max-width 720, centered), `.nav-bar` (sticky top), `.toc` (sticky chips below nav), `main`. Five card patterns matching spec §5.1: `.slide.hero`, `.slide.standard`, `.slide.stats`, `.slide.vehicle-cards`, `.slide.list`. Two breakpoints: phone (default), tablet `@media (min-width: 760px)`. No animation framework. Verify by hard-coding one of each card type into `mobile.html` and eyeballing on iPhone simulator + Chrome DevTools mobile emulator.
+
+  - [ ] **21.3 Content data `src/mobile-content.js`** — export `MOBILE_SLIDES` array with all 18 entries from spec §5.2. Pull slide titles, takeaways, and key numbers verbatim from the matching `<section>` blocks in [index.html](index.html). Each entry shape (full schema in spec §5):
+    ```js
+    {
+      id, type,
+      section: { de, en },
+      slideNumber,
+      kicker: { de, en },     // optional
+      headline: { de, en },
+      subtitle: { de, en },   // hero only
+      body: { de, en },       // HTML string for standard/list types
+      takeaway: { de, en },   // optional
+      stats: [...],           // stats type only
+      // ... type-specific fields
+    }
+    ```
+    No logic, just data. Keep file under 500 lines.
+
+  - [ ] **21.4 Render layer `src/mobile.js`** — entry script, ~150 lines, no Reveal/D3/GSAP imports. Responsibilities:
+    1. Read `lang` from URL `?lang=` or `localStorage('preferredLang')`, default `'de'`. Mirror the key the desktop deck uses.
+    2. Read `theme` similarly (`'auto' | 'light' | 'dark'`). On `'auto'` respect `prefers-color-scheme`.
+    3. Render top bar (back-to-top button, lang toggle, theme toggle) into a fixed `.nav-bar`.
+    4. Render `MOBILE_SLIDES` ToC chips into `.toc` — one chip per slide.
+    5. Render slides into `<main>` via a small dispatch table per `type`: `{ hero: renderHero, standard: renderStandard, stats: renderStats, 'vehicle-cards': renderVehicles, list: renderList }`.
+    6. ToC scroll-spy via `IntersectionObserver` with `rootMargin: '-40% 0px -50% 0px'` — current chip gets `.current` class.
+    7. Scroll preservation: on theme/lang toggle, capture `window.scrollY`, re-render, restore via `window.scrollTo({ top: savedY, behavior: 'instant' })`.
+
+  - [ ] **21.5 Redirect snippet in [index.html](index.html)** — insert this block at the top of `<head>`, BEFORE any other script tags or stylesheet links:
+    ```html
+    <script>
+      (function(){
+        var qs = window.location.search;
+        if (/[?&](desktop|receiver)\b/.test(qs)) return;
+        if (window.location.pathname.endsWith('/mobile.html')) return;
+        if (window.matchMedia('(max-width: 1024px)').matches) {
+          window.location.replace('/mobile.html' + qs + window.location.hash);
+        }
+      })();
+    </script>
+    ```
+    Vanilla ES5, no dependencies. Skips speaker/receiver view and respects `?desktop=1` override. Test: open `localhost:3000` in Chrome DevTools at iPhone 14 viewport — should redirect to `/mobile.html`. Open at 1920×1080 — should NOT redirect. Open with `?desktop=1` on mobile viewport — should NOT redirect.
+
+  - [ ] **21.6 Real-device verification (spec §9 — all 9 checks)** —
+    1. Desktop unchanged: open laptop at 1920×1080, click through 5 representative slides (title, vehicles, conclusion, Danke, one backup) — should be byte-identical to pre-Phase-21 behavior.
+    2. iPhone real-device: scan QR from laptop title slide, scroll all 18 cards, tap every ToC chip, toggle DE/EN twice, toggle theme through all 3 states.
+    3. iPad portrait same as #2 — verify the `min-width: 760px` breakpoint kicks in (tighter padding, two-up stat cards).
+    4. iPad landscape same as #2 — should still get mobile view per the 1024 px breakpoint.
+    5. `?desktop=1` on phone — forces desktop deck.
+    6. `?receiver=1` — speaker view unaffected.
+    7. Offline: disconnect Mac from internet, reload both views — both work (no CDN dependencies).
+    8. Build: `npm run build` produces both `dist/index.html` AND `dist/mobile.html`.
+    9. Preview: `npm run preview` serves both at correct paths; PDF/PPTX export from desktop still works.
+
+  - [ ] **21.7 Polish pass** — fix anything that came up in 21.6. Iterate on real device, not in DevTools. Tighten typography, fix line-clamping, fix any layout breaks. Test once more on iPhone + iPad after polish.
+
+  - [ ] **21.8 Final commit + merge** — squash-merge `feat/mobile-companion` to `main`. No new tag (the defense tag stays on its commit). Update Phase 21 checkbox → `[x]`. Mobile companion live.
+
+  ### Quality gates for "done"
+  - Desktop deck behavior is byte-identical pre/post Phase 21 (smoke-tested on 5 slides)
+  - All 18 mobile slides render correctly on iPhone Safari and iPad Safari
+  - ToC scroll-spy highlights the correct section
+  - Theme + language toggles persist across page reload AND scroll position is preserved
+  - `?desktop=1` override and `?receiver` speaker mode both still work
+  - Offline test passes (no CDN/network calls leak)
+  - `npm run build` succeeds with both entries; `npm run preview` serves both
+  - PDF + PPTX export from the desktop deck still work unchanged
+
 ## How to Use Skills
 
 Skills are invoked **automatically** — just describe what you want in plain language and Claude picks the right ones.

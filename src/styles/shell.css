@@ -86,21 +86,17 @@ body.theme-light .sidebar-logo {
   text-overflow: ellipsis;
 }
 
-/* Subsections — collapsed by default, expand when section is active */
+/* Subsections — always visible (Phase 20: no collapse glitching between slides) */
 .nav-group {
   display: flex;
   flex-direction: column;
 }
 
 .nav-subs {
-  display: none;
+  display: flex;
   flex-direction: column;
   padding-left: 2.5rem;
   overflow: hidden;
-}
-
-.nav-group.expanded .nav-subs {
-  display: flex;
 }
 
 .nav-sub-item {
