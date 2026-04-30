@@ -731,8 +731,8 @@
           <!-- Slide 10: Discharge Protocol (Entladung) — Dashboard Cluster -->
           <section id="slide-discharge" data-section="method">
             <h2>
-              <span class="lang-de">Entladung durch normale Fahrt bis Display-SOC = 0 % (BMS-SOC ≈ 5,75 %)</span>
-              <span class="lang-en" hidden>Discharge via normal driving until display SOC = 0% (BMS SOC ≈ 5.75%)</span>
+              <span class="lang-de">Protokoll-Detail: Entladung (Phase 1) bis Display-SOC = 0 % — anschließend CC-CV-Ladung bis 100 %</span>
+              <span class="lang-en" hidden>Protocol detail: discharge (Phase 1) to display SOC = 0% — followed by CC-CV charge to 100%</span>
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
@@ -882,7 +882,8 @@
           </section>
 
           <!-- Slide 11: CC-CV Charging Profile (Einladung) -->
-          <section id="slide-charging" data-section="method">
+          <!-- Phase 20: demoted to backup (charging detail). Phase 1 covered by slide-discharge title. -->
+          <section id="slide-charging" data-section="backup" data-visibility="uncounted">
             <h2>
               <span class="lang-de">CC-CV-Ladeprofil: Konstantstrom → Konstantspannung liefert Daten für alle SOH-Methoden</span>
               <span class="lang-en" hidden>CC-CV charging profile: constant current → constant voltage provides data for all SOH methods</span>
@@ -984,21 +985,35 @@
             </div>
           </section>
 
-          <!-- Slide 12: Test vehicles -->
+          <!-- Slide 12: MEB-Plattform — Primärfahrzeug + Verifikationsfahrzeuge -->
           <section id="slide-vehicles" data-section="method">
             <h2>
-              <span class="lang-de">Testfahrzeug VW ID.4 — 16 Messungen über 12 Monate mit drei Diagnosesystemen</span>
-              <span class="lang-en" hidden>Test Vehicle VW ID.4 — 16 measurements over 12 months with three diagnostic systems</span>
+              <span class="lang-de">MEB-Plattform: VW ID.4 als Primärfahrzeug — Verifikation an Skoda Elroq + Cupra Born</span>
+              <span class="lang-en" hidden>MEB platform: VW ID.4 as primary vehicle — verification on Skoda Elroq + Cupra Born</span>
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
-                <!-- Top zone: vehicle card + diagnostic systems -->
+                <!-- Headline metric -->
+                <div class="vehicles-headline fragment" data-fragment-index="1">
+                  <span class="vehicles-headline-num">33</span>
+                  <span class="vehicles-headline-text">
+                    <span class="lang-de">Einzelmessungen · Dez 2024 – Dez 2025 · MEB-Plattform</span>
+                    <span class="lang-en" hidden>individual measurements · Dec 2024 – Dec 2025 · MEB platform</span>
+                  </span>
+                </div>
+
+                <!-- Top zone: VW ID.4 (large) + Diagnosesysteme + Verifikationsfahrzeuge -->
                 <div class="vehicle-top-row">
-                  <!-- Left: vehicle image + spec badges -->
-                  <div class="vehicle-card fragment" data-fragment-index="1">
+                  <!-- Primary vehicle: VW ID.4 -->
+                  <div class="vehicle-card primary fragment" data-fragment-index="2">
+                    <div class="vehicle-card-label">
+                      <span class="lang-de">Primärfahrzeug</span>
+                      <span class="lang-en" hidden>Primary vehicle</span>
+                    </div>
                     <div class="vehicle-sticker-wrap">
                       <img src="assets/images/vehicle-id4.png" alt="VW ID.4" class="vehicle-sticker">
                     </div>
+                    <div class="vehicle-name">VW ID.4 (IfE)</div>
                     <div class="spec-badges">
                       <span class="spec-badge accent">77 kWh</span>
                       <span class="spec-badge">NMC 712</span>
@@ -1009,48 +1024,70 @@
                     </div>
                   </div>
 
-                  <!-- Right: diagnostic systems with hover images -->
-                  <div class="diag-systems fragment" data-fragment-index="2">
+                  <!-- Diagnosesysteme -->
+                  <div class="diag-systems fragment" data-fragment-index="3">
                     <h3><span class="lang-de">Diagnosesysteme</span><span class="lang-en" hidden>Diagnostic Systems</span></h3>
-                    <div class="diag-system">
+                    <div class="diag-system primary-diag">
                       <span class="diag-dot" style="background: #00C9A7;"></span>
                       <span class="diag-name">AVL HV-Check</span>
-                      <span class="diag-count">6</span>
+                      <span class="diag-role"><span class="lang-de">Hauptsystem</span><span class="lang-en" hidden>Primary</span></span>
                     </div>
-                    <div class="diag-system">
+                    <div class="diag-system primary-diag">
                       <span class="diag-dot" style="background: #4C9AFF;"></span>
                       <span class="diag-name">OBDLink MX+</span>
-                      <span class="diag-count">7</span>
+                      <span class="diag-role"><span class="lang-de">Hauptsystem</span><span class="lang-en" hidden>Primary</span></span>
                     </div>
-                    <div class="diag-system">
+                    <div class="diag-system supplementary-diag">
                       <span class="diag-dot" style="background: #9F7AEA;"></span>
                       <span class="diag-name">AUTEL MaxiSYS Ultra</span>
-                      <span class="diag-count">3</span>
+                      <span class="diag-role"><em><span class="lang-de">ergänzend</span><span class="lang-en" hidden>supplementary</span></em></span>
                     </div>
-
                     <div class="diag-rationale">
-                      <h3><span class="lang-de">Warum VW ID.4?</span><span class="lang-en" hidden>Why VW ID.4?</span></h3>
+                      <h3><span class="lang-de">Warum MEB?</span><span class="lang-en" hidden>Why MEB?</span></h3>
                       <ul class="styled-list">
-                        <li><span class="lang-de">MEB: meistverkaufte EV-Architektur in Europa</span><span class="lang-en" hidden>MEB: best-selling EV architecture in Europe</span></li>
+                        <li><span class="lang-de">Meistverkaufte EV-Architektur in Europa</span><span class="lang-en" hidden>Best-selling EV architecture in Europe</span></li>
                         <li><span class="lang-de">Vollständiger OBD-Zugang (96 Zellspannungen)</span><span class="lang-en" hidden>Full OBD access (96 cell voltages)</span></li>
                       </ul>
+                    </div>
+                  </div>
+
+                  <!-- MEB-Verifikationsfahrzeuge -->
+                  <div class="verification-fleet fragment" data-fragment-index="4">
+                    <h3><span class="lang-de">MEB-Verifikation</span><span class="lang-en" hidden>MEB verification</span></h3>
+                    <div class="verif-card">
+                      <div class="verif-name">Skoda Elroq (IfE)</div>
+                      <div class="verif-stats">
+                        <span class="verif-stat">7 AVL</span>
+                        <span class="verif-stat">σ = 0 %</span>
+                        <span class="verif-stat">12.572 km</span>
+                      </div>
+                      <div class="verif-note"><span class="lang-de">Reproduzierbarkeit perfekt über 9 Monate</span><span class="lang-en" hidden>Perfect reproducibility over 9 months</span></div>
+                    </div>
+                    <div class="verif-card supplementary">
+                      <div class="verif-name">Cupra Born</div>
+                      <div class="verif-stats">
+                        <span class="verif-stat">1 AVL</span>
+                        <span class="verif-stat">1 OBD</span>
+                        <span class="verif-stat">SOH 93,5 %</span>
+                      </div>
+                      <div class="verif-note"><em><span class="lang-de">ergänzende Plattform-Übertragbarkeit</span><span class="lang-en" hidden>supplementary platform transferability</span></em></div>
                     </div>
                   </div>
                 </div>
 
                 <!-- Bottom zone: measurement timeline -->
-                <div class="vehicle-timeline-wrap fragment slide-up" data-fragment-index="3">
+                <div class="vehicle-timeline-wrap fragment slide-up" data-fragment-index="5">
                   <div class="chart-container zoomable-image" id="chart-vehicle-timeline"></div>
                 </div>
               </div>
             </div>
           </section>
 
-          <!-- Slide 11: SOH calculation pipeline — convergence flow -->
+          <!-- Slide 11: SOH calculation pipeline — Ebene 3 (nachgelagerte Auswertung in Python-App) -->
           <section id="slide-pipeline" data-section="method">
             <h2>
-              <span class="lang-de">Sechs Berechnungsmethoden konvergieren zu einem robusten kombinierten SOH-Wert</span>
-              <span class="lang-en" hidden>Six calculation methods converge into a robust combined SOH value</span>
+              <span class="lang-de">Ebene 3 — nachgelagerte Auswertung: Sechs Methoden konvergieren zum kombinierten SOH</span>
+              <span class="lang-en" hidden>Level 3 — post-processing: six methods converge into a combined SOH value</span>
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
@@ -1243,7 +1280,7 @@
           </section>
 
           <!-- Slide 15: DC pulse resistance -->
-          <section id="slide-resistance" data-section="results">
+          <section id="slide-resistance" data-section="backup" data-visibility="uncounted">
             <h2>
               <span class="lang-de">Der DC-Puls-Innenwiderstand des VW ID.4 beträgt 40 mΩ (Laden) und 33 mΩ (Relaxation) bei 51 % SOC</span>
               <span class="lang-en" hidden>The DC pulse internal resistance of the VW ID.4 is 40 mΩ (charging) and 33 mΩ (relaxation) at 51% SOC</span>
@@ -1317,7 +1354,7 @@
           </section>
 
           <!-- Slide 16: Failure case — SOC window -->
-          <section id="slide-failure" data-section="results">
+          <section id="slide-failure" data-section="backup" data-visibility="uncounted">
             <h2>
               <span class="lang-de">Ein SOC-Fenster unter 50 % führt zu einer Abweichung von 21 Prozentpunkten — SOH-Bestimmung wird unbrauchbar</span>
               <span class="lang-en" hidden>An SOC window below 50% leads to a 21 percentage point deviation — SOH determination becomes unusable</span>
@@ -1419,7 +1456,7 @@
           </section>
 
           <!-- Slide 16: Inter-System Agreement -->
-          <section id="slide-intersystem" data-section="results">
+          <section id="slide-intersystem" data-section="backup" data-visibility="uncounted">
             <h2>
               <span class="lang-de">AVL-Referenz und On-Board-Methode stimmen beim VW ID.4 auf 1,6 Prozentpunkte überein</span>
               <span class="lang-en" hidden>AVL reference and on-board method agree within 1.6 percentage points for the VW ID.4</span>
@@ -1617,7 +1654,7 @@
           </section>
 
           <!-- Slide 18: Community Dataset Comparison -->
-          <section id="slide-community" data-section="results">
+          <section id="slide-community" data-section="backup" data-visibility="uncounted">
             <h2>
               <span class="lang-de">Eigene Messwerte fügen sich konsistent in öffentliche Community-Datensätze ein</span>
               <span class="lang-en" hidden>Own measurements consistently fit into public community datasets</span>
@@ -1716,11 +1753,11 @@
           <!-- SECTION 6: DISCUSSION (Slides 21-22, ~2 min)                 -->
           <!-- ============================================================ -->
 
-          <!-- Slide 21: Strengths & limitations -->
+          <!-- Slide 21: Stärken, Limitationen & Reflexion der Ergebnisse -->
           <section id="slide-discussion" data-section="discussion">
             <h2>
-              <span class="lang-de">Stärken & Limitationen</span>
-              <span class="lang-en" hidden>Strengths & Limitations</span>
+              <span class="lang-de">Stärken, Limitationen & Reflexion der Ergebnisse</span>
+              <span class="lang-en" hidden>Strengths, Limitations & Reflection</span>
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
@@ -1729,49 +1766,61 @@
                   <div class="discussion-row success">
                     <div class="discussion-bar"></div>
                     <div class="discussion-key">±1,6 Pp</div>
-                    <div class="discussion-desc"><span class="lang-de">Reproduzierbarer SOH mit ~€50 OBD-Hardware vs. AVL-Referenz</span><span class="lang-en" hidden>Reproducible SOH with ~€50 OBD hardware vs. AVL reference</span></div>
+                    <div class="discussion-desc"><span class="lang-de">Reproduzierbarer SOH mit OBDLink (Consumer-OBD) vs. AVL HV-Check Referenz am VW ID.4</span><span class="lang-en" hidden>Reproducible SOH with OBDLink (consumer OBD) vs. AVL HV-Check reference on VW ID.4</span></div>
+                  </div>
+                  <div class="discussion-row success">
+                    <div class="discussion-bar"></div>
+                    <div class="discussion-key">3 × MEB</div>
+                    <div class="discussion-desc"><span class="lang-de">Verifikation an Skoda Elroq (σ = 0 % über 7 AVL-Messungen) und Cupra Born (ergänzend)</span><span class="lang-en" hidden>Verified on Skoda Elroq (σ = 0% over 7 AVL measurements) and Cupra Born (supplementary)</span></div>
                   </div>
                   <div class="discussion-row success">
                     <div class="discussion-bar"></div>
                     <div class="discussion-key">0,1 Pp</div>
-                    <div class="discussion-desc"><span class="lang-de">Kombinierte Methode robust gegen Temperatur (9–19 °C)</span><span class="lang-en" hidden>Combined method robust against temperature (9–19°C)</span></div>
+                    <div class="discussion-desc"><span class="lang-de">Kombinierte Methode robust gegen Temperatur (9–19 °C) — gegenläufige Effekte kompensieren sich</span><span class="lang-en" hidden>Combined method robust against temperature (9–19°C) — opposing effects cancel out</span></div>
                   </div>
-                  <div class="discussion-row success">
+                  <div class="discussion-row success cost-tier-row">
                     <div class="discussion-bar"></div>
-                    <div class="discussion-key">200×</div>
-                    <div class="discussion-desc"><span class="lang-de">Inter-System-Übereinstimmung AVL ↔ OBD bei 1/200 der Kosten</span><span class="lang-en" hidden>Inter-system agreement AVL ↔ OBD at 1/200 the cost</span></div>
+                    <div class="discussion-key">€</div>
+                    <div class="discussion-desc">
+                      <strong><span class="lang-de">OBDLink-Mehrwert: kontinuierliche Daten + keine Folgekosten.</span><span class="lang-en" hidden>OBDLink advantage: continuous data + no recurring costs.</span></strong>
+                      <span class="cost-tier-line">
+                        <span class="cost-tier"><span class="cost-amt">~8.000 €</span> <span class="cost-label">AUTEL (Profi)</span></span>
+                        <span class="cost-tier"><span class="cost-amt">~70 €/Jahr</span> <span class="cost-label">AVL (Lizenz)</span></span>
+                        <span class="cost-tier highlight"><span class="cost-amt">~130 €</span> <span class="cost-label"><span class="lang-de">OBDLink (einmalig)</span><span class="lang-en" hidden>OBDLink (one-off)</span></span></span>
+                      </span>
+                    </div>
                   </div>
                   <div class="discussion-row success">
                     <div class="discussion-bar"></div>
                     <div class="discussion-key">App</div>
-                    <div class="discussion-desc"><span class="lang-de">Automatisierte Python-App für Werkstattpraxis</span><span class="lang-en" hidden>Automated Python app for workshop practice</span></div>
+                    <div class="discussion-desc"><span class="lang-de">Automatisierte Python-App mit 6 SOH-Methoden für Werkstattpraxis</span><span class="lang-en" hidden>Automated Python app with 6 SOH methods for workshop use</span></div>
                   </div>
                   <div class="discussion-divider"></div>
-                  <div class="discussion-section-label danger"><span class="lang-de">Limitationen</span><span class="lang-en" hidden>Limitations</span></div>
+                  <div class="discussion-section-label danger"><span class="lang-de">Limitationen & Reflexion</span><span class="lang-en" hidden>Limitations & Reflection</span></div>
                   <div class="discussion-row danger">
                     <div class="discussion-bar"></div>
-                    <div class="discussion-key"><span class="lang-de">1 Fzg.</span><span class="lang-en" hidden>1 veh.</span></div>
-                    <div class="discussion-desc"><span class="lang-de">Einzelnes Primärfahrzeug (VW ID.4), Übertragbarkeit unklar</span><span class="lang-en" hidden>Single primary vehicle (VW ID.4), transferability unclear</span></div>
+                    <div class="discussion-key">MEB</div>
+                    <div class="discussion-desc"><span class="lang-de">MEB-fokussiert: nur 3 MEB-Fahrzeuge — BMW i3s nur kontextuelle Vergleichsmessung; LFP/Tesla offen</span><span class="lang-en" hidden>MEB-focused: only 3 MEB vehicles — BMW i3s only contextual comparison; LFP/Tesla open</span></div>
                   </div>
                   <div class="discussion-row danger">
                     <div class="discussion-bar"></div>
                     <div class="discussion-key"><span class="lang-de">Nur AC</span><span class="lang-en" hidden>AC only</span></div>
-                    <div class="discussion-desc"><span class="lang-de">Keine DC-Schnellladedaten, kein Hochstrom-Vergleich</span><span class="lang-en" hidden>No DC fast charging data, no high C-rate comparison</span></div>
+                    <div class="discussion-desc"><span class="lang-de">Keine DC-Schnellladedaten — Effekte hoher C-Raten (&gt; 50 kW) nicht untersucht</span><span class="lang-en" hidden>No DC fast charging data — effects of high C-rates (&gt; 50 kW) not investigated</span></div>
                   </div>
                   <div class="discussion-row danger">
                     <div class="discussion-bar"></div>
                     <div class="discussion-key">&gt;97 %</div>
-                    <div class="discussion-desc"><span class="lang-de">Keine signifikante Alterung im Messzeitraum beobachtet</span><span class="lang-en" hidden>No significant aging observed in measurement period</span></div>
+                    <div class="discussion-desc"><span class="lang-de">Keine signifikante Alterung im Messzeitraum — Empfindlichkeit bei stark gealterten Akkus offen</span><span class="lang-en" hidden>No significant aging in measurement period — sensitivity for strongly aged batteries open</span></div>
                   </div>
                   <div class="discussion-row danger">
                     <div class="discussion-bar"></div>
-                    <div class="discussion-key"><span class="lang-de">T-Korr.</span><span class="lang-en" hidden>T corr.</span></div>
-                    <div class="discussion-desc"><span class="lang-de">Keine Temperaturkorrektur — Messungen bei &lt;15 °C eingeschränkt vergleichbar</span><span class="lang-en" hidden>No temperature correction — measurements at &lt;15°C limited comparability</span></div>
+                    <div class="discussion-key">±4,6 Pp</div>
+                    <div class="discussion-desc"><span class="lang-de">Gesamtunsicherheit der OBD-SOH-Bestimmung — dominiert durch Methodenstreuung und SOC-Fenster</span><span class="lang-en" hidden>Total uncertainty of OBD SOH determination — dominated by method spread and SOC window</span></div>
                   </div>
                   <div class="discussion-row danger">
                     <div class="discussion-bar"></div>
                     <div class="discussion-key">ISO</div>
-                    <div class="discussion-desc"><span class="lang-de">Keine unabhängige Laborvalidierung (ISO 12405)</span><span class="lang-en" hidden>No independent lab validation (ISO 12405)</span></div>
+                    <div class="discussion-desc"><span class="lang-de">Keine unabhängige Laborvalidierung (ISO 12405) — Vergleich nur gegen kommerzielle Referenz</span><span class="lang-en" hidden>No independent lab validation (ISO 12405) — comparison only against commercial reference</span></div>
                   </div>
                 </div>
               </div>
@@ -1779,7 +1828,7 @@
           </section>
 
           <!-- Slide 22: Uncertainty budget -->
-          <section id="slide-uncertainty" data-section="discussion">
+          <section id="slide-uncertainty" data-section="backup" data-visibility="uncounted">
             <h2>
               <span class="lang-de">Die Gesamtunsicherheit von ±4,5 Pp reicht aus, um Batteriezustandskategorien zu unterscheiden</span>
               <span class="lang-en" hidden>The total uncertainty of ±4.5 pp is sufficient to distinguish battery condition categories</span>
@@ -1856,25 +1905,10 @@
             </div>
           </section>
 
-          <!-- ============================================================ -->
-          <!-- SECTION 7: FLOWCHART GALLERY (Slide 23)                      -->
-          <!-- ============================================================ -->
-
-          <!-- Slide 23: Diagram gallery -->
-          <section id="slide-flowchart-gallery" data-section="flowcharts">
-            <h2>
-              <span class="lang-de">Flussdiagramme & Systemarchitektur</span>
-              <span class="lang-en" hidden>Flowcharts & System Architecture</span>
-            </h2>
-            <div class="slide-content">
-              <div class="evidence-area">
-                <div id="flowchart-gallery" class="flowchart-gallery"></div>
-              </div>
-            </div>
-          </section>
+          <!-- Phase 20: flowchart-gallery moved to position right before backups (after slide-thanks) -->
 
           <!-- ============================================================ -->
-          <!-- SECTION 8: CONCLUSION & OUTLOOK (Slides 24-25, ~1.5 min)     -->
+          <!-- SECTION 7: CONCLUSION & OUTLOOK (final main slides)          -->
           <!-- ============================================================ -->
 
           <!-- Slide 24: Core finding -->
@@ -1888,8 +1922,8 @@
                 <div class="conclusion-zoomable zoomable-image" style="cursor: pointer;">
                   <div class="core-claim" style="max-width: 1200px; margin: 0 auto;">
                     <p style="font-size: var(--fs-h2); color: var(--text-primary); font-weight: var(--fw-semibold); line-height: 1.5;">
-                      <span class="lang-de">Die Kombination von energiebasierter und integrativer SOH-Methode ermöglicht eine <span style="color: var(--accent);">reproduzierbare Bestimmung des Batteriezustands</span> mit einem kostengünstigen OBD-Adapter (~€50) bei einer Abweichung von nur <span style="color: var(--success);">±1,6 Prozentpunkten</span> zur professionellen Off-Board-Referenz.</span>
-                      <span class="lang-en" hidden>The combination of energy-based and integrative SOH methods enables <span style="color: var(--accent);">reproducible battery health determination</span> with a low-cost OBD adapter (~€50) at a deviation of only <span style="color: var(--success);">±1.6 percentage points</span> from the professional off-board reference.</span>
+                      <span class="lang-de">Die Kombination von energiebasierter und integrativer SOH-Methode ermöglicht eine <span style="color: var(--accent);">reproduzierbare Bestimmung des Batteriezustands</span> mit einem kostengünstigen OBD-Adapter (~130 € einmalig) bei einer Abweichung von nur <span style="color: var(--success);">±1,6 Prozentpunkten</span> zur professionellen Off-Board-Referenz — verifiziert auf der MEB-Plattform.</span>
+                      <span class="lang-en" hidden>The combination of energy-based and integrative SOH methods enables <span style="color: var(--accent);">reproducible battery health determination</span> with a low-cost OBD adapter (~€130 one-off) at a deviation of only <span style="color: var(--success);">±1.6 percentage points</span> from the professional off-board reference — verified on the MEB platform.</span>
                     </p>
                   </div>
                   <div class="three-col" style="margin-top: 3rem; max-width: 1000px; margin-left: auto; margin-right: auto;">
@@ -1906,7 +1940,7 @@
                     <div class="stat-card">
                       <div class="stat-value success">1,6 Pp</div>
                       <div class="stat-label"><span class="lang-de">AVL ↔ OBD</span><span class="lang-en" hidden>AVL ↔ OBD</span></div>
-                      <div class="stat-sublabel">VW ID.4 (IfE)</div>
+                      <div class="stat-sublabel"><span class="lang-de">VW ID.4 · MEB-Verif. Elroq + Born</span><span class="lang-en" hidden>VW ID.4 · MEB verif. Elroq + Born</span></div>
                     </div>
                   </div>
                 </div>
@@ -1947,7 +1981,8 @@
                   <div>
                     <h3><span class="lang-de">Zukünftige Forschung</span><span class="lang-en" hidden>Future Research</span></h3>
                     <ul class="styled-list">
-                      <li><span class="lang-de">Erweiterung auf LFP-Chemie (BYD, Tesla) und weitere MEB-Plattformen</span><span class="lang-en" hidden>Extension to LFP chemistry (BYD, Tesla) and more MEB platforms</span></li>
+                      <li><span class="lang-de"><strong>Erweiterung auf weitere Plattformen</strong> (BMW i3s, Tesla, LFP-Chemie) — Methoden bleiben gleich, nur PIDs/Kanäle anpassen</span><span class="lang-en" hidden><strong>Extension to other platforms</strong> (BMW i3s, Tesla, LFP chemistry) — methods stay the same, only PIDs/channels need adjustment</span></li>
+                      <li><span class="lang-de"><strong>Temperaturkorrektur</strong> (z. B. Arrhenius-Modell) für SOH-Werte unter 15 °C</span><span class="lang-en" hidden><strong>Temperature correction</strong> (e.g. Arrhenius model) for SOH values below 15 °C</span></li>
                       <li><span class="lang-de">DC-Schnelllade-Messungen (hohe C-Rate-Effekte)</span><span class="lang-en" hidden>DC fast charging measurements (high C-rate effects)</span></li>
                       <li><span class="lang-de">Gealterte Fahrzeuge (50k–150k km) für ICA/DVA-Validierung</span><span class="lang-en" hidden>Aged vehicles (50k–150k km) for ICA/DVA validation</span></li>
                       <li><span class="lang-de">ML-basierte Korrektur: Ridge/Random-Forest auf AVL-Referenz</span><span class="lang-en" hidden>ML-based correction: Ridge/Random Forest on AVL reference</span></li>
@@ -1958,6 +1993,53 @@
                 <div class="sticker-layout-visual">
                   <img src="assets/images/sticker-curiosity.png" alt="" class="slide-sticker" />
                 </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 26: Danke + Q&A invite -->
+          <section id="slide-thanks" data-section="conclusion">
+            <div class="thanks-slide">
+              <div class="thanks-headline">
+                <span class="lang-de">Vielen Dank für Ihre Aufmerksamkeit</span>
+                <span class="lang-en" hidden>Thank you for your attention</span>
+              </div>
+              <div class="thanks-qa-invite">
+                <span class="lang-de">Ich freue mich auf Ihre Fragen</span>
+                <span class="lang-en" hidden>I look forward to your questions</span>
+              </div>
+              <div class="thanks-ack">
+                <h3 class="thanks-ack-label">
+                  <span class="lang-de">Mein besonderer Dank gilt</span>
+                  <span class="lang-en" hidden>My special thanks to</span>
+                </h3>
+                <ul class="thanks-ack-list">
+                  <li><strong>Prof. Dr.-Ing. Kerstin Siebert</strong> · <span class="lang-de">Erstprüferin</span><span class="lang-en" hidden>First Examiner</span></li>
+                  <li><strong>Prof. Dr.-Ing. Michael Schugt</strong> · <span class="lang-de">Zweitprüfer</span><span class="lang-en" hidden>Second Examiner</span></li>
+                  <li><span class="lang-de">Institut für Elektromobilität, Hochschule Bochum</span><span class="lang-en" hidden>Institute for Electromobility, Bochum University of Applied Sciences</span></li>
+                  <li><span class="lang-de">Meiner Familie für die Unterstützung während der gesamten Studienzeit</span><span class="lang-en" hidden>My family for their support throughout my studies</span></li>
+                </ul>
+              </div>
+              <div class="thanks-meta">
+                <span>Amirreza Roodsaz · 6. Mai 2026</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============================================================ -->
+          <!-- SECTION 8: FLOWCHART GALLERY (Q&A reference, uncounted)      -->
+          <!-- Last slide before backups — for jumping to specific diagrams -->
+          <!-- ============================================================ -->
+
+          <!-- Diagram gallery — moved here in Phase 20 -->
+          <section id="slide-flowchart-gallery" data-section="flowcharts" data-visibility="uncounted">
+            <h2>
+              <span class="lang-de">Flussdiagramme & Systemarchitektur</span>
+              <span class="lang-en" hidden>Flowcharts & System Architecture</span>
+            </h2>
+            <div class="slide-content">
+              <div class="evidence-area">
+                <div id="flowchart-gallery" class="flowchart-gallery"></div>
               </div>
             </div>
           </section>
