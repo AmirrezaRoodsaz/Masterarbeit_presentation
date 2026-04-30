@@ -2218,6 +2218,141 @@ body.lang-en .lang-en.block:not(body) { display: block !important; }
   font-size: var(--fs-caption);
 }
 
+/* === Phase 20: Gap + Contributions merged layout === */
+.gap-contribution-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  height: 100%;
+}
+
+.gap-question-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.gap-question-row .takeaway-box {
+  margin: 0;
+  padding: 1rem 1.4rem;
+}
+
+.gap-question-row .takeaway-box p {
+  font-size: var(--fs-body);
+  line-height: 1.45;
+}
+
+.contributions-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  flex: 1 1 auto;
+}
+
+.contribution-card {
+  background: var(--bg-surface);
+  border-radius: var(--border-radius);
+  padding: 1rem 1.1rem 1.1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-top: 3px solid var(--card-color, var(--accent));
+  box-shadow: var(--shadow-card);
+}
+
+.contribution-card .contribution-num {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: var(--fw-bold);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.02em;
+}
+
+.contribution-card .contribution-title {
+  font-size: var(--fs-h4, 1.1rem);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.contribution-card .contribution-desc {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* === Phase 20: 3-Ebenen-Modell strip on slide-tools === */
+.ebenen-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.ebene-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.7rem 0.9rem;
+  background: var(--bg-surface);
+  border-radius: var(--border-radius-sm);
+  border-left: 3px solid transparent;
+}
+
+.ebene-card.primary {
+  border-left-color: #00C9A7;
+  background: var(--accent-soft, color-mix(in srgb, #00C9A7 8%, var(--bg-surface)));
+}
+
+.ebene-num {
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: var(--fw-bold);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ebene-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.ebene-label {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.ebene-desc {
+  font-size: var(--fs-small);
+  color: var(--text-secondary);
+  line-height: 1.3;
+}
+
+/* Supplementary table row tagging */
+.data-table tr.supplementary-row td {
+  opacity: 0.78;
+  font-style: italic;
+}
+.data-table tr.supplementary-row td.highlight {
+  font-style: normal;
+  opacity: 1;
+}
+
 /* Core claim styling */
 /* Segmented Cycle Layout (reusable for motivation section) */
 .cycle-layout {
