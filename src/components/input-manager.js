@@ -48,9 +48,23 @@ function dispatch(action) {
     case 'firstSlide':
       deck.slide(0);
       break;
-    case 'lastSlide':
+    case 'lastSlide': {
+      // Phase 20: jump to slide-thanks (the last counted main slide).
+      // flowchart-gallery + backups follow but should NOT be the
+      // target of a "last slide" command during normal navigation.
+      const target = document.getElementById('slide-thanks');
+      if (target) {
+        const sections = Array.from(document.querySelectorAll('.reveal .slides > section'));
+        const idx = sections.indexOf(target);
+        if (idx >= 0) {
+          deck.slide(idx);
+          break;
+        }
+      }
+      // Fallback if slide-thanks isn't in the DOM
       deck.slide(deck.getTotalSlides() - 1);
       break;
+    }
     case 'defenseMode':
       toggleDefenseMode();
       break;
@@ -132,6 +146,8 @@ function initKeyboardHandler() {
       if (!boundKey) continue;
       if (key === boundKey || key.toLowerCase() === boundKey) {
         e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
         dispatch(action);
         return;
       }
@@ -143,12 +159,14 @@ function initKeyboardHandler() {
         if (action === 'enabled') continue;
         if (boundKey && (key === boundKey || key.toLowerCase() === boundKey)) {
           e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
           dispatch(action);
           return;
         }
       }
     }
-  });
+  }, true); // capture phase — runs before Reveal/plugin handlers
 }
 
 // === Gamepad handler ===
