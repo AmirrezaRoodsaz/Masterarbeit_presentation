@@ -4,7 +4,10 @@
 import { createIcons, BookOpen, Zap, Beaker, Wrench, BarChart3, MessageSquare, Target, QrCode, Languages, Timer, Monitor, Presentation, Settings, Workflow, Download } from 'lucide';
 import { getSettings } from './settings-store.js';
 
-// Section definitions matching the slide structure
+// Section definitions matching the Phase 20 slide structure (15-min budget, 21 main slides)
+// Indices match DOM order; uncounted slides (charging, resistance, failure, intersystem,
+// community, uncertainty, flowchart-gallery, backups) are NOT listed in main sidebar
+// but remain reachable via the backup dropdown.
 const SECTIONS = [
   { id: 'opening', label: 'Einleitung', label_en: 'Introduction', icon: 'book-open', slideIndex: 0, subs: [
     { label: 'Titel', label_en: 'Title', slideIndex: 0 },
@@ -12,43 +15,35 @@ const SECTIONS = [
   ]},
   { id: 'motivation', label: 'Motivation', label_en: 'Motivation', icon: 'zap', slideIndex: 2, subs: [
     { label: 'Problem', label_en: 'Problem', slideIndex: 2 },
-    { label: 'Lücke', label_en: 'Gap', slideIndex: 3 },
-    { label: 'Beiträge', label_en: 'Contributions', slideIndex: 4 },
+    { label: 'Lücke & Beitrag', label_en: 'Gap & Contribution', slideIndex: 3 },
   ]},
-  { id: 'theory', label: 'Theorie', label_en: 'Theory', icon: 'beaker', slideIndex: 5, subs: [
-    { label: 'Batterie-Grundlagen', label_en: 'Battery Basics', slideIndex: 5 },
-    { label: 'SOH-Definitionen', label_en: 'SOH Definitions', slideIndex: 6 },
+  { id: 'theory', label: 'Theorie', label_en: 'Theory', icon: 'beaker', slideIndex: 4, subs: [
+    { label: 'Batterie-Grundlagen', label_en: 'Battery Basics', slideIndex: 4 },
+    { label: 'SOH-Definitionen', label_en: 'SOH Definitions', slideIndex: 5 },
   ]},
-  { id: 'method', label: 'Methodik', label_en: 'Methodology', icon: 'wrench', slideIndex: 7, subs: [
-    { label: 'Diagnosesysteme', label_en: 'Diagnostic Tools', slideIndex: 7 },
-    { label: 'Messprotokoll', label_en: 'Test Protocol', slideIndex: 8 },
-    { label: 'Entladung', label_en: 'Discharge', slideIndex: 9 },
-    { label: 'CC-CV Ladung', label_en: 'CC-CV Charging', slideIndex: 10 },
-    { label: 'Fahrzeuge', label_en: 'Vehicles', slideIndex: 11 },
-    { label: 'SOH-Pipeline', label_en: 'SOH Pipeline', slideIndex: 12 },
+  { id: 'method', label: 'Methodik', label_en: 'Methodology', icon: 'wrench', slideIndex: 6, subs: [
+    { label: 'Diagnosesysteme', label_en: 'Diagnostic Tools', slideIndex: 6 },
+    { label: 'Messprotokoll', label_en: 'Test Protocol', slideIndex: 7 },
+    { label: 'Entladung & Ladung', label_en: 'Discharge & Charging', slideIndex: 8 },
+    { label: 'Fahrzeuge (MEB)', label_en: 'Vehicles (MEB)', slideIndex: 10 },
+    { label: 'SOH-Pipeline', label_en: 'SOH Pipeline', slideIndex: 11 },
   ]},
-  { id: 'results', label: 'Ergebnisse', label_en: 'Results', icon: 'bar-chart-3', slideIndex: 13, subs: [
-    { label: 'Methodenvergleich', label_en: 'Method Comparison', slideIndex: 13 },
-    { label: 'Reproduzierbarkeit', label_en: 'Reproducibility', slideIndex: 14 },
-    { label: 'Temperatureffekt', label_en: 'Temperature Effect', slideIndex: 15 },
-    { label: 'Innenwiderstand', label_en: 'Resistance', slideIndex: 16 },
-    { label: 'Fehlerfall', label_en: 'Failure Case', slideIndex: 17 },
-    { label: 'Inter-System', label_en: 'Inter-System', slideIndex: 18 },
-    { label: 'ICA/DVA', label_en: 'ICA/DVA', slideIndex: 19 },
-    { label: 'Community-Daten', label_en: 'Community Data', slideIndex: 20 },
-    { label: 'Demo (Pro)', label_en: 'Demo (Pro)', slideIndex: 21 },
-    { label: 'Demo (Easy)', label_en: 'Demo (Easy)', slideIndex: 22 },
+  { id: 'results', label: 'Ergebnisse', label_en: 'Results', icon: 'bar-chart-3', slideIndex: 12, subs: [
+    { label: 'Methodenvergleich', label_en: 'Method Comparison', slideIndex: 12 },
+    { label: 'Reproduzierbarkeit', label_en: 'Reproducibility', slideIndex: 13 },
+    { label: 'Temperatureffekt', label_en: 'Temperature Effect', slideIndex: 14 },
+    { label: 'ICA/DVA', label_en: 'ICA/DVA', slideIndex: 18 },
+    { label: 'Demo (Pro)', label_en: 'Demo (Pro)', slideIndex: 20 },
+    { label: 'Demo (Easy)', label_en: 'Demo (Easy)', slideIndex: 21 },
   ]},
-  { id: 'discussion', label: 'Diskussion', label_en: 'Discussion', icon: 'message-square', slideIndex: 23, subs: [
-    { label: 'Stärken & Grenzen', label_en: 'Strengths & Limits', slideIndex: 23 },
-    { label: 'Unsicherheitsbudget', label_en: 'Uncertainty Budget', slideIndex: 24 },
+  { id: 'discussion', label: 'Diskussion & Fazit', label_en: 'Discussion & Conclusion', icon: 'target', slideIndex: 22, subs: [
+    { label: 'Stärken & Reflexion', label_en: 'Strengths & Reflection', slideIndex: 22 },
+    { label: 'Kernaussage', label_en: 'Core Finding', slideIndex: 24 },
+    { label: 'Ausblick', label_en: 'Outlook', slideIndex: 25 },
+    { label: 'Danke', label_en: 'Thanks', slideIndex: 26 },
   ]},
-  { id: 'flowcharts', label: 'Diagramme', label_en: 'Diagrams', icon: 'workflow', slideIndex: 25, subs: [
-    { label: 'Galerie', label_en: 'Gallery', slideIndex: 25 },
-  ]},
-  { id: 'conclusion', label: 'Fazit', label_en: 'Conclusion', icon: 'target', slideIndex: 26, subs: [
-    { label: 'Kernaussage', label_en: 'Core Finding', slideIndex: 26 },
-    { label: 'Ausblick', label_en: 'Outlook', slideIndex: 27 },
+  { id: 'flowcharts', label: 'Diagramme (Q&A)', label_en: 'Diagrams (Q&A)', icon: 'workflow', slideIndex: 27, subs: [
+    { label: 'Galerie', label_en: 'Gallery', slideIndex: 27 },
   ]},
 ];
 

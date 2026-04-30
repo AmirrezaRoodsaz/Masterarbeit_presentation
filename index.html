@@ -2052,7 +2052,7 @@
           <!-- Backup 1: Tool Validation -->
           <section id="slide-backup-intersystem" data-section="backup" data-visibility="uncounted">
             <h2>
-              <span class="lang-de">Funktionieren die drei Diagnosesysteme auch an anderen Fahrzeugen?</span>
+              <span class="lang-de">Funktionieren die zwei Hauptsysteme + AUTEL-Snapshot auch an anderen Fahrzeugen?</span>
               <span class="lang-en" hidden>Do the three diagnostic systems also work on other vehicles?</span>
             </h2>
             <div class="slide-content">
@@ -2236,9 +2236,9 @@
                   <div class="method-annotations backup-annotations">
                     <div class="method-annotations-header"><span class="lang-de">Kontext</span><span class="lang-en" hidden>Context</span></div>
                     <div class="method-note">
-                      <strong><span class="lang-de">AVL = ein System von dreien</span><span class="lang-en" hidden>AVL = one of three systems</span></strong><br>
-                      <span class="lang-de">Off-Board-Messung mit professionellem Laborgerät (0–1000V DC, ±0,5% Genauigkeit) — ergänzt OBD und AUTEL</span>
-                      <span class="lang-en" hidden>Off-board measurement with professional lab device (0–1000V DC, ±0.5% accuracy) — complements OBD and AUTEL</span>
+                      <strong><span class="lang-de">AVL = Hauptsystem (Snapshot-Referenz)</span><span class="lang-en" hidden>AVL = primary system (snapshot reference)</span></strong><br>
+                      <span class="lang-de">Snapshot-Messung über OBD-II (0–1000 V DC, ±0,5 % Herstellerangabe) — Referenzwert für die OBDLink-Zeitreihen; AUTEL ergänzt als Snapshot-Vergleich</span>
+                      <span class="lang-en" hidden>Snapshot measurement via OBD-II (0–1000 V DC, ±0.5 % manufacturer spec) — reference for OBDLink time series; AUTEL serves as supplementary snapshot comparison</span>
                     </div>
                     <div class="method-note">
                       <strong><span class="lang-de">Temperaturabhängigkeit</span><span class="lang-en" hidden>Temperature dependency</span></strong><br>
@@ -2379,9 +2379,9 @@
                       <span class="lang-en" hidden>0.1–0.15 C minimizes thermal effects and enables quasi-stationary measurement — applies to all on-board methods</span>
                     </div>
                     <div class="method-note">
-                      <strong><span class="lang-de">Ladeenergie → SOH<sub>e</sub></span><span class="lang-en" hidden>Charge energy → SOH<sub>e</sub></span></strong><br>
-                      <span class="lang-de">73,9 kWh / 77 kWh = 95,97% — direkte Grundlage für die energiebasierte SOH-Berechnung</span>
-                      <span class="lang-en" hidden>73.9 kWh / 77 kWh = 95.97% — direct basis for energy-based SOH calculation</span>
+                      <strong><span class="lang-de">Ladeenergie → Datengrundlage</span><span class="lang-en" hidden>Charge energy → data basis</span></strong><br>
+                      <span class="lang-de">73,9 kWh kumulierte Ladeenergie liefert die Zeitreihe; SOH<sub>e</sub> wird direkt aus dem BMS-Parameter „aktueller Energiegehalt" berechnet (= 99,6 % am VW ID.4 IfE)</span>
+                      <span class="lang-en" hidden>73.9 kWh cumulative charge energy provides the time series; SOH<sub>e</sub> is calculated directly from the BMS parameter "current energy content" (= 99.6 % on VW ID.4 IfE)</span>
                     </div>
                     <div class="method-note">
                       <strong>R<sub>i</sub> <span class="lang-de">Bewertung</span><span class="lang-en" hidden>Assessment</span></strong><br>

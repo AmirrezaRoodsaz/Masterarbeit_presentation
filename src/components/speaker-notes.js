@@ -30,7 +30,7 @@ export const SPEAKER_NOTES = {
   // ============================================================
 
   'slide-title': {
-    time: '0:00 – 0:30 (30 s)',
+    time: '0:00 – 0:20 (20 s)',
     bullets: {
       de: [
         'Begrüßung: „Sehr geehrte Prüfer, sehr geehrte Anwesende…"',
@@ -56,7 +56,7 @@ export const SPEAKER_NOTES = {
   },
 
   'slide-roadmap': {
-    time: '0:30 – 1:00 (30 s)',
+    time: '0:20 – 0:50 (30 s)',
     bullets: {
       de: [
         'Fünf Blöcke durchgehen: Motivation → Theorie → Methodik → Ergebnisse → Diskussion & Fazit',
@@ -86,7 +86,7 @@ export const SPEAKER_NOTES = {
   // ============================================================
 
   'slide-problem': {
-    time: '1:30 – 2:45 (75 s)',
+    time: '0:50 – 1:50 (60 s)',
     bullets: {
       de: [
         'Fünf Problemaspekte im Kreisdiagramm — Fragmente einzeln auslösen',
@@ -130,7 +130,7 @@ export const SPEAKER_NOTES = {
 
   // Phase 20: slide-gap + slide-contributions merged into one slide
   'slide-gap-contributions': {
-    time: '2:00 – 3:00 (60 s)',
+    time: '1:50 – 2:50 (60 s)',
     bullets: {
       de: [
         'Forschungslücke kompakt: BMS proprietär ±5–10 %, externe Diagnostik abweichend, Studien auf Laborzellen',
@@ -171,7 +171,7 @@ export const SPEAKER_NOTES = {
   // ============================================================
 
   'slide-battery-basics': {
-    time: '5:00 – 6:30 (90 s)',
+    time: '2:50 – 3:30 (40 s)',
     bullets: {
       de: [
         'Kalendarische Alterung: SEI-Wachstum, Kathoden-Degradation, Elektrolyt-Zersetzung, Arrhenius',
@@ -206,7 +206,7 @@ export const SPEAKER_NOTES = {
   },
 
   'slide-soh-definitions': {
-    time: '6:30 – 8:00 (90 s)',
+    time: '3:30 – 4:10 (40 s)',
     bullets: {
       de: [
         'Fünf Methoden nacheinander einblenden — Gleichungen erklären',
@@ -252,7 +252,7 @@ export const SPEAKER_NOTES = {
   // ============================================================
 
   'slide-tools': {
-    time: '4:30 – 5:30 (60 s)',
+    time: '4:10 – 5:10 (60 s)',
     bullets: {
       de: [
         '3-Ebenen-Modell oben: BMS / On-Board-Erfassung / Auswertung',
@@ -292,7 +292,7 @@ export const SPEAKER_NOTES = {
   },
 
   'slide-protocol': {
-    time: '9:15 – 10:15 (60 s)',
+    time: '5:10 – 5:50 (40 s)',
     bullets: {
       de: [
         'Fünf Phasen des standardisierten Protokolls',
@@ -328,7 +328,7 @@ export const SPEAKER_NOTES = {
   },
 
   'slide-discharge': {
-    time: '10:15 – 11:00 (45 s)',
+    time: '5:50 – 6:30 (40 s)',
     bullets: {
       de: [
         'Entladung durch normale Fahrt — kein spezieller Modus nötig',
@@ -359,7 +359,7 @@ export const SPEAKER_NOTES = {
   },
 
   'slide-charging': {
-    time: '11:00 – 12:00 (60 s)',
+    time: 'Backup (charging detail demoted in Phase 20)',
     bullets: {
       de: [
         'CC-Phase: Konstantstrom (~30 A), Spannung steigt, 0–80% SOC',
@@ -393,7 +393,7 @@ export const SPEAKER_NOTES = {
   },
 
   'slide-vehicles': {
-    time: '7:00 – 8:00 (60 s)',
+    time: '6:30 – 7:30 (60 s)',
     bullets: {
       de: [
         'Headline: 33 Einzelmessungen Dez 2024 – Dez 2025 auf MEB-Plattform',
@@ -436,7 +436,7 @@ export const SPEAKER_NOTES = {
   },
 
   'slide-pipeline': {
-    time: '13:00 – 14:00 (60 s)',
+    time: '7:30 – 8:00 (30 s)',
     bullets: {
       de: [
         'Pipeline: Datenquellen → 6 Berechnungsmethoden → kombinierter SOH',
@@ -466,7 +466,7 @@ export const SPEAKER_NOTES = {
   // ============================================================
 
   'slide-method-comparison': {
-    time: '14:00 – 15:30 (90 s)',
+    time: '8:00 – 9:00 (60 s)',
     bullets: {
       de: [
         'Lollipop-Chart: alle 6 Methoden + AVL-Referenz auf einer Achse',
@@ -509,7 +509,7 @@ export const SPEAKER_NOTES = {
   },
 
   'slide-reproducibility': {
-    time: '15:30 – 16:30 (60 s)',
+    time: '9:00 – 10:00 (60 s)',
     bullets: {
       de: [
         'Links: Algorithmische Reproduzierbarkeit — 3× gleicher Datensatz',
@@ -544,7 +544,7 @@ export const SPEAKER_NOTES = {
   },
 
   'slide-temperature': {
-    time: '16:30 – 17:30 (60 s)',
+    time: '10:00 – 10:45 (45 s)',
     bullets: {
       de: [
         'Slope-Chart: Session A (19°C) vs. Session B (9,8°C)',
@@ -582,7 +582,7 @@ export const SPEAKER_NOTES = {
   },
 
   'slide-resistance': {
-    time: '17:30 – 18:30 (60 s)',
+    time: 'Backup (resistance demoted in Phase 20)',
     bullets: {
       de: [
         'DC-Puls-Test bei 51,2% SOC, 34°C',
@@ -615,7 +615,7 @@ export const SPEAKER_NOTES = {
   },
 
   'slide-failure': {
-    time: '18:30 – 19:30 (60 s)',
+    time: 'Backup (failure case demoted in Phase 20)',
     bullets: {
       de: [
         'Vergleich: gutes SOC-Fenster (≥80%) vs. schlechtes (<50%)',
@@ -695,7 +695,7 @@ export const SPEAKER_NOTES = {
   },
 
   'slide-ica-dva': {
-    time: '20:30 – 21:30 (60 s)',
+    time: '10:45 – 11:30 (45 s)',
     bullets: {
       de: [
         'ICA: dQ/dV vs. V — Peaks zeigen Phasenübergänge (Graphit-Staging + NMC-Kathode)',
@@ -735,7 +735,7 @@ export const SPEAKER_NOTES = {
   },
 
   'slide-community': {
-    time: '21:30 – 22:30 (60 s)',
+    time: 'Backup (community demoted in Phase 20)',
     bullets: {
       de: [
         'VW ID.4 Community: n=273, μ=94,0%, 0–156.663 km',
@@ -770,7 +770,7 @@ export const SPEAKER_NOTES = {
   },
 
   'slide-demo-pro': {
-    time: '22:30 – 24:00 (90 s)',
+    time: '11:30 – 12:15 (45 s)',
     bullets: {
       de: [
         'Live-Demo der Pro-Version (Streamlit, Port 8501)',
@@ -800,7 +800,7 @@ export const SPEAKER_NOTES = {
   },
 
   'slide-demo-easy': {
-    time: '24:00 – 25:00 (60 s)',
+    time: '12:15 – 13:00 (45 s)',
     bullets: {
       de: [
         'Easy-Version: 4-Schritt-Assistent für Werkstätten',
@@ -834,7 +834,7 @@ export const SPEAKER_NOTES = {
   // ============================================================
 
   'slide-discussion': {
-    time: '13:30 – 14:00 (90 s)',
+    time: '13:00 – 14:15 (75 s)',
     bullets: {
       de: [
         'Stärken: ±1,6 Pp Genauigkeit, 3 × MEB-Verifikation (Elroq σ=0%), 0,1 Pp Temperaturrobustheit, 3-Tier-Kosten + OBDLink-Mehrwert, App',
@@ -879,7 +879,7 @@ export const SPEAKER_NOTES = {
   },
 
   'slide-uncertainty': {
-    time: '26:30 – 28:00 (90 s)',
+    time: 'Backup (uncertainty demoted in Phase 20)',
     bullets: {
       de: [
         'Unsicherheitsbudget: u_gesamt ≈ ±4,6 Pp',
@@ -924,7 +924,7 @@ export const SPEAKER_NOTES = {
   // ============================================================
 
   'slide-flowchart-gallery': {
-    time: '28:00 – 28:30 (30 s)',
+    time: 'Last main slide before backups (Q&A reference, uncounted)',
     bullets: {
       de: [
         'Galerie mit allen 39 PlantUML-Diagrammen (30 Flowcharts + 9 Architektur)',
@@ -954,7 +954,7 @@ export const SPEAKER_NOTES = {
   // ============================================================
 
   'slide-conclusion': {
-    time: '14:00 – 14:30 (30 s)',
+    time: '14:15 – 14:40 (25 s)',
     bullets: {
       de: [
         'Kernaussage prominent und klar — verifiziert auf der MEB-Plattform',
@@ -986,7 +986,7 @@ export const SPEAKER_NOTES = {
   },
 
   'slide-outlook': {
-    time: '14:30 – 14:50 (20 s)',
+    time: '14:40 – 14:55 (15 s)',
     bullets: {
       de: [
         'Anwendungen: Werkstätten, Flottenbetreiber, Versicherungen, Second Life',
@@ -1020,7 +1020,7 @@ export const SPEAKER_NOTES = {
 
   // Phase 20: closing Danke + Q&A invite
   'slide-thanks': {
-    time: '14:50 – 15:00 (10 s)',
+    time: '14:55 – 15:00 (5 s)',
     bullets: {
       de: [
         'Kurzes „Vielen Dank für Ihre Aufmerksamkeit"',
@@ -1191,11 +1191,11 @@ export const SPEAKER_NOTES = {
       ],
     },
     script: {
-      de: 'Das CC-CV-Profil zeigt die typische Ladekurve unserer AC-Wallbox-Messungen. Die niedrige C-Rate von 0,1 bis 0,15 C ermöglicht quasi-stationäre Bedingungen. 73,9 kWh Ladeenergie bei 77 kWh Nennkapazität ergibt direkt den SOH_e von 95,97%. Der DC-Puls-Test bei 51% SOC zeigt 40 mΩ Ladewiderstand und 33 mΩ Entladewiderstand — eine 22%-Asymmetrie, die physikalisch durch die unterschiedliche Impedanz an der Grenzfläche erklärbar ist.',
-      en: 'The CC-CV profile shows the typical charging curve of our AC wallbox measurements. The low C-rate of 0.1 to 0.15 C enables quasi-stationary conditions. 73.9 kWh charge energy at 77 kWh nominal capacity directly yields SOH_e of 95.97%. The DC pulse test at 51% SOC shows 40 mΩ charge resistance and 33 mΩ discharge resistance — a 22% asymmetry physically explained by different impedance at the interface.',
+      de: 'Das CC-CV-Profil zeigt die typische Ladekurve unserer AC-Wallbox-Messungen. Die niedrige C-Rate von 0,1 bis 0,15 C ermöglicht quasi-stationäre Bedingungen. 73,9 kWh kumulierte Ladeenergie über knapp 8 Stunden liefern die Zeitreihe für die Methodenpipeline. SOH_e wird dabei direkt aus dem BMS-Parameter „aktueller Energiegehalt" berechnet (= 99,6 % am VW ID.4 IfE), nicht als simples Verhältnis Lade-Energie/Nenn-Energie. Der DC-Puls-Test bei 51 % SOC zeigt 40 mΩ Ladewiderstand und 33 mΩ Entladewiderstand — eine ca. 22 %-Asymmetrie durch unterschiedliche Grenzflächen-Impedanz.',
+      en: 'The CC-CV profile shows the typical charging curve of our AC wallbox measurements. The low C-rate of 0.1 to 0.15 C enables quasi-stationary conditions. 73.9 kWh cumulative charge energy over almost 8 hours provides the time series for the method pipeline. SOH_e is calculated directly from the BMS parameter "current energy content" (= 99.6 % on VW ID.4 IfE), not as a simple ratio of charge energy to nominal energy. The DC pulse test at 51% SOC shows 40 mΩ charge resistance and 33 mΩ discharge resistance — an approximately 22% asymmetry from different interfacial impedance.',
     },
     dataCallouts: [
-      '73,9 kWh / 77 kWh = 95,97%',
+      '73,9 kWh kumulierte Ladeenergie · SOH_e = 99,6 % (BMS-direkt)',
       'R_i: 40 mΩ (Laden) / 33 mΩ (Entladen)',
     ],
     questions: [],
