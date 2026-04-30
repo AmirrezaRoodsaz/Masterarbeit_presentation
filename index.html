@@ -1282,8 +1282,8 @@
           <!-- Slide 15: DC pulse resistance -->
           <section id="slide-resistance" data-section="backup" data-visibility="uncounted">
             <h2>
-              <span class="lang-de">Der DC-Puls-Innenwiderstand des VW ID.4 beträgt 40 mΩ (Laden) und 33 mΩ (Relaxation) bei 51 % SOC</span>
-              <span class="lang-en" hidden>The DC pulse internal resistance of the VW ID.4 is 40 mΩ (charging) and 33 mΩ (relaxation) at 51% SOC</span>
+              <span class="lang-de">Der DC-Puls-Innenwiderstand des VW ID.4 beträgt 40 mΩ (Laden) und 33 mΩ (Entladen) bei 51 % SOC</span>
+              <span class="lang-en" hidden>The DC pulse internal resistance of the VW ID.4 is 40 mΩ (charging) and 33 mΩ (discharging) at 51% SOC</span>
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
@@ -1319,7 +1319,7 @@
                     <div class="method-note">
                       <span class="method-note-dot" style="background:var(--success)"></span>
                       <div>
-                        <strong><span class="lang-de">Laden &gt; Relaxation (~22 %)</span><span class="lang-en" hidden>Charging &gt; Relaxation (~22%)</span></strong>
+                        <strong><span class="lang-de">Laden &gt; Entladen (~22 %)</span><span class="lang-en" hidden>Charging &gt; Discharging (~22%)</span></strong>
                         <span class="lang-de"> — typische Asymmetrie durch unterschiedliche Impedanz der Elektroden-Elektrolyt-Grenzfläche</span>
                         <span class="lang-en" hidden> — typical asymmetry from different impedance of the electrode-electrolyte interface</span>
                       </div>
@@ -1468,9 +1468,9 @@
                     <!-- AVL system -->
                     <div class="intersystem-system avl">
                       <div class="intersystem-label">AVL HV-Check</div>
-                      <div class="intersystem-sublabel"><span class="lang-de">Off-Board Referenz</span><span class="lang-en" hidden>Off-board reference</span></div>
+                      <div class="intersystem-sublabel"><span class="lang-de">Snapshot-Referenz</span><span class="lang-en" hidden>Snapshot reference</span></div>
                       <div class="intersystem-value">97,3 <span class="intersystem-unit">%</span></div>
-                      <div class="intersystem-cost">&gt; €10.000</div>
+                      <div class="intersystem-cost"><span class="lang-de">~70 €/Jahr (Lizenz)</span><span class="lang-en" hidden>~€70/year (license)</span></div>
                     </div>
                     <!-- Delta bridge -->
                     <div class="intersystem-bridge">
@@ -1483,7 +1483,7 @@
                       <div class="intersystem-label">OBD (kombiniert)</div>
                       <div class="intersystem-sublabel">(SOH<sub>e</sub> + SOH<sub>c</sub>) / 2</div>
                       <div class="intersystem-value">95,7 <span class="intersystem-unit">%</span></div>
-                      <div class="intersystem-cost">~ €50</div>
+                      <div class="intersystem-cost"><span class="lang-de">~130 € einmalig</span><span class="lang-en" hidden>~€130 one-off</span></div>
                     </div>
                   </div>
                   <div class="intersystem-annotations">
@@ -1502,9 +1502,9 @@
                     <div class="method-note">
                       <span class="method-note-dot" style="background:var(--chart-blue)"></span>
                       <div>
-                        <strong><span class="lang-de">Kostenfaktor 200×</span><span class="lang-en" hidden>Cost factor 200×</span></strong>
-                        <span class="lang-de"> — OBD-Adapter (~€50) liefert vergleichbare Ergebnisse wie professionelles Laborgerät (&gt;€10.000)</span>
-                        <span class="lang-en" hidden> — OBD adapter (~€50) delivers comparable results to professional lab equipment (&gt;€10,000)</span>
+                        <strong><span class="lang-de">3-Tier-Kosten</span><span class="lang-en" hidden>3-tier cost</span></strong>
+                        <span class="lang-de"> — OBDLink ~130 € einmalig (keine Folgekosten) · AVL ~70 €/Jahr Lizenz · AUTEL ~8.000 €. OBDLink-Mehrwert: kontinuierliche Daten, die der AVL nicht liefert.</span>
+                        <span class="lang-en" hidden> — OBDLink ~€130 one-off (no recurring costs) · AVL ~€70/year license · AUTEL ~€8,000. OBDLink advantage: continuous data the AVL cannot provide.</span>
                       </div>
                     </div>
                     <div class="method-note">
@@ -1529,8 +1529,8 @@
               <div class="takeaway-box">
                 <div class="takeaway-label">Takeaway</div>
                 <p>
-                  <span class="lang-de">Die On-Board-Methode erreicht mit 1,6 Pp Abweichung praxistaugliche Genauigkeit — bei 1/200 der Kosten des AVL-Systems.</span>
-                  <span class="lang-en" hidden>The on-board method achieves practical accuracy with 1.6 pp deviation — at 1/200 the cost of the AVL system.</span>
+                  <span class="lang-de">Die On-Board-Methode erreicht mit 1,6 Pp Abweichung praxistaugliche Genauigkeit — bei einmalig ~130 € für den OBDLink und ohne laufende Kosten.</span>
+                  <span class="lang-en" hidden>The on-board method achieves practical accuracy with 1.6 pp deviation — at ~€130 one-off for the OBDLink and no recurring costs.</span>
                 </p>
               </div>
             </div>
@@ -1830,8 +1830,8 @@
           <!-- Slide 22: Uncertainty budget -->
           <section id="slide-uncertainty" data-section="backup" data-visibility="uncounted">
             <h2>
-              <span class="lang-de">Die Gesamtunsicherheit von ±4,5 Pp reicht aus, um Batteriezustandskategorien zu unterscheiden</span>
-              <span class="lang-en" hidden>The total uncertainty of ±4.5 pp is sufficient to distinguish battery condition categories</span>
+              <span class="lang-de">Die Gesamtunsicherheit von ±4,6 Pp reicht aus, um Batteriezustandskategorien zu unterscheiden</span>
+              <span class="lang-en" hidden>The total uncertainty of ±4.6 pp is sufficient to distinguish battery condition categories</span>
             </h2>
             <div class="slide-content">
               <div class="evidence-area">
@@ -1839,7 +1839,7 @@
                   <!-- Left: equation + component bars -->
                   <div class="uncertainty-main">
                     <div class="equation-block" style="margin-bottom: 1.5rem;">
-                      <div class="katex-eq">$$u_\text{gesamt} = \sqrt{u_\text{Mess}^2 + u_\text{Temp}^2 + u_\text{SOC}^2 + u_\text{Methode}^2} \approx \pm 4{,}5 \text{ Pp}$$</div>
+                      <div class="katex-eq">$$u_\text{gesamt} = \sqrt{u_\text{Mess}^2 + u_\text{Temp}^2 + u_\text{SOC}^2 + u_\text{Methode}^2} \approx \pm 4{,}6 \text{ Pp}$$</div>
                     </div>
                     <div class="uncertainty-bars">
                       <div class="uncertainty-row">
@@ -1886,8 +1886,8 @@
                     </div>
                     <div class="method-note">
                       <strong><span class="lang-de">Praxisrelevanz</span><span class="lang-en" hidden>Practical relevance</span></strong><br>
-                      <span class="lang-de">Zustandskategorien liegen 10 Pp auseinander (≥90% / ≥80% / &lt;70%) → ±4,5 Pp erlaubt zuverlässige Unterscheidung</span>
-                      <span class="lang-en" hidden>Condition categories are 10 pp apart (≥90% / ≥80% / &lt;70%) → ±4.5 pp allows reliable discrimination</span>
+                      <span class="lang-de">Zustandskategorien liegen 10 Pp auseinander (≥90% / ≥80% / &lt;70%) → ±4,6 Pp erlaubt zuverlässige Unterscheidung</span>
+                      <span class="lang-en" hidden>Condition categories are 10 pp apart (≥90% / ≥80% / &lt;70%) → ±4.6 pp allows reliable discrimination</span>
                     </div>
                     <div class="method-note">
                       <strong><span class="lang-de">Temperatureffekt</span><span class="lang-en" hidden>Temperature effect</span></strong><br>
@@ -2014,10 +2014,11 @@
                   <span class="lang-en" hidden>My special thanks to</span>
                 </h3>
                 <ul class="thanks-ack-list">
-                  <li><strong>Prof. Dr.-Ing. Kerstin Siebert</strong> · <span class="lang-de">Erstprüferin</span><span class="lang-en" hidden>First Examiner</span></li>
-                  <li><strong>Prof. Dr.-Ing. Michael Schugt</strong> · <span class="lang-de">Zweitprüfer</span><span class="lang-en" hidden>Second Examiner</span></li>
-                  <li><span class="lang-de">Institut für Elektromobilität, Hochschule Bochum</span><span class="lang-en" hidden>Institute for Electromobility, Bochum University of Applied Sciences</span></li>
-                  <li><span class="lang-de">Meiner Familie für die Unterstützung während der gesamten Studienzeit</span><span class="lang-en" hidden>My family for their support throughout my studies</span></li>
+                  <li><strong>Prof. Dr.-Ing. Kerstin Siebert</strong> · <span class="lang-de">Erstprüferin & Betreuung</span><span class="lang-en" hidden>First Examiner & Supervision</span></li>
+                  <li><strong>Prof. Dr.-Ing. Michael Schugt</strong> · <span class="lang-de">Zweitbegutachtung</span><span class="lang-en" hidden>Second Review</span></li>
+                  <li><strong>Simeon Kremzow-Tennie, M.Sc.</strong> · <span class="lang-de">fachliche Diskussionen am Institut für Elektromobilität</span><span class="lang-en" hidden>technical discussions at the Institute for Electromobility</span></li>
+                  <li><strong>Benjamin Geiger, M.Sc.</strong> · <span class="lang-de">Unterstützung bei den Messungen am VW ID.4</span><span class="lang-en" hidden>support with measurements on the VW ID.4</span></li>
+                  <li><strong>Maral Ghajarjazi, M.Sc.</strong> · <span class="lang-de">meine Frau — fachlicher Rat und Rückhalt während des gesamten Studiums</span><span class="lang-en" hidden>my wife — scientific advice and support throughout my studies</span></li>
                 </ul>
               </div>
               <div class="thanks-meta">
@@ -2502,8 +2503,8 @@
                     </div>
                     <div class="method-note">
                       <strong><span class="lang-de">Genauigkeit ausreichend</span><span class="lang-en" hidden>Accuracy sufficient</span></strong><br>
-                      <span class="lang-de">±4,5 Pp Unsicherheit bei 10 Pp Kategorieabstand → zuverlässige Einordnung mit jedem der drei Systeme</span>
-                      <span class="lang-en" hidden>±4.5 pp uncertainty at 10 pp category spacing → reliable classification with any of the three systems</span>
+                      <span class="lang-de">±4,6 Pp Unsicherheit bei 10 Pp Kategorieabstand → zuverlässige Einordnung mit jedem der drei Systeme</span>
+                      <span class="lang-en" hidden>±4.6 pp uncertainty at 10 pp category spacing → reliable classification with any of the three systems</span>
                     </div>
                   </div>
                 </div>
