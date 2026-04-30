@@ -32,21 +32,11 @@
     {
       "date": "2024-08-29",
       "system": "OBD",
-      "label": "AC-Puls bei 50 % SOC",
-      "label_en": "AC Pulse at 50% SOC",
+      "label": "DC-Puls bei 51,2 % SOC",
+      "label_en": "DC Pulse at 51.2% SOC",
       "km": null,
       "soh": null,
       "temp": 34
-    },
-    {
-      "date": "2024-08-29",
-      "system": "OBD",
-      "label": "DC-Puls bei 50 % SOC",
-      "label_en": "DC Pulse at 50% SOC",
-      "km": null,
-      "soh": null,
-      "temp": 34,
-      "offset_y": 1
     },
     {
       "date": "2024-12-19",
@@ -76,19 +66,10 @@
       "temp": 4.0
     },
     {
-      "date": "2025-04-09",
-      "system": "AVL",
-      "label": "AVL HV-Check #3",
-      "label_en": "AVL HV-Check #3",
-      "km": null,
-      "soh": null,
-      "temp": null
-    },
-    {
       "date": "2025-04-25",
       "system": "AVL",
-      "label": "AVL HV-Check #4a",
-      "label_en": "AVL HV-Check #4a",
+      "label": "AVL HV-Check #3a",
+      "label_en": "AVL HV-Check #3a",
       "km": 9872,
       "soh": 100.0,
       "temp": 10.5
@@ -96,8 +77,8 @@
     {
       "date": "2025-04-25",
       "system": "AVL",
-      "label": "AVL HV-Check #4b (Reproduzierbarkeit)",
-      "label_en": "AVL HV-Check #4b (Reproducibility)",
+      "label": "AVL HV-Check #3b (Reproduzierbarkeit)",
+      "label_en": "AVL HV-Check #3b (Reproducibility)",
       "km": 9872,
       "soh": 100.0,
       "temp": 10.5,
@@ -108,15 +89,6 @@
       "system": "AUTEL",
       "label": "AUTEL Messung #2",
       "label_en": "AUTEL Measurement #2",
-      "km": null,
-      "soh": null,
-      "temp": null
-    },
-    {
-      "date": "2025-07-02",
-      "system": "AVL",
-      "label": "AVL HV-Check #5",
-      "label_en": "AVL HV-Check #5",
       "km": null,
       "soh": null,
       "temp": null
@@ -151,16 +123,16 @@
     {
       "date": "2025-12-03",
       "system": "AVL",
-      "label": "AVL HV-Check #6 (Referenz)",
-      "label_en": "AVL HV-Check #6 (Reference)",
+      "label": "AVL HV-Check #5 (Referenz)",
+      "label_en": "AVL HV-Check #5 (Reference)",
       "km": 10801,
       "soh": 97.3,
       "temp": 24.0
     }
   ],
   "systems": {
-    "OBD": { "color": "#4C9AFF", "label": "OBDLink MX+", "count": 7 },
-    "AVL": { "color": "#00C9A7", "label": "AVL HV-Check", "count": 6 },
-    "AUTEL": { "color": "#9F7AEA", "label": "AUTEL MaxiSYS Ultra", "count": 3 }
+    "OBD": { "color": "#4C9AFF", "label": "OBDLink MX+", "count": 6, "role": "Hauptsystem" },
+    "AVL": { "color": "#00C9A7", "label": "AVL HV-Check", "count": 5, "role": "Hauptsystem" },
+    "AUTEL": { "color": "#9F7AEA", "label": "AUTEL MaxiSYS Ultra", "count": 3, "role": "ergänzend (Snapshot-Vergleich)" }
   }
 }
