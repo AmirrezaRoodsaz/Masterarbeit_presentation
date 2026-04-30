@@ -171,8 +171,20 @@ function updateActiveSection(deck) {
   const currentSlide = deck.getCurrentSlide();
   if (!currentSlide) return;
 
+  // When transiting an uncounted/backup slide during normal navigation
+  // (charging, resistance, failure, intersystem, community, uncertainty,
+  // flowchart-gallery, backups), keep the sidebar state stable — don't
+  // collapse the active section.
+  const isUncounted = currentSlide.getAttribute('data-visibility') === 'uncounted';
+  if (isUncounted) return;
+
   const currentSection = currentSlide.getAttribute('data-section');
-  const currentSlideIndex = deck.getSlidePastCount();
+
+  // Use DOM index instead of getSlidePastCount() — the latter counts
+  // only counted slides, so the sub-item highlight drifts by one every
+  // time we cross an uncounted slide.
+  const allSections = Array.from(document.querySelectorAll('.reveal .slides > section'));
+  const currentSlideIndex = allSections.indexOf(currentSlide);
 
   // Toggle active section + expand/collapse subsections
   document.querySelectorAll('.nav-group').forEach(group => {

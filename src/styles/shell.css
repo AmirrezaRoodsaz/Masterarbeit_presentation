@@ -86,7 +86,8 @@ body.theme-light .sidebar-logo {
   text-overflow: ellipsis;
 }
 
-/* Subsections — always visible (Phase 20: no collapse glitching between slides) */
+/* Subsections — collapsible with smooth max-height animation
+   (no display toggle — keeps layout stable, no glitch). */
 .nav-group {
   display: flex;
   flex-direction: column;
@@ -96,7 +97,13 @@ body.theme-light .sidebar-logo {
   display: flex;
   flex-direction: column;
   padding-left: 2.5rem;
+  max-height: 0;
   overflow: hidden;
+  transition: max-height 0.25s ease;
+}
+
+.nav-group.expanded .nav-subs {
+  max-height: 500px;
 }
 
 .nav-sub-item {
