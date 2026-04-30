@@ -215,9 +215,103 @@ Each phase: push main → create feature branch → implement → merge with app
 - [x] **Phase 14b:** Desktop/mobile mode toggle in settings, touch swipe, defense exit tab
 - [x] **Phase 15:** Visual polish — theme-aware CSS variables, light theme fixes, responsive scaling
 - [x] **Phase 16:** Speaker view — notes system, resizable panels, timer sync, presenter mode default, header logos
-- [ ] **Phase 17:** Fallbacks — PDF export, PPTX backup (sidebar buttons, client-side html2canvas + jsPDF + PptxGenJS)
-- [ ] **Phase 18:** Verify institutional requirements — time limit, language, required elements (logo, declaration), Q&A format
-- [ ] **Phase 19:** Distill core contribution — one sentence: *"This thesis demonstrates that ___ by ___, resulting in ___"*
+- [x] **Phase 17:** Fallbacks — PDF & PPTX export with modal popup, lazy-loaded libraries, GSAP reset for accurate captures
+- [x] **Phase 18:** Institutional requirements verified — all elements present (logos, examiners, title, date), fully offline, no Erklärung needed in presentation
+- [x] **Phase 19:** Distill core contribution — one sentence: *"This thesis demonstrates that the SOH of EV traction batteries can be determined reproducibly using on-board OBD diagnostics by combining energy-based and integrative methods, resulting in ±1.6 Pp agreement with professional off-board reference at ~€50 hardware cost."*
+
+- [ ] **Phase 20: Feedback-R2 + 15-min trim — final closure before defense (6. Mai 2026)**
+  Branch: `feat/phase-20-feedback-r2-15min`. Each numbered task = one self-contained chunk that should commit cleanly. After all checks pass: merge to main, push, project = done.
+
+  **Context.** Report received second feedback round (Simeon, 13.04.2026). Critical content drift between report and slides + presentation slot reduced from 20 → **15 min without Q&A**. Current deck has 28 main slides → must shrink to ~19 main + ~14 backups. Source feedback: `../Masterarbeit_v2/docs/betreuer_feedback_changelog.md` and `../Masterarbeit_v2/docs/Feedback_20260413.md`. Authoritative report state: `../Masterarbeit_v2/kapitel/`.
+
+  **Locked decisions (from interview).**
+  - Defense date on title slide: **6. Mai 2026** (replace "April 2026").
+  - **No Cupra Born real measurement data** — keep only as MEB-verification candidate label, not a measured vehicle card.
+  - **AUTEL** framed as in submitted report: "ergänzend für Snapshot-Vergleichsmessungen", visible but secondary. Costs from report: AVL ~70 €/Jahr Lizenz, OBDLink ~130 € einmalig, AUTEL ~8.000 € (R2-#7).
+  - **BMW i3s out of main scope** → demote `slide-intersystem` to backup, relabel as "kontextuelle Vergleichsmessung".
+  - **Flowchart gallery placement**: last slide before backups (between Danke-slide and backup section), so it's reachable for Q&A jumps but not part of main count.
+  - **Acknowledgments**: dedicated closing **Danke-Slide** with Prof. Siebert (Erstprüferin) + Prof. Schugt (Zweitprüfer) + IfE.
+  - **Both demos kept** (`slide-demo-pro` + `slide-demo-easy`) — they carry the visual narrative while user speaks less.
+  - **Vehicle slide headline**: use bericht numbers — total **33 Einzelmessungen Dez 2024 – Dez 2025**, VW ID.4 primary + Elroq/Born MEB-Verifikation. AUTEL row stays with footnote.
+  - **Verification (rehearsal, offline test, PDF/PPTX re-export) is part of this phase** — the phase only closes when every check passes.
+
+  ### Tasks
+
+  - [ ] **20.0 Branch + sanity-check** — push pending CLAUDE.md + thesis.pdf changes to `main` first, then create `feat/phase-20-feedback-r2-15min` from clean main.
+
+  - [ ] **20.1 Title slide (`slide-title`)** — date "April 2026" → "6. Mai 2026". Confirm subtitle still reads "On-Board- und Off-Board-Diagnosesystemen" (matches report).
+
+  - [ ] **20.2 Roadmap (`slide-roadmap`)** — agenda 6 → 5 items: merge "Diskussion" into "Fazit & Ausblick" tile (mirror the slide cuts).
+
+  - [ ] **20.3 Merge `slide-gap` + `slide-contributions` → one slide** — title "Forschungslücke & Beitrag". Lücke wording from Kap. 1.1 (Forschungsstand kompakt nach R1-#3). Contributions stay 3–4 verb-led bullets.
+
+  - [ ] **20.4 SOH definitions (`slide-soh-definitions`)** — spell out **HPPC = Hybrid Pulse Power Characterization** beim ersten Vorkommen (R2-#4). Verify all formulas match Kap. 2.4.
+
+  - [ ] **20.5 Tools slide (`slide-tools`)** — REWRITE per report's framing:
+    - Title: "Zwei Hauptdiagnosesysteme + ergänzender AUTEL-Snapshot"
+    - Table: AVL & OBDLink as primary, AUTEL row clearly tagged "ergänzend (Snapshot-Vergleich)"
+    - Costs: AVL "~70 €/Jahr (Lizenz)" not "~67 €/Monat"; AUTEL "~8.000 €" not "~5.500 €"; OBDLink "~130 € einmalig — keine Folgekosten"
+    - Add 3-Ebenen-Modell mini-strip (BMS / On-Board-Erfassung / nachgelagerte Auswertung) — R1-#5
+
+  - [ ] **20.6 Merge `slide-discharge` + `slide-charging` → one protocol-detail slide** — Entladung-Gauge + CC-CV-Profil nebeneinander, single takeaway box. Saves ~30 s.
+
+  - [ ] **20.7 Vehicles slide (`slide-vehicles`)** — REWRITE per submitted bericht:
+    - Title: "MEB-Plattform: VW ID.4 als Primärfahrzeug, Verifikation an Elroq + Born"
+    - Headline metric: "**33 Einzelmessungen Dez 2024 – Dez 2025**"
+    - Vehicle cards: VW ID.4 (large, primary), Skoda Elroq (small, "MEB-Verifikation, σ=0 % über 7 AVL-Messungen"), Cupra Born (small, "MEB-Verifikation, ergänzend, 1 AVL/1 OBD")
+    - Diagnosesysteme: AVL + OBDLink as Hauptsystem, AUTEL row with footnote "ergänzender Snapshot-Vergleich"
+
+  - [ ] **20.8 Pipeline slide (`slide-pipeline`)** — title hint "**Auswertung erfolgt nachgelagert in der Python-App (Ebene 3)**" to land 3-Ebenen-Modell.
+
+  - [ ] **20.9 Demote to backup** (move `<section>` blocks into the backup zone, preserve `data-visibility="uncounted"`):
+    - `slide-resistance` → backup
+    - `slide-failure` → backup
+    - `slide-intersystem` → backup, retitle "Kontextuelle Vergleichsmessung BMW i3s (außerhalb MEB-Scope)"
+    - `slide-community` → backup
+    - `slide-uncertainty` → backup (lift one bullet into discussion slide)
+    - `slide-flowchart-gallery` → place as last slide before backups (between Danke and backup section), keep `data-section="flowcharts"` but mark uncounted
+
+  - [ ] **20.10 Discussion slide (`slide-discussion`)** — REWRITE per R2-#7, R2-#8, R1-#26:
+    - Title: "Stärken, Limitationen & Reflexion der Ergebnisse" (R1-#26)
+    - Add Stärke: "OBDLink-Mehrwert: kontinuierliche Daten + keine Folgekosten" (R2-#7)
+    - Add Stärke / sub-row: 3-Tier-Cost (AUTEL ~8.000 € / AVL ~70 €/a / OBDLink ~130 € einmalig)
+    - Limitation "1 Fzg." → "MEB-fokussiert (3 Fahrzeuge MEB; BMW i3s nur kontextuell)"
+    - **Drop "Keine Temperaturkorrektur" Limitation** — moved to Future Work (R2-#8)
+    - Fold one essential u-budget number from removed `slide-uncertainty` into a note row
+
+  - [ ] **20.11 Conclusion slide (`slide-conclusion`)** — keep core sentence; replace stat-card sublabel "VW ID.4 (IfE)" → keep but add small note "MEB-Verifikation: Elroq + Born". **No new flowchart** (R2-#8 says no figures in Fazit).
+
+  - [ ] **20.12 Outlook slide (`slide-outlook`)** — REWRITE Future-Work bullet list:
+    - Add "Temperaturkorrektur (z. B. Arrhenius-Modell)" as **bullet only**, no flowchart (R2-#8)
+    - Add "Erweiterung auf weitere Plattformen (BMW i3s, Tesla, LFP-Chemie)" — explicit BMW future-work framing (R2-#3)
+    - Keep DC-Schnellladung, ICA/DVA-Validierung an gealterten Fahrzeugen, EU-Batteriepass
+
+  - [ ] **20.13 NEW `slide-thanks`** — closing slide before flowchart-gallery + backups. "Danke für Ihre Aufmerksamkeit", Q&A invite, named acknowledgments: Prof. Dr.-Ing. Kerstin Siebert (Erstprüferin), Prof. Dr.-Ing. Michael Schugt (Zweitprüfer), Institut für Elektromobilität, Familie. Same visual style as title slide.
+
+  - [ ] **20.14 Order in DOM**: title → roadmap → motivation → theory → method → results (4 result slides + 2 demos) → discussion → conclusion → outlook → **thanks** → **flowchart-gallery (last main, uncounted)** → backups. Confirm `data-visibility="uncounted"` set correctly so the slide counter reads the right number for main count.
+
+  - [ ] **20.15 Speaker notes** ([src/components/speaker-notes.js](src/components/speaker-notes.js)) — update notes for every changed/merged slide, delete entries for demoted slides (or move to backup section), add notes for new `slide-thanks`. Tighten timing hints — every slide should have a `[~XX s]` budget hint matching the 15-min plan.
+
+  - [ ] **20.16 Timer + agenda count** — speaker-view default timer 20:00 → **15:00**. Slide counter should reflect ~19 main slides. Test in defense mode.
+
+  - [ ] **20.17 Re-export PDF + PPTX** — open the deck, trigger PDF export modal, save as `public/Roodsaz_Kolloquium_2026-05-06.pdf` (or replace `public/thesis.pdf` consistently). Same for PPTX. Verify each main slide renders cleanly (no half-animated states).
+
+  - [ ] **20.18 Offline + projector test** — disconnect network, hard reload (Cmd-Shift-R), walk every main slide, verify no CDN calls leak through (check DevTools Network tab → only same-origin requests). Run at 1920×1080 + 16:10 to mimic projector. Test QR code with phone.
+
+  - [ ] **20.19 Two timed rehearsals** — speaker view + 15:00 timer, narrate fully. Each pass must land within ±30 s of 15:00. Note any slide that consistently runs long → trim.
+
+  - [ ] **20.20 Backup-jump check** — from Q&A simulation, verify all expected committee questions have a corresponding backup reachable via dropdown:
+    - "Was ist mit BMW i3s?" → `slide-backup-intersystem`
+    - "Wie sieht die Unsicherheitsbilanz im Detail aus?" → `slide-backup-uncertainty` (renamed from main)
+    - "Innenwiderstand?" → `slide-backup-resistance`
+    - "ICA/DVA Details?" → existing detail backup
+    - "Fehlerfall-Erkennung?" → `slide-backup-failure`
+    - "Welche öffentlichen Datensätze?" → `slide-backup-community`
+
+  - [ ] **20.21 Final commit + merge** — after all 20.x tasks pass, merge `feat/phase-20-feedback-r2-15min` to main, push, tag commit `defense-2026-05-06`. Update Phase 20 checkbox → `[x]`. Project = done.
+
+  ### Quality gates for "done"
+  Every gate from the existing list (one message per slide, takeaway boxes on result slides, baseline + sensitivity shown, contributions explicit, backups prepared, PDF fallback exported, offline test passed, target resolution tested) must pass after Phase 20. Re-walk the gate list before marking 20.21 complete.
 
 ## How to Use Skills
 
