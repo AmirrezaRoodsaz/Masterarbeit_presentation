@@ -1,17 +1,26 @@
 /**
- * Speaker Notes — bilingual content for all 36 slides.
+ * Speaker Notes — bilingual content for the defense deck.
  * Structure per slide: time, bullets (de/en), script (de/en),
  * dataCallouts, questions [{q,a}], transition (de/en).
  *
- * Time budget: 30 minutes total
- *   Opening     1:30  (slides 1-2)
- *   Motivation  3:30  (slides 3-5)
- *   Theory      3:00  (slides 6-7)
- *   Methodology 6:00  (slides 8-13)
- *   Results    11:00  (slides 14-23)
- *   Discussion  3:00  (slides 24-25)
- *   Flowcharts  0:30  (slide 26)
- *   Conclusion  1:30  (slides 27-28)
+ * Time budget: 15 minutes total (Phase 20 — defense 6. Mai 2026)
+ *   Opening      0:30  (title, roadmap)
+ *   Motivation   2:00  (problem, gap+contributions merged)
+ *   Theory       1:30  (battery-basics, soh-definitions)
+ *   Methodology  3:30  (tools, protocol, discharge, vehicles, pipeline)
+ *   Results      5:00  (method-comparison, reproducibility, temperature,
+ *                       ica-dva, demo-pro, demo-easy)
+ *   Discussion   1:30  (discussion — Stärken, Limitationen & Reflexion)
+ *   Conclusion   1:00  (conclusion, outlook, thanks)
+ *
+ * Demoted to backup (uncounted, available via dropdown for Q&A):
+ *   slide-resistance, slide-failure, slide-intersystem (BMW i3s out
+ *   of MEB scope), slide-community, slide-uncertainty, slide-charging,
+ *   slide-flowchart-gallery (last position before backups for diagram
+ *   jumping during Q&A).
+ *
+ * Removed entirely from main flow:
+ *   slide-contributions (merged into slide-gap-contributions).
  */
 
 export const SPEAKER_NOTES = {
@@ -41,23 +50,23 @@ export const SPEAKER_NOTES = {
     dataCallouts: [],
     questions: [],
     transition: {
-      de: 'Beginnen wir mit der Agenda — ich werde sechs Themenbereiche durchgehen.',
-      en: 'Let\'s start with the agenda — I will cover six topic areas.',
+      de: 'Beginnen wir mit der Agenda — fünf Themenbereiche in 15 Minuten.',
+      en: 'Let\'s start with the agenda — five topic areas in 15 minutes.',
     },
   },
 
   'slide-roadmap': {
-    time: '0:30 – 1:30 (60 s)',
+    time: '0:30 – 1:00 (30 s)',
     bullets: {
       de: [
-        'Sechs Blöcke durchgehen: Motivation → Theorie → Methodik → Ergebnisse → Diskussion → Fazit',
-        'Schwerpunkt liegt auf Ergebnissen (~11 Minuten) und Methodik (~6 Minuten)',
-        'Am Ende zwei Live-Demos der entwickelten Software',
+        'Fünf Blöcke durchgehen: Motivation → Theorie → Methodik → Ergebnisse → Diskussion & Fazit',
+        'Schwerpunkt liegt auf Ergebnissen (~5 Minuten) und Methodik (~3,5 Minuten)',
+        'Am Ende zwei kurze Live-Demos der entwickelten Software',
       ],
       en: [
-        'Walk through six blocks: Motivation → Theory → Methodology → Results → Discussion → Conclusion',
-        'Focus on Results (~11 minutes) and Methodology (~6 minutes)',
-        'Two live demos of the developed software at the end',
+        'Walk through five blocks: Motivation → Theory → Methodology → Results → Discussion & Conclusion',
+        'Focus on Results (~5 minutes) and Methodology (~3.5 minutes)',
+        'Two short live demos of the developed software at the end',
       ],
     },
     script: {
@@ -119,71 +128,38 @@ export const SPEAKER_NOTES = {
     },
   },
 
-  'slide-gap': {
-    time: '2:45 – 3:45 (60 s)',
+  // Phase 20: slide-gap + slide-contributions merged into one slide
+  'slide-gap-contributions': {
+    time: '2:00 – 3:00 (60 s)',
     bullets: {
       de: [
-        'Drei Aspekte der Forschungslücke im Dreieck',
-        '1. BMS-Algorithmen proprietär — keine unabhängige Verifikation',
-        '2. Externe Diagnostik widersprüchlich — OBD, Werkstattgeräte, Prüfstände',
-        '3. Labor vs. Realfahrzeug — meiste Studien an Laborzellen, nicht an realen Fahrzeugen',
-        'Forschungslücke-Box am Ende',
+        'Forschungslücke kompakt: BMS proprietär ±5–10 %, externe Diagnostik abweichend, Studien auf Laborzellen',
+        'Forschungsfrage prominent: reproduzierbar + praxistauglich + On-/Off-Board',
+        'Vier Beiträge in einer Reihe: B1 Evaluation, B2 Protokoll, B3 Software, B4 Einflussfaktoren',
+        'B1-Wording: zwei Hauptdiagnosesysteme + ergänzender AUTEL-Snapshot',
       ],
       en: [
-        'Three aspects of the research gap in triangle',
-        '1. BMS algorithms proprietary — no independent verification',
-        '2. External diagnostics contradictory — OBD, workshop tools, test stands',
-        '3. Lab vs. real vehicles — most studies use lab cells, not real vehicles',
-        'Research gap box at the end',
+        'Gap in one line: BMS proprietary ±5–10 %, external diagnostics divergent, studies on lab cells',
+        'Research question prominent: reproducible + practical + on/off-board',
+        'Four contributions in a row: B1 evaluation, B2 protocol, B3 software, B4 influence factors',
+        'B1 wording: two primary diagnostic systems + supplementary AUTEL snapshot',
       ],
     },
     script: {
-      de: 'Die Forschungslücke zeigt sich in drei Dimensionen: Erstens sind BMS-Algorithmen proprietär und nicht unabhängig verifizierbar. Zweitens liefern verschiedene externe Diagnosesysteme widersprüchliche Ergebnisse. Und drittens — und das ist besonders relevant — nutzen die meisten Studien Laborzellen unter idealen Bedingungen, aber es gibt keinen systematischen Vergleich an realen Fahrzeugen mit kommerziellen Diagnosegeräten. Genau diese Lücke schließt meine Arbeit.',
-      en: 'The research gap manifests in three dimensions: First, BMS algorithms are proprietary and cannot be independently verified. Second, different external diagnostic systems deliver contradicting results. And third — particularly relevant — most studies use lab cells under ideal conditions, but there is no systematic comparison on real vehicles with commercial diagnostic tools. This is exactly the gap my thesis addresses.',
-    },
-    dataCallouts: [],
-    questions: [
-      {
-        q: { de: 'Welche Studien haben Sie als Stand der Technik herangezogen?', en: 'Which studies did you use as state of the art?' },
-        a: { de: 'Xiong 2018 (BMS-Algorithmen), Waag 2014 (Impedanzmethoden), Berecibar 2016 (Degradationsdiagnose). Die meisten dieser Arbeiten nutzen jedoch Laborzellen, nicht reale Fahrzeuge mit kommerziellen Diagnosesystemen.', en: 'Xiong 2018 (BMS algorithms), Waag 2014 (impedance methods), Berecibar 2016 (degradation diagnosis). Most of these use lab cells, not real vehicles with commercial diagnostic systems.' },
-      },
-    ],
-    transition: {
-      de: 'Aus dieser Lücke leite ich die Forschungsfrage und sechs konkrete Beiträge ab.',
-      en: 'From this gap, I derive the research question and six concrete contributions.',
-    },
-  },
-
-  'slide-contributions': {
-    time: '3:45 – 5:00 (75 s)',
-    bullets: {
-      de: [
-        'Forschungsfrage prominent zeigen',
-        'Vier Beitragsgruppen im Quadrat — Fragmente auslösen',
-        'B1: Systematische Evaluation dreier Diagnosesysteme',
-        'B2 + B6: Standardisiertes Messprotokoll + Praxisempfehlungen',
-        'B3 + B5: 6 SOH-Methoden + Python-Streamlit-App',
-        'B4: Einflussfaktoren quantifiziert (Temperatur, SOC-Fenster)',
-      ],
-      en: [
-        'Show research question prominently',
-        'Four contribution groups in square — trigger fragments',
-        'C1: Systematic evaluation of three diagnostic systems',
-        'C2 + C6: Standardized protocol + practical recommendations',
-        'C3 + C5: 6 SOH methods + Python Streamlit app',
-        'C4: Influence factors quantified (temperature, SOC window)',
-      ],
-    },
-    script: {
-      de: 'Meine Forschungsfrage lautet: Wie kann der State of Health von Traktionsbatterien reproduzierbar und praxistauglich mittels On-Board- und Off-Board-Diagnostik bestimmt werden? Daraus ergeben sich sechs Beiträge: Erstens die systematische Evaluation dreier Diagnosesysteme — AVL HV-Check, OBDLink MX+ und AUTEL MaxiSYS Ultra. Zweitens ein standardisiertes Messprotokoll für reproduzierbare Messungen. Drittens die Implementierung und der Vergleich von sechs SOH-Berechnungsmethoden in einer Python-Anwendung. Und viertens die Quantifizierung der Einflussfaktoren Temperatur und SOC-Fenster.',
-      en: 'My research question is: How can the State of Health of traction batteries be determined reproducibly and practically using on-board and off-board diagnostics? This yields six contributions: First, systematic evaluation of three diagnostic systems — AVL HV-Check, OBDLink MX+, and AUTEL MaxiSYS Ultra. Second, a standardized measurement protocol. Third, implementation and comparison of six SOH calculation methods in a Python application. And fourth, quantification of temperature and SOC window influence factors.',
+      de: 'Die Forschungslücke ist klar: BMS-Algorithmen sind proprietär mit ±5–10 % Abweichung, externe Diagnosegeräte liefern abweichende Werte, und die meisten Studien nutzen Laborzellen — eine standardisierte, reproduzierbare Methodik am realen Fahrzeug fehlt. Daraus meine Forschungsfrage: Wie lässt sich der SOH reproduzierbar und praxistauglich bestimmen? Vier Beiträge: Erstens die systematische Evaluation der zwei Hauptdiagnosesysteme — AVL HV-Check und OBDLink MX+, ergänzt durch den AUTEL als Snapshot-Vergleich. Zweitens ein standardisiertes Messprotokoll. Drittens sechs SOH-Methoden in einer Python-App. Und viertens die Quantifizierung der wichtigsten Einflussfaktoren.',
+      en: 'The research gap is clear: BMS algorithms are proprietary with ±5–10 % deviation, external diagnostics deliver divergent values, and most studies use lab cells — a standardized, reproducible methodology on real vehicles is missing. Hence my research question: How can SOH be determined reproducibly and practically? Four contributions: first, systematic evaluation of two primary diagnostic systems — AVL HV-Check and OBDLink MX+, supplemented by the AUTEL as snapshot comparison. Second, a standardized measurement protocol. Third, six SOH methods in a Python app. And fourth, quantification of the key influence factors.',
     },
     dataCallouts: [
-      '3 Diagnosesysteme / diagnostic systems',
+      '2 Hauptsysteme + 1 ergänzend / 2 primary + 1 supplementary',
       '6 SOH-Berechnungsmethoden / calculation methods',
       '33 Einzelmessungen / individual measurements',
     ],
-    questions: [],
+    questions: [
+      {
+        q: { de: 'Welche Studien haben Sie als Stand der Technik herangezogen?', en: 'Which studies did you use as state of the art?' },
+        a: { de: 'Xiong 2018 (BMS-Algorithmen), Waag 2014 (Impedanzmethoden), Berecibar 2016 (Degradationsdiagnose). Die meisten dieser Arbeiten nutzen Laborzellen, nicht reale Fahrzeuge mit kommerziellen Diagnosesystemen.', en: 'Xiong 2018 (BMS algorithms), Waag 2014 (impedance methods), Berecibar 2016 (degradation diagnosis). Most of these use lab cells, not real vehicles with commercial diagnostic systems.' },
+      },
+    ],
     transition: {
       de: 'Bevor wir in die Methodik einsteigen, zunächst die theoretischen Grundlagen.',
       en: 'Before diving into methodology, first the theoretical foundations.',
@@ -276,35 +252,37 @@ export const SPEAKER_NOTES = {
   // ============================================================
 
   'slide-tools': {
-    time: '8:00 – 9:15 (75 s)',
+    time: '4:30 – 5:30 (60 s)',
     bullets: {
       de: [
-        'Drei Systeme nacheinander einblenden — Tabelle + Sticker-Bilder',
-        'AVL HV-Check: Off-Board-Referenz, Snapshot, PDF-Bericht, ~67 €/Monat',
-        'OBDLink MX+: On-Board, Consumer, kontinuierliche Zeitreihen, CSV, ~130 €',
-        'AUTEL MaxiSYS Ultra: Off-Board, herstellerübergreifend, Snapshot, >5.500 €',
-        'Rollenverteilung betonen: Referenz, Hauptdatenquelle, Zweite Referenz',
+        '3-Ebenen-Modell oben: BMS / On-Board-Erfassung / Auswertung',
+        'Hauptsysteme: AVL HV-Check (Snapshot-Referenz, ~70 €/Jahr Lizenz) + OBDLink MX+ (kontinuierlich, ~130 € einmalig — keine Folgekosten)',
+        'AUTEL MaxiSYS Ultra: ergänzend (Snapshot-Vergleich, ~8.000 €) — visuell zurückgenommen',
+        'OBDLink-Mehrwert betonen: Daten, die mit AVL nicht möglich sind, plus keine laufenden Kosten',
       ],
       en: [
-        'Reveal three systems one by one — table + sticker images',
-        'AVL HV-Check: off-board reference, snapshot, PDF report, ~67€/month',
-        'OBDLink MX+: on-board, consumer, continuous time series, CSV, ~130€',
-        'AUTEL MaxiSYS Ultra: off-board, cross-manufacturer, snapshot, >5,500€',
-        'Emphasize roles: reference, primary data source, second reference',
+        '3-level model on top: BMS / on-board acquisition / post-processing',
+        'Primary: AVL HV-Check (snapshot reference, ~€70/year license) + OBDLink MX+ (continuous, ~€130 one-off — no recurring costs)',
+        'AUTEL MaxiSYS Ultra: supplementary (snapshot comparison, ~€8,000) — visually downplayed',
+        'Emphasize OBDLink advantage: data not possible with AVL, plus no recurring costs',
       ],
     },
     script: {
-      de: 'Wir nutzen drei Diagnosesysteme, die das gesamte Spektrum abdecken. Der AVL HV-Check ist unsere professionelle Off-Board-Referenz — er liest den BMS-SOH direkt aus und liefert einen PDF-Prüfbericht. Der OBDLink MX+ ist ein kostengünstiger Consumer-Adapter für etwa 130 Euro, der über Bluetooth kontinuierliche Zeitreihen liefert — alle 96 Zellspannungen, 24 Temperatursensoren, Strom und Spannung mit etwa einer Sekunde Abtastrate. Er ist unsere Hauptdatenquelle für die SOH-Berechnung. Das AUTEL MaxiSYS Ultra dient als zweite Referenz — ein professionelles Werkstattgerät für über 5.500 Euro, das herstellerübergreifend eingesetzt werden kann.',
-      en: 'We use three diagnostic systems covering the full spectrum. The AVL HV-Check is our professional off-board reference — it reads the BMS SOH directly and delivers a PDF test report. The OBDLink MX+ is a consumer adapter for about 130 euros that delivers continuous time series via Bluetooth — all 96 cell voltages, 24 temperature sensors, current and voltage at about one second sampling rate. It is our primary data source for SOH calculation. The AUTEL MaxiSYS Ultra serves as second reference — a professional workshop device for over 5,500 euros with cross-manufacturer support.',
+      de: 'Zwei Hauptdiagnosesysteme decken das Spektrum ab — beide greifen über OBD-II auf das BMS zu. Der AVL HV-Check ist unsere Snapshot-Referenz: er liest den BMS-SOH direkt aus und kostet etwa 70 Euro pro Jahr im Lizenzmodell. Der OBDLink MX+ ist der zentrale Mehrwert dieser Arbeit: ein Consumer-Adapter für 130 Euro einmalig, ohne Folgekosten, der kontinuierliche Zeitreihen liefert — also genau die Daten, die der AVL nicht liefern kann. Das AUTEL MaxiSYS Ultra dient ergänzend als Snapshot-Vergleich. Oben sehen Sie das 3-Ebenen-Modell: Im Fahrzeug läuft das BMS, beide Hauptsysteme erfassen On-Board, und die eigentliche SOH-Auswertung dieser Arbeit findet nachgelagert in der Python-App statt.',
+      en: 'Two primary diagnostic systems cover the spectrum — both access the BMS via OBD-II. The AVL HV-Check is our snapshot reference: it reads BMS SOH directly and costs about €70 per year on a license model. The OBDLink MX+ is the key contribution of this work: a consumer adapter at €130 one-off, no recurring costs, delivering continuous time series — exactly the data the AVL cannot provide. The AUTEL MaxiSYS Ultra is supplementary as snapshot comparison. The 3-level model above: BMS runs in the vehicle, both primary systems acquire on-board, and the actual SOH analysis of this work happens downstream in the Python app.',
     },
     dataCallouts: [
-      'AVL: ~67 €/Monat, OBD: ~130 €, AUTEL: >5.500 €',
+      'AVL: ~70 €/Jahr Lizenz · OBDLink: ~130 € einmalig · AUTEL: ~8.000 €',
       '96 Zellspannungen + 24 Temperatursensoren via OBD',
     ],
     questions: [
       {
         q: { de: 'Warum nicht direkt an der Batterie messen statt über OBD?', en: 'Why not measure directly at the battery instead of via OBD?' },
         a: { de: 'Das würde den Eingriff in das Hochvoltsystem erfordern — sicherheitskritisch und für den Werkstattalltag nicht praktikabel. Der OBD-Zugang ist zerstörungsfrei und standardisiert.', en: 'That would require intervention in the high-voltage system — safety-critical and not practical for workshop use. OBD access is non-destructive and standardized.' },
+      },
+      {
+        q: { de: 'Warum ist der AUTEL nicht Hauptsystem?', en: 'Why is the AUTEL not a primary system?' },
+        a: { de: 'Wir haben mit dem AUTEL nur Snapshot-Vergleichsmessungen durchgeführt. Die kontinuierlichen Daten — die Grundlage für eigene SOH-Berechnungen — kommen vom OBDLink. Daher ergänzend, nicht primär.', en: 'We only did snapshot comparison measurements with the AUTEL. The continuous data — the basis for our own SOH calculations — comes from the OBDLink. Hence supplementary, not primary.' },
       },
     ],
     transition: {
@@ -415,36 +393,40 @@ export const SPEAKER_NOTES = {
   },
 
   'slide-vehicles': {
-    time: '12:00 – 13:00 (60 s)',
+    time: '7:00 – 8:00 (60 s)',
     bullets: {
       de: [
-        'VW ID.4: 77 kWh NMC 712, 288 Zellen, MEB-Plattform, 10.801 km',
-        'Warum VW ID.4? MEB ist meistverkaufte EV-Architektur in Europa + vollständiger OBD-Zugang',
-        '16 Messungen über 12 Monate mit allen drei Systemen',
-        '6 AVL + 7 OBD + 3 AUTEL',
-        'Timeline-Chart zeigt den Messfortschritt',
+        'Headline: 33 Einzelmessungen Dez 2024 – Dez 2025 auf MEB-Plattform',
+        'Primärfahrzeug VW ID.4 (IfE): 77 kWh NMC 712, 288 Zellen, MEB, 10.801 km, SOH 97,3 %',
+        'Hauptsysteme markiert; AUTEL ergänzend (visuell zurückgenommen)',
+        'MEB-Verifikation: Skoda Elroq (7 AVL, σ=0% über 9 Monate, 12.572 km) + Cupra Born (1 AVL/1 OBD, ergänzend)',
+        'BMW i3s NICHT erwähnen — ist nur kontextuelle Vergleichsmessung im Backup',
       ],
       en: [
-        'VW ID.4: 77 kWh NMC 712, 288 cells, MEB platform, 10,801 km',
-        'Why VW ID.4? MEB is best-selling EV architecture in Europe + full OBD access',
-        '16 measurements over 12 months with all three systems',
-        '6 AVL + 7 OBD + 3 AUTEL',
-        'Timeline chart shows measurement progress',
+        'Headline: 33 individual measurements Dec 2024 – Dec 2025 on MEB platform',
+        'Primary vehicle VW ID.4 (IfE): 77 kWh NMC 712, 288 cells, MEB, 10,801 km, SOH 97.3 %',
+        'Primary systems flagged; AUTEL supplementary (visually downplayed)',
+        'MEB verification: Skoda Elroq (7 AVL, σ=0% over 9 months, 12,572 km) + Cupra Born (1 AVL/1 OBD, supplementary)',
+        'Do NOT mention BMW i3s — only contextual comparison in backup',
       ],
     },
     script: {
-      de: 'Unser primäres Versuchsfahrzeug ist ein institutseigener VW ID.4 auf der MEB-Plattform mit 77 kWh NMC 712-Batterie und einem Kilometerstand von 10.801 km. Die Wahl fiel auf den ID.4 aus zwei Gründen: Die MEB-Plattform ist die meistverkaufte EV-Architektur in Europa, und es besteht vollständiger OBD-Zugang zu allen 96 Zellspannungen. Über 12 Monate haben wir 16 Messungen mit allen drei Diagnosesystemen durchgeführt — sechs mit dem AVL, sieben mit OBD und drei mit AUTEL.',
-      en: 'Our primary test vehicle is an institutional VW ID.4 on the MEB platform with 77 kWh NMC 712 battery and 10,801 km mileage. The ID.4 was chosen for two reasons: the MEB platform is the best-selling EV architecture in Europe, and there is full OBD access to all 96 cell voltages. Over 12 months, we performed 16 measurements with all three diagnostic systems — six with AVL, seven with OBD, and three with AUTEL.',
+      de: 'Insgesamt 33 Einzelmessungen über ein Jahr — der Schwerpunkt liegt auf der MEB-Plattform. Primärfahrzeug ist unser institutseigener VW ID.4 mit 77-kWh-NMC-712-Batterie, MEB-Plattform, 10.801 Kilometer Laufleistung und einem aktuellen BMS-SOH von 97,3 Prozent. Hauptsysteme: AVL HV-Check und OBDLink — der AUTEL ergänzend. Die Übertragbarkeit auf die MEB-Plattform haben wir am Skoda Elroq verifiziert: sieben AVL-Messungen über neun Monate mit perfekter Reproduzierbarkeit Sigma gleich null. Der Cupra Born dient als ergänzende Plattform-Verifikation.',
+      en: 'A total of 33 individual measurements over one year — the focus is on the MEB platform. Primary vehicle is our institutional VW ID.4 with 77 kWh NMC 712 battery, MEB platform, 10,801 km mileage and a current BMS SOH of 97.3 percent. Primary systems: AVL HV-Check and OBDLink — AUTEL supplementary. Transferability to the MEB platform was verified on the Skoda Elroq: seven AVL measurements over nine months with perfect reproducibility, sigma equals zero. The Cupra Born serves as supplementary platform verification.',
     },
     dataCallouts: [
-      '77 kWh · NMC 712 · 288 Zellen · MEB',
-      '16 Messungen / measurements über / over 12 Monate / months',
-      'SOH 97,3% (AVL, Dez. 2025)',
+      '33 Einzelmessungen Dez 2024 – Dez 2025',
+      'VW ID.4 (Haupt) · Elroq (σ=0%, 7 AVL) · Born (ergänzend)',
+      'SOH 97,3% (AVL, VW ID.4 IfE)',
     ],
     questions: [
       {
-        q: { de: 'Warum nur ein Primärfahrzeug? Wäre mehr Fahrzeuge nicht besser?', en: 'Why only one primary vehicle? Wouldn\'t more be better?' },
-        a: { de: 'Für die detaillierte On-Board-Analyse mit allen sechs Methoden haben wir den VW ID.4 gewählt. Zusätzlich wurden 5 weitere Fahrzeuge für Werkzeugvalidierung getestet (BMW i3s, Skoda Elroq, Cupra Born, Renault Zoe). Die Erweiterung auf mehr Fahrzeuge ist als Ausblick formuliert.', en: 'For detailed on-board analysis with all six methods, we chose the VW ID.4. Additionally, 5 more vehicles were tested for tool validation (BMW i3s, Skoda Elroq, Cupra Born, Renault Zoe). Expansion to more vehicles is formulated as outlook.' },
+        q: { de: 'Warum kein BMW i3s als Verifikation?', en: 'Why no BMW i3s as verification?' },
+        a: { de: 'Wir haben am BMW i3s Vergleichsmessungen durchgeführt — 0,4 Pp Inter-System-Übereinstimmung — aber bewusst auf die MEB-Plattform fokussiert, weil die kontinuierliche OBD-Datenerfassung mit allen sechs Methoden nur dort vollständig durchgeführt wurde. Die BMW-Messungen liegen im Backup und sind kontextuell, nicht als Validierung gedacht. Erweiterung auf andere Plattformen ist als Future Work formuliert.', en: 'We did comparison measurements on the BMW i3s — 0.4 pp inter-system agreement — but deliberately focused on the MEB platform, because the full continuous OBD data acquisition with all six methods was only performed there. The BMW measurements are in the backup as contextual, not as validation. Extension to other platforms is formulated as future work.' },
+      },
+      {
+        q: { de: 'Warum nur ein Primärfahrzeug?', en: 'Why only one primary vehicle?' },
+        a: { de: 'Für die detaillierte On-Board-Analyse mit allen sechs Methoden haben wir den VW ID.4 gewählt. Drei MEB-Fahrzeuge insgesamt — VW ID.4 als Hauptfahrzeug, Elroq und Born zur Plattform-Verifikation.', en: 'For detailed on-board analysis with all six methods we chose the VW ID.4. Three MEB vehicles in total — VW ID.4 as primary, Elroq and Born for platform verification.' },
       },
     ],
     transition: {
@@ -850,33 +832,47 @@ export const SPEAKER_NOTES = {
   // ============================================================
 
   'slide-discussion': {
-    time: '25:00 – 26:30 (90 s)',
+    time: '13:30 – 14:00 (90 s)',
     bullets: {
       de: [
-        'Stärken: ±1,6 Pp Genauigkeit, 0,1 Pp Temperaturrobustheit, 200× Kostenvorteil, automatisierte App',
-        'Limitationen: 1 Primärfahrzeug, nur AC-Ladung, keine signifikante Alterung, keine Temperaturkorrektur, keine ISO-Validierung',
+        'Stärken: ±1,6 Pp Genauigkeit, 3 × MEB-Verifikation (Elroq σ=0%), 0,1 Pp Temperaturrobustheit, 3-Tier-Kosten + OBDLink-Mehrwert, App',
+        'OBDLink-Mehrwert klar machen: kontinuierliche Daten, die mit AVL nicht möglich sind, plus keine Folgekosten',
+        '3-Tier-Kosten in einer Zeile: AUTEL ~8.000 € · AVL ~70 €/Jahr · OBDLink ~130 € einmalig',
+        'Limitationen: MEB-fokussiert (BMW i3s nur kontextuell), nur AC, >97 % keine Alterung, ±4,6 Pp Gesamtunsicherheit, keine ISO-Validierung',
+        'KEINE Temperaturkorrektur erwähnen als Limitation — die ist jetzt im Ausblick (Future Work)',
         'Ehrlich kommunizieren — zeigt wissenschaftliche Integrität',
       ],
       en: [
-        'Strengths: ±1.6 pp accuracy, 0.1 pp temperature robustness, 200× cost advantage, automated app',
-        'Limitations: 1 primary vehicle, AC only, no significant aging, no temperature correction, no ISO validation',
+        'Strengths: ±1.6 pp accuracy, 3 × MEB verification (Elroq σ=0%), 0.1 pp temp robustness, 3-tier cost + OBDLink advantage, app',
+        'Make OBDLink advantage clear: continuous data not possible with AVL, plus no recurring costs',
+        '3-tier cost in one line: AUTEL ~€8000 · AVL ~€70/yr · OBDLink ~€130 one-off',
+        'Limitations: MEB-focused (BMW i3s only contextual), AC only, >97% no aging, ±4.6 pp total uncertainty, no ISO validation',
+        'Do NOT mention temp correction as limitation — moved to future work',
         'Communicate honestly — shows scientific integrity',
       ],
     },
     script: {
-      de: 'Auf der Stärkenseite: Wir erreichen eine reproduzierbare SOH-Bestimmung mit nur 1,6 Prozentpunkten Abweichung zur Referenz, die Kombination ist mit 0,1 Prozentpunkten temperaturrobust, und der OBD-Adapter kostet nur ein Zweihundertstel des AVL-Systems. Aber ich möchte auch ehrlich die Limitationen benennen: Die detaillierte Analyse wurde nur am VW ID.4 durchgeführt — die Übertragbarkeit auf andere Plattformen und Zellchemien ist nicht gesichert. Alle Ladungen erfolgten mit AC — kein DC-Schnellladen. Das Fahrzeug zeigt mit über 97 Prozent SOH keine signifikante Alterung, und die Arrhenius-Temperaturkorrektur liefert bei niedrigen Temperaturen unplausible Ergebnisse. Eine unabhängige Laborvalidierung nach ISO 12405 war nicht möglich.',
-      en: 'On the strengths side: we achieve reproducible SOH determination with only 1.6 pp deviation from reference, the combination is temperature-robust at 0.1 pp, and the OBD adapter costs only 1/200th of the AVL system. But I want to honestly name the limitations: detailed analysis was only done on the VW ID.4 — transferability to other platforms and cell chemistries is not assured. All charging was AC — no DC fast charging. The vehicle shows no significant aging at over 97% SOH, and the Arrhenius temperature correction produces implausible results at low temperatures. Independent lab validation per ISO 12405 was not possible.',
+      de: 'Stärken: Wir erreichen eine reproduzierbare SOH-Bestimmung mit 1,6 Prozentpunkten Abweichung am VW ID.4, verifiziert auf der MEB-Plattform am Skoda Elroq mit perfekter Reproduzierbarkeit über sieben Messungen. Die kombinierte Methode ist mit 0,1 Prozentpunkten temperaturrobust. Der entscheidende OBDLink-Mehrwert: kontinuierliche Datenerfassung, die der AVL gar nicht leisten kann — bei einmalig 130 Euro und ohne Folgekosten, gegenüber 70 Euro pro Jahr beim AVL und 8.000 Euro beim AUTEL. Ehrlich auf der Limitationsseite: Die Arbeit ist MEB-fokussiert — der BMW i3s ist nur eine kontextuelle Vergleichsmessung im Backup. Wir hatten keine DC-Schnellladedaten, das Fahrzeug zeigt keine signifikante Alterung, und die Gesamtunsicherheit liegt bei rund ±4,6 Prozentpunkten — dominiert durch Methodenstreuung und SOC-Fenster. Eine unabhängige Laborvalidierung nach ISO 12405 war nicht möglich.',
+      en: 'Strengths: reproducible SOH with 1.6 pp deviation on the VW ID.4, verified on the MEB platform at the Skoda Elroq with perfect reproducibility over seven measurements. Combined method is temperature-robust at 0.1 pp. Key OBDLink advantage: continuous data acquisition the AVL simply cannot provide — at €130 one-off with no recurring costs, vs. €70/year for AVL and €8000 for AUTEL. Honestly on limitations: the work is MEB-focused — BMW i3s is only a contextual comparison in backup. No DC fast-charging data, no significant aging in the measurement window, and total uncertainty is around ±4.6 pp — dominated by method spread and SOC window. Independent lab validation per ISO 12405 was not possible.',
     },
-    dataCallouts: [],
+    dataCallouts: [
+      'AUTEL ~8.000 € · AVL ~70 €/Jahr · OBDLink ~130 € einmalig',
+      '±1,6 Pp · σ = 0 % (Elroq) · 0,1 Pp Temperaturrobustheit',
+      '±4,6 Pp Gesamtunsicherheit (dominiert durch Methode + SOC)',
+    ],
     questions: [
       {
-        q: { de: 'Wie ließe sich die größte Limitation (1 Fahrzeug) adressieren?', en: 'How could the biggest limitation (1 vehicle) be addressed?' },
-        a: { de: 'Im Ausblick formuliert: Erweiterung auf LFP-Chemie (BYD, Tesla) und weitere MEB-Fahrzeuge. Zusätzlich Fahrzeuge mit bekannter Degradation (50k–150k km) für ICA/DVA-Validierung.', en: 'Formulated in outlook: extension to LFP chemistry (BYD, Tesla) and more MEB vehicles. Additionally, vehicles with known degradation (50k–150k km) for ICA/DVA validation.' },
+        q: { de: 'Wie ließe sich die größte Limitation adressieren?', en: 'How could the biggest limitation be addressed?' },
+        a: { de: 'Im Ausblick formuliert: Erweiterung auf weitere Plattformen (BMW i3s, Tesla, LFP) — die Methoden bleiben gleich, nur PIDs/Kanäle anpassen. Zusätzlich Fahrzeuge mit bekannter Degradation (50k–150k km) für ICA/DVA-Validierung und Temperaturkorrektur als zukünftige Forschung.', en: 'Formulated in outlook: extension to other platforms (BMW i3s, Tesla, LFP) — methods stay the same, only PIDs/channels need adjustment. Additionally vehicles with known degradation (50k–150k km) for ICA/DVA validation and temperature correction as future work.' },
+      },
+      {
+        q: { de: 'Was kostet das gesamte Setup?', en: 'What does the full setup cost?' },
+        a: { de: 'OBDLink MX+ ~130 Euro einmalig, plus Smartphone/Tablet (vorhanden), plus die Python-App (Open Source). Keine Folgekosten. Im direkten Vergleich: AVL HV-Check etwa 70 Euro pro Jahr Lizenzgebühr, AUTEL MaxiSYS Ultra rund 8.000 Euro einmalig.', en: 'OBDLink MX+ ~€130 one-off, plus smartphone/tablet (already owned), plus the Python app (open source). No recurring costs. Direct comparison: AVL HV-Check about €70/year license, AUTEL MaxiSYS Ultra around €8,000 one-off.' },
       },
     ],
     transition: {
-      de: 'Wie groß ist die Gesamtunsicherheit und reicht sie für die Praxis?',
-      en: 'How large is the total uncertainty and is it sufficient for practice?',
+      de: 'Damit zur Kernaussage meiner Arbeit.',
+      en: 'This brings us to the core finding of my thesis.',
     },
   },
 
@@ -956,27 +952,29 @@ export const SPEAKER_NOTES = {
   // ============================================================
 
   'slide-conclusion': {
-    time: '28:30 – 29:15 (45 s)',
+    time: '14:00 – 14:30 (30 s)',
     bullets: {
       de: [
-        'Kernaussage prominent und klar',
-        'Drei Kennzahlen: 95,7% kombinierter SOH, 0,1 Pp Temperaturrobustheit, 1,6 Pp AVL↔OBD',
+        'Kernaussage prominent und klar — verifiziert auf der MEB-Plattform',
+        'OBD-Adapter ~130 € einmalig, keine Folgekosten',
+        'Drei Kennzahlen: 95,7 % kombinierter SOH · 0,1 Pp Temperaturrobustheit · 1,6 Pp AVL↔OBD',
         'Langsam und deutlich sprechen — dies ist der wichtigste Satz der Präsentation',
       ],
       en: [
-        'Core claim prominent and clear',
-        'Three metrics: 95.7% combined SOH, 0.1 pp temperature robustness, 1.6 pp AVL↔OBD',
+        'Core claim prominent and clear — verified on the MEB platform',
+        'OBD adapter ~€130 one-off, no recurring costs',
+        'Three metrics: 95.7 % combined SOH · 0.1 pp temperature robustness · 1.6 pp AVL↔OBD',
         'Speak slowly and clearly — this is the most important sentence of the presentation',
       ],
     },
     script: {
-      de: 'Die Kernaussage meiner Arbeit lautet: Die Kombination von energiebasierter und integrativer SOH-Methode ermöglicht eine reproduzierbare Bestimmung des Batteriezustands mit einem kostengünstigen OBD-Adapter für rund 50 Euro — bei einer Abweichung von nur 1,6 Prozentpunkten zur professionellen Off-Board-Referenz. Drei Zahlen zum Mitnehmen: 95,7 Prozent kombinierter SOH, 0,1 Prozentpunkte Temperaturrobustheit, und 1,6 Prozentpunkte Übereinstimmung zwischen OBD und AVL.',
-      en: 'The core finding of my thesis is: The combination of energy-based and integrative SOH methods enables reproducible battery health determination with a low-cost OBD adapter for about 50 euros — at a deviation of only 1.6 percentage points from the professional off-board reference. Three numbers to remember: 95.7% combined SOH, 0.1 pp temperature robustness, and 1.6 pp agreement between OBD and AVL.',
+      de: 'Die Kernaussage meiner Arbeit lautet: Die Kombination von energiebasierter und integrativer SOH-Methode ermöglicht eine reproduzierbare Bestimmung des Batteriezustands mit einem kostengünstigen OBD-Adapter für rund 130 Euro — einmalig und ohne Folgekosten — bei einer Abweichung von nur 1,6 Prozentpunkten zur professionellen Off-Board-Referenz. Verifiziert auf der MEB-Plattform an Skoda Elroq und Cupra Born. Drei Zahlen zum Mitnehmen: 95,7 Prozent kombinierter SOH, 0,1 Prozentpunkte Temperaturrobustheit, und 1,6 Prozentpunkte Übereinstimmung zwischen OBD und AVL.',
+      en: 'The core finding of my thesis is: The combination of energy-based and integrative SOH methods enables reproducible battery health determination with a low-cost OBD adapter for about 130 euros — one-off and without recurring costs — at a deviation of only 1.6 percentage points from the professional off-board reference. Verified on the MEB platform at Skoda Elroq and Cupra Born. Three numbers to remember: 95.7% combined SOH, 0.1 pp temperature robustness, and 1.6 pp agreement between OBD and AVL.',
     },
     dataCallouts: [
-      '95,7% kombinierter SOH / combined SOH',
+      '95,7 % kombinierter SOH / combined SOH',
       '0,1 Pp Temperaturrobustheit / temperature robustness',
-      '1,6 Pp AVL ↔ OBD Übereinstimmung / agreement',
+      '1,6 Pp AVL ↔ OBD · MEB-Verif. Elroq + Born',
     ],
     questions: [],
     transition: {
@@ -986,26 +984,60 @@ export const SPEAKER_NOTES = {
   },
 
   'slide-outlook': {
-    time: '29:15 – 30:00 (45 s)',
+    time: '14:30 – 14:50 (20 s)',
     bullets: {
       de: [
-        'Praxisanwendungen: Werkstätten, Flottenbetreiber, Versicherungen, Second Life',
-        'Zukünftige Forschung: LFP-Chemie, DC-Schnellladen, gealterte Fahrzeuge, ML-Korrektur, EU-Batteriepass',
-        'Abschluss: „Vielen Dank — ich freue mich auf Ihre Fragen."',
+        'Anwendungen: Werkstätten, Flottenbetreiber, Versicherungen, Second Life',
+        'Zukünftige Forschung — Erweiterung auf weitere Plattformen (BMW i3s, Tesla, LFP) ZUERST nennen',
+        'Temperaturkorrektur (Arrhenius-Modell) als Bullet — kein Flowchart!',
+        'Weitere: DC-Schnellladen, gealterte Fahrzeuge, ML-Korrektur, EU-Batteriepass',
+        'Sehr kurz halten — direkt weiter zur Danke-Folie',
       ],
       en: [
         'Applications: workshops, fleet operators, insurance, second life',
-        'Future research: LFP chemistry, DC fast charging, aged vehicles, ML correction, EU battery passport',
-        'Closing: "Thank you — I look forward to your questions."',
+        'Future research — extension to other platforms (BMW i3s, Tesla, LFP) FIRST',
+        'Temperature correction (Arrhenius model) as bullet — no flowchart!',
+        'Plus: DC fast charging, aged vehicles, ML correction, EU battery passport',
+        'Keep very brief — straight to thank-you slide',
       ],
     },
     script: {
-      de: 'Die entwickelten Verfahren sind direkt anwendbar in Werkstätten für standardisierte SOH-Prüfungen, bei Flottenbetreibern für Langzeitmonitoring, bei Versicherungen für Restwertbestimmung und für die Second-Life-Klassifizierung. Für die Zukunft sehe ich fünf Richtungen: Erweiterung auf LFP-Chemie, DC-Schnelllade-Messungen, gealterte Fahrzeuge für ICA/DVA-Validierung, ML-basierte Korrekturfaktoren und die Integration in den ab 2027 verpflichtenden EU-Batteriepass. Vielen Dank für Ihre Aufmerksamkeit — ich freue mich auf Ihre Fragen.',
-      en: 'The developed methods are directly applicable in workshops for standardized SOH testing, for fleet operators for long-term monitoring, for insurance for residual value determination, and for second-life classification. For the future, I see five directions: extension to LFP chemistry, DC fast charging measurements, aged vehicles for ICA/DVA validation, ML-based correction factors, and integration into the EU battery passport mandatory from 2027. Thank you for your attention — I look forward to your questions.',
+      de: 'Die entwickelten Verfahren sind direkt anwendbar in Werkstätten, bei Flottenbetreibern, bei Versicherungen und für die Second-Life-Klassifizierung. Für die Zukunft sehe ich vor allem die Erweiterung auf weitere Plattformen — BMW i3s, Tesla, LFP-Chemie. Die Methoden bleiben gleich, nur Kanäle und PIDs müssen angepasst werden. Außerdem Temperaturkorrektur, DC-Schnellladen, gealterte Fahrzeuge, ML-Korrektur und der EU-Batteriepass.',
+      en: 'The developed methods are directly applicable in workshops, for fleet operators, for insurance, and for second-life classification. For the future, the priority is extension to other platforms — BMW i3s, Tesla, LFP chemistry. Methods stay the same, only channels and PIDs need adjustment. Also temperature correction, DC fast charging, aged vehicles, ML correction, and the EU battery passport.',
     },
     dataCallouts: [
+      'BMW i3s · Tesla · LFP — Erweiterung als Future Work',
       'EU-Batteriepass ab 2027 / EU Battery Passport from 2027',
     ],
+    questions: [],
+    transition: {
+      de: '',
+      en: '',
+    },
+  },
+
+  // Phase 20: closing Danke + Q&A invite
+  'slide-thanks': {
+    time: '14:50 – 15:00 (10 s)',
+    bullets: {
+      de: [
+        'Kurzes „Vielen Dank für Ihre Aufmerksamkeit"',
+        'Q&A-Einladung',
+        'Acknowledgments NICHT alle einzeln vorlesen — die stehen auf der Folie',
+        'Kurz Augenkontakt zum Prüfer, dann Bühne abgeben',
+      ],
+      en: [
+        'Short "Thank you for your attention"',
+        'Q&A invite',
+        'Do NOT read out all acknowledgments — they are on the slide',
+        'Brief eye contact with examiner, then yield the floor',
+      ],
+    },
+    script: {
+      de: 'Vielen Dank für Ihre Aufmerksamkeit — ich freue mich auf Ihre Fragen.',
+      en: 'Thank you for your attention — I look forward to your questions.',
+    },
+    dataCallouts: [],
     questions: [],
     transition: {
       de: '',
