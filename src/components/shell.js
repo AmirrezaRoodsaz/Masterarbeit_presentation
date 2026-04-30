@@ -171,14 +171,16 @@ function updateActiveSection(deck) {
   const currentSlide = deck.getCurrentSlide();
   if (!currentSlide) return;
 
-  // When transiting an uncounted/backup slide during normal navigation
-  // (charging, resistance, failure, intersystem, community, uncertainty,
-  // flowchart-gallery, backups), keep the sidebar state stable — don't
-  // collapse the active section.
-  const isUncounted = currentSlide.getAttribute('data-visibility') === 'uncounted';
-  if (isUncounted) return;
-
   const currentSection = currentSlide.getAttribute('data-section');
+
+  // Only skip when crossing a real backup slide (data-section="backup")
+  // during normal navigation — keeps the previous section expanded so
+  // the sidebar doesn't collapse mid-arrow-press while traversing
+  // charging, resistance, failure, intersystem, community, uncertainty,
+  // backup-* etc. Slides with their own real section (opening,
+  // motivation, theory, method, results, discussion, flowcharts) DO
+  // update the sidebar even if data-visibility="uncounted".
+  if (currentSection === 'backup') return;
 
   // Use DOM index instead of getSlidePastCount() — the latter counts
   // only counted slides, so the sub-item highlight drifts by one every
