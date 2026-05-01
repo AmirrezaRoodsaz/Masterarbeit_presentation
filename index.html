@@ -382,50 +382,120 @@
                   </div>
                 </div>
 
-                <!-- Bottom: 4 contribution cards -->
-                <div class="contributions-grid">
-                  <div class="contribution-card fragment" data-fragment-index="3" style="--card-color: #E2001A;">
-                    <div class="contribution-num" style="background: #E2001A;">B1</div>
-                    <div class="contribution-title">
-                      <span class="lang-de">Systematische Evaluation</span>
-                      <span class="lang-en" hidden>Systematic Evaluation</span>
+                <!-- Bottom: 4-segment cycle (matches slide-problem visual language) -->
+                <div class="cycle-layout" style="flex: 1;">
+                  <!-- Left text blocks: 4 (top-left, yellow), 3 (bottom-left, teal) -->
+                  <div class="cycle-texts cycle-texts-left">
+                    <div class="cycle-text-block fragment cycle-reveal" data-segment="4" data-fragment-index="6">
+                      <div class="cycle-text-num" style="background: #FFB800;">B4</div>
+                      <div>
+                        <div class="cycle-text-title">
+                          <span class="lang-de">Einflussfaktoren</span>
+                          <span class="lang-en" hidden>Influencing Factors</span>
+                        </div>
+                        <div class="cycle-text-desc">
+                          <span class="lang-de">Quantifizierung der Auswirkungen von Temperatur, SOC-Fenster und Ladeleistung auf die SOH-Bestimmung</span>
+                          <span class="lang-en" hidden>Quantification of temperature, SOC window and charging power effects on SOH determination</span>
+                        </div>
+                      </div>
                     </div>
-                    <div class="contribution-desc">
-                      <span class="lang-de">Vergleich zweier Hauptdiagnosesysteme (AVL HV-Check + OBDLink MX+) ergänzt durch AUTEL-Snapshot, am realen MEB-Fahrzeug</span>
-                      <span class="lang-en" hidden>Comparison of two primary diagnostic systems (AVL HV-Check + OBDLink MX+) supplemented by AUTEL snapshot, on a real MEB vehicle</span>
-                    </div>
-                  </div>
-                  <div class="contribution-card fragment" data-fragment-index="4" style="--card-color: #4C9AFF;">
-                    <div class="contribution-num" style="background: #4C9AFF;">B2</div>
-                    <div class="contribution-title">
-                      <span class="lang-de">Messprotokoll</span>
-                      <span class="lang-en" hidden>Measurement Protocol</span>
-                    </div>
-                    <div class="contribution-desc">
-                      <span class="lang-de">Standardisiertes Entlade-/Ladeprotokoll mit praxisorientierten Empfehlungen für den Werkstattalltag</span>
-                      <span class="lang-en" hidden>Standardized discharge/charge protocol with practice-oriented recommendations for workshops</span>
-                    </div>
-                  </div>
-                  <div class="contribution-card fragment" data-fragment-index="5" style="--card-color: #00C9A7;">
-                    <div class="contribution-num" style="background: #00C9A7;">B3</div>
-                    <div class="contribution-title">
-                      <span class="lang-de">Software & Methoden</span>
-                      <span class="lang-en" hidden>Software & Methods</span>
-                    </div>
-                    <div class="contribution-desc">
-                      <span class="lang-de">Sechs SOH-Berechnungsmethoden in einer Python-Streamlit-App mit PDF-Bericht und SQLite-Persistenz</span>
-                      <span class="lang-en" hidden>Six SOH calculation methods in a Python Streamlit app with PDF reporting and SQLite persistence</span>
+                    <div class="cycle-text-block fragment cycle-reveal" data-segment="3" data-fragment-index="5">
+                      <div class="cycle-text-num" style="background: #00C9A7;">B3</div>
+                      <div>
+                        <div class="cycle-text-title">
+                          <span class="lang-de">Software & Methoden</span>
+                          <span class="lang-en" hidden>Software & Methods</span>
+                        </div>
+                        <div class="cycle-text-desc">
+                          <span class="lang-de">Sechs SOH-Berechnungsmethoden in einer Python-Streamlit-App mit PDF-Bericht und SQLite-Persistenz</span>
+                          <span class="lang-en" hidden>Six SOH calculation methods in a Python Streamlit app with PDF reporting and SQLite persistence</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="contribution-card fragment" data-fragment-index="6" style="--card-color: #FFB800;">
-                    <div class="contribution-num" style="background: #FFB800;">B4</div>
-                    <div class="contribution-title">
-                      <span class="lang-de">Einflussfaktoren</span>
-                      <span class="lang-en" hidden>Influencing Factors</span>
+
+                  <!-- Center: 4-segment rounded square SVG (clockwise: 1=TR, 2=BR, 3=BL, 4=TL) -->
+                  <svg class="cycle-svg" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Segment 1: Evaluation (top-right) -->
+                    <path class="cycle-segment" data-segment="1" d="M324.4,214.4 C354.0,222.8 377.3,246.1 385.7,275.7 C388.1,284.1 395.9,289.9 404.6,289.9 L586.4,289.9 C585.8,213.5 571.4,137.2 542.7,64.8 L542.7,64.8 C468.5,32.7 389.5,15.7 310.2,13.8 L310.2,195.5 C310.2,204.2 316.0,212.0 324.4,214.4 Z" fill="#E2001A"/>
+                    <!-- Segment 2: Messprotokoll (bottom-right) -->
+                    <path class="cycle-segment" data-segment="2" d="M385.7,324.4 C377.3,354.0 353.9,377.3 324.4,385.7 C315.9,388.1 310.1,395.9 310.1,404.7 L310.1,586.5 C386.5,585.9 462.9,571.5 535.2,542.8 L535.2,542.8 C567.3,468.5 584.3,389.5 586.2,310.2 L404.6,310.2 C395.8,310.2 388.0,316.0 385.6,324.5 Z" fill="#4C9AFF"/>
+                    <!-- Segment 3: Software (bottom-left) -->
+                    <path class="cycle-segment" data-segment="3" d="M275.6,385.7 C246.0,377.4 222.7,354.0 214.3,324.4 C211.9,316.0 204.1,310.2 195.4,310.2 L13.6,310.2 C14.2,386.6 28.6,462.9 57.3,535.3 C131.5,567.4 210.5,584.4 289.8,586.3 L289.8,404.6 C289.8,395.9 284.0,388.1 275.6,385.7 Z" fill="#00C9A7"/>
+                    <!-- Segment 4: Einflussfaktoren (top-left) -->
+                    <path class="cycle-segment" data-segment="4" d="M64.7,57.3 C32.6,131.6 15.7,210.6 13.7,289.9 L195.4,289.9 C204.2,289.9 211.9,284.1 214.3,275.6 C222.7,246.0 246.1,222.8 275.6,214.3 C284.1,211.9 289.9,204.2 289.9,195.4 L289.9,13.6 C213.5,14.2 137.1,28.6 64.8,57.3 L64.8,57.3 Z" fill="#FFB800"/>
+
+                    <!-- Icons (Lucide-style strokes) -->
+                    <!-- 1: clipboard-check (top-right, evaluation) -->
+                    <g transform="translate(443,154) scale(1.5)" class="cycle-icon-g" data-segment="1">
+                      <g transform="translate(-12,-12)">
+                        <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/>
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                        <path d="m9 14 2 2 4-4"/>
+                      </g>
+                    </g>
+                    <!-- 2: file-text (bottom-right, protocol) -->
+                    <g transform="translate(443,444) scale(1.5)" class="cycle-icon-g" data-segment="2">
+                      <g transform="translate(-12,-12)">
+                        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+                        <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+                        <path d="M10 9H8"/>
+                        <path d="M16 13H8"/>
+                        <path d="M16 17H8"/>
+                      </g>
+                    </g>
+                    <!-- 3: code-xml (bottom-left, software) -->
+                    <g transform="translate(157,444) scale(1.5)" class="cycle-icon-g" data-segment="3">
+                      <g transform="translate(-12,-12)">
+                        <path d="m18 16 4-4-4-4"/>
+                        <path d="m6 8-4 4 4 4"/>
+                        <path d="m14.5 4-5 16"/>
+                      </g>
+                    </g>
+                    <!-- 4: thermometer (top-left, influencing factors) -->
+                    <g transform="translate(157,154) scale(1.5)" class="cycle-icon-g" data-segment="4">
+                      <g transform="translate(-12,-12)">
+                        <path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/>
+                      </g>
+                    </g>
+
+                    <!-- Center: target (research goal) -->
+                    <g transform="translate(300,300) scale(2)" class="cycle-icon-g" style="stroke: var(--text-secondary);">
+                      <g transform="translate(-12,-12)">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="12" r="6"/>
+                        <circle cx="12" cy="12" r="2"/>
+                      </g>
+                    </g>
+                  </svg>
+
+                  <!-- Right text blocks: 1 (top-right, red), 2 (bottom-right, blue) -->
+                  <div class="cycle-texts cycle-texts-right">
+                    <div class="cycle-text-block fragment cycle-reveal" data-segment="1" data-fragment-index="3">
+                      <div class="cycle-text-num" style="background: #E2001A;">B1</div>
+                      <div>
+                        <div class="cycle-text-title">
+                          <span class="lang-de">Systematische Evaluation</span>
+                          <span class="lang-en" hidden>Systematic Evaluation</span>
+                        </div>
+                        <div class="cycle-text-desc">
+                          <span class="lang-de">Vergleich zweier Hauptdiagnosesysteme (AVL HV-Check + OBDLink MX+) ergänzt durch AUTEL-Snapshot, am realen MEB-Fahrzeug</span>
+                          <span class="lang-en" hidden>Comparison of two primary diagnostic systems (AVL HV-Check + OBDLink MX+) supplemented by AUTEL snapshot, on a real MEB vehicle</span>
+                        </div>
+                      </div>
                     </div>
-                    <div class="contribution-desc">
-                      <span class="lang-de">Quantifizierung der Auswirkungen von Temperatur, SOC-Fenster und Ladeleistung auf die SOH-Bestimmung</span>
-                      <span class="lang-en" hidden>Quantification of temperature, SOC window and charging power effects on SOH determination</span>
+                    <div class="cycle-text-block fragment cycle-reveal" data-segment="2" data-fragment-index="4">
+                      <div class="cycle-text-num" style="background: #4C9AFF;">B2</div>
+                      <div>
+                        <div class="cycle-text-title">
+                          <span class="lang-de">Messprotokoll</span>
+                          <span class="lang-en" hidden>Measurement Protocol</span>
+                        </div>
+                        <div class="cycle-text-desc">
+                          <span class="lang-de">Standardisiertes Entlade-/Ladeprotokoll mit praxisorientierten Empfehlungen für den Werkstattalltag</span>
+                          <span class="lang-en" hidden>Standardized discharge/charge protocol with practice-oriented recommendations for workshops</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
