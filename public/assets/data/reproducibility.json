@@ -10,7 +10,8 @@
     "rating_en": "EXCELLENT"
   },
   "measurement": [
-    { "vehicle": "VW ID.4 (IfE)", "n": 5, "timespan": "12 Monate", "soh_min": 97.3, "soh_max": 100.0, "sigma": 1.20 },
-    { "vehicle": "VW ID.4 (FP)", "n": 3, "timespan": "6 Monate", "soh_min": 96.2, "soh_max": 98.1, "sigma": 1.00 }
+    { "vehicle": "Skoda Elroq (IfE)", "n": 7, "timespan": "9 Monate", "soh_min": 100.0, "soh_max": 100.0, "sigma": 0.00, "note": "MEB-Verifikation" },
+    { "vehicle": "VW ID.4 (IfE)", "n": 5, "timespan": "12 Monate", "soh_min": 97.3, "soh_max": 100.0, "sigma": 1.20, "note": "Primärfahrzeug" },
+    { "vehicle": "VW ID.4 (FP)", "n": 3, "timespan": "6 Monate", "soh_min": 96.2, "soh_max": 98.1, "sigma": 1.00, "note": "Privatfahrzeug, höhere km" }
   ]
 }

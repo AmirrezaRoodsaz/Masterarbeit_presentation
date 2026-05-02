@@ -699,8 +699,8 @@ function renderPrintNotes() {
     </style>
     <div class="print-header">
       <h1>Speaker Notes — SOH Elektrofahrzeuge</h1>
-      <p>Amirreza Roodsaz · Masterarbeit Kolloquium · April 2026</p>
-      <p style="font-size:0.85rem;">30 Minuten · 28 Hauptfolien + 8 Backup</p>
+      <p>Amirreza Roodsaz · Masterarbeit Kolloquium · 6. Mai 2026</p>
+      <p style="font-size:0.85rem;">15 Minuten · ~19 Hauptfolien + ~14 Backup</p>
     </div>
   `;
 

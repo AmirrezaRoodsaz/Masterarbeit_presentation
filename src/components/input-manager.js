@@ -10,6 +10,10 @@ let gamepadRAF = null;
 let lastGamepadButtons = [];
 let lastStickTime = 0;
 let settingsModalOpen = false;
+// Per-button debounce timestamps (ms). Phase 20: prevents bouncy
+// gamepad buttons from registering twice in quick succession.
+let lastButtonDispatchAt = [];
+const BUTTON_DEBOUNCE_MS = 80;
 
 // Track if settings modal is open (to suppress navigation)
 document.addEventListener('settings-modal-open', () => { settingsModalOpen = true; });
@@ -48,9 +52,23 @@ function dispatch(action) {
     case 'firstSlide':
       deck.slide(0);
       break;
-    case 'lastSlide':
+    case 'lastSlide': {
+      // Phase 20: jump to slide-thanks (the last counted main slide).
+      // flowchart-gallery + backups follow but should NOT be the
+      // target of a "last slide" command during normal navigation.
+      const target = document.getElementById('slide-thanks');
+      if (target) {
+        const sections = Array.from(document.querySelectorAll('.reveal .slides > section'));
+        const idx = sections.indexOf(target);
+        if (idx >= 0) {
+          deck.slide(idx);
+          break;
+        }
+      }
+      // Fallback if slide-thanks isn't in the DOM
       deck.slide(deck.getTotalSlides() - 1);
       break;
+    }
     case 'defenseMode':
       toggleDefenseMode();
       break;
@@ -132,6 +150,8 @@ function initKeyboardHandler() {
       if (!boundKey) continue;
       if (key === boundKey || key.toLowerCase() === boundKey) {
         e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
         dispatch(action);
         return;
       }
@@ -143,12 +163,14 @@ function initKeyboardHandler() {
         if (action === 'enabled') continue;
         if (boundKey && (key === boundKey || key.toLowerCase() === boundKey)) {
           e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
           dispatch(action);
           return;
         }
       }
     }
-  });
+  }, true); // capture phase — runs before Reveal/plugin handlers
 }
 
 // === Gamepad handler ===
@@ -196,17 +218,31 @@ function pollGamepad() {
       }
     }));
 
-    // Check button presses (edge detection — only on press, not hold)
+    // Check button presses (edge detection — only on press, not hold).
+    // Phase 20: also ensures each button index dispatches AT MOST ONE
+    // action per frame and applies a per-button debounce so bouncy
+    // hardware can't register two clicks on a single press.
     const currentButtons = gp.buttons.map(b => b.pressed);
+    const now = Date.now();
+    const firedThisFrame = new Set();
 
     for (const [action, binding] of Object.entries(s.gamepad)) {
       if (typeof binding !== 'object' || !binding || binding.type !== 'button') continue;
       const idx = binding.index;
-      if (idx >= 0 && idx < currentButtons.length) {
-        if (currentButtons[idx] && (!lastGamepadButtons[idx])) {
-          dispatch(action);
-        }
-      }
+      if (idx < 0 || idx >= currentButtons.length) continue;
+      if (firedThisFrame.has(idx)) continue;
+
+      const isPress = currentButtons[idx] && !lastGamepadButtons[idx];
+      if (!isPress) continue;
+
+      // Hardware debounce — ignore re-presses of the same button
+      // within BUTTON_DEBOUNCE_MS of the previous dispatch.
+      const lastAt = lastButtonDispatchAt[idx] || 0;
+      if (now - lastAt < BUTTON_DEBOUNCE_MS) continue;
+
+      firedThisFrame.add(idx);
+      lastButtonDispatchAt[idx] = now;
+      dispatch(action);
     }
 
     // Stick navigation (left stick X axis → slide nav)

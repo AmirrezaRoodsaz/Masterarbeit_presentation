@@ -151,15 +151,21 @@ function renderKeyboardTab() {
   let html = '<div class="bindings-list">';
 
   for (const [action, labels] of Object.entries(ACTION_LABELS.keyboard)) {
-    const currentKey = s.keyboard[action] || '—';
+    const currentKey = s.keyboard[action];
     const isListening = listeningFor?.category === 'keyboard' && listeningFor?.key === action;
+    const hasBinding = currentKey != null && currentKey !== '';
     html += `
       <div class="binding-row">
         <span class="binding-label">${labels[lang]}</span>
-        <button class="key-binding-btn ${isListening ? 'listening' : ''}"
-                data-category="keyboard" data-action="${action}">
-          ${isListening ? '<span class="listening-text">...</span>' : formatKey(currentKey)}
-        </button>
+        <div class="binding-controls">
+          <button class="key-binding-btn ${isListening ? 'listening' : ''}"
+                  data-category="keyboard" data-action="${action}">
+            ${isListening ? '<span class="listening-text">…</span>' : (hasBinding ? formatKey(currentKey) : '—')}
+          </button>
+          <button class="binding-clear" data-category="keyboard" data-action="${action}"
+                  title="${lang === 'de' ? 'Belegung entfernen' : 'Clear binding'}"
+                  ${!hasBinding ? 'disabled' : ''}>✕</button>
+        </div>
       </div>
     `;
   }
@@ -190,16 +196,22 @@ function renderPresenterTab() {
   `;
 
   for (const [action, labels] of Object.entries(ACTION_LABELS.presenter)) {
-    const currentKey = s.presenter[action] || '—';
     if (action === 'enabled') continue;
+    const currentKey = s.presenter[action];
     const isListening = listeningFor?.category === 'presenter' && listeningFor?.key === action;
+    const hasBinding = currentKey != null && currentKey !== '';
     html += `
       <div class="binding-row">
         <span class="binding-label">${labels[lang]}</span>
-        <button class="key-binding-btn ${isListening ? 'listening' : ''}"
-                data-category="presenter" data-action="${action}">
-          ${isListening ? '<span class="listening-text">...</span>' : formatKey(currentKey)}
-        </button>
+        <div class="binding-controls">
+          <button class="key-binding-btn ${isListening ? 'listening' : ''}"
+                  data-category="presenter" data-action="${action}">
+            ${isListening ? '<span class="listening-text">…</span>' : (hasBinding ? formatKey(currentKey) : '—')}
+          </button>
+          <button class="binding-clear" data-category="presenter" data-action="${action}"
+                  title="${lang === 'de' ? 'Belegung entfernen' : 'Clear binding'}"
+                  ${!hasBinding ? 'disabled' : ''}>✕</button>
+        </div>
       </div>
     `;
   }
@@ -264,16 +276,22 @@ function renderGamepadTab() {
     const binding = s.gamepad[action];
     const isListening = listeningFor?.category === 'gamepad' && listeningFor?.key === action;
     let btnName = '—';
-    if (binding && typeof binding === 'object' && binding.index !== undefined) {
+    const hasBinding = binding && typeof binding === 'object' && binding.index !== undefined;
+    if (hasBinding) {
       btnName = GAMEPAD_BUTTON_NAMES[binding.index] || `Button ${binding.index}`;
     }
     html += `
       <div class="binding-row">
         <span class="binding-label">${labels[lang]}</span>
-        <button class="key-binding-btn gamepad-bind ${isListening ? 'listening' : ''}"
-                data-category="gamepad" data-action="${action}">
-          ${isListening ? '<span class="listening-text">...</span>' : btnName}
-        </button>
+        <div class="binding-controls">
+          <button class="key-binding-btn gamepad-bind ${isListening ? 'listening' : ''}"
+                  data-category="gamepad" data-action="${action}">
+            ${isListening ? '<span class="listening-text">…</span>' : btnName}
+          </button>
+          <button class="binding-clear" data-category="gamepad" data-action="${action}"
+                  title="${lang === 'de' ? 'Belegung entfernen' : 'Clear binding'}"
+                  ${!hasBinding ? 'disabled' : ''}>✕</button>
+        </div>
       </div>
     `;
   }
@@ -416,6 +434,18 @@ function bindTabEvents() {
     });
   });
 
+  // Clear/unbind buttons (✕ next to each binding)
+  document.querySelectorAll('.binding-clear').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const category = btn.dataset.category;
+      const action = btn.dataset.action;
+      updateSettings(category, action, null);
+      listeningFor = null;
+      renderTabContent();
+    });
+  });
+
   // Toggle switches
   document.getElementById('presenter-enabled')?.addEventListener('change', (e) => {
     updateSettings('presenter', 'enabled', e.target.checked);
@@ -496,6 +526,21 @@ function handleRebindKey(e) {
   e.stopPropagation();
 
   const key = e.key;
+
+  // Auto-clear: if this key is already bound to another action in the
+  // same category, unbind it before assigning here. Prevents one key
+  // from triggering two actions.
+  const s = getSettings();
+  const cat = s[listeningFor.category];
+  for (const [otherAction, otherKey] of Object.entries(cat)) {
+    if (otherAction === listeningFor.key) continue;
+    if (otherAction === 'enabled') continue;
+    if (typeof otherKey !== 'string') continue;
+    if (otherKey === key || (typeof key === 'string' && otherKey?.toLowerCase?.() === key.toLowerCase())) {
+      updateSettings(listeningFor.category, otherAction, null);
+    }
+  }
+
   updateSettings(listeningFor.category, listeningFor.key, key);
   listeningFor = null;
   renderTabContent();
@@ -516,6 +561,16 @@ function listenForGamepadButton(action) {
 
     for (let i = 0; i < gp.buttons.length; i++) {
       if (gp.buttons[i].pressed) {
+        // Auto-clear: if this button is already bound to another
+        // gamepad action, unbind it before assigning here.
+        const s = getSettings();
+        for (const [otherAction, binding] of Object.entries(s.gamepad)) {
+          if (otherAction === action) continue;
+          if (typeof binding !== 'object' || !binding) continue;
+          if (binding.type === 'button' && binding.index === i) {
+            updateSettings('gamepad', otherAction, null);
+          }
+        }
         updateSettings('gamepad', action, { type: 'button', index: i });
         listeningFor = null;
         renderTabContent();

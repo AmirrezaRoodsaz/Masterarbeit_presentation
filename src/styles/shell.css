@@ -86,21 +86,24 @@ body.theme-light .sidebar-logo {
   text-overflow: ellipsis;
 }
 
-/* Subsections — collapsed by default, expand when section is active */
+/* Subsections — collapsible with smooth max-height animation
+   (no display toggle — keeps layout stable, no glitch). */
 .nav-group {
   display: flex;
   flex-direction: column;
 }
 
 .nav-subs {
-  display: none;
+  display: flex;
   flex-direction: column;
   padding-left: 2.5rem;
+  max-height: 0;
   overflow: hidden;
+  transition: max-height 0.25s ease;
 }
 
 .nav-group.expanded .nav-subs {
-  display: flex;
+  max-height: 500px;
 }
 
 .nav-sub-item {

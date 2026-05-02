@@ -57,8 +57,8 @@ const DEFAULT_SETTINGS = {
     theme: 'light',
     animationsEnabled: false,
     viewMode: 'auto',
-    timerTarget: 1800,
-    timerWarning: 1620,
+    timerTarget: 900,
+    timerWarning: 810,
   },
 };
 
