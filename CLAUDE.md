@@ -313,7 +313,7 @@ Each phase: push main → create feature branch → implement → merge with app
   ### Quality gates for "done"
   Every gate from the existing list (one message per slide, takeaway boxes on result slides, baseline + sensitivity shown, contributions explicit, backups prepared, PDF fallback exported, offline test passed, target resolution tested) must pass after Phase 20. Re-walk the gate list before marking 20.21 complete.
 
-- [ ] **Phase 21: Mobile Companion — extra feature, ships AFTER defense-tagged main**
+- [x] **Phase 21: Mobile Companion — extra feature, ships AFTER defense-tagged main** — merged 2026-05-01 (commit `7af3468`); audience companion live at `/mobile.html` for defense on 6. Mai 2026
   Branch: `feat/mobile-companion` (off `main`, after Phase 20 is merged + tagged `defense-2026-05-06`). Each numbered task = one self-contained chunk that should commit cleanly. Spec: [docs/plans/2026-04-30-mobile-companion-design.md](docs/plans/2026-04-30-mobile-companion-design.md).
 
   **Context.** The current deck is unusable on phones (Reveal.js scales 1920×1080 to ~20% on a phone — text becomes 3-4 px). Audience members who scan the QR should be able to read along on their own device at their own pace. Method **B** chosen: a parallel `mobile.html` route, no Reveal.js, mobile-first stylesheet, **B-curated** content from `src/mobile-content.js`. Desktop deck untouched — 95% additive, 5% surgical (one redirect snippet + one Vite config line).
