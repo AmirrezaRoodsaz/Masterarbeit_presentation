@@ -59,19 +59,19 @@ export const SPEAKER_NOTES = {
     time: '0:20 – 0:50 (30 s)',
     bullets: {
       de: [
-        'Fünf Blöcke durchgehen: Motivation → Theorie → Methodik → Ergebnisse → Diskussion & Fazit',
-        'Schwerpunkt liegt auf Ergebnissen (~5 Minuten) und Methodik (~3,5 Minuten)',
-        'Am Ende zwei kurze Live-Demos der entwickelten Software',
+        'Fünf Blöcke: Motivation → Theorie → Methodik → Ergebnisse → Diskussion & Fazit',
+        'Schwerpunkt: Methodik (~3,5 min) und Ergebnisse (~5 min)',
+        'Am Schluss zwei kurze Live-Demos der App',
       ],
       en: [
-        'Walk through five blocks: Motivation → Theory → Methodology → Results → Discussion & Conclusion',
-        'Focus on Results (~5 minutes) and Methodology (~3.5 minutes)',
-        'Two short live demos of the developed software at the end',
+        'Five blocks: Motivation → Theory → Methodology → Results → Discussion & Conclusion',
+        'Focus: Methodology (~3.5 min) and Results (~5 min)',
+        'Two short live demos of the app at the end',
       ],
     },
     script: {
-      de: 'Ich habe die Präsentation in fünf Abschnitte gegliedert. Nach einer kurzen Motivation zur Problemstellung behandle ich die theoretischen Grundlagen der Batteriealterung und SOH-Definition. Der Schwerpunkt liegt dann auf der Methodik — zwei Hauptdiagnosesysteme plus ergänzender AUTEL-Snapshot, ein standardisiertes Messprotokoll — und den Ergebnissen, wo ich sechs SOH-Berechnungsmethoden vergleiche. Abschließend ordne ich die Ergebnisse ein und formuliere Empfehlungen.',
-      en: 'I have structured the presentation into five sections. After a brief motivation on the problem, I cover the theoretical foundations of battery aging and SOH definition. The focus then lies on methodology — two primary diagnostic systems plus a supplementary AUTEL snapshot, a standardized protocol — and results, where I compare six SOH calculation methods. Finally, I contextualize the findings and formulate recommendations.',
+      de: 'Die nächsten 15 Minuten habe ich in fünf Blöcke aufgeteilt. Erst zeige ich kurz, warum das Thema relevant ist. Dann gehe ich auf die Grundlagen ein — wie Batterien altern und wie wir SOH überhaupt definieren. Der Hauptteil liegt auf Methodik und Ergebnissen: zwei Hauptdiagnosesysteme, ein standardisiertes Messprotokoll und sechs SOH-Methoden im Vergleich. Am Ende ordne ich alles ein und sage Ihnen, was ich daraus für die Praxis empfehle.',
+      en: 'I have split the next 15 minutes into five blocks. First I will briefly explain why the topic matters. Then I will cover the basics — how batteries age and how we actually define SOH. The main part is methodology and results: two primary diagnostic systems, a standardized measurement protocol and six SOH methods compared head-to-head. At the end I will put it all in context and tell you what I would recommend for practice.',
     },
     dataCallouts: [],
     questions: [],
@@ -89,27 +89,27 @@ export const SPEAKER_NOTES = {
     time: '0:50 – 1:50 (60 s)',
     bullets: {
       de: [
-        'Fünf Problemaspekte im Kreisdiagramm — Fragmente einzeln auslösen',
-        '1. Kostenfaktor: Batterie = 40–50% des Fahrzeugwerts',
-        '2. BMS Black Box: proprietäre Algorithmen, ±5–10% Abweichung',
-        '3. Kein Standard: keine herstellerübergreifende SOH-Definition',
-        '4. Diagnose-Divergenz: verschiedene Tools → verschiedene Werte',
-        '5. Second Life: unter 70–80% EOL wird umgewidmet',
-        'Kernproblem am Ende einblenden',
+        '5 Problemaspekte als Pentagon — Fragmente einzeln auslösen',
+        '1. Batterie = 40–50 % des Fahrzeugwerts',
+        '2. BMS proprietär, ±5–10 % Abweichung',
+        '3. Keine einheitliche SOH-Definition über Hersteller',
+        '4. Diagnose-Tools widersprechen sich',
+        '5. Unter 70–80 % EOL → Second Life',
+        'Am Schluss: Kernproblem-Box einblenden',
       ],
       en: [
-        'Five problem aspects in cycle diagram — trigger fragments one by one',
-        '1. Cost factor: battery = 40–50% of vehicle value',
-        '2. BMS Black Box: proprietary algorithms, ±5–10% deviation',
-        '3. No standard: no cross-manufacturer SOH definition',
-        '4. Diagnostic divergence: different tools → different values',
-        '5. Second Life: below 70–80% EOL, batteries are repurposed',
-        'Show core problem at the end',
+        '5 problem aspects as pentagon — trigger fragments one by one',
+        '1. Battery = 40–50 % of vehicle value',
+        '2. BMS proprietary, ±5–10 % deviation',
+        '3. No unified SOH definition across manufacturers',
+        '4. Diagnostic tools contradict each other',
+        '5. Below 70–80 % EOL → second life',
+        'End: show core-problem box',
       ],
     },
     script: {
-      de: 'Die Traktionsbatterie ist mit 40 bis 50 Prozent des Fahrzeugwerts die teuerste Einzelkomponente eines Elektrofahrzeugs. Dennoch ist ihr Zustand intransparent: Die SOH-Algorithmen der Hersteller sind proprietär und zeigen Abweichungen von bis zu 10 Prozentpunkten. Es gibt keine einheitliche, herstellerübergreifende SOH-Definition. Verschiedene Diagnosewerkzeuge liefern signifikant unterschiedliche Ergebnisse für dasselbe Fahrzeug. Und für Second-Life-Anwendungen — also die Umwidmung der Batterie als stationärer Speicher — fehlt eine verlässliche Bewertungsgrundlage. Das Kernproblem: Beim Kauf eines Gebrauchtfahrzeugs kann der Batteriezustand nicht zuverlässig bewertet werden.',
-      en: 'The traction battery is the most expensive single component of an EV at 40 to 50 percent of vehicle value. Yet its condition remains opaque: manufacturers\' SOH algorithms are proprietary with up to 10 percentage points deviation. There is no unified, cross-manufacturer SOH definition. Different diagnostic tools deliver significantly different results for the same vehicle. And for second-life applications, a reliable assessment basis is missing. The core problem: when buying a used EV, battery condition cannot be reliably assessed.',
+      de: 'Die Batterie ist mit 40 bis 50 Prozent das teuerste Bauteil im Elektroauto. Trotzdem wissen wir kaum, wie es ihr geht. Die Hersteller halten ihre SOH-Algorithmen geheim — und die weichen je nach Hersteller um 5 bis 10 Prozent voneinander ab. Eine einheitliche Definition gibt es nicht. Verschiedene Diagnosegeräte liefern für dasselbe Fahrzeug ganz unterschiedliche Werte. Und auch für Second Life — also die Weiterverwendung als stationärer Speicher — fehlt eine verlässliche Grundlage. Konkret heißt das: Wer ein gebrauchtes Elektroauto kauft, weiß nicht wirklich, wie gut die Batterie noch ist.',
+      en: 'The battery is 40 to 50 percent of the car\'s value — the most expensive single component. Yet we barely know how it is doing. Manufacturers keep their SOH algorithms secret, and the values differ by 5 to 10 percent between brands. There is no unified definition. Different diagnostic tools give different numbers for the same car. And for second life — repurposing the battery as stationary storage — we lack a reliable basis. In concrete terms: when you buy a used EV, you do not really know how good the battery still is.',
     },
     dataCallouts: [
       '40–50 % Fahrzeugwert / vehicle value',
@@ -119,12 +119,12 @@ export const SPEAKER_NOTES = {
     questions: [
       {
         q: { de: 'Warum nicht einfach den BMS-SOH-Wert verwenden?', en: 'Why not just use the BMS SOH value?' },
-        a: { de: 'BMS-Algorithmen sind proprietär, nicht transparent und weisen laut Literatur Abweichungen von ±5–10% auf (Waag 2014). Außerdem variiert die Berechnung herstellerspezifisch — ein Vergleich ist nicht möglich.', en: 'BMS algorithms are proprietary, not transparent, and show ±5–10% deviations according to literature (Waag 2014). Additionally, calculation varies by manufacturer — comparison is impossible.' },
+        a: { de: 'Weil wir nicht wissen, wie er berechnet wird. Die BMS-Algorithmen sind herstellerspezifisch und nicht öffentlich; in der Literatur (Waag 2014) sind Abweichungen von 5 bis 10 Prozent dokumentiert. Vergleichen kann man die Werte deshalb nicht.', en: 'Because we do not know how it is calculated. The BMS algorithms are manufacturer-specific and not public; the literature (Waag 2014) reports deviations of 5 to 10 percent. So you cannot compare the values across vehicles.' },
       },
     ],
     transition: {
-      de: 'Daraus ergibt sich die Forschungslücke, die ich nun genauer beschreibe.',
-      en: 'This leads to the research gap, which I will now describe in more detail.',
+      de: 'Genau hier setzt meine Arbeit an — Forschungslücke und mein Beitrag dazu.',
+      en: 'This is exactly where my work picks up — research gap and my contribution.',
     },
   },
 
@@ -133,21 +133,21 @@ export const SPEAKER_NOTES = {
     time: '1:50 – 2:50 (60 s)',
     bullets: {
       de: [
-        'Forschungslücke kompakt: BMS proprietär ±5–10 %, externe Diagnostik abweichend, Studien auf Laborzellen',
-        'Forschungsfrage prominent: reproduzierbar + praxistauglich + On-/Off-Board',
-        'Vier Beiträge in einer Reihe: B1 Evaluation, B2 Protokoll, B3 Software, B4 Einflussfaktoren',
-        'B1-Wording: zwei Hauptdiagnosesysteme + ergänzender AUTEL-Snapshot',
+        'Lücke: BMS proprietär ±5–10 % · externe Tools widersprüchlich · meiste Studien Laborzellen',
+        'Forschungsfrage: SOH reproduzierbar + praxistauglich, On-/Off-Board',
+        'Vier Beiträge im Quadrat: B1 Evaluation · B2 Protokoll · B3 Software · B4 Einflussfaktoren',
+        'B1-Wording: zwei Hauptsysteme + AUTEL ergänzend',
       ],
       en: [
-        'Gap in one line: BMS proprietary ±5–10 %, external diagnostics divergent, studies on lab cells',
-        'Research question prominent: reproducible + practical + on/off-board',
-        'Four contributions in a row: B1 evaluation, B2 protocol, B3 software, B4 influence factors',
-        'B1 wording: two primary diagnostic systems + supplementary AUTEL snapshot',
+        'Gap: BMS proprietary ±5–10 % · external tools contradict · most studies on lab cells',
+        'Research question: SOH reproducible + practical, on-/off-board',
+        'Four contributions in a square: B1 evaluation · B2 protocol · B3 software · B4 influence factors',
+        'B1 wording: two primary systems + AUTEL supplementary',
       ],
     },
     script: {
-      de: 'Die Forschungslücke ist klar: BMS-Algorithmen sind proprietär mit ±5–10 % Abweichung, externe Diagnosegeräte liefern abweichende Werte, und die meisten Studien nutzen Laborzellen — eine standardisierte, reproduzierbare Methodik am realen Fahrzeug fehlt. Daraus meine Forschungsfrage: Wie lässt sich der SOH reproduzierbar und praxistauglich bestimmen? Vier Beiträge: Erstens die systematische Evaluation der zwei Hauptdiagnosesysteme — AVL HV-Check und OBDLink MX+, ergänzt durch den AUTEL als Snapshot-Vergleich. Zweitens ein standardisiertes Messprotokoll. Drittens sechs SOH-Methoden in einer Python-App. Und viertens die Quantifizierung der wichtigsten Einflussfaktoren.',
-      en: 'The research gap is clear: BMS algorithms are proprietary with ±5–10 % deviation, external diagnostics deliver divergent values, and most studies use lab cells — a standardized, reproducible methodology on real vehicles is missing. Hence my research question: How can SOH be determined reproducibly and practically? Four contributions: first, systematic evaluation of two primary diagnostic systems — AVL HV-Check and OBDLink MX+, supplemented by the AUTEL as snapshot comparison. Second, a standardized measurement protocol. Third, six SOH methods in a Python app. And fourth, quantification of the key influence factors.',
+      de: 'Die Lücke ist schnell erklärt: Die BMS-Werte sind proprietär und weichen um 5 bis 10 Prozent ab. Externe Diagnosegeräte liefern unterschiedliche Werte. Und die meisten Studien arbeiten mit Laborzellen, nicht mit echten Fahrzeugen. Eine reproduzierbare Methodik am realen Auto fehlt also. Meine Forschungsfrage: Wie bestimme ich den SOH reproduzierbar — On-Board und Off-Board? Dazu vier Beiträge. Erstens: Ich vergleiche zwei Hauptdiagnosesysteme — AVL und OBDLink — ergänzt durch einen AUTEL-Snapshot. Zweitens: ein standardisiertes Messprotokoll. Drittens: sechs SOH-Methoden in einer Python-App. Und viertens: ich messe, wie Temperatur, SOC-Fenster und Ladeleistung den SOH beeinflussen.',
+      en: 'The gap is quick to explain: BMS values are proprietary and differ by 5 to 10 percent. External diagnostic devices deliver different values. And most studies use lab cells, not real vehicles. So a reproducible methodology on a real car is missing. My research question: How do I determine SOH reproducibly — on-board and off-board? This leads to four contributions. First, I compare two primary diagnostic systems — AVL and OBDLink — supplemented by an AUTEL snapshot. Second, a standardized measurement protocol. Third, six SOH methods in a Python app. And fourth, I measure how temperature, SOC window and charging power affect SOH.',
     },
     dataCallouts: [
       '2 Hauptsysteme + 1 ergänzend / 2 primary + 1 supplementary',
@@ -157,12 +157,12 @@ export const SPEAKER_NOTES = {
     questions: [
       {
         q: { de: 'Welche Studien haben Sie als Stand der Technik herangezogen?', en: 'Which studies did you use as state of the art?' },
-        a: { de: 'Xiong 2018 (BMS-Algorithmen), Waag 2014 (Impedanzmethoden), Berecibar 2016 (Degradationsdiagnose). Die meisten dieser Arbeiten nutzen Laborzellen, nicht reale Fahrzeuge mit kommerziellen Diagnosesystemen.', en: 'Xiong 2018 (BMS algorithms), Waag 2014 (impedance methods), Berecibar 2016 (degradation diagnosis). Most of these use lab cells, not real vehicles with commercial diagnostic systems.' },
+        a: { de: 'Vor allem Xiong 2018 zu BMS-Algorithmen, Waag 2014 zu Impedanzmethoden und Berecibar 2016 zur Degradationsdiagnose. Aber alle drei arbeiten mit Laborzellen — nicht mit echten Fahrzeugen und nicht mit kommerziellen Diagnosegeräten.', en: 'Mainly Xiong 2018 on BMS algorithms, Waag 2014 on impedance methods and Berecibar 2016 on degradation diagnosis. But all three work with lab cells — not with real vehicles and not with commercial diagnostic devices.' },
       },
     ],
     transition: {
-      de: 'Bevor wir in die Methodik einsteigen, zunächst die theoretischen Grundlagen.',
-      en: 'Before diving into methodology, first the theoretical foundations.',
+      de: 'Bevor wir zur Methodik kommen, erst kurz die Grundlagen.',
+      en: 'Before we get to the methodology, a quick word on the basics.',
     },
   },
 
@@ -187,8 +187,8 @@ export const SPEAKER_NOTES = {
       ],
     },
     script: {
-      de: 'Li-Ionen-Batterien unterliegen zwei Alterungsarten. Kalendarische Alterung tritt unabhängig von der Nutzung auf — durch Wachstum der SEI-Schicht, Kathodendegradation und Elektrolytzersetzung. Das folgt einem Arrhenius-Verhalten: höhere Temperatur bedeutet exponentiell schnellere Alterung. Zyklische Alterung entsteht durch Laden und Entladen — Volumenänderungen führen zu Partikelrissen, und unter ungünstigen Bedingungen kann Lithium-Plating auftreten, was ein Sicherheitsrisiko darstellt. Unser Testfahrzeug ist ein VW ID.4 mit NMC 712 Pouch-Zellen — 288 Zellen in 12 Modulen, 77 kWh brutto, Spannungsbereich 300 bis 408 Volt.',
-      en: 'Li-ion batteries undergo two types of aging. Calendar aging occurs regardless of use — through SEI layer growth, cathode degradation, and electrolyte decomposition. This follows Arrhenius behavior: higher temperature means exponentially faster aging. Cyclic aging results from charging and discharging — volume changes cause particle cracking, and under unfavorable conditions, lithium plating can occur, posing a safety risk. Our test vehicle is a VW ID.4 with NMC 712 pouch cells — 288 cells in 12 modules, 77 kWh gross, voltage range 300 to 408 volts.',
+      de: 'Li-Ionen-Batterien altern auf zwei Wegen. Erstens kalendarisch — sie altern, auch wenn man sie nicht nutzt: Die SEI-Schicht wächst, die Kathode zersetzt sich, der Elektrolyt baut sich ab. Das geht exponentiell schneller, je wärmer die Batterie ist — Stichwort Arrhenius. Zweitens zyklisch — durch jedes Laden und Entladen. Die Zellen dehnen sich aus und ziehen sich zusammen, das gibt Mikrorisse. Bei niedriger Temperatur, hohem SOC und hoher Ladeleistung kann Lithium-Plating entstehen — das ist sicherheitskritisch. Unser Testfahrzeug ist ein VW ID.4 mit NMC-712-Pouch-Zellen: 288 Stück, 77 kWh, 300 bis 408 Volt.',
+      en: 'Li-ion batteries age in two ways. First, calendar aging — they age even when you do not use them: the SEI layer grows, the cathode breaks down, the electrolyte decomposes. This goes exponentially faster the warmer the battery is — Arrhenius behaviour. Second, cyclic aging — from every charge and discharge. The cells expand and contract, which causes micro-cracks. At low temperature, high SOC and high charging power, lithium plating can form — that is a safety risk. Our test vehicle is a VW ID.4 with NMC 712 pouch cells: 288 cells, 77 kWh, 300 to 408 volts.',
     },
     dataCallouts: [
       'NMC 712 · 288 Zellen · 77 kWh · 300–408 V',
@@ -196,12 +196,12 @@ export const SPEAKER_NOTES = {
     questions: [
       {
         q: { de: 'Warum NMC und nicht LFP?', en: 'Why NMC and not LFP?' },
-        a: { de: 'Der VW ID.4 nutzt NMC 712. LFP wäre ein interessanter Vergleich für zukünftige Arbeiten, besonders weil LFP eine flachere OCV-Kurve hat, was die ICA-Analyse erschwert.', en: 'The VW ID.4 uses NMC 712. LFP would be an interesting comparison for future work, especially since LFP has a flatter OCV curve, making ICA analysis more difficult.' },
+        a: { de: 'Weil unser VW ID.4 NMC 712 verbaut hat. LFP wäre für die Zukunft spannend zu vergleichen — besonders weil LFP eine flachere OCV-Kurve hat. Das macht die ICA-Analyse schwieriger.', en: 'Because our VW ID.4 has NMC 712 installed. LFP would be exciting to compare in the future — especially because LFP has a flatter OCV curve. That makes ICA analysis harder.' },
       },
     ],
     transition: {
-      de: 'Kommen wir zu den fünf SOH-Definitionen, die in dieser Arbeit verwendet werden.',
-      en: 'Let\'s move to the five SOH definitions used in this thesis.',
+      de: 'Jetzt zu den fünf SOH-Definitionen, mit denen ich arbeite.',
+      en: 'Now to the five SOH definitions I work with.',
     },
   },
 
@@ -209,27 +209,27 @@ export const SPEAKER_NOTES = {
     time: '3:30 – 4:10 (40 s)',
     bullets: {
       de: [
-        'Fünf Methoden nacheinander einblenden — Gleichungen erklären',
-        'SOH_cap: kapazitätsbasiert (BMS-Direktwert)',
+        '5 Methoden nacheinander einblenden — Gleichungen kurz erklären',
+        'SOH_cap: BMS-Direktwert (kapazitätsbasiert)',
         'SOH_e: energiebasiert (∫V·I dt / E_nenn) — genaueste Einzelmethode',
-        'SOH_c: Coulomb-Counting (∫|I| dt / Q_nenn) — systematische Unterschätzung',
-        'SOH_R: widerstandsbasiert (Baseline-Verhältnis)',
+        'SOH_c: Coulomb-Counting (∫|I| dt / Q_nenn) — unterschätzt systematisch',
+        'SOH_R: Innenwiderstand — HPPC (Hybrid Pulse Power Characterization)',
         'SOH_komb: (SOH_e + SOH_c) / 2 — empfohlener Gesamtwert',
-        'Jede Methode erfasst einen anderen Aspekt der Alterung',
+        'Jede Methode erfasst einen anderen Alterungsaspekt',
       ],
       en: [
-        'Reveal five methods one by one — explain equations',
-        'SOH_cap: capacity-based (BMS direct value)',
+        'Reveal 5 methods one by one — explain equations briefly',
+        'SOH_cap: BMS direct value (capacity-based)',
         'SOH_e: energy-based (∫V·I dt / E_nom) — most accurate single method',
-        'SOH_c: Coulomb counting (∫|I| dt / Q_nom) — systematic underestimation',
-        'SOH_R: resistance-based (baseline ratio)',
+        'SOH_c: Coulomb counting (∫|I| dt / Q_nom) — systematically underestimates',
+        'SOH_R: internal resistance — HPPC (Hybrid Pulse Power Characterization)',
         'SOH_comb: (SOH_e + SOH_c) / 2 — recommended overall value',
         'Each method captures a different aspect of aging',
       ],
     },
     script: {
-      de: 'Wir verwenden fünf komplementäre SOH-Methoden. Der kapazitätsbasierte SOH nutzt den BMS-Direktwert. Der energiebasierte SOH_e integriert Spannung mal Strom über die Ladezeit — er erweist sich als genaueste Einzelmethode. SOH_c basiert auf Coulomb-Counting, unterschätzt aber systematisch um etwa 5,5 Prozentpunkte, da bei langer AC-Ladung kumulative Integrationsfehler entstehen. SOH_R nutzt das Verhältnis von Baseline- zu aktuellem Innenwiderstand. Und der kombinierte SOH — der Mittelwert aus SOH_e und SOH_c — gleicht die systematischen Fehler beider Methoden aus und liefert den robustesten Gesamtwert.',
-      en: 'We use five complementary SOH methods. Capacity-based SOH uses the BMS direct value. Energy-based SOH_e integrates voltage times current over charging time — it proves to be the most accurate single method. SOH_c is based on Coulomb counting but systematically underestimates by about 5.5 percentage points due to cumulative integration errors during long AC charging. SOH_R uses the ratio of baseline to current internal resistance. And the combined SOH — the mean of SOH_e and SOH_c — compensates the systematic errors of both methods and delivers the most robust overall value.',
+      de: 'Ich rechne mit fünf komplementären SOH-Methoden. SOH_cap nimmt den BMS-Wert direkt — also was das Batterie-Management selbst meldet. SOH_e ist energiebasiert: Ich integriere Spannung mal Strom über die ganze Ladung — die genaueste Einzelmethode. SOH_c ist Coulomb-Counting, also nur den Strom integriert. Das unterschätzt systematisch um etwa 5,5 Prozentpunkte, weil sich bei langer AC-Ladung kleine Messfehler aufaddieren. SOH_R schaut auf den Innenwiderstand — Baseline zu aktuell. Das ist die HPPC-Methode, also Hybrid Pulse Power Characterization. Und der kombinierte SOH — Mittelwert aus SOH_e und SOH_c — gleicht die systematischen Fehler der beiden aus. Das ist mein robustester Gesamtwert.',
+      en: 'I work with five complementary SOH methods. SOH_cap takes the BMS value directly — what the battery management itself reports. SOH_e is energy-based: I integrate voltage times current over the whole charge — the most accurate single method. SOH_c is Coulomb counting, only the current integrated. That systematically underestimates by about 5.5 percentage points because small measurement errors add up over a long AC charge. SOH_R looks at the internal resistance — baseline vs. current. That is the HPPC method — Hybrid Pulse Power Characterization. And the combined SOH — the mean of SOH_e and SOH_c — compensates for the systematic errors of both. That is my most robust overall value.',
     },
     dataCallouts: [
       'SOH_e: genaueste Einzelmethode / most accurate single method',
@@ -238,7 +238,7 @@ export const SPEAKER_NOTES = {
     questions: [
       {
         q: { de: 'Warum nicht auch EIS (Impedanzspektroskopie)?', en: 'Why not also EIS (impedance spectroscopy)?' },
-        a: { de: 'EIS erfordert spezielle Laborausrüstung und ist für die praxisnahe On-Board-Diagnose nicht geeignet. In der Theorie behandelt, aber nicht implementiert — Fokus liegt auf mit OBD-Adapter durchführbaren Methoden.', en: 'EIS requires specialized lab equipment and is not suitable for practical on-board diagnosis. Covered in theory but not implemented — focus is on methods feasible with an OBD adapter.' },
+        a: { de: 'EIS braucht spezielle Laborausrüstung — das geht nicht über einen OBD-Adapter. Ich habe es theoretisch behandelt, aber nicht implementiert. Mein Fokus liegt auf Methoden, die man im Werkstattalltag tatsächlich einsetzen kann.', en: 'EIS needs specialized lab equipment — you cannot do it through an OBD adapter. I covered it theoretically but did not implement it. My focus is on methods you can actually use in workshop practice.' },
       },
     ],
     transition: {
@@ -268,8 +268,8 @@ export const SPEAKER_NOTES = {
       ],
     },
     script: {
-      de: 'Zwei Hauptdiagnosesysteme decken das Spektrum ab — beide greifen über OBD-II auf das BMS zu. Der AVL HV-Check ist unsere Snapshot-Referenz: er liest den BMS-SOH direkt aus und kostet etwa 70 Euro pro Jahr im Lizenzmodell. Der OBDLink MX+ ist der zentrale Mehrwert dieser Arbeit: ein Consumer-Adapter für 130 Euro einmalig, ohne Folgekosten, der kontinuierliche Zeitreihen liefert — also genau die Daten, die der AVL nicht liefern kann. Das AUTEL MaxiSYS Ultra dient ergänzend als Snapshot-Vergleich. Oben sehen Sie das 3-Ebenen-Modell: Im Fahrzeug läuft das BMS, beide Hauptsysteme erfassen On-Board, und die eigentliche SOH-Auswertung dieser Arbeit findet nachgelagert in der Python-App statt.',
-      en: 'Two primary diagnostic systems cover the spectrum — both access the BMS via OBD-II. The AVL HV-Check is our snapshot reference: it reads BMS SOH directly and costs about €70 per year on a license model. The OBDLink MX+ is the key contribution of this work: a consumer adapter at €130 one-off, no recurring costs, delivering continuous time series — exactly the data the AVL cannot provide. The AUTEL MaxiSYS Ultra is supplementary as snapshot comparison. The 3-level model above: BMS runs in the vehicle, both primary systems acquire on-board, and the actual SOH analysis of this work happens downstream in the Python app.',
+      de: 'Ich nutze zwei Hauptdiagnosesysteme — beide greifen über OBD auf das BMS zu. Der AVL HV-Check ist meine Snapshot-Referenz und kostet rund 70 Euro im Jahr als Lizenz. Der OBDLink MX+ ist der eigentliche Mehrwert dieser Arbeit: ein Consumer-Adapter für 130 Euro, einmalig, keine Folgekosten — und liefert kontinuierliche Zeitreihen. Genau das kann der AVL nicht. Der AUTEL kommt nur ergänzend dazu, für punktuelle Snapshot-Vergleiche. Oben das 3-Ebenen-Modell: Im Auto läuft das BMS, die beiden Hauptsysteme lesen on-board aus, und die eigentliche SOH-Berechnung passiert nachgelagert in meiner Python-App.',
+      en: 'I use two primary diagnostic systems — both access the BMS via OBD. The AVL HV-Check is my snapshot reference and costs about 70 euros per year on a license. The OBDLink MX+ is the actual added value of this work: a consumer adapter at 130 euros, one-off, no recurring costs — and it delivers continuous time series. That is exactly what the AVL cannot do. The AUTEL only comes in as a supplement, for spot snapshot comparisons. On top the 3-level model: in the car runs the BMS, the two primary systems read on-board, and the actual SOH calculation happens downstream in my Python app.',
     },
     dataCallouts: [
       'AVL: ~70 €/Jahr Lizenz · OBDLink: ~130 € einmalig · AUTEL: ~8.000 €',
@@ -278,11 +278,11 @@ export const SPEAKER_NOTES = {
     questions: [
       {
         q: { de: 'Warum nicht direkt an der Batterie messen statt über OBD?', en: 'Why not measure directly at the battery instead of via OBD?' },
-        a: { de: 'Das würde den Eingriff in das Hochvoltsystem erfordern — sicherheitskritisch und für den Werkstattalltag nicht praktikabel. Der OBD-Zugang ist zerstörungsfrei und standardisiert.', en: 'That would require intervention in the high-voltage system — safety-critical and not practical for workshop use. OBD access is non-destructive and standardized.' },
+        a: { de: 'Weil das einen Eingriff ins Hochvoltsystem bedeuten würde — sicherheitskritisch und im Werkstattalltag nicht praktikabel. Über OBD bekomme ich dieselben Daten zerstörungsfrei und standardisiert.', en: 'Because that would mean intervening in the high-voltage system — safety-critical and not practical in workshop use. Via OBD I get the same data non-destructively and standardized.' },
       },
       {
         q: { de: 'Warum ist der AUTEL nicht Hauptsystem?', en: 'Why is the AUTEL not a primary system?' },
-        a: { de: 'Wir haben mit dem AUTEL nur Snapshot-Vergleichsmessungen durchgeführt. Die kontinuierlichen Daten — die Grundlage für eigene SOH-Berechnungen — kommen vom OBDLink. Daher ergänzend, nicht primär.', en: 'We only did snapshot comparison measurements with the AUTEL. The continuous data — the basis for our own SOH calculations — comes from the OBDLink. Hence supplementary, not primary.' },
+        a: { de: 'Weil ich mit dem AUTEL nur Snapshot-Vergleichsmessungen gemacht habe. Die kontinuierlichen Daten — die Grundlage für meine SOH-Berechnungen — kommen vom OBDLink. Deshalb ergänzend, nicht primär.', en: 'Because I only did snapshot comparison measurements with the AUTEL. The continuous data — the basis for my SOH calculations — comes from the OBDLink. So it is supplementary, not primary.' },
       },
     ],
     transition: {
@@ -314,8 +314,8 @@ export const SPEAKER_NOTES = {
       ],
     },
     script: {
-      de: 'Das standardisierte Messprotokoll umfasst fünf Phasen. Zuerst wird das Fahrzeug bis zum Display-SOC von null Prozent entladen und die Umgebungstemperatur dokumentiert. Dann wird der OBDLink MX+ verbunden und alle relevanten BMS-Parameter ausgewählt — SOC, Spannung, Strom, 96 Zellgruppen und 24 Temperatursensoren. Entscheidend: Die Aufzeichnung muss vor dem Ladestart beginnen, um den kompletten Ladezyklus von 0 bis 100 Prozent zu erfassen. Nach dem Export als CSV wird der Datensatz automatisch in unserer Python-App analysiert.',
-      en: 'The standardized protocol comprises five phases. First, the vehicle is discharged to display SOC of zero percent and ambient temperature is documented. Then the OBDLink MX+ is connected and all relevant BMS parameters selected — SOC, voltage, current, 96 cell groups and 24 temperature sensors. Critically: recording must start before charging begins to capture the complete 0 to 100 percent cycle. After CSV export, the dataset is automatically analyzed in our Python app.',
+      de: 'Mein Messprotokoll hat fünf Phasen. Zuerst entlade ich das Fahrzeug bis Display-SOC null Prozent und dokumentiere die Umgebungstemperatur. Dann schließe ich den OBDLink MX+ an und wähle alle relevanten BMS-Parameter aus — SOC, Spannung, Strom, 96 Zellgruppen und 24 Temperatursensoren. Wichtig: Die Aufzeichnung muss vor dem Ladestart laufen, damit ich den kompletten Zyklus von 0 bis 100 Prozent mitbekomme. Den CSV-Export ziehe ich dann in meine Python-App, die rechnet alle SOH-Methoden automatisch durch.',
+      en: 'My measurement protocol has five phases. First, I discharge the vehicle to display SOC zero percent and document the ambient temperature. Then I connect the OBDLink MX+ and select all relevant BMS parameters — SOC, voltage, current, 96 cell groups and 24 temperature sensors. Important: recording has to be running before charging starts, so I capture the full 0 to 100 percent cycle. The CSV export then goes into my Python app, which automatically runs all SOH methods.',
     },
     dataCallouts: [
       '194 BMS-Kanäle / channels, ~1 s Abtastrate / sampling rate',
@@ -331,21 +331,21 @@ export const SPEAKER_NOTES = {
     time: '5:50 – 6:30 (40 s)',
     bullets: {
       de: [
-        'Entladung durch normale Fahrt — kein spezieller Modus nötig',
-        'Display-SOC = 0% entspricht BMS-SOC ≈ 5,75%',
-        'Nutzbares Fenster: ca. 90% der physikalischen Kapazität',
-        'Gauge-Animation zeigt den Prozess visuell',
+        'Phase 1: Entladung durch normales Fahren — kein spezieller Modus',
+        'Display-SOC = 0 % ≈ BMS-SOC 5,75 %',
+        'Nutzbares Fenster: ~90 % der physikalischen Kapazität',
+        'Phase 2 (CC-CV-Ladung) folgt direkt — Details im Backup',
       ],
       en: [
-        'Discharge through normal driving — no special mode needed',
-        'Display SOC = 0% corresponds to BMS SOC ≈ 5.75%',
-        'Usable window: approx. 90% of physical capacity',
-        'Gauge animation shows the process visually',
+        'Phase 1: discharge through normal driving — no special mode',
+        'Display SOC = 0 % ≈ BMS SOC 5.75 %',
+        'Usable window: ~90 % of physical capacity',
+        'Phase 2 (CC-CV charging) follows directly — details in backup',
       ],
     },
     script: {
-      de: 'Die Entladung erfolgt durch normales Fahren bis zum Display-SOC von null Prozent. Wichtig zu wissen: Display-SOC null Prozent entspricht einem BMS-SOC von etwa 5,75 Prozent — das BMS hält eine Pufferreserve zurück. Das nutzbare Fenster beträgt damit etwa 90 Prozent der physikalischen Kapazität.',
-      en: 'Discharge occurs through normal driving until display SOC reaches zero percent. Important to know: display SOC zero corresponds to a BMS SOC of approximately 5.75 percent — the BMS retains a buffer reserve. The usable window is therefore about 90 percent of physical capacity.',
+      de: 'Die Entladung läuft durch normales Fahren bis Display-SOC null Prozent — kein spezieller Modus, einfach fahren. Wichtig zu wissen: Display-SOC null entspricht BMS-SOC etwa 5,75 Prozent. Das BMS hält also eine Pufferreserve zurück. Das nutzbare Fenster ist damit rund 90 Prozent der physikalischen Kapazität. Direkt im Anschluss läuft die CC-CV-Ladung bis 100 Prozent — die Details dazu habe ich im Backup.',
+      en: 'Discharge runs through normal driving down to display SOC zero percent — no special mode, just drive. Important to know: display SOC zero corresponds to BMS SOC of about 5.75 percent. The BMS keeps a buffer reserve. So the usable window is around 90 percent of physical capacity. Right after that, the CC-CV charge runs up to 100 percent — details on that are in the backup.',
     },
     dataCallouts: [
       'Display-SOC 0% = BMS-SOC ≈ 5,75%',
@@ -353,8 +353,8 @@ export const SPEAKER_NOTES = {
     ],
     questions: [],
     transition: {
-      de: 'Jetzt kommt der Ladevorgang — das CC-CV-Profil.',
-      en: 'Now comes the charging process — the CC-CV profile.',
+      de: 'Damit zu den Versuchsfahrzeugen.',
+      en: 'And now to the test vehicles.',
     },
   },
 
@@ -411,8 +411,8 @@ export const SPEAKER_NOTES = {
       ],
     },
     script: {
-      de: 'Insgesamt 33 Einzelmessungen über ein Jahr — der Schwerpunkt liegt auf der MEB-Plattform. Primärfahrzeug ist unser institutseigener VW ID.4 mit 77-kWh-NMC-712-Batterie, MEB-Plattform, 10.801 Kilometer Laufleistung und einem aktuellen BMS-SOH von 97,3 Prozent. Hauptsysteme: AVL HV-Check und OBDLink — der AUTEL ergänzend. Die Übertragbarkeit auf die MEB-Plattform haben wir am Skoda Elroq verifiziert: sieben AVL-Messungen über neun Monate mit perfekter Reproduzierbarkeit Sigma gleich null. Der Cupra Born dient als ergänzende Plattform-Verifikation.',
-      en: 'A total of 33 individual measurements over one year — the focus is on the MEB platform. Primary vehicle is our institutional VW ID.4 with 77 kWh NMC 712 battery, MEB platform, 10,801 km mileage and a current BMS SOH of 97.3 percent. Primary systems: AVL HV-Check and OBDLink — AUTEL supplementary. Transferability to the MEB platform was verified on the Skoda Elroq: seven AVL measurements over nine months with perfect reproducibility, sigma equals zero. The Cupra Born serves as supplementary platform verification.',
+      de: 'Insgesamt 33 Einzelmessungen über ein Jahr — Schwerpunkt MEB-Plattform. Mein Primärfahrzeug ist ein institutseigener VW ID.4: 77-kWh-NMC-712-Batterie, 288 Zellen, 10.801 Kilometer, aktueller BMS-SOH 97,3 Prozent. Als Hauptsysteme nutze ich den AVL HV-Check und den OBDLink — der AUTEL läuft nur ergänzend mit. Dass sich die Methodik auf die MEB-Plattform übertragen lässt, habe ich am Skoda Elroq verifiziert: sieben AVL-Messungen über neun Monate, Streuung gleich null. Der Cupra Born kommt als ergänzendes Verifikationsfahrzeug dazu.',
+      en: '33 individual measurements over one year — focus on the MEB platform. My primary vehicle is an institute-owned VW ID.4: 77 kWh NMC 712 battery, 288 cells, 10,801 km, current BMS SOH 97.3 percent. As primary systems I use the AVL HV-Check and the OBDLink — the AUTEL only runs alongside as a supplement. To verify that the methodology transfers to the MEB platform, I checked it on the Skoda Elroq: seven AVL measurements over nine months, zero spread. The Cupra Born comes in as a supplementary verification vehicle.',
     },
     dataCallouts: [
       '33 Einzelmessungen Dez 2024 – Dez 2025',
@@ -422,16 +422,16 @@ export const SPEAKER_NOTES = {
     questions: [
       {
         q: { de: 'Warum kein BMW i3s als Verifikation?', en: 'Why no BMW i3s as verification?' },
-        a: { de: 'Wir haben am BMW i3s Vergleichsmessungen durchgeführt — 0,4 Pp Inter-System-Übereinstimmung — aber bewusst auf die MEB-Plattform fokussiert, weil die kontinuierliche OBD-Datenerfassung mit allen sechs Methoden nur dort vollständig durchgeführt wurde. Die BMW-Messungen liegen im Backup und sind kontextuell, nicht als Validierung gedacht. Erweiterung auf andere Plattformen ist als Future Work formuliert.', en: 'We did comparison measurements on the BMW i3s — 0.4 pp inter-system agreement — but deliberately focused on the MEB platform, because the full continuous OBD data acquisition with all six methods was only performed there. The BMW measurements are in the backup as contextual, not as validation. Extension to other platforms is formulated as future work.' },
+        a: { de: 'Ich habe am BMW i3s zwar Vergleichsmessungen gemacht — und alle drei Systeme stimmen dort auf 0,4 Prozentpunkte überein. Aber ich habe mich bewusst auf die MEB-Plattform konzentriert, weil ich die kontinuierliche OBD-Datenerfassung mit allen sechs Methoden nur dort vollständig durchgezogen habe. Die BMW-Messungen liegen im Backup als kontextueller Vergleich, nicht als Validierung. Die Erweiterung auf andere Plattformen ist im Ausblick formuliert.', en: 'I did do comparison measurements on the BMW i3s — and there all three systems agree to within 0.4 percentage points. But I deliberately focused on the MEB platform, because I only ran the full continuous OBD data acquisition with all six methods there. The BMW measurements live in the backup as a contextual comparison, not as validation. Extending to other platforms is formulated in the outlook.' },
       },
       {
         q: { de: 'Warum nur ein Primärfahrzeug?', en: 'Why only one primary vehicle?' },
-        a: { de: 'Für die detaillierte On-Board-Analyse mit allen sechs Methoden haben wir den VW ID.4 gewählt. Drei MEB-Fahrzeuge insgesamt — VW ID.4 als Hauptfahrzeug, Elroq und Born zur Plattform-Verifikation.', en: 'For detailed on-board analysis with all six methods we chose the VW ID.4. Three MEB vehicles in total — VW ID.4 as primary, Elroq and Born for platform verification.' },
+        a: { de: 'Für die detaillierte On-Board-Analyse mit allen sechs Methoden habe ich den VW ID.4 genommen. Insgesamt sind es drei MEB-Fahrzeuge — der ID.4 als Hauptfahrzeug, Elroq und Born zur Plattform-Verifikation.', en: 'For the detailed on-board analysis with all six methods I picked the VW ID.4. In total three MEB vehicles — the ID.4 as primary, Elroq and Born for platform verification.' },
       },
     ],
     transition: {
-      de: 'Wie die sechs Methoden zusammenwirken, zeigt die Konvergenz-Pipeline.',
-      en: 'How the six methods converge is shown in the convergence pipeline.',
+      de: 'Wie die sechs Methoden zusammenwirken, zeigt die Pipeline auf der nächsten Folie.',
+      en: 'How the six methods converge is shown by the pipeline on the next slide.',
     },
   },
 
@@ -450,8 +450,8 @@ export const SPEAKER_NOTES = {
       ],
     },
     script: {
-      de: 'Dieses Konvergenzdiagramm zeigt, wie unsere sechs Berechnungsmethoden — von der direkten BMS-Auslesung über Energie- und Ladungsintegration bis zur Widerstandsanalyse — zu einem robusten kombinierten SOH-Wert konvergieren. Jede Methode erfasst einen anderen Aspekt der Alterung, und die Kombination gleicht die jeweiligen Schwächen aus. Die konkreten Ergebnisse zeige ich Ihnen jetzt.',
-      en: 'This convergence diagram shows how our six calculation methods — from direct BMS readout through energy and charge integration to resistance analysis — converge into a robust combined SOH value. Each method captures a different aspect of aging, and the combination compensates for their respective weaknesses. Let me now show you the concrete results.',
+      de: 'Hier sind wir auf Ebene 3 — nachgelagerte Auswertung in meiner Python-App. Aus den OBD-Rohdaten rechne ich sechs SOH-Methoden parallel: BMS-Direktwert, Energie-Integration, Coulomb-Counting, Widerstand und ICA/DVA. Diese sechs Werte konvergieren zu einem kombinierten SOH. Jede Methode hat ihren eigenen blinden Fleck — die Kombination gleicht das aus. Wie das konkret aussieht, zeige ich auf den nächsten Folien.',
+      en: 'This is level 3 — post-processing in my Python app. From the OBD raw data I run six SOH methods in parallel: BMS direct readout, energy integration, Coulomb counting, resistance, and ICA/DVA. These six values converge into a combined SOH. Each method has its own blind spot — the combination compensates for that. I will show you what this looks like in concrete numbers on the next slides.',
     },
     dataCallouts: [],
     questions: [],
@@ -488,8 +488,8 @@ export const SPEAKER_NOTES = {
       ],
     },
     script: {
-      de: 'Hier sehen Sie den Vergleich aller sechs SOH-Methoden. Die Streuung beträgt 10,3 Prozentpunkte — von SOH_kap mit 89,7 Prozent bis SOH_R mit 100 Prozent. SOH_e mit 99,6 Prozent ist die genaueste Einzelmethode — nur 2,3 Prozentpunkte über der AVL-Referenz. SOH_c mit 91,8 Prozent unterschätzt systematisch um etwa 5,5 Prozentpunkte, was an den kumulativen Integrationsfehlern während der langen AC-Ladung liegt. Der kombinierte Wert aus SOH_e und SOH_c von 95,7 Prozent gleicht diese Fehler aus und weicht nur 1,6 Prozentpunkte von der AVL-Referenz ab. Das zeigt: Keine Einzelmethode liefert den wahren SOH, aber die Kombination ist praxistauglich.',
-      en: 'Here you see the comparison of all six SOH methods. The spread is 10.3 percentage points — from SOH_cap at 89.7% to SOH_R at 100%. SOH_e at 99.6% is the most accurate single method — only 2.3 pp above the AVL reference. SOH_c at 91.8% systematically underestimates by about 5.5 pp, due to cumulative integration errors during long AC charging. The combined value of SOH_e and SOH_c at 95.7% compensates these errors and deviates only 1.6 pp from the AVL reference. This shows: no single method delivers the true SOH, but the combination is practically usable.',
+      de: 'Hier sehen Sie alle sechs Methoden im Vergleich. Die Streuung ist beachtlich — 10,3 Prozentpunkte: von SOH_kap mit 89,7 Prozent bis SOH_R mit glatten 100. SOH_e ist mit 99,6 Prozent meine beste Einzelmethode — nur 2,3 Prozentpunkte über dem AVL-Referenzwert. SOH_c liegt bei 91,8 Prozent — also rund 5,5 Prozentpunkte zu niedrig. Das passiert, weil sich beim Coulomb-Counting kleine Stromfehler über die ganze AC-Ladung aufaddieren. Wenn ich SOH_e und SOH_c miteinander kombiniere, gleichen sie sich aus: 95,7 Prozent — nur 1,6 Prozentpunkte unter dem AVL. Die Botschaft ist klar: Keine Einzelmethode trifft den wahren SOH. Aber die Kombination ist praxistauglich.',
+      en: 'Here you see all six methods side by side. The spread is striking — 10.3 percentage points: from SOH_cap at 89.7 percent to SOH_R at a clean 100. SOH_e is my most accurate single method at 99.6 percent — only 2.3 pp above the AVL reference. SOH_c sits at 91.8 percent — about 5.5 pp too low. That happens because in Coulomb counting small current errors keep adding up over the long AC charge. If I combine SOH_e and SOH_c, they balance each other: 95.7 percent — only 1.6 pp below the AVL. The takeaway is clear: no single method nails the true SOH. But the combination is practically usable.',
     },
     dataCallouts: [
       'SOH_e = 99,6% · SOH_c = 91,8% · Kombiniert = 95,7%',
@@ -499,7 +499,7 @@ export const SPEAKER_NOTES = {
     questions: [
       {
         q: { de: 'Warum unterschätzt SOH_c systematisch?', en: 'Why does SOH_c systematically underestimate?' },
-        a: { de: 'Bei langer AC-Ladung (~8h bei ~30A) akkumulieren Integrationsfehler im Coulomb-Counting. Zusätzlich gehen Verluste (Wärme, BMS-Eigenverbrauch) nicht in die Stromintegration ein. Die BMS-Strommessung hat zudem Offsets bei niedrigen Strömen.', en: 'During long AC charging (~8h at ~30A), integration errors accumulate in Coulomb counting. Additionally, losses (heat, BMS self-consumption) are not captured in current integration. The BMS current measurement also has offsets at low currents.' },
+        a: { de: 'Bei langer AC-Ladung — wir reden hier über etwa 8 Stunden bei 30 Ampere — addieren sich kleine Stromfehler immer weiter auf. Außerdem gehen Verluste wie Wärme und der BMS-Eigenverbrauch gar nicht in die Stromintegration ein. Und die BMS-Strommessung hat bei kleinen Strömen einen Offset. All das zusammen drückt SOH_c systematisch nach unten.', en: 'During a long AC charge — we are talking about roughly 8 hours at 30 amps — small current errors keep adding up. On top of that, losses like heat and the BMS self-consumption do not show up in the current integration at all. And the BMS current measurement has an offset at low currents. All of that together pushes SOH_c systematically downwards.' },
       },
     ],
     transition: {
@@ -529,8 +529,8 @@ export const SPEAKER_NOTES = {
       ],
     },
     script: {
-      de: 'Die algorithmische Reproduzierbarkeit ist exzellent. Wir haben denselben Datensatz dreimal unabhängig analysiert: SOH_e ist vollständig deterministisch mit null Streuung. SOH_c zeigt minimal 0,3 Prozentpunkte Abweichung durch aktualisierte Softwareparameter. Der kombinierte SOH streut nur 0,2 Prozentpunkte. Beim AVL HV-Check zeigt sich über 12 Monate eine Standardabweichung von 1,2 Prozent — diese wird aber durch Fahrzeugzustand und Temperatur dominiert, nicht durch den Algorithmus selbst.',
-      en: 'Algorithmic reproducibility is excellent. We analyzed the same dataset three times independently: SOH_e is fully deterministic with zero spread. SOH_c shows minimal 0.3 pp deviation from updated software parameters. The combined SOH spreads only 0.2 pp. The AVL HV-Check shows a standard deviation of 1.2% over 12 months — but this is dominated by vehicle state and temperature, not the algorithm itself.',
+      de: 'Die algorithmische Reproduzierbarkeit ist exzellent. Ich habe denselben Datensatz dreimal unabhängig analysiert: SOH_e ist vollständig deterministisch — null Streuung. SOH_c liegt bei 0,3 Prozentpunkten, das kommt von leichten Updates an den Softwareparametern. Der kombinierte SOH streut nur 0,2 Prozentpunkte — das ist exzellent. Auf der rechten Seite die Messwiederholbarkeit beim AVL: über 12 Monate eine Standardabweichung von 1,2 Prozent. Aber das kommt von Fahrzeugzustand und Temperatur, nicht vom Algorithmus selbst.',
+      en: 'Algorithmic reproducibility is excellent. I analyzed the same dataset three times independently: SOH_e is fully deterministic — zero spread. SOH_c sits at 0.3 percentage points, which comes from small updates to the software parameters. The combined SOH spreads only 0.2 pp — that is excellent. On the right, the measurement repeatability of the AVL: a standard deviation of 1.2 percent over 12 months. But that comes from vehicle state and temperature, not from the algorithm itself.',
     },
     dataCallouts: [
       'Algorithmisch: 0,2 Pp Streuung / algorithmic: 0.2 pp spread',
@@ -538,8 +538,8 @@ export const SPEAKER_NOTES = {
     ],
     questions: [],
     transition: {
-      de: 'Wie beeinflusst die Temperatur die Ergebnisse?',
-      en: 'How does temperature affect the results?',
+      de: 'Jetzt zur ICA/DVA-Analyse — die zeigt charakteristische Alterungssignaturen der NMC-Zellen.',
+      en: 'Now to ICA/DVA analysis — it shows the characteristic aging signatures of the NMC cells.',
     },
   },
 
@@ -715,8 +715,8 @@ export const SPEAKER_NOTES = {
       ],
     },
     script: {
-      de: 'Die ICA-Analyse — die Ableitung dQ/dV gegen Spannung — identifiziert charakteristische Peaks, die den Phasenübergängen im Graphit-Anoden-Staging und den NMC-Kathodenreaktionen entsprechen. Die DVA zeigt die zugehörigen Spannungsplateaus. Unsere Software erkennt Peaks automatisch und speichert Position, Höhe und Halbwertsbreite in der Datenbank für Langzeittracking. Die wichtige Limitation: Da unser Fahrzeug mit über 97 Prozent SOH keine signifikante Alterung zeigt, können wir noch keine Peakverschiebungen nachweisen. Aber die Infrastruktur steht für zukünftiges Degradationsmonitoring.',
-      en: 'The ICA analysis — the derivative dQ/dV versus voltage — identifies characteristic peaks corresponding to graphite anode staging phase transitions and NMC cathode reactions. DVA shows the associated voltage plateaus. Our software automatically detects peaks and stores position, height, and FWHM in the database for long-term tracking. The important limitation: since our vehicle shows no significant aging at over 97% SOH, we cannot yet detect peak shifts. But the infrastructure is ready for future degradation monitoring.',
+      de: 'Die ICA-Analyse leitet dQ/dV gegen die Spannung ab. Die Peaks zeigen Phasenübergänge — Graphit-Staging in der Anode und Reaktionen in der NMC-Kathode. Die DVA zeigt die zugehörigen Spannungsplateaus. Meine Software erkennt diese Peaks automatisch und speichert Position, Höhe und Halbwertsbreite in der Datenbank — für späteres Langzeittracking. Wichtige Einschränkung: Da unser Fahrzeug mit über 97 Prozent SOH praktisch keine Alterung zeigt, sehe ich noch keine Peakverschiebung. Aber die Infrastruktur steht — für zukünftiges Degradationsmonitoring ist alles vorbereitet.',
+      en: 'The ICA analysis takes dQ/dV against voltage. The peaks show phase transitions — graphite staging in the anode and reactions in the NMC cathode. DVA shows the associated voltage plateaus. My software detects these peaks automatically and stores position, height, and FWHM in the database — for later long-term tracking. Important caveat: since our vehicle shows practically no aging at over 97 percent SOH, I do not yet see any peak shift. But the infrastructure is in place — everything is ready for future degradation monitoring.',
     },
     dataCallouts: [
       'OCV-Bereich / range: ~325 V → ~397 V',
@@ -725,12 +725,12 @@ export const SPEAKER_NOTES = {
     questions: [
       {
         q: { de: 'Ist die C-Rate bei AC-Ladung nicht zu hoch für ICA?', en: 'Isn\'t the C-rate too high for ICA with AC charging?' },
-        a: { de: 'Optimal wäre <C/10. Mit 11 kW AC auf 77 kWh ergibt sich C/7 — grenzwertig. Die Peaks sind erkennbar, aber breiter als bei niedrigerer C-Rate. Für hochaufgelöste ICA wäre C/25 ideal, was aber ~25h Ladedauer bedeuten würde.', en: 'Optimal would be <C/10. With 11 kW AC on 77 kWh we get C/7 — borderline. Peaks are recognizable but broader than at lower C-rate. For high-resolution ICA, C/25 would be ideal, but that means ~25h charging time.' },
+        a: { de: 'Optimal wäre unter C/10. Mit 11 kW AC auf 77 kWh komme ich bei C/7 raus — also grenzwertig. Die Peaks sind noch erkennbar, aber breiter als bei niedrigerer C-Rate. Wirklich hochaufgelöste ICA bräuchte C/25 — das wären rund 25 Stunden Ladezeit. Im Werkstattalltag nicht praktikabel.', en: 'Optimal would be under C/10. With 11 kW AC on a 77 kWh battery I end up at C/7 — borderline. Peaks are still recognizable but broader than at lower C-rate. Truly high-resolution ICA would need C/25 — that would mean about 25 hours of charging. Not practical in workshop use.' },
       },
     ],
     transition: {
-      de: 'Wie ordnen sich unsere Messwerte im Vergleich zu Community-Daten ein?',
-      en: 'How do our measurements compare to community data?',
+      de: 'Jetzt zur Live-Demo der App — der Pro-Modus für die Forschung.',
+      en: 'Now to the live demo of the app — the Pro mode for research.',
     },
   },
 
@@ -788,8 +788,8 @@ export const SPEAKER_NOTES = {
       ],
     },
     script: {
-      de: 'Hier sehen Sie die Pro-Version unserer SOH-Analyse-Software. Sie lädt OBD-CSV-Dateien und AVL-PDF-Berichte, erkennt automatisch den Fahrzeugtyp und berechnet alle sechs SOH-Methoden parallel. Die Ergebnisse werden als interaktive Plotly-Charts dargestellt und können als PDF-Bericht exportiert werden. Die Software speichert alle Messungen in einer SQLite-Datenbank für Langzeitvergleiche.',
-      en: 'Here you see the Pro version of our SOH analysis software. It loads OBD CSV files and AVL PDF reports, automatically detects vehicle type and calculates all six SOH methods in parallel. Results are displayed as interactive Plotly charts and can be exported as PDF reports. The software stores all measurements in a SQLite database for long-term comparisons.',
+      de: 'Hier ist die Pro-Version meiner SOH-Analyse-Software live. Ich lade eine OBD-CSV oder einen AVL-PDF-Bericht hoch — die App erkennt das Fahrzeug automatisch und rechnet alle sechs SOH-Methoden parallel durch. Die Ergebnisse sehen Sie als interaktive Plotly-Charts, und ich kann sie als PDF exportieren. Alle Messungen landen in einer SQLite-Datenbank für Langzeitvergleiche.',
+      en: 'Here is the Pro version of my SOH analysis software live. I upload an OBD CSV or an AVL PDF report — the app automatically detects the vehicle and runs all six SOH methods in parallel. You see the results as interactive Plotly charts, and I can export them as a PDF. All measurements land in a SQLite database for long-term comparisons.',
     },
     dataCallouts: [],
     questions: [],
@@ -818,8 +818,8 @@ export const SPEAKER_NOTES = {
       ],
     },
     script: {
-      de: 'Die Easy-Version ist ein vereinfachter 4-Schritt-Assistent — Fahrzeug auswählen, Datei hochladen, Ergebnis anzeigen, Bericht exportieren. Sie nutzt ein Ampel-System für die Batteriebewertung und ist für Werkstattmitarbeiter ohne technischen Hintergrund optimiert.',
-      en: 'The Easy version is a simplified 4-step wizard — select vehicle, upload file, view results, export report. It uses a traffic light system for battery assessment and is optimized for workshop staff without technical background.',
+      de: 'Die Easy-Version ist ein 4-Schritt-Assistent für die Werkstatt: Fahrzeug wählen, Datei hochladen, Ergebnis anzeigen, Bericht exportieren. Statt Detailcharts gibt es ein Ampel-System — Grün, Gelb, Rot. Damit kommt jeder Werkstattmitarbeiter ohne technischen Hintergrund klar.',
+      en: 'The Easy version is a 4-step wizard for the workshop: pick the vehicle, upload the file, view the result, export the report. Instead of detail charts there is a traffic-light system — green, yellow, red. With that, any workshop technician without a technical background can use it.',
     },
     dataCallouts: [],
     questions: [],
@@ -854,8 +854,8 @@ export const SPEAKER_NOTES = {
       ],
     },
     script: {
-      de: 'Stärken: Wir erreichen eine reproduzierbare SOH-Bestimmung mit 1,6 Prozentpunkten Abweichung am VW ID.4, verifiziert auf der MEB-Plattform am Skoda Elroq mit perfekter Reproduzierbarkeit über sieben Messungen. Die kombinierte Methode ist mit 0,1 Prozentpunkten temperaturrobust. Der entscheidende OBDLink-Mehrwert: kontinuierliche Datenerfassung, die der AVL gar nicht leisten kann — bei einmalig 130 Euro und ohne Folgekosten, gegenüber 70 Euro pro Jahr beim AVL und 8.000 Euro beim AUTEL. Ehrlich auf der Limitationsseite: Die Arbeit ist MEB-fokussiert — der BMW i3s ist nur eine kontextuelle Vergleichsmessung im Backup. Wir hatten keine DC-Schnellladedaten, das Fahrzeug zeigt keine signifikante Alterung, und die Gesamtunsicherheit liegt bei rund ±4,6 Prozentpunkten — dominiert durch Methodenstreuung und SOC-Fenster. Eine unabhängige Laborvalidierung nach ISO 12405 war nicht möglich.',
-      en: 'Strengths: reproducible SOH with 1.6 pp deviation on the VW ID.4, verified on the MEB platform at the Skoda Elroq with perfect reproducibility over seven measurements. Combined method is temperature-robust at 0.1 pp. Key OBDLink advantage: continuous data acquisition the AVL simply cannot provide — at €130 one-off with no recurring costs, vs. €70/year for AVL and €8000 for AUTEL. Honestly on limitations: the work is MEB-focused — BMW i3s is only a contextual comparison in backup. No DC fast-charging data, no significant aging in the measurement window, and total uncertainty is around ±4.6 pp — dominated by method spread and SOC window. Independent lab validation per ISO 12405 was not possible.',
+      de: 'Zu den Stärken: Ich erreiche eine reproduzierbare SOH-Bestimmung mit nur 1,6 Prozentpunkten Abweichung am VW ID.4. Auf der MEB-Plattform habe ich das am Skoda Elroq verifiziert — über sieben Messungen Streuung gleich null. Die kombinierte Methode ist temperaturrobust: nur 0,1 Prozentpunkte Unterschied zwischen 9,8 und 19 Grad. Der entscheidende OBDLink-Mehrwert: kontinuierliche Datenerfassung, die der AVL gar nicht liefern kann — und das bei einmalig 130 Euro ohne Folgekosten. Zum Vergleich: AVL kostet 70 Euro pro Jahr, AUTEL rund 8.000 Euro. Ehrlich zu den Grenzen: Die Arbeit ist MEB-fokussiert — der BMW i3s ist nur eine kontextuelle Vergleichsmessung im Backup. Ich hatte keine DC-Schnellladedaten und das Fahrzeug zeigt mit über 97 Prozent SOH keine signifikante Alterung. Die Gesamtunsicherheit liegt bei rund ±4,6 Prozentpunkten — getrieben vor allem durch die Methodenstreuung und das SOC-Fenster. Eine unabhängige Laborvalidierung nach ISO 12405 war im Rahmen dieser Arbeit nicht möglich.',
+      en: 'On the strengths side: I get a reproducible SOH with only 1.6 percentage points deviation on the VW ID.4. On the MEB platform I verified that on the Skoda Elroq — zero spread over seven measurements. The combined method is temperature-robust: only 0.1 percentage points between 9.8 and 19 degrees. The key OBDLink advantage: continuous data acquisition the AVL simply cannot deliver — and that at 130 euros one-off, no recurring costs. By comparison: AVL costs 70 euros per year, AUTEL around 8,000 euros. Honestly on the limitations: the work is MEB-focused — the BMW i3s is only a contextual comparison in the backup. I had no DC fast-charging data and the vehicle shows no significant aging at over 97 percent SOH. The total uncertainty is around ±4.6 pp — driven mainly by method spread and the SOC window. An independent lab validation per ISO 12405 was not feasible within this work.',
     },
     dataCallouts: [
       'AUTEL ~8.000 € · AVL ~70 €/Jahr · OBDLink ~130 € einmalig',
@@ -865,11 +865,11 @@ export const SPEAKER_NOTES = {
     questions: [
       {
         q: { de: 'Wie ließe sich die größte Limitation adressieren?', en: 'How could the biggest limitation be addressed?' },
-        a: { de: 'Im Ausblick formuliert: Erweiterung auf weitere Plattformen (BMW i3s, Tesla, LFP) — die Methoden bleiben gleich, nur PIDs/Kanäle anpassen. Zusätzlich Fahrzeuge mit bekannter Degradation (50k–150k km) für ICA/DVA-Validierung und Temperaturkorrektur als zukünftige Forschung.', en: 'Formulated in outlook: extension to other platforms (BMW i3s, Tesla, LFP) — methods stay the same, only PIDs/channels need adjustment. Additionally vehicles with known degradation (50k–150k km) for ICA/DVA validation and temperature correction as future work.' },
+        a: { de: 'Im Ausblick formuliert: Erweiterung auf andere Plattformen — BMW i3s, Tesla, LFP-Chemie. Die Methoden bleiben gleich, ich muss nur die PIDs und Kanäle anpassen. Dazu noch Fahrzeuge mit bekannter Degradation, also 50.000 bis 150.000 Kilometer Laufleistung, um die ICA/DVA zu validieren. Und die Temperaturkorrektur als eigene Forschungsfrage.', en: 'I lay this out in the outlook: extending to other platforms — BMW i3s, Tesla, LFP chemistry. The methods stay the same, I only have to adjust the PIDs and channels. On top of that, vehicles with known degradation — somewhere between 50,000 and 150,000 km — to validate ICA/DVA. And temperature correction as its own research question.' },
       },
       {
         q: { de: 'Was kostet das gesamte Setup?', en: 'What does the full setup cost?' },
-        a: { de: 'OBDLink MX+ ~130 Euro einmalig, plus Smartphone/Tablet (vorhanden), plus die Python-App (Open Source). Keine Folgekosten. Im direkten Vergleich: AVL HV-Check etwa 70 Euro pro Jahr Lizenzgebühr, AUTEL MaxiSYS Ultra rund 8.000 Euro einmalig.', en: 'OBDLink MX+ ~€130 one-off, plus smartphone/tablet (already owned), plus the Python app (open source). No recurring costs. Direct comparison: AVL HV-Check about €70/year license, AUTEL MaxiSYS Ultra around €8,000 one-off.' },
+        a: { de: 'Der OBDLink MX+ kostet einmalig rund 130 Euro. Smartphone oder Tablet hat man heute sowieso, und die Python-App ist Open Source. Keine Folgekosten. Zum Vergleich: AVL HV-Check etwa 70 Euro pro Jahr als Lizenz, AUTEL MaxiSYS Ultra rund 8.000 Euro einmalig.', en: 'The OBDLink MX+ is about 130 euros one-off. You usually already have a smartphone or tablet, and the Python app is open source. No recurring costs. By comparison: AVL HV-Check about 70 euros per year as a license, AUTEL MaxiSYS Ultra around 8,000 euros one-off.' },
       },
     ],
     transition: {
@@ -970,8 +970,8 @@ export const SPEAKER_NOTES = {
       ],
     },
     script: {
-      de: 'Die Kernaussage meiner Arbeit lautet: Die Kombination von energiebasierter und integrativer SOH-Methode ermöglicht eine reproduzierbare Bestimmung des Batteriezustands mit einem kostengünstigen OBD-Adapter für rund 130 Euro — einmalig und ohne Folgekosten — bei einer Abweichung von nur 1,6 Prozentpunkten zur professionellen Off-Board-Referenz. Verifiziert auf der MEB-Plattform an Skoda Elroq und Cupra Born. Drei Zahlen zum Mitnehmen: 95,7 Prozent kombinierter SOH, 0,1 Prozentpunkte Temperaturrobustheit, und 1,6 Prozentpunkte Übereinstimmung zwischen OBD und AVL.',
-      en: 'The core finding of my thesis is: The combination of energy-based and integrative SOH methods enables reproducible battery health determination with a low-cost OBD adapter for about 130 euros — one-off and without recurring costs — at a deviation of only 1.6 percentage points from the professional off-board reference. Verified on the MEB platform at Skoda Elroq and Cupra Born. Three numbers to remember: 95.7% combined SOH, 0.1 pp temperature robustness, and 1.6 pp agreement between OBD and AVL.',
+      de: 'Die Kernaussage meiner Arbeit lautet: Die Kombination aus energiebasierter und integrativer SOH-Methode liefert eine reproduzierbare Bestimmung des Batteriezustands. Mit einem OBD-Adapter für einmalig 130 Euro — ohne Folgekosten — und einer Abweichung von nur 1,6 Prozentpunkten zur professionellen Off-Board-Referenz. Verifiziert habe ich das auf der MEB-Plattform am Skoda Elroq und Cupra Born. Drei Zahlen zum Mitnehmen: 95,7 Prozent kombinierter SOH, 0,1 Prozentpunkte Temperaturrobustheit, und 1,6 Prozentpunkte Übereinstimmung zwischen OBD und AVL.',
+      en: 'The core finding of my thesis: the combination of energy-based and integrative SOH methods delivers a reproducible determination of battery health. With an OBD adapter for 130 euros one-off — no recurring costs — and a deviation of only 1.6 percentage points from the professional off-board reference. I verified that on the MEB platform at the Skoda Elroq and Cupra Born. Three numbers to take home: 95.7 percent combined SOH, 0.1 percentage points temperature robustness, and 1.6 percentage points agreement between OBD and AVL.',
     },
     dataCallouts: [
       '95,7 % kombinierter SOH / combined SOH',
@@ -1004,8 +1004,8 @@ export const SPEAKER_NOTES = {
       ],
     },
     script: {
-      de: 'Die entwickelten Verfahren sind direkt anwendbar in Werkstätten, bei Flottenbetreibern, bei Versicherungen und für die Second-Life-Klassifizierung. Für die Zukunft sehe ich vor allem die Erweiterung auf weitere Plattformen — BMW i3s, Tesla, LFP-Chemie. Die Methoden bleiben gleich, nur Kanäle und PIDs müssen angepasst werden. Außerdem Temperaturkorrektur, DC-Schnellladen, gealterte Fahrzeuge, ML-Korrektur und der EU-Batteriepass.',
-      en: 'The developed methods are directly applicable in workshops, for fleet operators, for insurance, and for second-life classification. For the future, the priority is extension to other platforms — BMW i3s, Tesla, LFP chemistry. Methods stay the same, only channels and PIDs need adjustment. Also temperature correction, DC fast charging, aged vehicles, ML correction, and the EU battery passport.',
+      de: 'Meine Verfahren lassen sich direkt einsetzen — in Werkstätten, bei Flottenbetreibern, Versicherungen und für die Second-Life-Klassifizierung. Für die Zukunft an erster Stelle: Erweiterung auf andere Plattformen wie BMW i3s, Tesla oder LFP-Chemie. Die Methoden bleiben gleich, ich muss nur Kanäle und PIDs anpassen. Dazu noch Temperaturkorrektur, DC-Schnellladen, gealterte Fahrzeuge, ML-Korrektur und der EU-Batteriepass.',
+      en: 'My methods can be used directly — in workshops, by fleet operators, insurers and for second-life classification. For the future, top of the list: extending to other platforms like BMW i3s, Tesla or LFP chemistry. The methods stay the same, I only have to adjust channels and PIDs. On top of that: temperature correction, DC fast charging, aged vehicles, ML correction and the EU battery passport.',
     },
     dataCallouts: [
       'BMW i3s · Tesla · LFP — Erweiterung als Future Work',
