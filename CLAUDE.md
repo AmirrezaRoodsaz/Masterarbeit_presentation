@@ -219,7 +219,7 @@ Each phase: push main → create feature branch → implement → merge with app
 - [x] **Phase 18:** Institutional requirements verified — all elements present (logos, examiners, title, date), fully offline, no Erklärung needed in presentation
 - [x] **Phase 19:** Distill core contribution — one sentence: *"This thesis demonstrates that the SOH of EV traction batteries can be determined reproducibly using on-board OBD diagnostics by combining energy-based and integrative methods, resulting in ±1.6 Pp agreement with professional off-board reference at ~€50 hardware cost."*
 
-- [ ] **Phase 20: Feedback-R2 + 15-min trim — final closure before defense (6. Mai 2026)**
+- [x] **Phase 20: Feedback-R2 + 15-min trim — final closure before defense (6. Mai 2026)** — merged 2026-05-02, tag `defense-2026-05-06`
   Branch: `feat/phase-20-feedback-r2-15min`. Each numbered task = one self-contained chunk that should commit cleanly. After all checks pass: merge to main, push, project = done.
 
   **Context.** Report received second feedback round (Simeon, 13.04.2026). Critical content drift between report and slides + presentation slot reduced from 20 → **15 min without Q&A**. Current deck has 28 main slides → must shrink to ~19 main + ~14 backups. Source feedback: `../Masterarbeit_v2/docs/betreuer_feedback_changelog.md` and `../Masterarbeit_v2/docs/Feedback_20260413.md`. Authoritative report state: `../Masterarbeit_v2/kapitel/`.
