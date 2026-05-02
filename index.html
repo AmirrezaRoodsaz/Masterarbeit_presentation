@@ -3,6 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Phase 21: redirect small viewports to the mobile companion.
+       Skips speaker/receiver view, respects ?desktop=1 override.
+       Vanilla ES5, runs before any other script. -->
+  <script>
+    (function () {
+      var qs = window.location.search;
+      if (/[?&](desktop|receiver)\b/.test(qs)) return;
+      if (window.location.pathname.indexOf('mobile.html') !== -1) return;
+      if (window.matchMedia && window.matchMedia('(max-width: 1024px)').matches) {
+        window.location.replace('/mobile.html' + qs + window.location.hash);
+      }
+    })();
+  </script>
   <title>SOH Elektrofahrzeuge — Masterarbeit Amirreza Roodsaz</title>
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
