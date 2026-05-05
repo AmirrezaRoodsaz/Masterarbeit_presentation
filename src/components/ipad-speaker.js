@@ -1,27 +1,26 @@
 /**
  * iPad Speaker View — auto-follows the main presenter via SSE.
- * Mirrors the Mac's S-key speaker view layout (notes-left + slide thumbs
- * right + synced timer) but works as a standalone URL on a remote device.
  *
  * URL: /?ipad-speaker
- *   Listens to /api/sync for { h, v, f, id, title } messages
- *   broadcasted by the main presenter when it changes slides.
+ * Layout: full-width notes panel (no slide thumbnails).
+ * SSE channels:
+ *   /api/sync  — slide position { h, v, f, id, title }
+ *   /api/timer — presentation timer { seconds, running, target, warning, overtime }
+ *
+ * Both channels replay the last known state to new clients on connect,
+ * so the iPad shows the current slide + current timer immediately even
+ * if the Mac hasn't broadcast since the iPad opened.
  */
 import { SPEAKER_NOTES } from './speaker-notes.js';
 
-let slideOrder = [];          // Array of { id, title } in DOM order
+let slideOrder = [];     // [{ id, title{de,en}, counted, countedIdx }]
 let lang = 'de';
-let currentH = 0;
 let currentSlideId = null;
-let sseSource = null;
-let timerSec = 0;
-let timerRunning = false;
-let timerTarget = 900;        // 15 min
-let timerInterval = null;
+let sseSync = null;
+let sseTimer = null;
 
 export async function initIpadSpeakerView() {
   document.title = 'Speaker View — Roodsaz Kolloquium';
-  // Wipe any existing body content from the deck attempt
   document.body.innerHTML = '';
   document.body.classList.add('ipad-speaker-mode');
 
@@ -30,16 +29,10 @@ export async function initIpadSpeakerView() {
   renderLayout();
   attachEventHandlers();
   connectSSE();
-  startTimer();
-  // Render initial state from the manifest (h=0)
+  // Render initial placeholder until first SSE message arrives
   renderForIndex(0, 0, -1, slideOrder[0]?.id);
 }
 
-/**
- * Fetch the deck's HTML once to extract the ordered list of slide IDs +
- * H2 titles. The SSE messages give us the index `h`; this lets us map
- * `h → id` for the SPEAKER_NOTES lookup.
- */
 async function fetchSlideManifest() {
   try {
     const res = await fetch('/?embed=manifest', { cache: 'no-store' });
@@ -49,8 +42,7 @@ async function fetchSlideManifest() {
     let countedRunningIdx = 0;
     slideOrder = Array.from(sections).map(sec => {
       const id = sec.id;
-      // Only the language-specific span text — H2 contains both .lang-de
-      // and .lang-en, taking textContent of the H2 concatenates them.
+      // Read DE / EN spans separately — h2.textContent would concatenate them.
       const titleDE = sec.querySelector('h2 .lang-de')?.textContent.trim();
       const titleEN = sec.querySelector('h2 .lang-en')?.textContent.trim();
       const title = { de: titleDE || id, en: titleEN || titleDE || id };
@@ -80,28 +72,12 @@ function renderLayout() {
         <span class="slide-num" id="slide-num">— / —</span>
       </div>
       <div class="header-right">
-        <span class="timer" id="timer-display" title="Tippen zum Starten/Stoppen">00:00 / 15:00</span>
+        <span class="timer" id="timer-display">00:00 / 15:00</span>
       </div>
     </header>
     <main>
-      <section class="notes-pane">
-        <div class="slide-title-bar" id="slide-title">—</div>
-        <div class="notes-content" id="notes-content"></div>
-      </section>
-      <aside class="slide-pane">
-        <div class="slide-card current">
-          <div class="slide-card-label">Aktuelle Folie</div>
-          <div class="slide-iframe-wrap">
-            <iframe id="current-iframe" src="about:blank"></iframe>
-          </div>
-        </div>
-        <div class="slide-card upcoming">
-          <div class="slide-card-label">Nächste Folie</div>
-          <div class="slide-iframe-wrap">
-            <iframe id="upcoming-iframe" src="about:blank"></iframe>
-          </div>
-        </div>
-      </aside>
+      <div class="slide-title-bar" id="slide-title">—</div>
+      <div class="notes-content" id="notes-content"></div>
     </main>
   `;
   document.body.appendChild(root);
@@ -112,44 +88,54 @@ function attachEventHandlers() {
     lang = lang === 'de' ? 'en' : 'de';
     document.getElementById('lang-btn').textContent = lang.toUpperCase();
     renderNotes(currentSlideId);
-  });
-
-  document.getElementById('timer-display').addEventListener('click', () => {
-    timerRunning = !timerRunning;
-    document.getElementById('timer-display').classList.toggle('running', timerRunning);
+    // Re-render slide-num + title in the new language too
+    const meta = slideOrder.find(s => s.id === currentSlideId);
+    if (meta) {
+      document.getElementById('slide-title').textContent = meta.title[lang] || meta.id;
+    }
   });
 }
 
 function connectSSE() {
-  if (sseSource) sseSource.close();
   const indicator = document.getElementById('connection-indicator');
 
-  sseSource = new EventSource('/api/sync');
-  sseSource.addEventListener('open', () => {
+  // /api/sync — slide position
+  if (sseSync) sseSync.close();
+  sseSync = new EventSource('/api/sync');
+  sseSync.addEventListener('open', () => {
     indicator.textContent = '📡 Verbunden';
     indicator.classList.remove('disconnected');
     indicator.classList.add('connected');
   });
-  sseSource.onmessage = (evt) => {
+  sseSync.onmessage = (evt) => {
     try {
       const data = JSON.parse(evt.data);
       if (typeof data.h === 'number') {
         renderForIndex(data.h, data.v ?? 0, data.f ?? -1, data.id);
       }
-    } catch { /* ignore parse */ }
+    } catch { /* ignore */ }
   };
-  sseSource.onerror = () => {
+  sseSync.onerror = () => {
     indicator.textContent = '📡 Getrennt — neuer Versuch …';
     indicator.classList.remove('connected');
     indicator.classList.add('disconnected');
-    sseSource.close();
-    setTimeout(connectSSE, 3000);
+    sseSync.close();
+    setTimeout(() => connectSSE(), 3000);
   };
+
+  // /api/timer — synced timer from the Mac
+  if (sseTimer) sseTimer.close();
+  sseTimer = new EventSource('/api/timer');
+  sseTimer.onmessage = (evt) => {
+    try {
+      const data = JSON.parse(evt.data);
+      updateTimer(data);
+    } catch { /* ignore */ }
+  };
+  // Don't reconnect timer separately; sync's reconnect handles network
 }
 
 function renderForIndex(h, v, f, id) {
-  currentH = h;
-  // Resolve slide ID — prefer the broadcaster's id field, else look up by index
   const resolvedId = id || slideOrder[h]?.id || null;
   currentSlideId = resolvedId;
 
@@ -157,23 +143,11 @@ function renderForIndex(h, v, f, id) {
   const meta = slideOrder[h];
   const slideNum = meta?.counted
     ? `${meta.countedIdx} / ${countedTotal()}`
-    : (lang === 'de' ? 'Backup' : 'Backup');
+    : 'Backup';
   document.getElementById('slide-num').textContent = total ? slideNum : '— / —';
 
   const titleEl = document.getElementById('slide-title');
   titleEl.textContent = meta?.title?.[lang] || meta?.title?.de || resolvedId || '—';
-
-  // Iframes — only update if hash changed (avoid full reload on every fragment).
-  // Reveal is configured with hashOneBasedIndex: true, so URL hashes are
-  // 1-based — convert from 0-based deck index `h` to `h+1` for the URL.
-  const cIframe = document.getElementById('current-iframe');
-  const uIframe = document.getElementById('upcoming-iframe');
-  const hashH = h + 1;                                // 1-based for URL
-  const upcomingHashH = (h + 1 < total) ? hashH + 1 : hashH;
-  const currentSrc = `/?embed=slide#/${hashH}/${v}/${f}`;
-  const upcomingSrc = `/?embed=slide#/${upcomingHashH}/0/-1`;
-  if (!cIframe.src.endsWith(currentSrc)) cIframe.src = currentSrc;
-  if (!uIframe.src.endsWith(upcomingSrc)) uIframe.src = upcomingSrc;
 
   renderNotes(resolvedId);
 }
@@ -181,7 +155,7 @@ function renderForIndex(h, v, f, id) {
 function renderNotes(slideId) {
   const container = document.getElementById('notes-content');
   if (!slideId) {
-    container.innerHTML = '<p class="empty">Keine Folie aktiv.</p>';
+    container.innerHTML = '<p class="empty">Keine Folie aktiv. Wenn Sie auf dem Mac eine Folie ändern, aktualisiert sich diese Ansicht automatisch.</p>';
     return;
   }
   const note = SPEAKER_NOTES[slideId];
@@ -222,25 +196,18 @@ function buildNoteHTML(note, lang) {
   return html;
 }
 
-function startTimer() {
-  if (timerInterval) clearInterval(timerInterval);
-  timerInterval = setInterval(() => {
-    if (!timerRunning) return;
-    timerSec++;
-    updateTimerDisplay();
-  }, 1000);
-  updateTimerDisplay();
-}
-
-function updateTimerDisplay() {
+function updateTimer(state) {
   const el = document.getElementById('timer-display');
   if (!el) return;
-  const m = Math.floor(timerSec / 60).toString().padStart(2, '0');
-  const s = (timerSec % 60).toString().padStart(2, '0');
-  const tm = Math.floor(timerTarget / 60).toString().padStart(2, '0');
+  const sec = state.seconds || 0;
+  const target = state.target || 900;
+  const m = Math.floor(sec / 60).toString().padStart(2, '0');
+  const s = (sec % 60).toString().padStart(2, '0');
+  const tm = Math.floor(target / 60).toString().padStart(2, '0');
   el.textContent = `${m}:${s} / ${tm}:00`;
-  el.classList.toggle('overtime', timerSec >= timerTarget);
-  el.classList.toggle('warning', timerSec >= timerTarget * 0.9 && timerSec < timerTarget);
+  el.classList.toggle('running', !!state.running && !state.overtime);
+  el.classList.toggle('warning', !!state.warning);
+  el.classList.toggle('overtime', !!state.overtime);
 }
 
 function injectStyles() {
@@ -302,11 +269,9 @@ function injectStyles() {
       font-variant-numeric: tabular-nums;
       font-weight: 700;
       font-size: 1.6rem;
-      cursor: pointer;
       padding: 0.2rem 0.7rem;
       border-radius: 8px;
-      color: #e2e8f0;
-      -webkit-tap-highlight-color: transparent;
+      color: #888;
       user-select: none;
     }
     .timer.running { color: #00C9A7; }
@@ -319,140 +284,91 @@ function injectStyles() {
       font-weight: 500;
     }
 
-    /* MAIN */
+    /* MAIN — full-width notes, no slide thumbnails */
     #ipad-speaker-root > main {
       flex: 1;
-      display: grid;
-      grid-template-columns: 60% 40%;
+      display: flex;
+      flex-direction: column;
       overflow: hidden;
       min-height: 0;
     }
-
-    /* NOTES PANE */
-    .notes-pane {
-      display: flex; flex-direction: column;
-      overflow: hidden;
-      border-right: 1px solid rgba(255,255,255,0.08);
-    }
     .slide-title-bar {
       flex-shrink: 0;
-      padding: 0.7rem 1.2rem;
-      font-size: 1.15rem; font-weight: 700;
+      padding: 0.8rem 1.5rem;
+      font-size: 1.35rem; font-weight: 700;
       color: #E2001A;
       background: rgba(0,0,0,0.3);
       border-bottom: 1px solid rgba(255,255,255,0.08);
+      line-height: 1.3;
     }
     .notes-content {
       flex: 1;
-      padding: 0.8rem 1.2rem 1.5rem;
+      padding: 1rem 1.8rem 2rem;
       overflow-y: auto;
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
-      font-size: 0.95rem;
-      line-height: 1.55;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
     }
     .notes-content h4 {
       color: #E2001A;
-      font-size: 0.78rem;
+      font-size: 0.85rem;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin: 1.1rem 0 0.4rem;
+      letter-spacing: 0.07em;
+      margin: 1.4rem 0 0.5rem;
       font-weight: 700;
     }
-    .notes-content h4:first-child { margin-top: 0; }
-    .notes-content ul { padding-left: 1.4rem; margin: 0.4rem 0; }
-    .notes-content li { margin: 0.25rem 0; color: #cbd5e1; }
-    .notes-content p { margin: 0.4rem 0; }
-    .notes-content .time { color: #888; font-size: 0.85rem; margin-top: 0; }
+    .notes-content h4:first-child { margin-top: 0.5rem; }
+    .notes-content ul { padding-left: 1.5rem; margin: 0.5rem 0; }
+    .notes-content li { margin: 0.35rem 0; color: #cbd5e1; }
+    .notes-content p { margin: 0.5rem 0; }
+    .notes-content .time { color: #888; font-size: 0.9rem; margin-top: 0; }
     .notes-content .script {
       font-style: italic;
-      line-height: 1.7;
+      line-height: 1.75;
       color: #e2e8f0;
       background: rgba(255,255,255,0.03);
-      padding: 0.7rem 0.9rem;
+      padding: 0.9rem 1.1rem;
       border-left: 3px solid #4C9AFF;
       border-radius: 4px;
+      font-size: 1.08rem;
     }
     .notes-content .callout {
       color: #FFB800; font-weight: 600;
     }
     .notes-content .qa-q {
-      color: #4C9AFF; margin: 0.5em 0 0.15em;
+      color: #4C9AFF; margin: 0.7em 0 0.2em;
       font-weight: 500;
     }
     .notes-content .qa-a {
-      color: #94a3b8; margin: 0 0 0.6em 1em; font-size: 0.9em;
+      color: #94a3b8; margin: 0 0 0.8em 1em; font-size: 0.95em;
     }
     .notes-content .transition {
       color: #4C9AFF;
-      padding: 0.5rem 0.7rem;
-      margin-top: 1rem;
+      padding: 0.6rem 0.9rem;
+      margin-top: 1.2rem;
       border-left: 3px solid #4C9AFF;
       background: rgba(76,154,255,0.06);
       border-radius: 4px;
       font-style: italic;
     }
     .notes-content .empty {
-      color: #555; font-style: italic; text-align: center; padding: 2rem;
+      color: #555; font-style: italic; text-align: center; padding: 3rem 1rem;
+      font-size: 1rem;
     }
     .notes-content code {
       background: rgba(255,255,255,0.08);
       padding: 0.1em 0.3em;
       border-radius: 3px;
-      font-size: 0.85em;
-    }
-
-    /* SLIDE PANE */
-    .slide-pane {
-      display: flex; flex-direction: column;
-      padding: 0.6rem;
-      gap: 0.6rem;
-      overflow: hidden;
-    }
-    .slide-card {
-      display: flex; flex-direction: column;
-      background: #fff;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.4);
-    }
-    .slide-card.current { flex: 1.4; }
-    .slide-card.upcoming { flex: 1; opacity: 0.9; }
-    .slide-card-label {
-      padding: 0.35rem 0.7rem;
-      background: rgba(20,20,35,0.95);
-      color: #E2001A;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-    .slide-iframe-wrap {
-      flex: 1;
-      position: relative;
-      background: #fff;
-      overflow: hidden;
-    }
-    .slide-iframe-wrap iframe {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      border: 0;
+      font-size: 0.9em;
     }
 
     @keyframes ipad-pulse {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.45; }
-    }
-
-    /* Hint at the bottom for first-time use */
-    .notes-content .empty::after {
-      content: 'Wenn Sie auf dem Mac eine Folie ändern, aktualisiert sich diese Ansicht automatisch.';
-      display: block;
-      margin-top: 0.8rem;
-      font-size: 0.85rem;
-      color: #666;
     }
   `;
   document.head.appendChild(style);
