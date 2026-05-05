@@ -58,11 +58,32 @@ export function initNotesLoader(deckInstance) {
     const delta = e.detail?.delta || 0;
     if (!delta) return;
 
-    // Scroll the speaker view popup (if open)
+    // Scroll the speaker view popup (if open). Reveal's structure has
+    // changed across versions: try the inner notes container first
+    // (most reliable scroller), then the outer panel, then the window
+    // itself as a final fallback.
     if (speakerWindow && !speakerWindow.closed) {
       try {
-        const notesEl = speakerWindow.document.querySelector('#speaker-controls');
-        if (notesEl) notesEl.scrollBy({ top: delta, behavior: 'auto' });
+        const doc = speakerWindow.document;
+        const candidates = [
+          doc.querySelector('#speaker-controls-notes .value'),
+          doc.getElementById('speaker-controls-notes'),
+          doc.getElementById('speaker-controls'),
+        ].filter(Boolean);
+
+        let scrolled = false;
+        for (const el of candidates) {
+          // Only scroll an element that can actually scroll
+          if (el.scrollHeight > el.clientHeight + 1) {
+            el.scrollBy({ top: delta, behavior: 'auto' });
+            scrolled = true;
+            break;
+          }
+        }
+        if (!scrolled) {
+          // Fallback: scroll the popup window itself
+          speakerWindow.scrollBy({ top: delta, behavior: 'auto' });
+        }
       } catch { /* cross-origin or closed */ }
     }
 
