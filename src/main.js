@@ -1,13 +1,3 @@
-// Phase 21: iPad speaker view — short-circuit before any Reveal init.
-// URL `?ipad-speaker` opens a standalone follower view that mirrors the
-// Mac S-key speaker layout (notes-left + slide-thumbs-right + timer)
-// and auto-syncs via SSE.
-const _earlyParams = new URLSearchParams(window.location.search);
-const _isIpadSpeaker = _earlyParams.has('ipad-speaker');
-if (_isIpadSpeaker) {
-  import('./components/ipad-speaker.js').then(m => m.initIpadSpeakerView());
-}
-
 import Reveal from 'reveal.js';
 import RevealNotes from 'reveal.js/plugin/notes/notes.esm.js';
 import { initShell } from './components/shell.js';
@@ -31,34 +21,20 @@ import 'katex/dist/katex.min.css';
 // Reveal.js core styles
 import 'reveal.js/dist/reveal.css';
 
-// `?embed=slide` — used by iPad speaker view iframes. Loads the deck
-// without sidebar/controls. Add the body class before Reveal initializes
-// so the layout is correct from the first paint.
-if (_earlyParams.has('embed')) {
-  document.documentElement.classList.add('embed-slide');
-  document.body && document.body.classList.add('embed-slide');
-}
-
 // Auto-enable presenter mode if no mode params are set
 if (!window.location.search.includes('presenter') &&
     !window.location.search.includes('print-notes') &&
     !window.location.search.includes('follow') &&
-    !window.location.search.includes('receiver') &&
-    !window.location.search.includes('embed')) {
+    !window.location.search.includes('receiver')) {
   const url = new URL(window.location);
   url.searchParams.set('presenter', '');
   window.location.replace(url);
 }
 
-// Don't initialize Reveal in iPad speaker mode — the page is repainted
-// by the dynamic ipad-speaker module above.
-let deck = null;
-if (!_isIpadSpeaker) {
-
 const s = getSettings();
 
 // Initialize Reveal.js
-deck = Reveal({
+const deck = Reveal({
   hash: true,
   hashOneBasedIndex: true,
   transition: 'fade',
@@ -315,7 +291,5 @@ if (progressCar) {
     img.addEventListener('click', () => openZoom(img));
   });
 })();
-
-} // end of !_isIpadSpeaker guard
 
 export { deck };

@@ -39,7 +39,6 @@ function getQrEntries() {
 
   return [
     { id: 'slides',    name: 'Kolloquium',               url: `http://${ip}:3000`,    icon: 'monitor',   type: 'dynamic' },
-    { id: 'ipad',      name: 'iPad Speaker View',         url: `http://${ip}:3000/?ipad-speaker`, icon: 'tablet',  type: 'dynamic' },
     { id: 'soh-pro',   name: 'SOH Tool (Pro)',            url: `http://${ip}:8501`,    icon: 'activity',  type: 'dynamic' },
     { id: 'soh-easy',  name: 'SOH Tool (Easy)',           url: `http://${ip}:8000`,    icon: 'zap',       type: 'dynamic' },
     { id: 'thesis',    name: 'Masterarbeit Bericht PDF',  url: '/thesis.pdf',          icon: 'file-text', type: 'static' },

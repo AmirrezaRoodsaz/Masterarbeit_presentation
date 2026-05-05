@@ -44,11 +44,8 @@ export function initNotesLoader(deckInstance) {
     createNotesPanel();
   }
 
-  // Broadcast slide + fragment changes only from the main presenter
-  // (skip ?follow, ?embed, and any iframe-embedded view — those would
-  // create a feedback loop with the iPad speaker view).
-  const isEmbed = params.has('embed') || window.self !== window.top;
-  if (!params.has('follow') && !isEmbed) {
+  // Always broadcast slide + fragment changes if we're the main presenter (no ?follow)
+  if (!params.has('follow')) {
     deck.on('slidechanged', () => broadcastSlide());
     deck.on('fragmentshown', () => broadcastSlide());
     deck.on('fragmenthidden', () => broadcastSlide());
@@ -846,19 +843,14 @@ function connectSSE() {
 
 /**
  * Broadcast current slide + fragment position to SSE server.
- * Uses {h, v, f} indices plus the slide id and German H2 title so the
- * iPad speaker view can resolve notes without its own DOM.
+ * Uses {h, v, f} indices so the follower can sync fragments too.
  */
 function broadcastSlide() {
   if (!deck) return;
   const indices = deck.getIndices(); // { h, v, f }
-  const slide = deck.getCurrentSlide();
-  const id = slide?.id || '';
-  const titleEl = slide?.querySelector('h2 .lang-de, h2');
-  const title = titleEl?.textContent?.trim() || '';
   fetch('/api/sync', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ h: indices.h, v: indices.v, f: indices.f ?? -1, id, title }),
+    body: JSON.stringify({ h: indices.h, v: indices.v, f: indices.f ?? -1 }),
   }).catch(() => { /* SSE server not available — silent fail */ });
 }

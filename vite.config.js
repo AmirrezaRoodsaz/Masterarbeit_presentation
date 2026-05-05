@@ -7,7 +7,7 @@ import { defineConfig } from 'vite';
  */
 function sseSyncPlugin() {
   const clients = new Set();
-  let lastState = { h: 0, v: 0, f: -1, id: '', title: '' };
+  let lastState = { h: 0, v: 0, f: -1 };
 
   return {
     name: 'sse-sync',
@@ -25,20 +25,14 @@ function sseSyncPlugin() {
           clients.add(res);
           req.on('close', () => clients.delete(res));
         } else if (req.method === 'POST') {
-          // Receive slide + fragment position {h, v, f, id, title}
+          // Receive slide + fragment position {h, v, f}
           let body = '';
           req.on('data', (chunk) => { body += chunk; });
           req.on('end', () => {
             try {
               const data = JSON.parse(body);
               if (data.h !== undefined) {
-                lastState = {
-                  h: data.h,
-                  v: data.v ?? 0,
-                  f: data.f ?? -1,
-                  id: data.id ?? '',
-                  title: data.title ?? '',
-                };
+                lastState = { h: data.h, v: data.v ?? 0, f: data.f ?? -1 };
                 const msg = `data: ${JSON.stringify(lastState)}\n\n`;
                 for (const client of clients) {
                   client.write(msg);
