@@ -230,24 +230,17 @@ function initTimer() {
   // Don't auto-restore from sessionStorage — it can get stale and hide the sidebar.
 }
 
-/** Broadcast timer state to any listening speaker view popups + iPad. */
+/** Broadcast timer state to any listening speaker view popups */
 function broadcastTimerState() {
   const ts = getSettings();
-  const detail = {
-    seconds: timerSeconds,
-    running: timerRunning,
-    warning: timerSeconds >= ts.display.timerWarning && timerSeconds < ts.display.timerTarget,
-    overtime: timerSeconds >= ts.display.timerTarget,
-    target: ts.display.timerTarget,
-  };
-  // Local DOM event — speaker view popup listens to this
-  document.dispatchEvent(new CustomEvent('timer-sync', { detail }));
-  // SSE — iPad / remote followers listen to /api/timer
-  fetch('/api/timer', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(detail),
-  }).catch(() => { /* dev server unavailable — silent */ });
+  document.dispatchEvent(new CustomEvent('timer-sync', {
+    detail: {
+      seconds: timerSeconds,
+      running: timerRunning,
+      warning: timerSeconds >= ts.display.timerWarning && timerSeconds < ts.display.timerTarget,
+      overtime: timerSeconds >= ts.display.timerTarget,
+    },
+  }));
 }
 
 export function getTimerState() {
