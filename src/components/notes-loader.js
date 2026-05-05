@@ -54,9 +54,6 @@ export function initNotesLoader(deckInstance) {
     deck.on('fragmenthidden', () => broadcastSlide());
     // Broadcast initial position
     setTimeout(() => broadcastSlide(), 500);
-    // Heartbeat: re-broadcast every 2 s so a momentarily-lost POST is
-    // self-healed without the presenter having to click forward+back.
-    setInterval(() => broadcastSlide(), 2000);
   }
 
   // Gamepad scroll → scroll speaker view notes panel

@@ -16,10 +16,8 @@ import { SPEAKER_NOTES } from './speaker-notes.js';
 let slideOrder = [];     // [{ id, title{de,en}, counted, countedIdx }]
 let lang = 'de';
 let currentSlideId = null;
-let pollTimer = null;
-let lastSyncRev = -1;
-let lastTimerRev = -1;
-let consecutiveErrors = 0;
+let sseSync = null;
+let sseTimer = null;
 
 export async function initIpadSpeakerView() {
   document.title = 'Speaker View — Roodsaz Kolloquium';
@@ -30,8 +28,8 @@ export async function initIpadSpeakerView() {
   await fetchSlideManifest();
   renderLayout();
   attachEventHandlers();
-  startPolling();
-  // Render initial placeholder until first poll arrives
+  connectSSE();
+  // Render initial placeholder until first SSE message arrives
   renderForIndex(0, 0, -1, slideOrder[0]?.id);
 }
 
@@ -99,52 +97,45 @@ function attachEventHandlers() {
   });
 }
 
-/**
- * Polling-based sync — bulletproof against Safari iOS SSE buffering quirks.
- * Polls /api/state every 500 ms and applies updates whenever the server
- * revision counter advances.
- */
-function startPolling() {
+function connectSSE() {
   const indicator = document.getElementById('connection-indicator');
 
-  async function tick() {
+  // /api/sync — slide position
+  if (sseSync) sseSync.close();
+  sseSync = new EventSource('/api/sync');
+  sseSync.addEventListener('open', () => {
+    indicator.textContent = '📡 Verbunden';
+    indicator.classList.remove('disconnected');
+    indicator.classList.add('connected');
+  });
+  sseSync.onmessage = (evt) => {
     try {
-      const res = await fetch('/api/state', { cache: 'no-store' });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      consecutiveErrors = 0;
-      indicator.textContent = '🟢 Verbunden';
-      indicator.classList.remove('disconnected');
-      indicator.classList.add('connected');
+      const data = JSON.parse(evt.data);
+      if (typeof data.h === 'number') {
+        renderForIndex(data.h, data.v ?? 0, data.f ?? -1, data.id);
+        markSync('slide');
+      }
+    } catch { /* ignore */ }
+  };
+  sseSync.onerror = () => {
+    indicator.textContent = '📡 Getrennt — neuer Versuch …';
+    indicator.classList.remove('connected');
+    indicator.classList.add('disconnected');
+    sseSync.close();
+    setTimeout(() => connectSSE(), 3000);
+  };
 
-      if (typeof data.syncRev === 'number' && data.syncRev !== lastSyncRev) {
-        lastSyncRev = data.syncRev;
-        const s = data.sync || {};
-        if (typeof s.h === 'number') {
-          renderForIndex(s.h, s.v ?? 0, s.f ?? -1, s.id);
-          markSync('slide');
-        }
-      }
-      if (typeof data.timerRev === 'number' && data.timerRev !== lastTimerRev) {
-        lastTimerRev = data.timerRev;
-        if (data.timer) {
-          updateTimer(data.timer);
-          markSync('timer');
-        }
-      }
-    } catch (e) {
-      consecutiveErrors++;
-      if (consecutiveErrors >= 3) {
-        indicator.textContent = '🔴 Getrennt';
-        indicator.classList.remove('connected');
-        indicator.classList.add('disconnected');
-      }
-    }
-  }
-
-  if (pollTimer) clearInterval(pollTimer);
-  tick();
-  pollTimer = setInterval(tick, 500);
+  // /api/timer — synced timer from the Mac
+  if (sseTimer) sseTimer.close();
+  sseTimer = new EventSource('/api/timer');
+  sseTimer.onmessage = (evt) => {
+    try {
+      const data = JSON.parse(evt.data);
+      updateTimer(data);
+      markSync('timer');
+    } catch { /* ignore */ }
+  };
+  // Don't reconnect timer separately; sync's reconnect handles network
 }
 
 function renderForIndex(h, v, f, id) {
