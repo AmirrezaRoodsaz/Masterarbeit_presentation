@@ -399,8 +399,13 @@ function renderDisplayTab() {
           </a>
           <a class="cheatsheet-item cheatsheet-link" href="?presenter&follow" target="_blank" rel="noopener">
             <code>?presenter&amp;follow</code>
-            <span class="lang-de">iPad: Notizen + Auto-Sync</span>
-            <span class="lang-en" hidden>iPad: Notes + auto-sync</span>
+            <span class="lang-de">iPad: Notizen + Auto-Sync (alt)</span>
+            <span class="lang-en" hidden>iPad: Notes + auto-sync (legacy)</span>
+          </a>
+          <a class="cheatsheet-item cheatsheet-link" href="?ipad-speaker" target="_blank" rel="noopener">
+            <code>?ipad-speaker</code>
+            <span class="lang-de">iPad-Speaker-View (Notizen + Timer-Sync)</span>
+            <span class="lang-en" hidden>iPad Speaker View (notes + timer sync)</span>
           </a>
         </div>
       </div>

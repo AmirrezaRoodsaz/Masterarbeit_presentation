@@ -66,6 +66,7 @@ function renderLayout() {
     <header>
       <div class="header-left">
         <span class="indicator" id="connection-indicator">📡 Verbinde…</span>
+        <span class="last-sync" id="last-sync" title="Letzte Aktualisierung vom Mac">—</span>
         <button class="header-btn" id="lang-btn">${lang.toUpperCase()}</button>
       </div>
       <div class="header-center">
@@ -112,6 +113,7 @@ function connectSSE() {
       const data = JSON.parse(evt.data);
       if (typeof data.h === 'number') {
         renderForIndex(data.h, data.v ?? 0, data.f ?? -1, data.id);
+        markSync('slide');
       }
     } catch { /* ignore */ }
   };
@@ -130,6 +132,7 @@ function connectSSE() {
     try {
       const data = JSON.parse(evt.data);
       updateTimer(data);
+      markSync('timer');
     } catch { /* ignore */ }
   };
   // Don't reconnect timer separately; sync's reconnect handles network
@@ -196,6 +199,16 @@ function buildNoteHTML(note, lang) {
   return html;
 }
 
+function markSync(kind) {
+  const el = document.getElementById('last-sync');
+  if (!el) return;
+  const now = new Date();
+  const t = now.toTimeString().slice(0, 8);
+  el.textContent = `↻ ${kind} ${t}`;
+  el.classList.add('flash');
+  setTimeout(() => el.classList.remove('flash'), 350);
+}
+
 function updateTimer(state) {
   const el = document.getElementById('timer-display');
   if (!el) return;
@@ -251,6 +264,14 @@ function injectStyles() {
     }
     .indicator.connected { background: #00C9A7; }
     .indicator.disconnected { background: #E2001A; }
+
+    .last-sync {
+      font-size: 0.7rem;
+      color: #888;
+      font-variant-numeric: tabular-nums;
+      transition: color 0.3s;
+    }
+    .last-sync.flash { color: #00C9A7; }
 
     .header-btn {
       background: transparent;
