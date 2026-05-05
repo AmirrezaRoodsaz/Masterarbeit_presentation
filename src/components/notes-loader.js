@@ -12,7 +12,6 @@ let deck = null;
 let sseSource = null;
 let notesPanel = null;
 let speakerWindow = null;
-let speakerWindowTwin = null;
 
 /**
  * Initialize notes system. Call after deck.initialize().
@@ -35,7 +34,7 @@ export function initNotesLoader(deckInstance) {
   // Listen for speaker view open (from keyboard/gamepad binding)
   // Only in presenter mode (not follow mode)
   if (params.has('presenter') && !params.has('follow')) {
-    document.addEventListener('open-speaker-view', () => openTwinSpeakerView());
+    document.addEventListener('open-speaker-view', () => openCustomSpeakerView());
   }
 
   // Mode 3: Follow — SSE auto-sync + always-visible notes panel
@@ -105,78 +104,6 @@ function openCustomSpeakerView() {
     injectSpeakerViewLayout(speakerWin);
     initTimerSync(speakerWin);
   }
-}
-
-/**
- * Open the speaker view AND a second mirrored copy. Useful for Sidecar /
- * AirPlay setups: drag one popup onto the iPad, keep the other on the Mac.
- *
- * Mechanism: Reveal's notes plugin opens its popup via window.open and
- * stores a single popup reference. We capture that reference, then open
- * an identical popup pointing at the same URL with a different window
- * name (forces a new window). Finally we monkey-patch postMessage on the
- * primary so every slide-update message also reaches the twin.
- */
-function openTwinSpeakerView() {
-  // 1) Primary popup (existing flow)
-  if (!speakerWindow || speakerWindow.closed) {
-    openCustomSpeakerView();
-  } else {
-    speakerWindow.focus();
-  }
-
-  // 2) Twin popup — wait until the primary has its location, then clone
-  setTimeout(() => {
-    if (speakerWindowTwin && !speakerWindowTwin.closed) {
-      speakerWindowTwin.focus();
-      return;
-    }
-    if (!speakerWindow || speakerWindow.closed) return;
-
-    let twinUrl;
-    try { twinUrl = speakerWindow.location.href; } catch { return; }
-
-    const left = Math.max(40, (window.screen?.availWidth || 1400) - 1180);
-    speakerWindowTwin = window.open(
-      twinUrl,
-      'reveal-notes-twin',
-      `width=1100,height=720,left=${left},top=80`
-    );
-
-    if (!speakerWindowTwin) {
-      console.warn('[speaker] twin popup blocked — allow popups for this site');
-      return;
-    }
-
-    const applyTwin = () => {
-      try {
-        injectSpeakerViewLayout(speakerWindowTwin);
-        initTimerSync(speakerWindowTwin);
-      } catch (e) { console.warn('[speaker] twin layout inject failed', e); }
-    };
-
-    // The twin URL is the same notes popup → wait for its load, then style.
-    if (speakerWindowTwin.document?.readyState === 'complete') {
-      applyTwin();
-    } else {
-      speakerWindowTwin.addEventListener('load', applyTwin, { once: true });
-      // Fallback if 'load' doesn't fire (some popup environments)
-      setTimeout(applyTwin, 1500);
-    }
-
-    // 3) Mirror postMessage from primary to twin so slide updates from the
-    //    deck reach BOTH popups. Reveal calls primaryPopup.postMessage(...)
-    //    on every slidechanged.
-    const origPost = speakerWindow.postMessage.bind(speakerWindow);
-    speakerWindow.postMessage = function (msg, target, transfer) {
-      origPost(msg, target, transfer);
-      try {
-        if (speakerWindowTwin && !speakerWindowTwin.closed) {
-          speakerWindowTwin.postMessage(msg, target, transfer);
-        }
-      } catch { /* twin closed or cross-origin — silent */ }
-    };
-  }, 800);
 }
 
 /**
