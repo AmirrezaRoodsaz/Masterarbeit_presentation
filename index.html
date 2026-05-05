@@ -9,7 +9,11 @@
   <script>
     (function () {
       var qs = window.location.search;
-      if (/[?&](desktop|receiver)\b/.test(qs)) return;
+      // Phase 21: skip mobile redirect for desktop/receiver/embed and
+      // ipad-speaker iframes — those need the desktop deck rendering.
+      if (/[?&](desktop|receiver|embed|ipad-speaker)\b/.test(qs)) return;
+      // Also skip when running inside an iframe (any nested context)
+      if (window.self !== window.top) return;
       if (window.location.pathname.indexOf('mobile.html') !== -1) return;
       if (window.matchMedia && window.matchMedia('(max-width: 1024px)').matches) {
         window.location.replace('/mobile.html' + qs + window.location.hash);

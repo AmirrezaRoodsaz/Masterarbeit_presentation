@@ -8,3 +8,27 @@
 @import './qr-hub.css';
 @import './charts.css';
 @import './flowchart-gallery.css';
+
+/* Phase 21: ?embed=slide — used by iPad speaker-view iframes.
+   Hide all chrome (sidebar, progress bar, defense exit tab, QR)
+   so the embedded slide fills the iframe entirely. */
+html.embed-slide body,
+body.embed-slide {
+  overflow: hidden;
+}
+html.embed-slide .sidebar,
+body.embed-slide .sidebar,
+html.embed-slide #progress-container,
+body.embed-slide #progress-container,
+html.embed-slide #defense-exit-tab,
+body.embed-slide #defense-exit-tab,
+html.embed-slide .title-qr,
+body.embed-slide .title-qr {
+  display: none !important;
+}
+html.embed-slide main,
+body.embed-slide main {
+  grid-column: 1 / -1 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+}
